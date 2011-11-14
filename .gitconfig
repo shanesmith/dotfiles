@@ -1,0 +1,13 @@
+[user]
+	name = Shane Smith
+	email = shane.smith.baz@gmail.com
+
+[alias]
+	st = status
+	unstage = 'reset HEADi --'
+
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	interactive = auto
