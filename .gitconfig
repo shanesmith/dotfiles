@@ -4,7 +4,8 @@
 
 [alias]
 	st = status
-	unstage = 'reset HEADi --'
+	unstage = 'reset HEAD --'
+	lol = log --pretty=oneline --abbrev-commit --graph --decorate
 
 [color]
 	diff = auto
