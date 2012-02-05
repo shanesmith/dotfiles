@@ -12,3 +12,6 @@
 	status = auto
 	branch = auto
 	interactive = auto
+
+[core]
+	editor = vim
