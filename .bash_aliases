@@ -23,6 +23,8 @@ cs() {
 
 alias apro="apropos"
 
+alias whoareyou="uname -a"
+
 alias svim="sudo vim"
 
 alias hs="history"
