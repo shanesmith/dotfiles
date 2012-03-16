@@ -6,6 +6,7 @@
 	st = status
 	unstage = reset HEAD --
 	lol = log --pretty=oneline --abbrev-commit --graph --decorate
+	co = checkout
 
 [color]
 	diff = auto
