@@ -31,4 +31,9 @@ alias hs="history"
 
 alias frak="fortune -c"
 
-alias smudel="ssh smudel.ca"
+alias apt-search="apt-cache search"
+alias apt-show="apt-cache show"
+alias apt-showpkg="apt-cache showpkg"
+alias apt-install="sudo apt-get install"
+alias apt-update="sudo apt-get update"
+alias apt-upgrade="sudo apt-get upgrade"
