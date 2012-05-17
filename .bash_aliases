@@ -17,9 +17,8 @@ alias lld='ll -d'
 alias h="cd ~"
 alias ..="cd .."
 alias ...="cd ../.."
-cs() { 
-	cd "$@" && ls 
-}
+cs() { cd "$@" && ls }
+up() { local x='';for i in $(seq ${1:-1});do x="$x../"; done;cd $x; }
 
 alias apro="apropos"
 
