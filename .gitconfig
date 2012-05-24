@@ -10,6 +10,8 @@
 	lall = log --pretty=oneline --abbrev-commit --graph --decorate --all
 	logf = log --name-status
 	co = checkout
+	pop = stash pop
+	k = !gitk
 
 [color]
 	ui = auto
