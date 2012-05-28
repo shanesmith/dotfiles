@@ -18,3 +18,6 @@
 
 [core]
 	editor = vim
+
+[merge]
+	defaultToUpstream = true
