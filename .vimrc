@@ -16,3 +16,8 @@ set backspace=indent,eol,start
 fixdel
 filetype plugin on
 "au BufNewFile BufRead *.j set filetype=js
+
+"Past toggle <F8>
+nnoremap <F8> :set invpaste paste?<CR>
+set pastetoggle=<F8>
+set showmode
