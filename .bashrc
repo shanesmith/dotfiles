@@ -69,7 +69,7 @@ fi
 unset color_prompt force_color_prompt
 
 if [[ $(type -t __git_ps1) == "function" ]]; then
-    PS1="$PS1$(__git_ps1 " (%s)")"
+    PS1="$PS1\$(__git_ps1 \" (%s)\")"
 fi
 
 PS1="$PS1\$ "
