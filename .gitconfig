@@ -4,6 +4,7 @@
 
 [alias]
 	st = status
+	shoe = show
 	unstage = reset HEAD --
 	lol = log --pretty=oneline --abbrev-commit --graph --decorate
 	lolf = log --pretty=oneline --abbrev-commit --graph --decorate --name-status
