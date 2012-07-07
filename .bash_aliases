@@ -40,3 +40,6 @@ alias apt-showpkg="apt-cache showpkg"
 alias apt-install="sudo apt-get install"
 alias apt-update="sudo apt-get update"
 alias apt-upgrade="sudo apt-get upgrade"
+
+alias xclip-copy="xclip -i -selection clip"
+alias xclip-paste="xclip -o -selection clip"
