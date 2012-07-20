@@ -17,8 +17,15 @@ set ruler
 "Match words as we type a search string. We may be able to find the word we are looking for before being done typing.
 set incsearch
 
+"Be smart about character case while searching
+set ignorecase
+set smartcase
+
 "Syntax highlighting
 syntax on
+
+"Line numbers
+set number
 
 "Backspace behaviour
 set backspace=indent,eol,start
