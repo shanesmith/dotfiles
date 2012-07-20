@@ -6,9 +6,11 @@
 	st = status
 	shoe = show
 	unstage = reset HEAD --
-	lol = log --pretty=oneline --abbrev-commit --graph --decorate
-	lolf = log --pretty=oneline --abbrev-commit --graph --decorate --name-status
-	lall = log --pretty=oneline --abbrev-commit --graph --decorate --all
+	lol = log --pretty=oneline --abbrev-commit --graph --decorate --all
+	lolb = log --pretty=oneline --abbrev-commit --graph --decorate
+	lolf = log --pretty=oneline --abbrev-commit --graph --decorate --all --name-status
+	lolbf = log --pretty=oneline --abbrev-commit --graph --decorate --name-status
+	lolnew = log --pretty=oneline --abbrev-commit --graph --decorate ORIG_HEAD..
 	logf = log --name-status
 	co = checkout
 	pop = stash pop
