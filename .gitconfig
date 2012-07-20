@@ -15,6 +15,7 @@
 	co = checkout
 	pop = stash pop
 	k = !gitk
+	staged = diff --staged
 
 [color]
 	ui = auto
