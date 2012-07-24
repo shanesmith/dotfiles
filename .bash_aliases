@@ -43,3 +43,7 @@ alias apt-upgrade="sudo apt-get upgrade"
 
 alias xclip-copy="xclip -i -selection clip"
 alias xclip-paste="xclip -o -selection clip"
+
+gittop() { 
+	cd $(git top)
+}

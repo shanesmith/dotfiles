@@ -16,6 +16,7 @@
 	pop = stash pop
 	k = !gitk
 	staged = diff --staged
+	top = rev-parse --show-toplevel
 
 [color]
 	ui = auto
