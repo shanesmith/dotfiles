@@ -101,3 +101,5 @@ fi
 
 # Some additional evironment variables
 export EDITOR=vim
+export TERM=xterm-color
+export CLICOLOR=1

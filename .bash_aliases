@@ -18,10 +18,13 @@ alias h="cd ~"
 alias ..="cd .."
 alias ...="cd ../.."
 cs() { 
-	cd "$@" && ls 
+	cd "$1" && ls 
 }
 up() { 
 	local x=''; for i in $(seq ${1:-1}); do x="$x../"; done; cd $x; 
+}
+mkcd() {
+    mkdir "$1" && cd "$1"
 }
 
 alias apro="apropos"
