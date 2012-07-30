@@ -36,6 +36,8 @@ alias svim="sudo vim"
 alias hs="history"
 
 alias frak="fortune -c"
+alias starwars="telnet towel.blinkenlights.nl"
+alias nyan="telnet miku.acm.uiuc.edu"
 
 alias apt-search="apt-cache search"
 alias apt-show="apt-cache show"
