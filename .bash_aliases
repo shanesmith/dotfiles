@@ -38,6 +38,7 @@ alias hs="history"
 alias frak="fortune -c"
 alias starwars="telnet towel.blinkenlights.nl"
 alias nyan="telnet miku.acm.uiuc.edu"
+alias busy="cat /dev/urandom | hexdump -C | grep 'ca fe'"
 
 alias apt-search="apt-cache search"
 alias apt-show="apt-cache show"
