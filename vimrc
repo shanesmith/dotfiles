@@ -40,3 +40,9 @@ filetype plugin on
 nnoremap <F8> :set invpaste paste?<CR>
 set pastetoggle=<F8>
 set showmode
+
+"Scroll offset
+set scrolloff=5
+
+"Split pane to right when :vsplit
+set splitright
