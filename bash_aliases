@@ -53,3 +53,6 @@ alias xclip-paste="xclip -o -selection clip"
 gittop() { 
 	cd $(git top)
 }
+
+alias httphp="php -S 127.0.0.1:8080"
+alias httpython="python -m SimpleHTTPServer 8080"
