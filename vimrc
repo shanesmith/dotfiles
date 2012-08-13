@@ -46,3 +46,7 @@ set scrolloff=5
 
 "Split pane to right when :vsplit
 set splitright
+
+"Custom leader commands
+let mapleader = ","
+:nnoremap <Leader>w <C-w>
