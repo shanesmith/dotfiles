@@ -21,9 +21,6 @@ set incsearch
 set ignorecase
 set smartcase
 
-"Syntax highlighting
-syntax on
-
 "Line numbers
 set number
 
@@ -33,8 +30,14 @@ set backspace=indent,eol,start
 "Fix delete key
 fixdel
 
+"Pathogen plugin loading
+call pathogen#infect()
+
+"Syntax highlighting
+syntax on
+
 "File type detection and plugin loading
-filetype plugin on
+filetype plugin indent on
 
 "Past toggle <F8>
 nnoremap <F8> :set invpaste paste?<CR>
@@ -47,6 +50,13 @@ set scrolloff=5
 "Split pane to right when :vsplit
 set splitright
 
+"Fix CommandT esc not working
+let g:CommandTEscapeMap = [ '<ESC>', '<C-c>' ]
+
+"What to show in character list
+set listchars=tab:>-,trail:',eol:$
+
 "Custom leader commands
 let mapleader = ","
-:nnoremap <Leader>w <C-w>
+nnoremap <Leader>w <C-w>
+nmap <Leader>s :set nolist!<CR>

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOTFILES="bashrc bash_aliases gitconfig vimrc"
+DOTFILES="bashrc bash_aliases gitconfig vimrc vim"
 
 RCPATH="$(cd `dirname $0` && pwd)"
 
@@ -17,8 +17,22 @@ unset_force() {
 do_install() {
 	local ret=0
 	for file in $DOTFILES; do
-			ln -s $FORCE "$RCPATH/$file" "$HOME/.$file"
-			(( ret = ret || $? ))
+			local src="$RCPATH/$file"
+			local dest="$HOME/.$file"
+			if [[ -L $dest && -z $FORCE ]]; then
+				if [[ $(readlink -f "$dest") == $src ]]; then
+					echo "Already installed $file"
+				else
+					echo "Link already exists for $file"
+					ret=1
+				fi
+			elif [[ -e $dest && -z $FORCE ]]; then
+				echo "File already exists for $file"
+				ret=1
+			else
+				echo "Installing $file"
+				ln -Ts $FORCE "$src" "$dest"
+			fi
 	done
 	return $ret
 }
@@ -42,6 +56,8 @@ if [[ ! $FORCE  ]] && [[ $SUCCESS != 0 ]]; then
 		echo "Force installing..."
 		set_force
 		do_install
+	else
+		echo "Install canceled"
 	fi
 
 fi
