@@ -51,7 +51,9 @@ set scrolloff=5
 set splitright
 
 "Fix CommandT esc not working
-let g:CommandTEscapeMap = [ '<ESC>', '<C-c>' ]
+let g:CommandTCancelMap = [ '<ESC>', '<C-c>' ]
+let g:CommandTSelectNextMap = [ '<C-n>', '<C-j>', '<ESC>OB' ]
+let g:CommandTSelectPreviousMap = [ '<C-p>', '<C-k>', '<ESC>OA' ]
 
 "What to show in character list
 set listchars=tab:>-,trail:',eol:$
