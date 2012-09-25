@@ -14,6 +14,9 @@ set showmatch
 "Display the status bar at the bottom
 set ruler
 
+"Always display status bar
+set laststatus=2
+
 "Match words as we type a search string. We may be able to find the word we are looking for before being done typing.
 set incsearch
 
@@ -62,3 +65,5 @@ set listchars=tab:>-,trail:',eol:$
 let mapleader = ","
 nnoremap <Leader>w <C-w>
 nmap <Leader>s :set nolist!<CR>
+nnoremap Q q
+nmap q <nop>
