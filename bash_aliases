@@ -45,7 +45,8 @@ alias apt-show="apt-cache show"
 alias apt-showpkg="apt-cache showpkg"
 alias apt-install="sudo apt-get install"
 alias apt-update="sudo apt-get update"
-alias apt-upgrade="sudo apt-get upgrade"
+alias apt-upgrade="sudo apt-get update && sudo apt-get upgrade"
+alias apt-dist-upgrade="sudo apt-get update && sudo apt-get dist-upgrade"
 
 alias xclip-copy="xclip -i -selection clip"
 alias xclip-paste="xclip -o -selection clip"
@@ -56,3 +57,7 @@ gittop() {
 
 alias httphp="php -S 127.0.0.1:8080"
 alias httpython="python -m SimpleHTTPServer 8080"
+
+# the space allows for aliases...
+# https://wiki.archlinux.org/index.php/Sudo#Passing_aliases
+alias sudo='sudo '
