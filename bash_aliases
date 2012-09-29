@@ -35,6 +35,14 @@ alias svim="sudo vim"
 
 alias hs="history"
 
+] () {
+	if [[ $(which xdg-open) ]]; then
+		xdg-open "$1"
+	elif [[ $(uname) == "Darwin" && $(which open) ]]; then
+		open "$1"
+	fi
+}
+
 alias frak="fortune -c"
 alias starwars="telnet towel.blinkenlights.nl"
 alias nyan="telnet miku.acm.uiuc.edu"
