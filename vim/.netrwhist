@@ -1,9 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/home/shane/tmp/lesstest'
-let g:netrw_dirhist_2='/usr/local/bin'
-let g:netrw_dirhist_3='/home/shane/Code/rc'
-let g:netrw_dirhist_4='/home/shane/Code'
-let g:netrw_dirhist_5='/home/shane/Code/macadamian'
-let g:netrw_dirhist_6='/home/shane/Code/macadamian/RIM-CA'
-let g:netrw_dirhist_7='/home/shane/Code/macadamian/RIM-CA/Backend'
