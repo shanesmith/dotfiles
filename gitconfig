@@ -22,6 +22,7 @@
 	slogf = svn log --show-commit --verbose
 	slol = svn log --show-commit --oneline
 	sshow = "!f() { git show $(git svn find-rev r$1); }; f"
+	gerrit = !gerrit
 
 [color]
 	ui = auto
