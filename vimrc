@@ -1,6 +1,7 @@
 "set autoindent
 set tabstop=2
 set shiftwidth=2
+set expandtab
 
 "Let's make sure that all the annoying bugs in VI are not displayed in VIM.
 set nocompatible
@@ -57,6 +58,11 @@ set splitright
 let g:CommandTCancelMap = [ '<ESC>', '<C-c>' ]
 let g:CommandTSelectNextMap = [ '<C-n>', '<C-j>', '<ESC>OB' ]
 let g:CommandTSelectPreviousMap = [ '<C-p>', '<C-k>', '<ESC>OA' ]
+let g:CommandTAcceptSelectionMap = ['<C-o>']
+let g:CommandTAcceptSelectionVSplitMap = ['<CR>']
+
+"LocalVimrc options
+let g:localvimrc_sandbox=0
 
 "What to show in character list
 set listchars=tab:>-,trail:',eol:$
