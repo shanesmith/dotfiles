@@ -17,6 +17,11 @@
 	k = !gitk &
 	staged = diff --staged
 	top = rev-parse --show-toplevel
+	s = svn
+	slog = svn log --show-commit
+	slogf = svn log --show-commit --verbose
+	slol = svn log --show-commit --oneline
+	sshow = "!f() { git show $(git svn find-rev r$1); }; f"
 
 [color]
 	ui = auto
