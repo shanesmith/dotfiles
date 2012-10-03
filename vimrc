@@ -6,6 +6,9 @@ set expandtab
 "Let's make sure that all the annoying bugs in VI are not displayed in VIM.
 set nocompatible
 
+"Enable mouse
+set mouse=a
+
 "Let VIM figure out the indentation neede in C-style programs - when it can.
 set smartindent
 
