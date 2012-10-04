@@ -76,3 +76,4 @@ nnoremap <Leader>w <C-w>
 nmap <Leader>s :set nolist!<CR>
 nnoremap Q q
 nmap q <nop>
+nmap <C-t> :tabnew<CR>
