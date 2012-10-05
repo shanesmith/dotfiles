@@ -21,9 +21,11 @@
   slog = svn log --show-commit
   slogf = svn log --show-commit --verbose
   slol = svn log --show-commit --oneline
-  sshow = "!f() { git show $(git svn find-rev r$1); }; f"
+  sshow = "!f() { git show $(git svn find-rev r$1); }; f" # git sshow <rev>
   gerrit = !gerrit
-  vimconf = "!vim $(git status --porcelain | awk '/^UU/ { print $2 }')"
+  git = !git
+  vimconflicts = "!vim $(git status --porcelain | awk '/^UU/ { print $2 }')"
+  vc = !git vimconflicts
 
 [color]
   ui = auto
