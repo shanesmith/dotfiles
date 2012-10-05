@@ -18,63 +18,63 @@ alias h="cd ~"
 alias ..="cd .."
 alias ...="cd ../.."
 cs() { 
-	cd "$1" && ls 
+  cd "$1" && ls 
 }
 up() { 
-	local x='' 
-	local num=${1:-1}
-	for (( i=0; i < $num; i++ )); do 
-		x="$x../" 
-	done 
-	cd $x 
+  local x='' 
+  local num=${1:-1}
+  for (( i=0; i < $num; i++ )); do 
+    x="$x../" 
+  done 
+  cd $x 
 }
 mkcd() {
-	mkdir "$1" && cd "$1"
+  mkdir "$1" && cd "$1"
 }
 cd() {
-	if [[ $1 =~ ^-+$ ]]; then
-		g ${#1}
-	else
-		pushd "$1" > /dev/null
-	fi
+  if [[ $1 =~ ^-+$ ]]; then
+    g ${#1}
+  else
+    pushd "$1" > /dev/null
+  fi
 }
 d() {
-	local num=10
-	local search=
+  local num=10
+  local search=
 
-	if [[ $# -ge 1 ]]; then
-		if [[ $1 =~ [0-9]+ ]]; then
-			local num=$1
-		else
-			local search=$1
-		fi
+  if [[ $# -ge 1 ]]; then
+    if [[ $1 =~ [0-9]+ ]]; then
+      local num=$1
+    else
+      local search=$1
+    fi
 
-		if [[ $# -ge 2 ]]; then
-			if [[ $2 =~ [0-9]+ ]]; then
-				local num=$2
-			else
-				local search=$2
-			fi
-		fi
-	fi
+    if [[ $# -ge 2 ]]; then
+      if [[ $2 =~ [0-9]+ ]]; then
+        local num=$2
+      else
+        local search=$2
+      fi
+    fi
+  fi
 
-	dirs -v | sort -k 2 -u | sort --numeric -k 1 | awk -v max=$num -v search="$search" 'BEGIN { lines = 0 } search=="" || tolower($0) ~ tolower(search) { printf "%2s  %s\n", NR-1, $2; lines++ } lines == max && max != 0 { exit }'
+  dirs -v | sort -k 2 -u | sort --numeric -k 1 | awk -v max=$num -v search="$search" 'BEGIN { lines = 0 } search=="" || tolower($0) ~ tolower(search) { printf "%2s  %s\n", NR-1, $2; lines++ } lines == max && max != 0 { exit }'
 }
 g() {
-	local show=0
-	local num="+"
-	if [[ $# -eq 0 ]]; then
-		while [[ $num == "+" ]]; do
-			(( show += 10 ))
-			d "$show"
-			read -p "Go to: "
-			num="$REPLY"
-		done
-	else
-		num=$1
-	fi
-	local dir=$(d 0 | awk -v line=$num 'NR==line+1 { print $2; exit }')
-	eval cd "$dir"
+  local show=0
+  local num="+"
+  if [[ $# -eq 0 ]]; then
+    while [[ $num == "+" ]]; do
+      (( show += 10 ))
+      d "$show"
+      read -p "Go to: "
+      num="$REPLY"
+    done
+  else
+    num=$1
+  fi
+  local dir=$(d 0 | awk -v line=$num 'NR==line+1 { print $2; exit }')
+  eval cd "$dir"
 }
 
 alias apro="apropos"
@@ -86,11 +86,11 @@ alias svim="sudo vim"
 alias hs="history"
 
 ] () {
-	if [[ $(which xdg-open) ]]; then
-		xdg-open "$1"
-	elif [[ $(uname) == "Darwin" && $(which open) ]]; then
-		open "$1"
-	fi
+  if [[ $(which xdg-open) ]]; then
+    xdg-open "$1"
+  elif [[ $(uname) == "Darwin" && $(which open) ]]; then
+    open "$1"
+  fi
 }
 
 alias frak="fortune -c"
@@ -110,7 +110,7 @@ alias xclip-copy="xclip -i -selection clip"
 alias xclip-paste="xclip -o -selection clip"
 
 gittop() { 
-	cd $(git top)
+  cd $(git top)
 }
 
 alias httphp="php -S 127.0.0.1:8080"

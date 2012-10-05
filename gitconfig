@@ -1,38 +1,38 @@
 [user]
-	name = Shane Smith
-	email = shane.smith.baz@gmail.com
+  name = Shane Smith
+  email = shane.smith.baz@gmail.com
 
 [alias]
-	st = status
-	shoe = show
-	unstage = reset HEAD --
-	lol = log --pretty=oneline --abbrev-commit --graph --decorate --all
-	lolb = log --pretty=oneline --abbrev-commit --graph --decorate
-	lolf = log --pretty=oneline --abbrev-commit --graph --decorate --all --name-status
-	lolbf = log --pretty=oneline --abbrev-commit --graph --decorate --name-status
-	lolnew = log --pretty=oneline --abbrev-commit --graph --decorate ORIG_HEAD..
-	logf = log --name-status
-	co = checkout
-	pop = stash pop
-	k = !gitk &
-	staged = diff --staged
-	top = rev-parse --show-toplevel
-	s = svn
-	slog = svn log --show-commit
-	slogf = svn log --show-commit --verbose
-	slol = svn log --show-commit --oneline
-	sshow = "!f() { git show $(git svn find-rev r$1); }; f"
-	gerrit = !gerrit
+  st = status
+  shoe = show
+  unstage = reset HEAD --
+  lol = log --pretty=oneline --abbrev-commit --graph --decorate --all
+  lolb = log --pretty=oneline --abbrev-commit --graph --decorate
+  lolf = log --pretty=oneline --abbrev-commit --graph --decorate --all --name-status
+  lolbf = log --pretty=oneline --abbrev-commit --graph --decorate --name-status
+  lolnew = log --pretty=oneline --abbrev-commit --graph --decorate ORIG_HEAD..
+  logf = log --name-status
+  co = checkout
+  pop = stash pop
+  k = !gitk &
+  staged = diff --staged
+  top = rev-parse --show-toplevel
+  s = svn
+  slog = svn log --show-commit
+  slogf = svn log --show-commit --verbose
+  slol = svn log --show-commit --oneline
+  sshow = "!f() { git show $(git svn find-rev r$1); }; f"
+  gerrit = !gerrit
   vimconf = "!vim $(git status --porcelain | awk '/^UU/ { print $2 }')"
 
 [color]
-	ui = auto
+  ui = auto
 
 [core]
-	editor = vim
+  editor = vim
 
 [merge]
-	defaultToUpstream = true
+  defaultToUpstream = true
 
 [push]
-	default = tracking  # deprecated, update to "upstream" when removed
+  default = tracking  # deprecated, update to "upstream" when removed
