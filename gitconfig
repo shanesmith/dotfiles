@@ -23,6 +23,7 @@
 	slol = svn log --show-commit --oneline
 	sshow = "!f() { git show $(git svn find-rev r$1); }; f"
 	gerrit = !gerrit
+  vimconf = "!vim $(git status --porcelain | awk '/^UU/ { print $2 }')"
 
 [color]
 	ui = auto
