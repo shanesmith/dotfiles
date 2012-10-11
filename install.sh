@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOTFILES="bashrc bash_aliases gitconfig vimrc vim"
+DOTFILES="bashrc bash_aliases gitconfig vimrc vim ackrc"
 
 RCPATH="$(cd `dirname $0` && pwd)"
 

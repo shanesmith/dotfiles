@@ -1,0 +1,7 @@
+
+--pager=less -r
+
+--smart-case
+
+--type-set
+twig=.twig
