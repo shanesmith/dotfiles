@@ -33,6 +33,9 @@
   wdiff = diff --color-words
   wshow = show --color-words
   wshoe = !git wshow
+  assume-unchanged = update-index --assume-unchanged --
+  show-unchanged = !git ls-files -v | grep \"^[[:lower:]]\"
+  amend = commit --amend
 
 [color]
   ui = auto
