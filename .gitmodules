@@ -22,3 +22,6 @@
 [submodule "vim/bundle/localvimrc"]
 	path = vim/bundle/localvimrc
 	url = git://github.com/vim-scripts/localvimrc
+[submodule "vim/bundle/ack"]
+	path = vim/bundle/ack
+	url = git://github.com/mileszs/ack.vim.git

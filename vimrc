@@ -1,11 +1,14 @@
+"Let's make sure that all the annoying bugs in VI are not displayed in VIM.
+set nocompatible
+
 "set autoindent
 set tabstop=2
 set shiftwidth=2
 set shiftround
 set expandtab
 
-"Let's make sure that all the annoying bugs in VI are not displayed in VIM.
-set nocompatible
+"Viminfo
+set viminfo+=!
 
 "Enable mouse
 set mouse=a
@@ -67,6 +70,7 @@ let g:CommandTAcceptSelectionVSplitMap = ['<CR>']
 
 "LocalVimrc options
 let g:localvimrc_sandbox=0
+let g:localvimrc_persistent=1
 
 "What to show in character list
 set listchars=tab:>-,trail:',eol:$
