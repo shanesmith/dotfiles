@@ -71,17 +71,28 @@ let g:localvimrc_sandbox=0
 "What to show in character list
 set listchars=tab:>-,trail:',eol:$
 
-"Custom leader commands
+""" 
+""" Custom leader commands
+"""
+
 let mapleader = ","
+
+"Window commands
 nnoremap <Leader>w <C-w>
-nmap <Leader>s :set nolist!<CR>
-nnoremap Q q
-nmap q <nop>
-nmap <C-t> :tabnew<CR>
 noremap <C-Right> <C-w><Right>
 noremap <C-Left> <C-w><Left>
 noremap <C-Down> <C-w><Down>
 noremap <C-Up> <C-w><Up>
+
+"Tab commands
+nmap <C-t> :tabnew<CR>
+
+"Show whitespace characters
+nmap <Leader>s :set nolist!<CR>
+
+"Stop accidentaly recording
+nnoremap Q q
+nmap q <nop>
 
 "Visual select last pasted
 "http://vim.wikia.com/wiki/Selecting_your_pasted_text
@@ -89,6 +100,13 @@ nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
 "Stamp word (replace current word with last delete/yank)
 nnoremap S diw"0p
-"Custom ex commands
+
+"""
+""" Custom ex commands
+"""
+
+"Force write when forgot to sudo
 command! W w !sudo tee %
+
+"Clean out trailing whitespaces
 command! CleanWhitespace %s/\s\+$//g
