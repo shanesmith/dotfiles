@@ -83,7 +83,12 @@ noremap <C-Left> <C-w><Left>
 noremap <C-Down> <C-w><Down>
 noremap <C-Up> <C-w><Up>
 
+"Visual select last pasted
+"http://vim.wikia.com/wiki/Selecting_your_pasted_text
+nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
+
+"Stamp word (replace current word with last delete/yank)
+nnoremap S diw"0p
 "Custom ex commands
 command! W w !sudo tee %
 command! CleanWhitespace %s/\s\+$//g
-command! -nargs=1 S s//<args>/&
