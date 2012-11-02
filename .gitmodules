@@ -28,3 +28,6 @@
 [submodule "vim/bundle/jshint"]
 	path = vim/bundle/jshint
 	url = git://github.com/wookiehangover/jshint.vim
+[submodule "vim/bundle/recover"]
+	path = vim/bundle/recover
+	url = https://github.com/chrisbra/Recover.vim
