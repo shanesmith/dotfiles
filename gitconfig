@@ -34,8 +34,13 @@
   wshow = show --color-words
   wshoe = !git wshow
   assume-unchanged = update-index --assume-unchanged --
-  show-unchanged = !git ls-files -v | grep \"^[[:lower:]]\"
+  no-assume-unchanged = update-index --no-assume-unchanged --
+  show-assume-unchanged = !git ls-files -v | grep \"^[[:lower:]]\"
+  skip-worktree = update-index --skip-worktree --
+  no-skip-worktree = update-index --no-skip-worktree --
+  show-skip-worktree = !git ls-files -v | grep \"^S\"
   amend = commit --amend
+  grep-add = "!f() { git ls-files -m -o --exclude-standard | grep \"$1\" | xargs git add --; }; f"
 
 [color]
   ui = auto
