@@ -109,8 +109,5 @@ nnoremap S diw"0p
 """ Custom ex commands
 """
 
-"Force write when forgot to sudo
-command! W w !sudo tee %
-
 "Clean out trailing whitespaces
 command! CleanWhitespace %s/\s\+$//g

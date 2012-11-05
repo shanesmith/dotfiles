@@ -31,3 +31,6 @@
 [submodule "vim/bundle/recover"]
 	path = vim/bundle/recover
 	url = https://github.com/chrisbra/Recover.vim
+[submodule "vim/bundle/eunuch"]
+	path = vim/bundle/eunuch
+	url = git://github.com/tpope/vim-eunuch
