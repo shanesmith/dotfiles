@@ -77,6 +77,24 @@ g() {
   eval cd "$dir"
 }
 
+ff() {
+  local name="$1"
+  find . -type f -iname "$name"
+}
+
+fd() {
+  local name="$1"
+  find . -type d -iname "$name"
+}
+
+date2timestamp() {
+  date --date="$1" +%s
+}
+
+timestamp2date() {
+  date --date="@$1"
+}
+
 alias apro="apropos"
 
 alias whoareyou="uname -a"
