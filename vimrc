@@ -103,7 +103,7 @@ nmap q <nop>
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
 "Stamp word (replace current word with last delete/yank)
-nnoremap S diw"0p
+nnoremap S diw"0P
 
 """
 """ Custom ex commands
