@@ -40,6 +40,7 @@
   no-skip-worktree = update-index --no-skip-worktree --
   show-skip-worktree = !git ls-files -v | grep \"^S\"
   amend = commit --amend
+  fixup = commit --amend --reuse-message=HEAD
   grep-add = "!f() { git ls-files -m -o --exclude-standard | grep \"$1\" | xargs git add --; }; f"
 
 [color]
