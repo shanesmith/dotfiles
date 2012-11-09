@@ -103,3 +103,5 @@ fi
 export EDITOR=vim
 export TERM=xterm-color
 export CLICOLOR=1
+
+export MYSQL_PS1="mysql://\u@\h \d> "
