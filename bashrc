@@ -74,15 +74,6 @@ fi
 
 PS1="$PS1\$ "
 
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -105,3 +96,15 @@ export TERM=xterm-color
 export CLICOLOR=1
 
 export MYSQL_PS1="mysql://\u@\h \d> "
+
+export PROMPT_COMMAND="_set_title"
+title() {
+  export TITLE="$*"
+}
+_set_title() {
+  if [ "x$TITLE" = "x" ]; then
+    echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"
+  else
+    echo -ne "\033]0;${TITLE}\007"
+  fi
+}
