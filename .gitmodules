@@ -34,3 +34,6 @@
 [submodule "vim/bundle/eunuch"]
 	path = vim/bundle/eunuch
 	url = git://github.com/tpope/vim-eunuch
+[submodule "vim/bundle/zoomwin"]
+	path = vim/bundle/zoomwin
+	url = git://github.com/vim-scripts/ZoomWin.git

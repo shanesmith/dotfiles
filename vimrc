@@ -82,7 +82,7 @@ set listchars=tab:>-,trail:',eol:$
 let mapleader = ","
 
 "Window commands
-nnoremap <Leader>w <C-w>
+nmap <Leader>w <C-w>
 noremap <C-Right> <C-w><Right>
 noremap <C-Left> <C-w><Left>
 noremap <C-Down> <C-w><Down>
