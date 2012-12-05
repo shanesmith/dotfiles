@@ -65,8 +65,9 @@ set splitright
 let g:CommandTCancelMap = [ '<ESC>', '<C-c>' ]
 let g:CommandTSelectNextMap = [ '<C-n>', '<C-j>', '<ESC>OB' ]
 let g:CommandTSelectPreviousMap = [ '<C-p>', '<C-k>', '<ESC>OA' ]
-let g:CommandTAcceptSelectionMap = ['<C-o>', '<C-M>']
-let g:CommandTAcceptSelectionVSplitMap = ['<CR>']
+let g:CommandTAcceptSelectionMap = ['<CR>', '<C-o>', '<C-M>']
+let g:CommandTAcceptSelectionVSplitMap = ['<C-v>']
+let g:CommandTAcceptSelectionHSplitMap = ['<C-h>']
 
 "LocalVimrc options
 let g:localvimrc_sandbox=0
@@ -100,10 +101,11 @@ nmap q <nop>
 
 "Visual select last pasted
 "http://vim.wikia.com/wiki/Selecting_your_pasted_text
-nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
+nnoremap gp `[v`]
 
 "Stamp word (replace current word with last delete/yank)
 nnoremap S diw"0P
+
 
 """
 """ Custom ex commands
