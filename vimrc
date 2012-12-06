@@ -100,7 +100,7 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 let g:delimitMate_expand_space = 1
 
 """ 
-""" Custom leader commands
+""" Custom mappings
 """
 
 let mapleader = ","
@@ -128,6 +128,12 @@ nnoremap gp `[v`]
 
 "Stamp word (replace current word with last delete/yank)
 nnoremap S diw"0P
+
+"Move lines up/down
+nnoremap <S-Up> dd<Up>P
+nnoremap <S-Down> ddp
+vnoremap <S-Up> d<Up>P`[V`]
+vnoremap <S-Down> dp`[V`]
 
 
 """
