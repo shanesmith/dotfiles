@@ -71,9 +71,10 @@ set listchars=tab:>-,trail:',eol:$
 "CtrlP options
 let g:ctrlp_map = "<leader>p"
 let g:ctrlp_match_window_reversed = 0
+let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_max_height = 50
 let g:ctrlp_tabpage_position = 'al'
-let g:ctrlp_working_path_mode = 'rwa'
+let g:ctrlp_working_path_mode = 0
 let g:ctrlp_prompt_mappings = {
     \ 'ToggleType(1)':        ['<c-right>'],
     \ 'ToggleType(-1)':       ['<c-left>'],
