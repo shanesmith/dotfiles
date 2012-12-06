@@ -99,6 +99,10 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 "DelimitMate options
 let g:delimitMate_expand_space = 1
 
+"Syntastic options
+let g:syntastic_check_on_open = 1
+
+
 """ 
 """ Custom mappings
 """
@@ -135,6 +139,8 @@ nnoremap <S-Down> ddp
 vnoremap <S-Up> d<Up>P`[V`]
 vnoremap <S-Down> dp`[V`]
 
+"Toggle NERDTree
+nnoremap <Leader>t :NERDTreeToggle<CR>
 
 """
 """ Custom ex commands
