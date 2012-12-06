@@ -61,20 +61,43 @@ set scrolloff=5
 "Split pane to right when :vsplit
 set splitright
 
-"Fix CommandT esc not working
-let g:CommandTCancelMap = [ '<ESC>', '<C-c>' ]
-let g:CommandTSelectNextMap = [ '<C-n>', '<C-j>', '<ESC>OB' ]
-let g:CommandTSelectPreviousMap = [ '<C-p>', '<C-k>', '<ESC>OA' ]
-let g:CommandTAcceptSelectionMap = ['<CR>', '<C-o>', '<C-M>']
-let g:CommandTAcceptSelectionVSplitMap = ['<C-v>']
-let g:CommandTAcceptSelectionHSplitMap = ['<C-h>']
+"What to show in character list
+set listchars=tab:>-,trail:',eol:$
+
+"""
+""" Plugin options
+"""
+
+"CtrlP options
+let g:ctrlp_map = "<leader>p"
+let g:ctrlp_match_window_reversed = 0
+let g:ctrlp_max_height = 50
+let g:ctrlp_tabpage_position = 'al'
+let g:ctrlp_working_path_mode = 'rwa'
+let g:ctrlp_prompt_mappings = {
+    \ 'ToggleType(1)':        ['<c-right>'],
+    \ 'ToggleType(-1)':       ['<c-left>'],
+    \ }
+
 
 "LocalVimrc options
 let g:localvimrc_sandbox=0
 let g:localvimrc_persistent=1
 
-"What to show in character list
-set listchars=tab:>-,trail:',eol:$
+"NeoComplCache options]
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_enable_camel_case_completion = 1
+let g:neocomplcache_enable_underbar_completion = 1
+let g:neocomplcache_min_syntax_length = 3
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+"DelimitMate options
+let g:delimitMate_expand_space = 1
 
 """ 
 """ Custom leader commands
