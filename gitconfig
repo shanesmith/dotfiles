@@ -42,6 +42,8 @@
   amend = commit --amend
   fixup = commit --amend --reuse-message=HEAD
   grep-add = "!f() { git ls-files -m -o --exclude-standard | grep \"$1\" | xargs git add --; }; f"
+  remove-submodule = "!f() { [ -d $1 ] && echo "Removing from .gitmodule..." && git config -f .gitmodules --remove-section submodule.$1 && echo "Removing from .git/config..." && git config -f .git/config --remove-section submodule.$1 && echo "Removing from cache..." && git rm --cached $1; }; f"
+  delete-submodule = "!f() { [ -d $1 ] && echo "Removing from .gitmodule..." && git config -f .gitmodules --remove-section submodule.$1 && echo "Removing from .git/config..." && git config -f .git/config --remove-section submodule.$1 && echo "Removing from cache..." && git rm --cached $1 && echo "Removing directory..." && rm -rf $1; }; f"
 
 [color]
   ui = auto
