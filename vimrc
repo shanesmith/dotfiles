@@ -147,6 +147,10 @@ vnoremap <S-Down> dp`[V`]
 
 "Toggle NERDTree
 nnoremap <Leader>t :NERDTreeToggle<CR>
+let NERDTreeMapActivateNode = '<Right>'
+let NERDTreeMapClodeDir = '<Left>'
+let NERDTreeMapOpenSplit = 'h'
+let NERDTreeMapOpenVSplit = 'v'
 
 """
 """ Custom ex commands
