@@ -64,6 +64,11 @@ set splitright
 "What to show in character list
 set listchars=tab:>-,trail:',eol:$
 
+"Colorscheme
+set term=xterm-256color
+let g:aldmeris_transparent = 1
+colorscheme aldmeris
+
 """
 """ Plugin options
 """

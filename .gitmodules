@@ -46,3 +46,6 @@
 [submodule "vim/bundle/molokai"]
 	path = vim/bundle/molokai
 	url = git://github.com/vim-scripts/molokai.git
+[submodule "vim/bundle/aldmeris"]
+	path = vim/bundle/aldmeris
+	url = git://github.com/veloce/vim-aldmeris.git
