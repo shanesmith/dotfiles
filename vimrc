@@ -148,7 +148,7 @@ vnoremap <S-Down> dp`[V`]
 "Toggle NERDTree
 nnoremap <Leader>t :NERDTreeToggle<CR>
 let NERDTreeMapActivateNode = '<Right>'
-let NERDTreeMapClodeDir = '<Left>'
+let NERDTreeMapCloseDir = '<Left>'
 let NERDTreeMapOpenSplit = 'h'
 let NERDTreeMapOpenVSplit = 'v'
 
