@@ -128,6 +128,7 @@ noremap <C-Up> <C-w><Up>
 "Search commands
 ""Highlight current word
 nnoremap <Leader>/ *#
+nnoremap <2-LeftMouse> *#
 ""Clear search (and Highlight)
 nnoremap <Leader>\ :let @/=""<CR>
 
