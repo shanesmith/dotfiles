@@ -127,8 +127,8 @@ noremap <C-Up> <C-w><Up>
 
 "Search commands
 ""Highlight current word
-nnoremap <Leader>/ *#
-nnoremap <2-LeftMouse> *#
+nnoremap <Leader>/ :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<CR>
+nnoremap <2-LeftMouse> :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<CR>
 ""Clear search (and Highlight)
 nnoremap <Leader>\ :let @/=""<CR>
 
