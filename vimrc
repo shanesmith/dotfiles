@@ -28,6 +28,9 @@ set laststatus=2
 "Match words as we type a search string. We may be able to find the word we are looking for before being done typing.
 set incsearch
 
+"Highlight matched search
+set hlsearch
+
 "Be smart about character case while searching
 set ignorecase
 set smartcase
@@ -121,6 +124,12 @@ noremap <C-Right> <C-w><Right>
 noremap <C-Left> <C-w><Left>
 noremap <C-Down> <C-w><Down>
 noremap <C-Up> <C-w><Up>
+
+"Search commands
+""Highlight current word
+nnoremap <Leader>/ *#
+""Clear search (and Highlight)
+nnoremap <Leader>\ :let @/=""<CR>
 
 "Tab commands
 nmap <C-t> :tabnew<CR>
