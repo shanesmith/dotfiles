@@ -52,3 +52,12 @@
 [submodule "vim/bundle/javascript"]
 	path = vim/bundle/javascript
 	url = git://github.com/pangloss/vim-javascript.git
+[submodule "vim/bundle/matchit"]
+	path = vim/bundle/matchit
+	url = https://github.com/vim-scripts/matchit.zip
+[submodule "vim/bundle/argtextobj"]
+	path = vim/bundle/argtextobj
+	url = https://github.com/vim-scripts/argtextobj.vim
+[submodule "vim/bundle/indent-object"]
+	path = vim/bundle/indent-object
+	url = https://github.com/michaeljsmith/vim-indent-object
