@@ -79,12 +79,12 @@ g() {
 
 ff() {
   local name="$1"
-  find . -type f -iname "$name"
+  find . -type f -iname "*${name}*"
 }
 
 fd() {
   local name="$1"
-  find . -type d -iname "$name"
+  find . -type d -iname "*${name}*"
 }
 
 date2timestamp() {
