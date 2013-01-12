@@ -126,7 +126,7 @@ alias apt-upgrade="sudo apt-get update && sudo apt-get upgrade"
 alias apt-dist-upgrade="sudo apt-get update && sudo apt-get dist-upgrade"
 apt-list-ppa() {
     for APT in `find /etc/apt/ -name *.list`; do
-      grep -o "^deb http://ppa.launchpad.net/[a-z0-9\-]\+/[a-z0-9\-]\+" $APT | while read ENTRY ; do
+      grep -o "^deb http://ppa.launchpad.net/[a-z0-9-]\+/[a-z0-9.-]\+" $APT | while read ENTRY ; do
           USER=`echo $ENTRY | cut -d/ -f4`
           PPA=`echo $ENTRY | cut -d/ -f5`
           echo ppa:$USER/$PPA
