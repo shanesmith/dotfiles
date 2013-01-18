@@ -155,6 +155,20 @@ nnoremap <S-Down> ddp
 vnoremap <S-Up> d<Up>P`[V`]
 vnoremap <S-Down> dp`[V`]
 
+"Text-object for matching whole-line pairs
+vnoremap <silent> A{ :normal [{V%<CR>
+vnoremap <silent> A} :normal [{V%<CR>
+vnoremap <silent> A( :normal [(V%<CR>
+vnoremap <silent> A) :normal [(V%<CR>
+vnoremap <silent> A[ :call searchpair('\[', '', '\]', 'bW') \| normal V%<CR>
+vnoremap <silent> A] :call searchpair('\[', '', '\]', 'bW') \| normal V%<CR>
+onoremap <silent> A{ :normal [{V%<CR>
+onoremap <silent> A} :normal [{V%<CR>
+onoremap <silent> A( :normal [(V%<CR>
+onoremap <silent> A) :normal [(V%<CR>
+onoremap <silent> A[ :call searchpair('\[', '', '\]', 'bW') \| normal V%<CR>
+onoremap <silent> A] :call searchpair('\[', '', '\]', 'bW') \| normal V%<CR>
+
 "Toggle NERDTree
 nnoremap <Leader>t :NERDTreeToggle<CR>
 let NERDTreeMapActivateNode = '<Right>'
