@@ -150,6 +150,9 @@ nnoremap gp `[v`]
 "Stamp word (replace current word with last delete/yank)
 nnoremap S diw"0P
 
+"Map U to redo
+nnoremap U :redo<CR>
+
 "Move lines up/down
 nnoremap <S-Up> dd<Up>P
 nnoremap <S-Down> ddp
