@@ -133,6 +133,21 @@ apt-list-ppa() {
       done
   done
 }
+remove-old-kernels() {
+  local KEEP=1
+  local PURGE=
+  local CANDIDATES=$(ls -tr /boot/vmlinuz-* | grep -v "$(uname -r)$" | head -n -1 | cut -d- -f2- | awk '{print "linux-image-" $0}')
+  for c in $CANDIDATES; do
+    dpkg-query -s "$c" >/dev/null 2>&1 && PURGE="$PURGE $c"
+  done
+
+  if [ -z "$PURGE" ]; then
+    echo "No kernels are eligible for removal"
+    exit 0
+  fi
+
+  sudo apt-get $APT_OPTS remove --purge $PURGE
+}
 
 alias xclip-copy="xclip -i -selection clip"
 alias xclip-paste="xclip -o -selection clip"
