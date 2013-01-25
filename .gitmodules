@@ -61,3 +61,12 @@
 [submodule "vim/bundle/indent-object"]
 	path = vim/bundle/indent-object
 	url = https://github.com/michaeljsmith/vim-indent-object
+[submodule "vim/bundle/neosnippet"]
+	path = vim/bundle/neosnippet
+	url = git://github.com/Shougo/neosnippet.git
+[submodule "vim/bundle/honza-snippets"]
+	path = vim/bundle/honza-snippets
+	url = git://github.com/honza/snipmate-snippets.git
+[submodule "vim/bundle/smartword"]
+	path = vim/bundle/smartword
+	url = git://github.com/kana/vim-smartword.git
