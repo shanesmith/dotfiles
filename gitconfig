@@ -39,8 +39,11 @@
   skip-worktree = update-index --skip-worktree --
   no-skip-worktree = update-index --no-skip-worktree --
   show-skip-worktree = !git ls-files -v | grep \"^S\"
+  com = commit -m 
+  acom = commit -am
   amend = commit --amend
   fixup = commit --amend --reuse-message=HEAD
+  wip = commit -m 'wip'
   grep-add = "!f() { git ls-files -m -o --exclude-standard | grep \"$1\" | xargs git add --; }; f"
   remove-submodule = "!f() { if [ -d $1 ]; then echo "Removing from .gitmodule..."; git config -f .gitmodules --remove-section submodule.$1; echo "Removing from .git/config..."; git config -f .git/config --remove-section submodule.$1; echo "Removing from cache..."; git rm --cached $1; fi }; f"
   delete-submodule = "!f() { if [ -d $1 ]; then echo "Removing from .gitmodule..."; git config -f .gitmodules --remove-section submodule.$1; echo "Removing from .git/config..."; git config -f .git/config --remove-section submodule.$1; echo "Removing from cache..."; git rm --cached $1; echo "Removing directory..."; rm -rf $1; fi }; f"
