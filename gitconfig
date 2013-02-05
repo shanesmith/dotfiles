@@ -59,3 +59,8 @@
 
 [push]
   default = tracking  # deprecated, update to "upstream" when removed
+
+[gerrit "default"]
+	host = partners.macadamian.com
+	user = ssmith
+	port = 29418
