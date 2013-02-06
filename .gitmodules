@@ -19,9 +19,6 @@
 [submodule "vim/bundle/recover"]
 	path = vim/bundle/recover
 	url = https://github.com/chrisbra/Recover.vim
-[submodule "vim/bundle/eunuch"]
-	path = vim/bundle/eunuch
-	url = git://github.com/tpope/vim-eunuch
 [submodule "vim/bundle/zoomwin"]
 	path = vim/bundle/zoomwin
 	url = git://github.com/vim-scripts/ZoomWin.git
@@ -70,3 +67,6 @@
 [submodule "vim/bundle/smartword"]
 	path = vim/bundle/smartword
 	url = git://github.com/kana/vim-smartword.git
+[submodule "vim/bundle/sudoedit"]
+	path = vim/bundle/sudoedit
+	url = git://github.com/chrisbra/SudoEdit.vim.git
