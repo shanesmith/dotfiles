@@ -2,6 +2,22 @@
 
 DOTFILES="bashrc bash_aliases gitconfig vimrc vim ackrc"
 
+is_linux=
+is_mac=
+is_windows=
+
+case $(uname) in
+	Linux)
+		is_linux="yes"
+		;;
+	Darwin)
+		is_mac="yes"
+		;;
+	MINGW*)
+		is_windows="yes"
+		;;
+esac
+
 RCPATH="$(cd `dirname $0` && pwd)"
 
 FORCE=
@@ -19,6 +35,9 @@ do_install() {
   for file in $DOTFILES; do
       local src="$RCPATH/$file"
       local dest="$HOME/.$file"
+      if [[ "$is_windows" && $file == "bashrc" ]]; then
+        src="${src}_msys"
+      fi
       if [[ -L $dest && -z $FORCE ]]; then
         if [[ $(readlink -f "$dest") == $src ]]; then
           echo "Already installed $file"
@@ -31,7 +50,12 @@ do_install() {
         ret=1
       else
         echo "Installing $file"
-        ln -Ts $FORCE "$src" "$dest"
+	if [[ "$is_windows" ]]; then
+		rm -rf "$dest"
+		cp -r "$src" "$dest"
+	else
+		ln -Ts $FORCE "$src" "$dest"
+	fi
       fi
   done
   return $ret
