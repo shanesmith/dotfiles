@@ -30,14 +30,39 @@ unset_force() {
   FORCE=
 }
 
+get_src() {
+  local file="$1"
+  if [[ "$is_windows" ]]; then
+    case "$file" in
+      bashrc)
+        echo "$RCPATH/bashrc_msys"
+        exit
+        ;;
+    esac
+  fi
+
+  echo "$RCPATH/$file"
+}
+
+get_dest() {
+  local file="$1"
+  if [[ "$is_windows" ]]; then
+    case "$file" in
+      vim)
+        echo "$HOME/vimfiles"
+        exit
+        ;;
+    esac
+  fi
+
+  echo "$HOME/.$file";
+}
+
 do_install() {
   local ret=0
   for file in $DOTFILES; do
-      local src="$RCPATH/$file"
-      local dest="$HOME/.$file"
-      if [[ "$is_windows" && $file == "bashrc" ]]; then
-        src="${src}_msys"
-      fi
+      local src=$(get_src "$file")
+      local dest=$(get_dest "$file")
       if [[ -L $dest && -z $FORCE ]]; then
         if [[ $(readlink -f "$dest") == $src ]]; then
           echo "Already installed $file"
@@ -50,15 +75,21 @@ do_install() {
         ret=1
       else
         echo "Installing $file"
+        install_file "$src" "$dest"
+      fi
+  done
+  return $ret
+}
+
+install_file() {
+  local src="$1"
+  local dest="$2"
 	if [[ "$is_windows" ]]; then
 		rm -rf "$dest"
 		cp -r "$src" "$dest"
 	else
 		ln -Ts $FORCE "$src" "$dest"
 	fi
-      fi
-  done
-  return $ret
 }
 
 while [[ $# > 0 ]]; do
