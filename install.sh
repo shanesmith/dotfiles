@@ -7,15 +7,15 @@ is_mac=
 is_windows=
 
 case $(uname) in
-	Linux)
-		is_linux="yes"
-		;;
-	Darwin)
-		is_mac="yes"
-		;;
-	MINGW*)
-		is_windows="yes"
-		;;
+  Linux)
+    is_linux="yes"
+    ;;
+  Darwin)
+    is_mac="yes"
+    ;;
+  MINGW*)
+    is_windows="yes"
+    ;;
 esac
 
 RCPATH="$(cd `dirname $0` && pwd)"
@@ -61,22 +61,22 @@ get_dest() {
 do_install() {
   local ret=0
   for file in $DOTFILES; do
-      local src=$(get_src "$file")
-      local dest=$(get_dest "$file")
-      if [[ -L $dest && -z $FORCE ]]; then
-        if [[ $(readlink -f "$dest") == $src ]]; then
-          echo "Already installed $file"
-        else
-          echo "Link already exists for $file"
-          ret=1
-        fi
-      elif [[ -e $dest && -z $FORCE ]]; then
-        echo "File already exists for $file"
-        ret=1
+    local src=$(get_src "$file")
+    local dest=$(get_dest "$file")
+    if [[ -L $dest && -z $FORCE ]]; then
+      if [[ $(readlink -f "$dest") == $src ]]; then
+        echo "Already installed $file"
       else
-        echo "Installing $file"
-        install_file "$src" "$dest"
+        echo "Link already exists for $file"
+        ret=1
       fi
+    elif [[ -e $dest && -z $FORCE ]]; then
+      echo "File already exists for $file"
+      ret=1
+    else
+      echo "Installing $file"
+      install_file "$src" "$dest"
+    fi
   done
   return $ret
 }
@@ -84,12 +84,12 @@ do_install() {
 install_file() {
   local src="$1"
   local dest="$2"
-	if [[ "$is_windows" ]]; then
-		rm -rf "$dest"
-		cp -r "$src" "$dest"
-	else
-		ln -Ts $FORCE "$src" "$dest"
-	fi
+  if [[ "$is_windows" ]]; then
+    rm -rf "$dest"
+    cp -r "$src" "$dest"
+  else
+    ln -Ts $FORCE "$src" "$dest"
+  fi
 }
 
 while [[ $# > 0 ]]; do

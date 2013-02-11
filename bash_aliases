@@ -1,11 +1,13 @@
+#!/bin/bash
+#
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+  alias ls='ls --color=auto'
 
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
 fi
 
 # some more ls aliases
@@ -17,16 +19,16 @@ alias lld='ll -d'
 alias h="cd ~"
 alias ..="cd .."
 alias ...="cd ../.."
-cs() { 
-  cd "$1" && ls 
+cs() {
+  cd "$1" && ls
 }
-up() { 
-  local x='' 
+up() {
+  local x=''
   local num=${1:-1}
-  for (( i=0; i < $num; i++ )); do 
-    x="$x../" 
-  done 
-  cd $x 
+  for (( i=0; i < $num; i++ )); do
+    x="$x../"
+  done
+  cd $x
 }
 mkcd() {
   mkdir "$1" && cd "$1"
@@ -104,11 +106,11 @@ alias svim="sudo vim"
 alias hs="history"
 
 ] () {
-  if [[ $(which xdg-open) ]]; then
-    xdg-open "$1"
-  elif [[ $(uname) == "Darwin" && $(which open) ]]; then
-    open "$1"
-  fi
+if [[ $(which xdg-open) ]]; then
+  xdg-open "$1"
+elif [[ $(uname) == "Darwin" && $(which open) ]]; then
+  open "$1"
+fi
 }
 
 alias frak="fortune -c"
@@ -125,34 +127,34 @@ alias apt-update="sudo apt-get update"
 alias apt-upgrade="sudo apt-get update && sudo apt-get upgrade"
 alias apt-dist-upgrade="sudo apt-get update && sudo apt-get dist-upgrade"
 apt-list-ppa() {
-    for APT in `find /etc/apt/ -name *.list`; do
-      grep -o "^deb http://ppa.launchpad.net/[a-z0-9-]\+/[a-z0-9.-]\+" $APT | while read ENTRY ; do
-          USER=`echo $ENTRY | cut -d/ -f4`
-          PPA=`echo $ENTRY | cut -d/ -f5`
-          echo ppa:$USER/$PPA
-      done
+for APT in `find /etc/apt/ -name *.list`; do
+  grep -o "^deb http://ppa.launchpad.net/[a-z0-9-]\+/[a-z0-9.-]\+" $APT | while read ENTRY ; do
+  USER=`echo $ENTRY | cut -d/ -f4`
+  PPA=`echo $ENTRY | cut -d/ -f5`
+  echo ppa:$USER/$PPA
+done
   done
 }
 remove-old-kernels() {
-  local KEEP=1
-  local PURGE=
-  local CANDIDATES=$(ls -tr /boot/vmlinuz-* | grep -v "$(uname -r)$" | head -n -1 | cut -d- -f2- | awk '{print "linux-image-" $0}')
-  for c in $CANDIDATES; do
-    dpkg-query -s "$c" >/dev/null 2>&1 && PURGE="$PURGE $c"
-  done
+local KEEP=1
+local PURGE=
+local CANDIDATES=$(ls -tr /boot/vmlinuz-* | grep -v "$(uname -r)$" | head -n -1 | cut -d- -f2- | awk '{print "linux-image-" $0}')
+for c in $CANDIDATES; do
+  dpkg-query -s "$c" >/dev/null 2>&1 && PURGE="$PURGE $c"
+done
 
-  if [ -z "$PURGE" ]; then
-    echo "No kernels are eligible for removal"
-    exit 0
-  fi
+if [ -z "$PURGE" ]; then
+  echo "No kernels are eligible for removal"
+  exit 0
+fi
 
-  sudo apt-get $APT_OPTS remove --purge $PURGE
+sudo apt-get $APT_OPTS remove --purge $PURGE
 }
 
 alias xclip-copy="xclip -i -selection clip"
 alias xclip-paste="xclip -o -selection clip"
 
-gittop() { 
+gittop() {
   cd $(git top)
 }
 
