@@ -81,12 +81,16 @@ g() {
 
 ff() {
   local name="$1"
-  find . -type f -iname "*${name}*"
+  shift
+  local args="$@"
+  find . -type f -iname "*${name}*" $@
 }
 
 fd() {
   local name="$1"
-  find . -type d -iname "*${name}*"
+  shift
+  local args="$@"
+  find . -type d -iname "*${name}*" $@
 }
 
 date2timestamp() {
