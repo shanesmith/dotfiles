@@ -168,3 +168,13 @@ alias httpython="python -m SimpleHTTPServer 8080"
 # the space allows for aliases...
 # https://wiki.archlinux.org/index.php/Sudo#Passing_aliases
 alias sudo='sudo '
+
+git_remove-merged-branches() {
+  local branches=$(git branch --merged | sed -e '/^*/d' -e '/master/d')
+  echo "Finding candidate branches..."
+  echo "$branches"
+  read -p "Remove these branches? "
+  if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
+    git branch -d $branches
+  fi
+}
