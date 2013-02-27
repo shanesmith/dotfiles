@@ -34,7 +34,7 @@ mkcd() {
   mkdir "$1" && cd "$1"
 }
 cd() {
-  if [[ $1 =~ ^-+$ ]]; then
+  if echo "$1" | egrep -q "^-+$"; then
     g ${#1}
   else
     pushd "$1" > /dev/null
@@ -45,14 +45,14 @@ d() {
   local search=
 
   if [[ $# -ge 1 ]]; then
-    if [[ $1 =~ [0-9]+ ]]; then
+    if echo "$1" | egrep -q "[0-9]+"; then
       local num=$1
     else
       local search=$1
     fi
 
     if [[ $# -ge 2 ]]; then
-      if [[ $2 =~ [0-9]+ ]]; then
+      if echo "$2" | egrep -q "[0-9]+"; then
         local num=$2
       else
         local search=$2
@@ -60,7 +60,7 @@ d() {
     fi
   fi
 
-  dirs -v | sort -k 2 -u | sort --numeric -k 1 | awk -v max=$num -v search="$search" 'BEGIN { lines = 0 } search=="" || tolower($0) ~ tolower(search) { printf "%2s  %s\n", NR-1, $2; lines++ } lines == max && max != 0 { exit }'
+  dirs -v | sort -k 2 -u | sort -n -k 1 | awk -v max=$num -v search="$search" 'BEGIN { lines = 0 } search=="" || tolower($0) ~ tolower(search) { printf "%2s  %s\n", NR-1, $2; lines++ } lines == max && max != 0 { exit }'
 }
 g() {
   local show=0
