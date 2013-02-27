@@ -45,3 +45,6 @@ fi
 
 # Some additional evironment variables
 export EDITOR=vim
+
+# Start the SSH Agent (default key lifetime 1 hour)
+eval $(ssh-agent -t 1h -s)
