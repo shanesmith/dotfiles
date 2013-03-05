@@ -31,7 +31,7 @@ up() {
   cd $x
 }
 mkcd() {
-  mkdir "$1" && cd "$1"
+  mkdir -p "$1" && cd "$1"
 }
 cd() {
   if echo "$1" | egrep -q "^-+$"; then
