@@ -44,6 +44,15 @@ set backspace=indent,eol,start
 "Fix delete key
 fixdel
 
+"Drupal
+if has("autocmd")
+  augroup module
+    autocmd BufRead,BufNewFile *.module set filetype=php
+    autocmd BufRead,BufNewFile *.install set filetype=php
+    autocmd BufRead,BufNewFile *.inc set filetype=php
+  augroup end
+endif
+
 "Pathogen plugin loading
 call pathogen#infect()
 
