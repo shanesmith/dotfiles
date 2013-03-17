@@ -45,13 +45,11 @@ set backspace=indent,eol,start
 fixdel
 
 "Drupal
-if has("autocmd")
-  augroup module
-    autocmd BufRead,BufNewFile *.module set filetype=php
-    autocmd BufRead,BufNewFile *.install set filetype=php
-    autocmd BufRead,BufNewFile *.inc set filetype=php
-  augroup end
-endif
+augroup module
+  autocmd BufRead,BufNewFile *.module set filetype=php
+  autocmd BufRead,BufNewFile *.install set filetype=php
+  autocmd BufRead,BufNewFile *.inc set filetype=php
+augroup end
 
 "Pathogen plugin loading
 call pathogen#infect()
@@ -103,22 +101,20 @@ let g:localvimrc_sandbox=0
 let g:localvimrc_persistent=1
 
 "NeoComplCache options
-if exists('g:neocomplcache_max_list')
-  let g:neocomplcache_enable_at_startup = 1
-  let g:neocomplcache_enable_smart_case = 1
-  let g:neocomplcache_enable_camel_case_completion = 1
-  let g:neocomplcache_enable_underbar_completion = 1
-  let g:neocomplcache_min_syntax_length = 3
-  let g:neocomplcache_enable_insert_char_pre = 1
-  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-  let g:neosnippet#snippets_directory='~/.vim/bundle/honza-snippets/snippets'
-  if has('conceal')
-    set conceallevel=2 concealcursor=i
-  endif
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_enable_camel_case_completion = 1
+let g:neocomplcache_enable_underbar_completion = 1
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_enable_insert_char_pre = 1
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+let g:neosnippet#snippets_directory='~/.vim/bundle/honza-snippets/snippets'
+if has('conceal')
+  set conceallevel=2 concealcursor=i
 endif
 
 "DelimitMate options
@@ -196,22 +192,23 @@ let NERDTreeMapOpenSplit = 'h'
 let NERDTreeMapOpenVSplit = 'v'
 
 "NeoCompleCache mappings
-if exists('g:neocomplcache_max_list')
-  inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
-  inoremap <expr><CR> pumvisible() ? neocomplcache#close_popup() : "\<CR>"
-  inoremap <expr><s-CR> pumvisible() ? neocomplcache#close_popup()"\<CR>" : "\<CR>"
-  inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-  inoremap <expr><C-y> neocomplcache#close_popup()
-  inoremap <expr><C-g> neocomplcache#undo_completion()
-  inoremap <expr><C-l> neocomplcache#complete_common_string()
-endif
+function! s:neocomplcache_exists()
+  return exists(":NeoComplCacheEnable") == 2
+endfunction
+inoremap <expr><TAB> pumvisible() && <SID>neocomplcache_exists() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() && <SID>neocomplcache_exists() ? "\<C-p>" : "\<TAB>"
+inoremap <expr><CR> pumvisible() && <SID>neocomplcache_exists() ? neocomplcache#close_popup() : "\<CR>"
+inoremap <expr><s-CR> pumvisible() && <SID>neocomplcache_exists() ? neocomplcache#close_popup()"\<CR>" : "\<CR>"
+inoremap <expr><BS>  <SID>neocomplcache_exists() ? neocomplcache#smart_close_popup()."\<C-h>" : "\<BS>"
+inoremap <expr><C-y> <SID>neocomplcache_exists() ? neocomplcache#close_popup() : "\<C-y>"
+inoremap <expr><C-g> <SID>neocomplcache_exists() ? neocomplcache#undo_completion() : "\<C-g>"
+inoremap <expr><C-l> <SID>neocomplcache_exists() ? neocomplcache#complete_common_string() : "\<C-l>"
 
 "NeoSnippets
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+imap <expr><TAB> <SID>neocomplcache_exists() && neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> <SID>neocomplcache_exists() && neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 "Smartwords
 map w <Plug>(smartword-w)
