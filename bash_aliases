@@ -24,10 +24,18 @@ cs() {
 }
 up() {
   local x=''
-  local num=${1:-1}
-  for (( i=0; i < $num; i++ )); do
-    x="$x../"
-  done
+  case $1 in
+    ''|*[0-9]*)
+      local num=${1:-1}
+      for (( i=0; i < $num; i++ )); do
+        x="$x../"
+      done
+      ;;
+    *)  
+      x=$(pwd | sed 's|\('$1'[^/]*\)/.*|\1|i')
+      ;;
+  esac
+  echo $x
   cd $x
 }
 mkcd() {
