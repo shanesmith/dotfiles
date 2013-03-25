@@ -5,3 +5,6 @@
 
 --type-set
 twig=.twig
+
+--type-add
+php=.module,.install,.profile,.inc
