@@ -63,7 +63,7 @@
 	url = git://github.com/Shougo/neosnippet.git
 [submodule "vim/bundle/honza-snippets"]
 	path = vim/bundle/honza-snippets
-	url = git://github.com/honza/snipmate-snippets.git
+	url = git://github.com/honza/vim-snippets.git
 [submodule "vim/bundle/smartword"]
 	path = vim/bundle/smartword
 	url = git://github.com/kana/vim-smartword.git
