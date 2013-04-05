@@ -84,11 +84,12 @@ EMC="\[\033[1;36m\]"
 EMW="\[\033[1;37m\]"
 
 SMILEY='$([[ $? -eq 0 ]] && echo ")" || echo "(")'
+HAS_JOBS='$(cnt=$(jobs | wc -l) && [[ $cnt -ne 0 ]] && echo ":'$C'$cnt'$NONE'" || echo "")'
 
 PS1='${debian_chroot:+($debian_chroot)}'
 
 if [ "$color_prompt" = yes ]; then
-  PS1="${PS1}${EMG}\u@\h${NONE}:${Y}\!${NONE}:${C}\j${NONE}:${SMILEY}${EMB}\w${NONE}"
+  PS1="${PS1}${EMG}\u@\h${NONE}:${Y}\!${NONE}${HAS_JOBS}:${SMILEY}${EMB}\w${NONE}"
 else
   PS1="$PS1\u@\h:\!:\j:${SMILEY}\w"
 fi
