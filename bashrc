@@ -61,18 +61,44 @@ export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWSTASHSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
 
+NONE="\[\033[0m\]"    # unsets color to term's fg color
+
+# regular colors
+K="\[\033[0;30m\]"    # black
+R="\[\033[0;31m\]"    # red
+G="\[\033[0;32m\]"    # green
+Y="\[\033[0;33m\]"    # yellow
+B="\[\033[0;34m\]"    # blue
+M="\[\033[0;35m\]"    # magenta
+C="\[\033[0;36m\]"    # cyan
+W="\[\033[0;37m\]"    # white
+
+# empahsized (bolded) colors
+EMK="\[\033[1;30m\]"
+EMR="\[\033[1;31m\]"
+EMG="\[\033[1;32m\]"
+EMY="\[\033[1;33m\]"
+EMB="\[\033[1;34m\]"
+EMM="\[\033[1;35m\]"
+EMC="\[\033[1;36m\]"
+EMW="\[\033[1;37m\]"
+
+SMILEY='$([[ $? -eq 0 ]] && echo ")" || echo "(")'
+
+PS1='${debian_chroot:+($debian_chroot)}'
+
 if [ "$color_prompt" = yes ]; then
-  PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]'
+  PS1="${PS1}${EMG}\u@\h${NONE}:${Y}\!${NONE}:${C}\j${NONE}:${SMILEY}${EMB}\w${NONE}"
 else
-  PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w'
+  PS1="$PS1\u@\h:\!:\j:${SMILEY}\w"
 fi
 unset color_prompt force_color_prompt
 
 if [[ $(type -t __git_ps1) == "function" ]]; then
-  PS1="$PS1\$(__git_ps1 \" (%s)\")"
+  PS1="$PS1\$(__git_ps1 ' (%s)')"
 fi
 
-PS1="$PS1\$ "
+PS1="$PS1\n\$ "
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
