@@ -83,15 +83,15 @@ EMM="\[\033[1;35m\]"
 EMC="\[\033[1;36m\]"
 EMW="\[\033[1;37m\]"
 
-SMILEY='$([[ $? -eq 0 ]] && echo ")" || echo "(")'
-HAS_JOBS='$(cnt=$(jobs | wc -l) && [[ $cnt -ne 0 ]] && echo ":'$C'$cnt'$NONE'" || echo "")'
+SMILEY=':$([[ $? -eq 0 ]] && echo ")" || echo "(")'
+HAS_JOBS='$(cnt=$(jobs | wc -l) && [[ $cnt -ne 0 ]] && echo " $cnt" || echo "")'
 
 PS1='${debian_chroot:+($debian_chroot)}'
 
 if [ "$color_prompt" = yes ]; then
-  PS1="${PS1}${EMG}\u@\h${NONE}:${Y}\!${NONE}${HAS_JOBS}:${SMILEY}${EMB}\w${NONE}"
+  PS1="${PS1}${G}\u@\h${NONE}${SMILEY}${C}\w${NONE} ${W}[\!${Y}${HAS_JOBS}${W}]${NONE}"
 else
-  PS1="$PS1\u@\h:\!:\j:${SMILEY}\w"
+  PS1="$PS1\u@\h${SMILEY}\w [\! \$?]"
 fi
 unset color_prompt force_color_prompt
 
@@ -99,7 +99,7 @@ if [[ $(type -t __git_ps1) == "function" ]]; then
   PS1="$PS1\$(__git_ps1 ' (%s)')"
 fi
 
-PS1="$PS1\n\$ "
+PS1="$PS1\n\\$ "
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
