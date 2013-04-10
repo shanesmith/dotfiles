@@ -83,7 +83,7 @@ EMM="\[\033[1;35m\]"
 EMC="\[\033[1;36m\]"
 EMW="\[\033[1;37m\]"
 
-SMILEY=':$([[ $? -eq 0 ]] && echo ")" || echo "(")'
+SMILEY='$([[ $? -eq 0 ]] && echo ":)" || echo "'$EMR':('$NONE'")'
 HAS_JOBS='$(cnt=$(jobs | wc -l) && [[ $cnt -ne 0 ]] && echo " $cnt" || echo "")'
 
 PS1='${debian_chroot:+($debian_chroot)}'
