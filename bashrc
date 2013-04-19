@@ -126,6 +126,8 @@ _set_title() {
   fi
 }
 
+eval $(ssh-agent -t 1H)
+
 if [ -f ~/.bash_aliases ]; then
   . ~/.bash_aliases
 fi
