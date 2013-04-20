@@ -223,3 +223,6 @@ map ge <Plug>(smartword-ge)
 
 "Clean out trailing whitespaces
 command! CleanWhitespace %s/\s\+$//g
+
+" Big W also writes
+command! W w
