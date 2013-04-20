@@ -101,6 +101,17 @@ fd() {
   find . -type d -iname "*${name}*" $@
 }
 
+scp-tar() {
+  local args=("$@")
+  local len=${#args[@]}
+  local files=("${args[@]:0:$(($len-1))}")
+  local dest="${args[@]:$(($len-1))}"
+  local dest_host="${dest%%:*}"
+  local dest_path="${dest#*:}"
+
+  tar czf - --dereference -- "${files[@]}" | ssh "$dest_host" "tar xzvf - -C '${dest_path}'"
+}
+
 date2timestamp() {
   date --date="$1" +%s
 }
