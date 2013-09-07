@@ -123,7 +123,7 @@ let g:delimitMate_expand_space = 1
 
 "Syntastic options
 let g:syntastic_check_on_open = 1
-
+let g:syntastic_objc_compiler = 'clang'
 
 """ 
 """ Custom mappings
