@@ -49,6 +49,12 @@
   delete-submodule = "!f() { if [ -d $1 ]; then echo "Removing from .gitmodule..."; git config -f .gitmodules --remove-section submodule.$1; echo "Removing from .git/config..."; git config -f .git/config --remove-section submodule.$1; echo "Removing from cache..."; git rm --cached $1; echo "Removing directory..."; rm -rf $1; fi }; f"
   remove-merged-branches = "!git_remove-merged-branches"
   er-done = "!f() { git commit -m \"$1\" && git push; }; f"
+  newb = checkout --track -b
+	hardhead = reset --hard HEAD
+	pick = cherry-pick
+  pup = "!f(){ [ $# -eq 1 ] && git checkout $1 && git pull && git co -; }; f"
+	stat = show --name-status
+  hs = "!git log -g --oneline -n50 | awk '/checkout:/ { if (system(\"git show-ref --quiet --verify refs/heads/\"$NF) == 0) print substr($2, 7)\" \"$NF }' | sort -k2 -u | sort -k1 -n | tail +2 | cut -d' ' -f2"
 
 [color]
   ui = auto
