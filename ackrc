@@ -8,3 +8,9 @@ twig=.twig
 
 --type-add
 php=.module,.install,.profile,.inc
+
+--type-set
+strings:ext:strings
+
+--type-set
+nib:ext:xib,storyboard
