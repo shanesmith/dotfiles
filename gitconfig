@@ -61,6 +61,7 @@
 
 [core]
   editor = vim
+  excludesfile = ~/.gitignore
 
 [merge]
   defaultToUpstream = true
