@@ -79,3 +79,6 @@
 [submodule "vim/bundle/neatstatus"]
 	path = vim/bundle/neatstatus
 	url = https://github.com/maciakl/vim-neatstatus.git
+[submodule "vim/bundle/seek"]
+	path = vim/bundle/seek
+	url = https://github.com/goldfeld/vim-seek.git
