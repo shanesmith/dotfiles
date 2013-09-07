@@ -88,7 +88,7 @@ install_file() {
     rm -rf "$dest"
     cp -r "$src" "$dest"
   else
-    ln -Ts $FORCE "$src" "$dest"
+    ln -ns $FORCE "$src" "$dest"
   fi
 }
 
