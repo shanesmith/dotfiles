@@ -102,12 +102,10 @@ PS1="$PS1\n\\$ "
 
 # Some additional evironment variables
 export EDITOR=vim
-export TERM=xterm-color
 export CLICOLOR=1
 
 export MYSQL_PS1="mysql://\u@\h \d> "
 
-export PROMPT_COMMAND="_set_title"
 title() {
   export TITLE="$*"
 }
@@ -118,6 +116,9 @@ _set_title() {
     echo -ne "\033]0;${TITLE}\007"
   fi
 }
+if [[ $TERM =~ xterm* ]]; then
+  export PROMPT_COMMAND="_set_title"
+fi
 
 eval $(ssh-agent -t 1H)
 
