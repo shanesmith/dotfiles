@@ -70,6 +70,10 @@
   default = tracking  # deprecated, update to "upstream" when removed
 
 [gerrit "default"]
-	host = partners.macadamian.com
-	user = ssmith
-	port = 29418
+  host = partners.macadamian.com
+  user = ssmith
+  port = 29418
+[gerrit "rimnet"]
+  host = gerrit.rim.net
+  user = shansmith
+  port = 29418
