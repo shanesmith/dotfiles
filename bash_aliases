@@ -32,7 +32,7 @@ up() {
       done
       ;;
     *)  
-      x=$(pwd | sed 's|\('$1'[^/]*\)/.*|\1|i')
+      x=$(pwd | perl -pe 's|(.*'$1'[^/]*)/.*|\1|i')
       ;;
   esac
   echo $x
@@ -68,7 +68,22 @@ d() {
     fi
   fi
 
-  dirs -v | sort -k 2 -u | sort -n -k 1 | awk -v max=$num -v search="$search" 'BEGIN { lines = 0 } search=="" || tolower($0) ~ tolower(search) { printf "%2s  %s\n", NR-1, $2; lines++ } lines == max && max != 0 { exit }'
+  dirs -v | sort -k 2 -u | sort -n -k 1 | awk -v max=$num -v search="$search" '
+    function ltrim(s) { sub(/^[ \t\r\n]+/, "", s); return s }
+    function rtrim(s) { sub(/[ \t\r\n]+$/, "", s); return s }
+    function trim(s) { return rtrim(ltrim(s)); }
+    BEGIN { 
+      lines = 0  
+    } 
+    search=="" || tolower($0) ~ tolower(search) {
+      $1="";
+      printf "%2s  %s\n", NR-1, trim($0);
+      lines++ 
+    }
+    lines == max && max != 0 {
+      exit 
+    }
+  '
 }
 g() {
   local show=0
@@ -83,8 +98,9 @@ g() {
   else
     num=$1
   fi
-  local dir=$(d 0 | awk -v line=$num 'NR==line+1 { print $2; exit }')
-  eval cd "$dir"
+  local dir=$(d 0 | awk -v line=$num 'NR==line+1 { $1=""; print $0; exit }')
+  dir=$(eval echo ${dir//>})
+  cd "$dir"
 }
 
 ff() {
