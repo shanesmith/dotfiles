@@ -215,3 +215,9 @@ git_remove-merged-branches() {
     git branch -d $branches
   fi
 }
+
+git_whitespace_fix() {
+  for FILE in $(exec git diff-index --check HEAD -- | sed '/^[+-]/d' | cut -d: -f1 | uniq); do
+    sed -i 's/[[:space:]]*$//' "$FILE"
+  done
+}
