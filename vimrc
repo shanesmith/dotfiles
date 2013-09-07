@@ -76,7 +76,6 @@ set splitright
 set listchars=tab:>-,trail:',eol:$
 
 "Colorscheme
-set term=xterm-256color
 let g:aldmeris_transparent = 1
 colorscheme aldmeris
 
