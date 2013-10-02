@@ -6,15 +6,17 @@
   st = status
   shoe = show
   unstage = reset HEAD --
-  lol = log --pretty=oneline --abbrev-commit --graph --decorate --all
-  lolb = log --pretty=oneline --abbrev-commit --graph --decorate
-  lolf = log --pretty=oneline --abbrev-commit --graph --decorate --all --name-status
-  lolbf = log --pretty=oneline --abbrev-commit --graph --decorate --name-status
-  lolnew = log --pretty=oneline --abbrev-commit --graph --decorate ORIG_HEAD..
+  lol = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --graph --branches --remotes=origin/[m]aster
+  lolb = log  --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --graph
+  lolf = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --graph --branches --remotes=origin/[m]aster --name-status
+  lolbf = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --graph --name-status
+  lolnew = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --graph ORIG_HEAD..
+  lall = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --graph --all
+  lallf = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --graph --all --name-status
   logf = log --name-status
   co = checkout
   pop = stash pop
-  k = !gitk --all &
+  k = !gitk --all &>- &
   staged = diff --staged
   top = rev-parse --show-toplevel
   s = svn
