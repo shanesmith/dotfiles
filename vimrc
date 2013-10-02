@@ -79,6 +79,9 @@ set listchars=tab:>-,trail:',eol:$
 let g:aldmeris_transparent = 1
 colorscheme aldmeris
 
+"Set leader character
+let mapleader = ","
+
 
 """
 """ Plugin options
@@ -128,8 +131,6 @@ let g:syntastic_objc_compiler = 'clang'
 """ Custom mappings
 """
 
-let mapleader = ","
-
 "Window commands
 nmap <Leader>w <C-w>
 noremap <C-Right> <C-w><Right>
@@ -169,6 +170,14 @@ nnoremap <S-Up> dd<Up>P
 nnoremap <S-Down> ddp
 vnoremap <S-Up> d<Up>P`[V`]
 vnoremap <S-Down> dp`[V`]
+
+"New lines
+nnoremap <Leader><CR> i<CR><ESC>
+nnoremap <Leader>o o<ESC>
+nnoremap <Leader>O O<ESC>
+
+"Better escape
+inoremap jj <ESC>
 
 "Text-object for matching whole-line pairs
 vnoremap <silent> A{ :normal [{V%<CR>
@@ -225,3 +234,5 @@ command! CleanWhitespace %s/\s\+$//g
 
 " Big W also writes
 command! W w
+command! Wq wq
+command! WQ wq
