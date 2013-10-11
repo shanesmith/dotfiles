@@ -16,7 +16,7 @@
   logf = log --name-status
   co = checkout
   pop = stash pop
-  k = !gitk --all &>- &
+  k = !gitk --all &>/dev/null &
   staged = diff --staged
   top = rev-parse --show-toplevel
   s = svn
