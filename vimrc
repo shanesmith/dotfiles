@@ -200,6 +200,12 @@ let NERDTreeMapCloseDir = '<Left>'
 let NERDTreeMapOpenSplit = 'h'
 let NERDTreeMapOpenVSplit = 'v'
 
+"NERDCommenter
+nmap \\ <Plug>NERDCommenterToggle
+vmap \\ <Plug>NERDCommenterToggle
+nmap \a <Plug>NERDCommenterAppend
+vmap \a <Plug>NERDCommenterAppend
+
 "NeoCompleCache mappings
 function! s:neocomplcache_exists()
   return exists(":NeoComplCacheEnable") == 2
