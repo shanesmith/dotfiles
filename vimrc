@@ -41,6 +41,10 @@ set number
 "Backspace behaviour
 set backspace=indent,eol,start
 
+"Directories
+set directory^=~/.vim/swaps//
+set backupdir^=~/.vim/backups//
+
 "Fix delete key
 fixdel
 
