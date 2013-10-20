@@ -57,6 +57,7 @@
   pup = "!f(){ [ $# -eq 1 ] && git checkout $1 && git pull && git co -; }; f"
 	stat = show --name-status
   hs = "!git log -g --oneline -n50 | awk '/checkout:/ { if (system(\"git show-ref --quiet --verify refs/heads/\"$NF) == 0) print substr($2, 7)\" \"$NF }' | sort -k2 -u | sort -k1 -n | tail +2 | cut -d' ' -f2"
+  base = merge-base HEAD
 
 [color]
   ui = auto
