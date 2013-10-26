@@ -82,3 +82,6 @@
 [submodule "vim/bundle/seek"]
 	path = vim/bundle/seek
 	url = https://github.com/goldfeld/vim-seek.git
+[submodule "vim/bundle/emmet"]
+	path = vim/bundle/emmet
+	url = https://github.com/mattn/emmet-vim/
