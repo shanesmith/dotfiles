@@ -13,6 +13,9 @@ set viminfo+=!
 "Enable mouse
 set mouse=a
 
+"Remove toolbar from GUI vim
+set guioptions-=T
+
 "Let VIM figure out the indentation neede in C-style programs - when it can.
 set smartindent
 
