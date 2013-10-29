@@ -56,6 +56,26 @@ fi
 export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWSTASHSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
+export GIT_PS1_SHOWUPSTREAM=true
+
+save_function() {
+    local ORIG_FUNC=$(declare -f $1)
+    local NEWNAME_FUNC="$2${ORIG_FUNC#$1}"
+    eval "$NEWNAME_FUNC"
+}
+
+save_function __git_ps1_show_upstream __orig_git_ps1_show_upstream
+
+__git_ps1_show_upstream() { 
+  __orig_git_ps1_show_upstream
+
+  local upstream="$(git rev-parse --symbolic-full-name --abbrev-ref '@{upstream}')"
+
+  if [[ -n $upstream ]]; then
+    b="$b $p$upstream"
+    p=""
+  fi
+}
 
 NONE="\[\033[0m\]"    # unsets color to term's fg color
 
