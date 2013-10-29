@@ -85,3 +85,6 @@
 [submodule "vim/bundle/emmet"]
 	path = vim/bundle/emmet
 	url = https://github.com/mattn/emmet-vim/
+[submodule "vim/bundle/expand"]
+	path = vim/bundle/expand
+	url = https://github.com/terryma/vim-expand-region
