@@ -83,8 +83,12 @@ set splitright
 set listchars=tab:>-,trail:',eol:$
 
 "Colorscheme
-let g:aldmeris_transparent = 1
-colorscheme aldmeris
+if &t_Co == 256
+  let g:aldmeris_transparent = 1
+  colorscheme aldmeris
+else
+  colorscheme desert
+endif
 
 "Set leader character
 let mapleader = ","
