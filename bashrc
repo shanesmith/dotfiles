@@ -5,19 +5,21 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+if [ $(tput colors) = "256" ]; then
+  export TERM="xterm-256color"
+fi
+
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
 HISTCONTROL=ignoredups:ignorespace
+HISTSIZE=1000
+HISTFILESIZE=2000
 
 # set shell options
 shopt -s histappend cdspell checkwinsize
 if [[ $(uname) != 'Darwin' ]]; then
   shopt -s dirspell autocd 
 fi
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
