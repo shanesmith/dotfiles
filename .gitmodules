@@ -88,3 +88,6 @@
 [submodule "vim/bundle/expand"]
 	path = vim/bundle/expand
 	url = https://github.com/terryma/vim-expand-region
+[submodule "vim/bundle/unimpared"]
+	path = vim/bundle/unimpared
+	url = git://github.com/tpope/vim-unimpaired.git
