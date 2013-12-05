@@ -66,17 +66,20 @@ save_function() {
     eval "$NEWNAME_FUNC"
 }
 
-save_function __git_ps1_show_upstream __orig_git_ps1_show_upstream
+if ! type -t __orig_git_ps1_show_upstream >/dev/null; then
+  save_function __git_ps1_show_upstream __orig_git_ps1_show_upstream
+fi
 
 __git_ps1_show_upstream() { 
   __orig_git_ps1_show_upstream
 
-  local upstream="$(git rev-parse --symbolic-full-name --abbrev-ref '@{upstream}')"
+  local upstream="$(git rev-parse --symbolic-full-name --abbrev-ref '@{upstream}' 2>/dev/null)"
 
   if [[ -n $upstream ]]; then
     b="$b $p$upstream"
     p=""
   fi
+
 }
 
 NONE="\[\033[0m\]"    # unsets color to term's fg color
