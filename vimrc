@@ -7,6 +7,10 @@ set shiftwidth=2
 set shiftround
 set expandtab
 
+"set modelines enabled
+set modeline
+set modelines=5
+
 "Viminfo
 set viminfo+=!
 
