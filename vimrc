@@ -87,7 +87,7 @@ set splitright
 set listchars=tab:>-,trail:',eol:$
 
 "Colorscheme
-if &t_Co == 256
+if &t_Co == 256 || has("gui_running")
   let g:aldmeris_transparent = 1
   colorscheme aldmeris
 else
