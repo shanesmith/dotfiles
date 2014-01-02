@@ -142,6 +142,11 @@ let g:delimitMate_expand_space = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_objc_compiler = 'clang'
 
+"DBGPavim
+let g:dbgPavimPort = 9009
+let g:dbgPavimBreakAtEntry = 0
+noremap <silent> <Leader>b :Bp<CR>
+
 """ 
 """ Custom mappings
 """

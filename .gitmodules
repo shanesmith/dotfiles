@@ -91,3 +91,6 @@
 [submodule "vim/bundle/unimpared"]
 	path = vim/bundle/unimpared
 	url = git://github.com/tpope/vim-unimpaired.git
+[submodule "vim/bundle/dbgpavim"]
+	path = vim/bundle/dbgpavim
+	url = https://github.com/brookhong/DBGPavim
