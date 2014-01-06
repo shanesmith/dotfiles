@@ -6,10 +6,10 @@
   st = status
   shoe = show
   unstage = reset HEAD --
-  lol = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --graph --branches --remotes=origin/[m]aster HEAD "@{upstream}"
-  lolb = log  --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --graph HEAD "@{upstream}"
-  lolf = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --graph --branches --remotes=origin/[m]aster --name-status HEAD "@{upstream}"
-  lolbf = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --graph --name-status HEAD "@{upstream}"
+  lol = "!f() { local extra=\"\"; if git rev-parse -q --verify '@{u}' &>/dev/null; then extra=\"$extra @{u}\"; fi; git log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --color --graph --branches --remotes=origin/[m]aster HEAD $extra $@; }; f"
+  lolb = "!f() { local extra=\"\"; if git rev-parse -q --verify '@{u}' &>/dev/null; then extra=\"$extra @{u}\"; fi; git log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --color --graph HEAD $extra $@; }; f"
+  lolf = "!f() { local extra=\"\"; if git rev-parse -q --verify '@{u}' &>/dev/null; then extra=\"$extra @{u}\"; fi; git log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --color --graph --name-status --branches --remotes=origin/[m]aster HEAD $extra $@; }; f"
+  lolbf = "!f() { local extra=\"\"; if git rev-parse -q --verify '@{u}' &>/dev/null; then extra=\"$extra @{u}\"; fi; git log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --color --graph --name-status HEAD $extra $@; }; f"
   lolnew = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --graph ORIG_HEAD..
   lall = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --graph --all
   lallf = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --graph --all --name-status
