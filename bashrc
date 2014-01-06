@@ -5,9 +5,8 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-if [ $(tput colors) = "256" ]; then
-  export TERM="xterm-256color"
-fi
+# Always set TERM to support color
+export TERM="xterm-256color"
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
