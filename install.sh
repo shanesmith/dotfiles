@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOTFILES="bashrc bash_aliases gitconfig vimrc vim ackrc"
+DOTFILES="bashrc bash_aliases gitconfig vimrc vim ackrc inputrc"
 
 is_linux=
 is_mac=
