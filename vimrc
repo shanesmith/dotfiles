@@ -103,12 +103,15 @@ let mapleader = ","
 """
 
 "CtrlP options
-let g:ctrlp_map = "<leader>p"
+let g:ctrlp_map = "<leader>pp"
+nnoremap <leader>pf :CtrlPFunky<cr>
+nnoremap <leader>pl :CtrlPLine<cr>
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_max_height = 50
 let g:ctrlp_tabpage_position = 'al'
 let g:ctrlp_working_path_mode = 0
+let g:ctrlp_extensions=['funky', 'line']
 let g:ctrlp_prompt_mappings = {
     \ 'ToggleType(1)':        ['<c-right>'],
     \ 'ToggleType(-1)':       ['<c-left>'],
@@ -146,6 +149,11 @@ let g:syntastic_objc_compiler = 'clang'
 let g:dbgPavimPort = 9009
 let g:dbgPavimBreakAtEntry = 0
 noremap <silent> <Leader>b :Bp<CR>
+
+"Signify
+highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
+highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
+highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
 
 """ 
 """ Custom mappings
@@ -225,6 +233,8 @@ nmap \\ <Plug>NERDCommenterToggle
 vmap \\ <Plug>NERDCommenterToggle
 nmap \a <Plug>NERDCommenterAppend
 vmap \a <Plug>NERDCommenterAppend
+nmap \* <Plug>NERDCommenterMinimal
+vmap \* <Plug>NERDCommenterMinimal
 
 "NeoCompleCache mappings
 function! s:neocomplcache_exists()

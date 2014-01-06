@@ -94,3 +94,15 @@
 [submodule "vim/bundle/dbgpavim"]
 	path = vim/bundle/dbgpavim
 	url = https://github.com/brookhong/DBGPavim
+[submodule "vim/bundle/signature"]
+	path = vim/bundle/signature
+	url = https://github.com/kshenoy/vim-signature
+[submodule "vim/bundle/signify"]
+	path = vim/bundle/signify
+	url = https://github.com/mhinz/vim-signify
+[submodule "vim/bundle/repeat"]
+	path = vim/bundle/repeat
+	url = https://github.com/tpope/vim-repeat
+[submodule "vim/bundle/ctrlp-funky"]
+	path = vim/bundle/ctrlp-funky
+	url = https://github.com/tacahiroy/ctrlp-funky
