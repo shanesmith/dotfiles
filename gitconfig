@@ -6,17 +6,17 @@
   st = status
   shoe = show
   unstage = reset HEAD --
-  lol = "!f() { local extra=\"\"; if git rev-parse -q --verify '@{u}' &>/dev/null; then extra=\"$extra @{u}\"; fi; git log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --color --graph --branches --remotes=origin/[m]aster HEAD $extra $@; }; f"
-  lolb = "!f() { local extra=\"\"; if git rev-parse -q --verify '@{u}' &>/dev/null; then extra=\"$extra @{u}\"; fi; git log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --color --graph HEAD $extra $@; }; f"
-  lolf = "!f() { local extra=\"\"; if git rev-parse -q --verify '@{u}' &>/dev/null; then extra=\"$extra @{u}\"; fi; git log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --color --graph --name-status --branches --remotes=origin/[m]aster HEAD $extra $@; }; f"
-  lolbf = "!f() { local extra=\"\"; if git rev-parse -q --verify '@{u}' &>/dev/null; then extra=\"$extra @{u}\"; fi; git log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --color --graph --name-status HEAD $extra $@; }; f"
+  lol = "!f() { local extra=\"\"; if git rev-parse -q --verify '@{u}' >/dev/null 2>&1; then extra=\"$extra @{u}\"; fi; git log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --color --graph --branches --remotes=origin/[m]aster HEAD $extra $@; }; f"
+  lolb = "!f() { local extra=\"\"; if git rev-parse -q --verify '@{u}' >/dev/null 2>&1; then extra=\"$extra @{u}\"; fi; git log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --color --graph HEAD $extra $@; }; f"
+  lolf = "!f() { local extra=\"\"; if git rev-parse -q --verify '@{u}' >/dev/null 2>&1; then extra=\"$extra @{u}\"; fi; git log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --color --graph --name-status --branches --remotes=origin/[m]aster HEAD $extra $@; }; f"
+  lolbf = "!f() { local extra=\"\"; if git rev-parse -q --verify '@{u}' >/dev/null 2>&1; then extra=\"$extra @{u}\"; fi; git log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --color --graph --name-status HEAD $extra $@; }; f"
   lolnew = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --graph ORIG_HEAD..
   lall = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --graph --all
   lallf = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --graph --all --name-status
   logf = log --name-status
   co = checkout
   pop = stash pop
-  k = !gitk --all &>/dev/null &
+  k = !gitk --all >/dev/null 2>&1 &
   staged = diff --staged
   top = rev-parse --show-toplevel
   s = svn
