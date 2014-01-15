@@ -155,6 +155,9 @@ highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
 highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
 
+"JSON
+let g:vim_json_syntax_conceal = 0
+
 """ 
 """ Custom mappings
 """
