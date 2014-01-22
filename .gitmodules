@@ -19,9 +19,6 @@
 [submodule "vim/bundle/recover"]
 	path = vim/bundle/recover
 	url = https://github.com/chrisbra/Recover.vim
-[submodule "vim/bundle/zoomwin"]
-	path = vim/bundle/zoomwin
-	url = git://github.com/vim-scripts/ZoomWin.git
 [submodule "vim/bundle/ctrlp"]
 	path = vim/bundle/ctrlp
 	url = git://github.com/kien/ctrlp.vim.git
@@ -112,3 +109,6 @@
 [submodule "vim/bundle/less"]
 	path = vim/bundle/less
 	url = https://github.com/groenewege/vim-less
+[submodule "vim/bundle/zoomwin"]
+	path = vim/bundle/zoomwin
+	url = https://github.com/regedarek/ZoomWin
