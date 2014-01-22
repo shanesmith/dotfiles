@@ -76,9 +76,6 @@
 [submodule "vim/bundle/php"]
 	path = vim/bundle/php
 	url = git://github.com/StanAngeloff/php.vim.git
-[submodule "vim/bundle/neatstatus"]
-	path = vim/bundle/neatstatus
-	url = https://github.com/maciakl/vim-neatstatus.git
 [submodule "vim/bundle/seek"]
 	path = vim/bundle/seek
 	url = https://github.com/goldfeld/vim-seek.git
@@ -109,3 +106,6 @@
 [submodule "vim/bundle/json"]
 	path = vim/bundle/json
 	url = https://github.com/elzr/vim-json
+[submodule "vim/bundle/airline"]
+	path = vim/bundle/airline
+	url = https://github.com/bling/vim-airline
