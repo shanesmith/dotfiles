@@ -29,6 +29,11 @@ set showmatch
 "Display the status bar at the bottom
 set ruler
 
+"Error bell
+set noerrorbells
+set visualbell
+set t_vb=
+
 "Always display tab and status bar
 set laststatus=2
 set showtabline=2
