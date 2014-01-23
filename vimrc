@@ -29,8 +29,9 @@ set showmatch
 "Display the status bar at the bottom
 set ruler
 
-"Always display status bar
+"Always display tab and status bar
 set laststatus=2
+set showtabline=2
 
 "Match words as we type a search string. We may be able to find the word we are looking for before being done typing.
 set incsearch
