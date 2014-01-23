@@ -94,6 +94,7 @@ set scrolloff=5
 
 "Split pane to right when :vsplit
 set splitright
+"set splitbelow
 
 "What to show in character list
 set listchars=tab:>-,trail:',eol:$
@@ -164,6 +165,7 @@ let g:syntastic_objc_compiler = 'clang'
 "DBGPavim
 let g:dbgPavimPort = 9009
 let g:dbgPavimBreakAtEntry = 0
+let g:dbgPavimPathMap = [['/Users/ssmith/smudel','/var/www'],]
 noremap <silent> <Leader>b :Bp<CR>
 
 "Signify
@@ -314,3 +316,14 @@ command! Wq wq
 command! WQ wq
 command! Q q
 cmap wQ wq
+
+"""
+""" AutoCmd
+"""
+
+" Auto load vimrc on save
+" http://www.bestofvim.com/tip/auto-reload-your-vimrc/
+augroup reload_vimrc " {
+    autocmd!
+    autocmd BufWritePost $MYVIMRC,~/Code/rc/vimrc source $MYVIMRC
+augroup END " }
