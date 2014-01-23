@@ -212,6 +212,14 @@ nmap q <nop>
 "http://vim.wikia.com/wiki/Selecting_your_pasted_text
 nnoremap gp `[v`]
 
+"Paste from system clipboard
+nnoremap <leader>v o<ESC>"+p
+nnoremap <leader>V O<ESC>"+p
+nnoremap <leader>C "+yy
+vnoremap <leader>v "+p
+vnoremap <leader>V "+p
+vnoremap <leader>c "+y
+
 "Stamp word (replace current word with last delete/yank)
 nnoremap S diw"0P
 
