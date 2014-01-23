@@ -174,6 +174,10 @@ highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
 "JSON
 let g:vim_json_syntax_conceal = 0
 
+"ACK
+nnoremap <leader>a :Ack! 
+vnoremap <leader>a "hy:<C-U>Ack! <C-R>h
+
 """ 
 """ Custom mappings
 """
