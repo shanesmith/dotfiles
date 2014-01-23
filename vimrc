@@ -197,7 +197,9 @@ nnoremap <silent> <2-LeftMouse> :let @/='\V\<'.escape(expand('<cword>'), '\').'\
 nnoremap <silent> <Leader>\ :let @/=""<CR>
 
 "Tab commands
-nmap <C-t> :tabnew<CR>
+nnoremap <C-t> :tabnew<CR>
+nnoremap <S-Right> :tabnext<CR>
+nnoremap <S-Left> :tabprevious<CR>
 
 "Show whitespace characters
 nmap <Leader>s :set nolist!<CR>
