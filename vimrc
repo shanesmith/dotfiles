@@ -255,11 +255,14 @@ onoremap <silent> A[ :call searchpair('\[', '', '\]', 'bW') \| normal V%<CR>
 onoremap <silent> A] :call searchpair('\[', '', '\]', 'bW') \| normal V%<CR>
 
 "Toggle NERDTree
-nnoremap <Leader>t :NERDTreeToggle<CR>
+nnoremap <Leader>t :NERDTreeToggle<CR> :NERDTreeMirror<CR>
 let NERDTreeMapActivateNode = '<Right>'
 let NERDTreeMapCloseDir = '<Left>'
 let NERDTreeMapOpenSplit = 'h'
 let NERDTreeMapOpenVSplit = 'v'
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeAutoDeleteBuffer = 1
+let g:NERDTreeChDirMode = 2
 
 "NERDCommenter
 nmap \\ <Plug>NERDCommenterToggle
