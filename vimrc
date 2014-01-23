@@ -238,7 +238,7 @@ nnoremap <Leader>o o<ESC>
 nnoremap <Leader>O O<ESC>
 
 "Better escape
-inoremap jj <ESC>
+inoremap jk <ESC>
 
 "Text-object for matching whole-line pairs
 vnoremap <silent> A{ :normal [{V%<CR>
