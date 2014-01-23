@@ -54,6 +54,9 @@ set smartcase
 "Line numbers
 set number
 
+"Add matching pairs for %
+set matchpairs+=<:>
+
 "Backspace behaviour
 set backspace=indent,eol,start
 
@@ -84,7 +87,7 @@ filetype plugin indent on
 "Past toggle <F8>
 nnoremap <F8> :set invpaste paste?<CR>
 set pastetoggle=<F8>
-set showmode
+set noshowmode
 
 "Scroll offset
 set scrolloff=5
