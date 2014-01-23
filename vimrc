@@ -312,3 +312,5 @@ command! CleanWhitespace %s/\s\+$//g
 command! W w
 command! Wq wq
 command! WQ wq
+command! Q q
+cmap wQ wq
