@@ -38,6 +38,9 @@ set t_vb=
 set laststatus=2
 set showtabline=2
 
+"Command tab completion behaviour
+set wildmode=longest,list
+
 "Match words as we type a search string. We may be able to find the word we are looking for before being done typing.
 set incsearch
 
