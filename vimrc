@@ -101,7 +101,11 @@ set listchars=tab:>-,trail:',eol:$
 "Colorscheme
 if &t_Co == 256 || has("gui_running")
   let g:aldmeris_transparent = 1
-  colorscheme aldmeris
+  try 
+    colorscheme aldmeris
+  catch
+    colorscheme desert
+  endtry
 else
   colorscheme desert
 endif
