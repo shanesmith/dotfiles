@@ -112,3 +112,12 @@
 [submodule "vim/bundle/zoomwin"]
 	path = vim/bundle/zoomwin
 	url = https://github.com/regedarek/ZoomWin
+[submodule "vim/bundle/autopairs"]
+	path = vim/bundle/autopairs
+	url = https://github.com/jiangmiao/auto-pairs
+[submodule "vim/bundle/searchcomplete"]
+	path = vim/bundle/searchcomplete
+	url = https://github.com/vim-scripts/SearchComplete
+[submodule "vim/bundle/colorizer"]
+	path = vim/bundle/colorizer
+	url = https://github.com/lilydjwg/colorizer

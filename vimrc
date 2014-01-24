@@ -307,6 +307,11 @@ let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 
+
+"Colorizer
+let g:colorizer_startup = 1
+let g:colorizer_nomap = 1
+
 """
 """ Custom ex commands
 """
