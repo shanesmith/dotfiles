@@ -16,6 +16,10 @@ alias la='ls -A'
 alias l='ls -CF'
 alias lld='ll -d'
 
+bak() {
+  cp -ai $1{,.bak$2}
+}
+
 alias h="cd ~"
 alias ..="cd .."
 alias ...="cd ../.."
