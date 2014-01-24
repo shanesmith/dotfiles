@@ -331,3 +331,9 @@ augroup reload_vimrc " {
     autocmd!
     autocmd BufWritePost $MYVIMRC,~/Code/rc/vimrc source $MYVIMRC
 augroup END " }
+
+" Close vim if NERDTree is the last window
+augroup nerdtree_vimrc
+  autocmd!
+  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+augroup END
