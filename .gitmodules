@@ -22,9 +22,6 @@
 [submodule "vim/bundle/ctrlp"]
 	path = vim/bundle/ctrlp
 	url = git://github.com/kien/ctrlp.vim.git
-[submodule "vim/bundle/neocomplcache"]
-	path = vim/bundle/neocomplcache
-	url = git://github.com/Shougo/neocomplcache.git
 [submodule "vim/bundle/nerdtree"]
 	path = vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
@@ -55,9 +52,6 @@
 [submodule "vim/bundle/indent-object"]
 	path = vim/bundle/indent-object
 	url = https://github.com/michaeljsmith/vim-indent-object
-[submodule "vim/bundle/neosnippet"]
-	path = vim/bundle/neosnippet
-	url = git://github.com/Shougo/neosnippet.git
 [submodule "vim/bundle/honza-snippets"]
 	path = vim/bundle/honza-snippets
 	url = git://github.com/honza/vim-snippets.git
@@ -124,3 +118,9 @@
 [submodule "vim/bundle/abolish"]
 	path = vim/bundle/abolish
 	url = https://github.com/tpope/vim-abolish
+[submodule "vim/bundle/neocomplete"]
+	path = vim/bundle/neocomplete
+	url = https://github.com/Shougo/neocomplete.vim
+[submodule "vim/bundle/fugitive"]
+	path = vim/bundle/fugitive
+	url = https://github.com/tpope/vim-fugitive

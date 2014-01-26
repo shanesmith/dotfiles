@@ -141,22 +141,18 @@ let g:ctrlp_custom_ignore = {
 let g:localvimrc_sandbox=0
 let g:localvimrc_persistent=1
 
-"NeoComplCache options
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_enable_underbar_completion = 1
-let g:neocomplcache_min_syntax_length = 3
-let g:neocomplcache_enable_insert_char_pre = 1
+"NeoComplete options
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+let g:neocomplete#enable_auto_select = 1
+let g:neocomplete#enable_insert_char_pre = 1
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-let g:neosnippet#snippets_directory='~/.vim/bundle/honza-snippets/snippets'
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
 
 "DelimitMate options
 let g:delimitMate_expand_space = 1
@@ -280,24 +276,19 @@ vmap \a <Plug>NERDCommenterAppend
 nmap \* <Plug>NERDCommenterMinimal
 vmap \* <Plug>NERDCommenterMinimal
 
-"NeoCompleCache mappings
-function! s:neocomplcache_exists()
-  return exists(":NeoComplCacheEnable") == 2
+"NeoComplete mappings
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
 endfunction
-inoremap <expr><TAB> pumvisible() && <SID>neocomplcache_exists() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() && <SID>neocomplcache_exists() ? "\<C-p>" : "\<TAB>"
-inoremap <expr><CR> pumvisible() && <SID>neocomplcache_exists() ? neocomplcache#close_popup() : "\<CR>"
-inoremap <expr><s-CR> pumvisible() && <SID>neocomplcache_exists() ? neocomplcache#close_popup()"\<CR>" : "\<CR>"
-inoremap <expr><BS>  <SID>neocomplcache_exists() ? neocomplcache#smart_close_popup()."\<C-h>" : "\<BS>"
-inoremap <expr><C-y> <SID>neocomplcache_exists() ? neocomplcache#close_popup() : "\<C-y>"
-inoremap <expr><C-g> <SID>neocomplcache_exists() ? neocomplcache#undo_completion() : "\<C-g>"
-inoremap <expr><C-l> <SID>neocomplcache_exists() ? neocomplcache#complete_common_string() : "\<C-l>"
-
-"NeoSnippets
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-imap <expr><TAB> <SID>neocomplcache_exists() && neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> <SID>neocomplcache_exists() && neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
+inoremap <expr><C-g> neocomplete#undo_completion()
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y> neocomplete#close_popup()
+inoremap <expr><C-e> neocomplete#cancel_popup()
+inoremap <expr><C-l> neocomplete#complete_common_string()
 
 "Smartwords
 map w <Plug>(smartword-w)
