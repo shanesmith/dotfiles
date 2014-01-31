@@ -200,6 +200,10 @@ nnoremap <silent> <2-LeftMouse> :let @/='\V\<'.escape(expand('<cword>'), '\').'\
 ""Clear search (and Highlight)
 nnoremap <silent> <Leader>\ :let @/=""<CR>
 
+"Next/Previous result
+nnoremap <F3> n
+nnoremap <S-F3> N
+
 "Tab commands
 nnoremap <C-t> :tabnew<CR>
 nnoremap <S-Right> :tabnext<CR>
