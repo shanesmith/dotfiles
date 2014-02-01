@@ -6,14 +6,17 @@
 # these allow you to start typing a command and 
 # use the up/down arrow to auto complete from 
 # commands in your history
-"\e[5~": history-search-forward
-"\e[6~": history-search-backward
+"\e[5~": history-search-backward
+"\e[6~": history-search-forward
 # Mac
-"\e[1;5B": history-search-forward
 "\e[1;5A": history-search-backward
+"\e[1;5B": history-search-forward
 
 "\ed": kill-whole-line
 "\C-d": kill-whole-line
+
+"\C-j": menu-complete
+"\C-k": menu-complete-backward
 
 # this lets you hit tab to auto-complete a file or 
 # directory name ignoring case
