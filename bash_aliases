@@ -203,8 +203,12 @@ gittop() {
   cd $(git top)
 }
 
-alias httphp="php -S 127.0.0.1:8080"
-alias httpython="python -m SimpleHTTPServer 8080"
+httphp() {
+  php -S 0.0.0.0:${1:-8080}
+}
+httpython() {
+  python -m SimpleHTTPServer ${1:-8080}
+}
 
 # the space allows for aliases...
 # https://wiki.archlinux.org/index.php/Sudo#Passing_aliases
