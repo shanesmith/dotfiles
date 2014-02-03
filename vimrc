@@ -22,6 +22,7 @@ set guioptions-=T
 
 "Let VIM figure out the indentation neede in C-style programs - when it can.
 set smartindent
+set autoindent
 
 "VIM will show the corresponding opening and closing curly brace, bracket or parentesis.
 set showmatch
@@ -29,14 +30,20 @@ set showmatch
 "Display the status bar at the bottom
 set ruler
 
+"Faster drawing... apparently...
+set lazyredraw
+
 "Error bell
 set noerrorbells
-set visualbell
+set novisualbell
 set t_vb=
 
 "Always display tab and status bar
 set laststatus=2
 set showtabline=2
+
+"Show cursorline
+set cursorline
 
 "Command tab completion behaviour
 set wildmode=longest,list
@@ -46,6 +53,9 @@ set incsearch
 
 "Highlight matched search
 set hlsearch
+
+"Default global substitute
+set gdefault
 
 "Be smart about character case while searching
 set ignorecase
