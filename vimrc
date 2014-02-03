@@ -33,6 +33,10 @@ set ruler
 "Faster drawing... apparently...
 set lazyredraw
 
+"Mostly for a better maximizer
+set winminwidth=0
+set winminheight=0
+
 "Error bell
 set noerrorbells
 set novisualbell
@@ -191,6 +195,9 @@ vnoremap <leader>a "hy:<C-U>Ack! <C-R>h
 
 "XMLEdit
 let g:xmledit_enable_html = 1
+
+"Maximizer
+let g:maximizer_default_mapping_key = '<F4>'
 
 """ 
 """ Custom mappings

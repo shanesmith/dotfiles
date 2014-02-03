@@ -103,9 +103,6 @@
 [submodule "vim/bundle/less"]
 	path = vim/bundle/less
 	url = https://github.com/groenewege/vim-less
-[submodule "vim/bundle/zoomwin"]
-	path = vim/bundle/zoomwin
-	url = https://github.com/regedarek/ZoomWin
 [submodule "vim/bundle/autopairs"]
 	path = vim/bundle/autopairs
 	url = https://github.com/jiangmiao/auto-pairs
@@ -130,3 +127,6 @@
 [submodule "vim/bundle/lesscss"]
 	path = vim/bundle/lesscss
 	url = https://github.com/vitalk/vim-lesscss
+[submodule "vim/bundle/maximizer"]
+	path = vim/bundle/maximizer
+	url = https://github.com/szw/vim-maximizer
