@@ -1,9 +1,6 @@
 [submodule "vim/bundle/surround"]
 	path = vim/bundle/surround
 	url = git://github.com/tpope/vim-surround.git
-[submodule "vim/bundle/better-css"]
-	path = vim/bundle/better-css
-	url = git://github.com/vim-scripts/Better-CSS-Syntax-for-Vim.git
 [submodule "vim/bundle/vim-twig"]
 	path = vim/bundle/vim-twig
 	url = git://github.com/beyondwords/vim-twig.git
@@ -136,3 +133,6 @@
 [submodule "vim/bundle/gundo"]
 	path = vim/bundle/gundo
 	url = https://github.com/sjl/gundo.vim
+[submodule "vim/bundle/css3-syntax"]
+	path = vim/bundle/css3-syntax
+	url = https://github.com/hail2u/vim-css3-syntax

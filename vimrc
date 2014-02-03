@@ -110,6 +110,7 @@ set listchars=tab:>-,trail:',eol:$
 "Colorscheme
 if &t_Co == 256 || has("gui_running")
   let g:aldmeris_transparent = 1
+  let g:aldmeris_css = 0
   try 
     colorscheme aldmeris
   catch
