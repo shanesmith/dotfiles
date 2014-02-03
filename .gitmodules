@@ -130,3 +130,9 @@
 [submodule "vim/bundle/tcomment"]
 	path = vim/bundle/tcomment
 	url = https://github.com/tomtom/tcomment_vim
+[submodule "vim/bundle/visualstar"]
+	path = vim/bundle/visualstar
+	url = https://github.com/thinca/vim-visualstar
+[submodule "vim/bundle/gundo"]
+	path = vim/bundle/gundo
+	url = https://github.com/sjl/gundo.vim
