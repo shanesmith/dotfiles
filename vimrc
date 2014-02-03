@@ -155,6 +155,7 @@ autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 "DelimitMate options
+au FileType html let b:delimitMate_matchpairs = '(:),[:],{:}'
 let g:delimitMate_expand_space = 1
 
 "Syntastic options
@@ -177,6 +178,9 @@ let g:vim_json_syntax_conceal = 0
 "ACK
 nnoremap <leader>a :Ack! 
 vnoremap <leader>a "hy:<C-U>Ack! <C-R>h
+
+"XMLEdit
+let g:xmledit_enable_html = 1
 
 """ 
 """ Custom mappings

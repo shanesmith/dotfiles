@@ -124,3 +124,9 @@
 [submodule "vim/bundle/fugitive"]
 	path = vim/bundle/fugitive
 	url = https://github.com/tpope/vim-fugitive
+[submodule "vim/bundle/xmledit"]
+	path = vim/bundle/xmledit
+	url = https://github.com/sukima/xmledit
+[submodule "vim/bundle/lesscss"]
+	path = vim/bundle/lesscss
+	url = https://github.com/vitalk/vim-lesscss
