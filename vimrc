@@ -135,6 +135,7 @@ let maplocalleader = "|"
 
 "CtrlP options
 let g:ctrlp_map = "<leader>pp"
+nnoremap <leader>p  :CtrlP<cr>
 nnoremap <leader>pf :CtrlPFunky<cr>
 nnoremap <leader>pl :CtrlPLine<cr>
 let g:ctrlp_match_window_reversed = 0
