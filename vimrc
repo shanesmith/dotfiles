@@ -156,7 +156,7 @@ let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#sources#syntax#min_keyword_length = 3
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-let g:neocomplete#enable_auto_select = 1
+let g:neocomplete#enable_auto_select = 0
 let g:neocomplete#enable_insert_char_pre = 1
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -273,7 +273,7 @@ onoremap <silent> A[ :call searchpair('\[', '', '\]', 'bW') \| normal V%<CR>
 onoremap <silent> A] :call searchpair('\[', '', '\]', 'bW') \| normal V%<CR>
 
 "Toggle NERDTree
-nnoremap <Leader>t :NERDTreeToggle<CR> :NERDTreeMirror<CR>
+nnoremap <Leader>t :NERDTreeToggle<CR>
 let NERDTreeMapActivateNode = '<Right>'
 let NERDTreeMapCloseDir = '<Left>'
 let NERDTreeMapOpenSplit = 'h'
@@ -293,7 +293,7 @@ vmap \* <Plug>NERDCommenterMinimal
 "NeoComplete mappings
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
-  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+  return pumvisible() ? neocomplete#smart_close_popup() : "\<CR>"
 endfunction
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
