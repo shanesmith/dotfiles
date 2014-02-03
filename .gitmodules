@@ -1,9 +1,6 @@
 [submodule "vim/bundle/surround"]
 	path = vim/bundle/surround
 	url = git://github.com/tpope/vim-surround.git
-[submodule "vim/bundle/nerdcommenter"]
-	path = vim/bundle/nerdcommenter
-	url = git://github.com/scrooloose/nerdcommenter
 [submodule "vim/bundle/better-css"]
 	path = vim/bundle/better-css
 	url = git://github.com/vim-scripts/Better-CSS-Syntax-for-Vim.git
@@ -130,3 +127,6 @@
 [submodule "vim/bundle/maximizer"]
 	path = vim/bundle/maximizer
 	url = https://github.com/szw/vim-maximizer
+[submodule "vim/bundle/tcomment"]
+	path = vim/bundle/tcomment
+	url = https://github.com/tomtom/tcomment_vim

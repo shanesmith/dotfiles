@@ -126,6 +126,7 @@ endif
 
 "Set leader character
 let mapleader = ","
+let maplocalleader = "|"
 
 
 """
@@ -289,13 +290,11 @@ let g:NERDTreeMinimalUI = 1
 let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeChDirMode = 2
 
-"NERDCommenter
-nmap \\ <Plug>NERDCommenterToggle
-vmap \\ <Plug>NERDCommenterToggle
-nmap \a <Plug>NERDCommenterAppend
-vmap \a <Plug>NERDCommenterAppend
-nmap \* <Plug>NERDCommenterMinimal
-vmap \* <Plug>NERDCommenterMinimal
+"TComment
+nmap \\ :TComment<CR>
+vmap \\ :TComment<CR>
+nmap \* :TCommentBlock<CR>
+vmap \* :TCommentBlock<CR>
 
 "NeoComplete mappings
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
