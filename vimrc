@@ -370,3 +370,9 @@ augroup drupal
   autocmd BufRead,BufNewFile *.inc set filetype=php
 augroup end
 
+" Show cursorline only on current window
+augroup CursorLine
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  au WinLeave * setlocal nocursorline
+augroup END
