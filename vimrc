@@ -17,6 +17,9 @@ set viminfo+=!
 "Enable mouse
 set mouse=a
 
+"Wrap at start/end of line
+set whichwrap+=<,>,[,],h,l
+
 "Remove toolbar from GUI vim
 set guioptions-=T
 
@@ -80,14 +83,6 @@ set backupdir^=~/.vim/backups//
 
 "Fix delete key
 fixdel
-
-"Drupal
-augroup module
-  autocmd BufRead,BufNewFile *.module set filetype=php
-  autocmd BufRead,BufNewFile *.profile set filetype=php
-  autocmd BufRead,BufNewFile *.install set filetype=php
-  autocmd BufRead,BufNewFile *.inc set filetype=php
-augroup end
 
 "Pathogen plugin loading
 call pathogen#infect()
@@ -360,3 +355,13 @@ augroup nerdtree_vimrc
   autocmd!
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 augroup END
+
+"Drupal
+augroup drupal
+  autocmd!
+  autocmd BufRead,BufNewFile *.module set filetype=php
+  autocmd BufRead,BufNewFile *.profile set filetype=php
+  autocmd BufRead,BufNewFile *.install set filetype=php
+  autocmd BufRead,BufNewFile *.inc set filetype=php
+augroup end
+
