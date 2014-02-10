@@ -338,7 +338,8 @@ command! W w
 command! Wq wq
 command! WQ wq
 command! Q q
-cmap wQ wq
+command! Qa qa
+command! QA qa
 
 "Super ReTab
 command! -range=% -nargs=0 Tab2Space execute '<line1>,<line2>s#^\t\+#\=repeat(" ", len(submatch(0))*' . &ts . ')'
