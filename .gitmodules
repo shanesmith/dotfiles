@@ -136,3 +136,6 @@
 [submodule "vim/bundle/css3-syntax"]
 	path = vim/bundle/css3-syntax
 	url = https://github.com/hail2u/vim-css3-syntax
+[submodule "vim/bundle/xolox-misc"]
+	path = vim/bundle/xolox-misc
+	url = https://github.com/xolox/vim-misc

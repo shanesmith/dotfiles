@@ -197,6 +197,10 @@ let g:xmledit_enable_html = 1
 "Maximizer
 let g:maximizer_default_mapping_key = '<F4>'
 
+"Notes
+let g:notes_directories = ['~/Dropbox/notes']
+let g:notes_suffix = ".txt"
+
 """ 
 """ Custom mappings
 """
