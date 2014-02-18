@@ -147,12 +147,10 @@ if [[ $TERM =~ xterm* ]]; then
   export PROMPT_COMMAND="_set_title"
 fi
 
-eval $(ssh-agent -t 1H)
+sources=( "${HOME}/.bash_aliases" "${HOME}/.bashrc-sshlogin" "${HOME}/.bashrc.local"  )
 
-if [ -f ~/.bash_aliases ]; then
-  . ~/.bash_aliases
-fi
-
-if [ -f ~/.bashrc.local ]; then
-  . ~/.bashrc.local
-fi
+for file in "${sources[@]}"; do
+  if [ -f "$file" ]; then
+    . "$file"
+  fi
+done
