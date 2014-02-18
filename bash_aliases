@@ -20,6 +20,10 @@ bak() {
   cp -ai $1{,.bak$2}
 }
 
+mvbak() {
+  mv -i $1{,.bak$2}
+}
+
 alias h="cd ~"
 alias ..="cd .."
 alias ...="cd ../.."
