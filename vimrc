@@ -42,7 +42,11 @@ set winminheight=0
 
 "Error bell
 set noerrorbells
-set novisualbell
+if has("gui_macvim")
+  set visualbell
+else
+  set novisualbell
+endif
 set t_vb=
 
 "Always display tab and status bar
