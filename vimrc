@@ -265,8 +265,8 @@ vnoremap <S-Down> dp`[V`]
 
 "New lines
 nnoremap <Leader><CR> i<CR><ESC>
-nnoremap <Leader>o o<ESC>
-nnoremap <Leader>O O<ESC>
+nnoremap <Leader>o o<ESC>k
+nnoremap <Leader>O O<ESC>j
 
 "Better escape
 inoremap jk <ESC>
@@ -324,6 +324,17 @@ map ge <Plug>(smartword-ge)
 "Bash style command line
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
+
+"Easier line start/end movement
+nnoremap H ^
+nnoremap L $
+
+"Next/Previous quick fix
+nnoremap <C-n> :cnext<CR>
+nnoremap <C-p> :cprevious<CR>
+
+"Toggle relative line numbers
+nnoremap <leader>l :set relativenumber!<CR>
 
 "Airline
 let g:airline_powerline_fonts = 1
