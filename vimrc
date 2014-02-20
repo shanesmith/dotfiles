@@ -321,6 +321,10 @@ map b <Plug>(smartword-b)
 map e <Plug>(smartword-e)
 map ge <Plug>(smartword-ge)
 
+"Bash style command line
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+
 "Airline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#whitespace#enabled = 0
