@@ -376,15 +376,6 @@ augroup nerdtree_vimrc
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 augroup END
 
-"Drupal
-augroup drupal
-  autocmd!
-  autocmd BufRead,BufNewFile *.module set filetype=php
-  autocmd BufRead,BufNewFile *.profile set filetype=php
-  autocmd BufRead,BufNewFile *.install set filetype=php
-  autocmd BufRead,BufNewFile *.inc set filetype=php
-augroup end
-
 " Show cursorline only on current window
 augroup CursorLine
   au!
