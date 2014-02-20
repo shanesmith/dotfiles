@@ -153,6 +153,7 @@ alias svim="sudo vim"
 alias hs="history"
 
 alias jg="jobs"
+alias kg="kill %1"
 
 ] () {
 if [[ $(which xdg-open) ]]; then
