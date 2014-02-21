@@ -139,3 +139,6 @@
 [submodule "vim/bundle/xolox-misc"]
 	path = vim/bundle/xolox-misc
 	url = https://github.com/xolox/vim-misc
+[submodule "vim/bundle/wildfire"]
+	path = vim/bundle/wildfire
+	url = https://github.com/gcmt/wildfire.vim
