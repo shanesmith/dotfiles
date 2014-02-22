@@ -155,6 +155,10 @@ alias hs="history"
 alias jg="jobs"
 alias kg="kill %1"
 
+lsps() {
+  ps aux | grep $1 | grep -v grep
+}
+
 ] () {
 if [[ $(which xdg-open) ]]; then
   xdg-open "$1"
