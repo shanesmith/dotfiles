@@ -258,10 +258,10 @@ nnoremap S diw"0P
 nnoremap U :redo<CR>
 
 "Move lines up/down
-nnoremap <S-Up> dd<Up>P
-nnoremap <S-Down> ddp
-vnoremap <S-Up> d<Up>P`[V`]
-vnoremap <S-Down> dp`[V`]
+nnoremap <S-Up> :move -2<CR>
+nnoremap <S-Down> :move +1<CR>
+vnoremap <S-Up> :move -2<CR>`[V`]
+vnoremap <S-Down> :move +1<CR>`[V`]
 
 "New lines
 nnoremap <Leader><CR> i<CR><ESC>
