@@ -9,7 +9,7 @@
 	url = git://github.com/vim-scripts/localvimrc
 [submodule "vim/bundle/ack"]
 	path = vim/bundle/ack
-	url = git://github.com/mileszs/ack.vim.git
+	url = git@github.com:shanesmith/ack.vim.git
 [submodule "vim/bundle/recover"]
 	path = vim/bundle/recover
 	url = https://github.com/chrisbra/Recover.vim
