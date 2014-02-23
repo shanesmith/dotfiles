@@ -327,7 +327,11 @@ cnoremap <C-e> <End>
 
 "Easier line start/end movement
 nnoremap H ^
+vnoremap H ^
+onoremap H ^
 nnoremap L $
+vnoremap L $
+onoremap L $
 
 "Next/Previous quick fix
 nnoremap <C-n> :cnext<CR>
