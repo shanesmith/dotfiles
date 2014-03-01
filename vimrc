@@ -177,6 +177,14 @@ let g:delimitMate_expand_space = 1
 "Syntastic options
 let g:syntastic_check_on_open = 1
 let g:syntastic_objc_compiler = 'clang'
+let g:syntastic_html_tidy_quiet_messages = {
+      \   'regex': [
+      \     '"tabindex" has invalid value "-1"',
+      \     '<div> proprietary attribute "tabindex"',
+      \     '<img> lacks "alt" attribute',
+      \     'trimming empty <span>',
+      \   ],
+      \ }
 
 "DBGPavim
 let g:dbgPavimPort = 9009
