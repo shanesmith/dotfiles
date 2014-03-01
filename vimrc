@@ -281,8 +281,8 @@ nnoremap U :redo<CR>
 "Move lines up/down
 nnoremap <S-Up> :move -2<CR>
 nnoremap <S-Down> :move +1<CR>
-vnoremap <S-Up> :move -2<CR>`[V`]
-vnoremap <S-Down> :move +1<CR>`[V`]
+vnoremap <S-Up> :move '<-2<CR>gv
+vnoremap <S-Down> :move '>+1<CR>gv
 
 "New lines
 nnoremap <Leader><CR> i<CR><ESC>
