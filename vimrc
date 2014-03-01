@@ -314,6 +314,7 @@ let NERDTreeMapCloseDir = '<Left>'
 let NERDTreeMapOpenSplit = 'h'
 let NERDTreeMapOpenVSplit = 'v'
 let g:NERDTreeMinimalUI = 1
+let g:NERDTreeShowLineNumbers = 1
 let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeChDirMode = 2
 
