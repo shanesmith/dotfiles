@@ -213,6 +213,19 @@ let g:maximizer_default_mapping_key = '<F4>'
 let g:notes_directories = ['~/Dropbox/notes']
 let g:notes_suffix = ".txt"
 
+function! s:emmet_expand_glyph(name)
+  return "<span class='glyphicon ".a:name."'></span>"
+endfunction
+
+"Emmet
+let g:emmet_html5 = 0
+let g:user_emmet_settings = {
+      \   'custom_expands': {
+      \     '^glyphicon-\S\+$': function("<SID>emmet_expand_glyph")
+      \   },
+      \ }
+
+
 """ 
 """ Custom mappings
 """
@@ -404,4 +417,14 @@ augroup CursorLine
   au!
   au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
   au WinLeave * setlocal nocursorline
+augroup END
+
+augroup EmmetMappings
+  au!
+  au FileType html,css imap <C-Y>Y <plug>(EmmetExpandAbbr)
+  au FileType html,css imap <C-Y><C-Y> <plug>(EmmetExpandAbbr)
+  au FileType html,css vmap <C-Y>Y <plug>(EmmetExpandAbbr)
+  au FileType html,css vmap <C-Y><C-Y> <plug>(EmmetExpandAbbr)
+  au FileType html,css nmap <C-Y>Y <plug>(EmmetExpandAbbr)
+  au FileType html,css nmap <C-Y><C-Y> <plug>(EmmetExpandAbbr)
 augroup END
