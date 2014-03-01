@@ -288,6 +288,7 @@ vnoremap <S-Down> :move '>+1<CR>gv
 nnoremap <Leader><CR> i<CR><ESC>
 nnoremap <Leader>o o<ESC>k
 nnoremap <Leader>O O<ESC>j
+vnoremap <Leader>o <ESC>`<dv`>i<CR><CR><ESC>kp`[v`]
 
 "Better escape
 inoremap jk <ESC>
