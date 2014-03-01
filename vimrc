@@ -359,6 +359,8 @@ onoremap L $
 "Next/Previous quick fix
 nnoremap <C-n> :cnext<CR>
 nnoremap <C-p> :cprevious<CR>
+nnoremap <C-j> :lnext<CR>
+nnoremap <C-k> :lprevious<CR>
 
 "Toggle relative line numbers
 nnoremap <leader>l :set relativenumber!<CR>
