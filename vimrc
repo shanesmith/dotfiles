@@ -225,6 +225,8 @@ let g:user_emmet_settings = {
       \   },
       \ }
 
+"Easy Align
+vmap <Tab> <Plug>(LiveEasyAlign)
 
 """ 
 """ Custom mappings
