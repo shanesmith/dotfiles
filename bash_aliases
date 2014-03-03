@@ -16,6 +16,8 @@ alias la='ls -A'
 alias l='ls -CF'
 alias lld='ll -d'
 
+alias :q='exit'
+
 bak() {
   cp -ai $1{,.bak$2}
 }
