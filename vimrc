@@ -371,6 +371,8 @@ onoremap H ^
 nnoremap L $
 vnoremap L $
 onoremap L $
+inoremap <C-a> <C-o>^
+inoremap <C-e> <C-o>$
 
 "Next/Previous quick fix
 nnoremap <C-n> :cnext<CR>
