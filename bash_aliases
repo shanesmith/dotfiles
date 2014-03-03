@@ -238,3 +238,42 @@ git_whitespace_fix() {
     sed -i 's/[[:space:]]*$//' "$FILE"
   done
 }
+
+fzf() {
+  ruby --disable-gems ~/.fzf "$@"
+}
+
+fd() {
+  DIR=$(find ${1:-*} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf) && cd "$DIR"
+}
+
+fda() {
+  DIR=$(find ${1:-.} -type d 2> /dev/null | fzf) && cd "$DIR"
+}
+
+fh() {
+  eval $(history | fzf +s | sed 's/ *[0-9]* *//')
+}
+
+__fsel() {
+  find * -path '*/\.*' -prune \
+    -o -type f -print \
+    -o -type d -print \
+    -o -type l -print 2> /dev/null | fzf -m | while read item; do printf '%q ' "$item"; done
+  echo
+}
+
+# Key bindings
+# ------------
+if [[ $- =~ i ]]; then
+
+  # Required to refresh the prompt after fzf
+  bind '"\er": redraw-current-line'
+
+  # CTRL-T - Paste the selected file path into the command line
+  bind '"\C-t": " \C-u \C-a\C-d$(__fsel)\e\C-e\C-y\C-a\C-y\ey\C-h\C-e\er"'
+
+  # CTRL-R - Paste the selected command from history into the command line
+  bind '"\C-r": " \C-e\C-u$(HISTTIMEFORMAT= history | fzf +s | sed \"s/ *[0-9]* *//\")\e\C-e\er"'
+
+fi
