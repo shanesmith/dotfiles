@@ -58,9 +58,6 @@
 [submodule "vim/bundle/php"]
 	path = vim/bundle/php
 	url = git://github.com/StanAngeloff/php.vim.git
-[submodule "vim/bundle/seek"]
-	path = vim/bundle/seek
-	url = https://github.com/goldfeld/vim-seek.git
 [submodule "vim/bundle/emmet"]
 	path = vim/bundle/emmet
 	url = https://github.com/mattn/emmet-vim/
@@ -148,3 +145,6 @@
 [submodule "vim/bundle/tagbar"]
 	path = vim/bundle/tagbar
 	url = https://github.com/majutsushi/tagbar
+[submodule "vim/bundle/sneak"]
+	path = vim/bundle/sneak
+	url = https://github.com/justinmk/vim-sneak
