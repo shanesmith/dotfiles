@@ -398,6 +398,10 @@ let g:colorizer_nomap = 1
 "Gundo
 nnoremap <leader>u :GundoToggle<CR>
 
+"Don't need help right now, thanks
+imap <F1> <Nop>
+nmap <F1> <Nop>
+
 """
 """ Custom ex commands
 """
