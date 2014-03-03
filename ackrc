@@ -14,3 +14,6 @@ strings:ext:strings
 
 --type-set
 nib:ext:xib,storyboard
+
+--ignore-file
+is:tags
