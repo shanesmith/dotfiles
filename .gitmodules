@@ -145,3 +145,6 @@
 [submodule "vim/bundle/easy-align"]
 	path = vim/bundle/easy-align
 	url = https://github.com/junegunn/vim-easy-align
+[submodule "vim/bundle/tagbar"]
+	path = vim/bundle/tagbar
+	url = https://github.com/majutsushi/tagbar
