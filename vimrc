@@ -424,6 +424,9 @@ command! -range=% -nargs=0 Space2Tab execute '<line1>,<line2>s#^\( \{'.&ts.'\}\)
 "HelpGrep alias
 cnoremap hg helpgrep<space>
 
+"Source vimrc
+command! VimrcReload source $MYVIMRC
+
 """
 """ AutoCmd
 """
