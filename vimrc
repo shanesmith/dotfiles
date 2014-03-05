@@ -150,7 +150,7 @@ let g:ctrlp_prompt_mappings = {
     \ }
 let g:ctrlp_custom_ignore = {
       \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-      \ 'file': '\v\.(exe|so|dll|DS_Store)$'
+      \ 'file': '\vtags|\.(exe|so|dll|DS_Store)$'
       \ }
 
 "LocalVimrc options
@@ -205,6 +205,7 @@ vnoremap <leader>a "hy:<C-U>Ack! <C-R>h
 
 "XMLEdit
 let g:xmledit_enable_html = 1
+let g:xml_use_xhtml = 1
 
 "Maximizer
 let g:maximizer_default_mapping_key = '<F4>'
@@ -212,6 +213,7 @@ let g:maximizer_default_mapping_key = '<F4>'
 "Notes
 let g:notes_directories = ['~/Dropbox/notes']
 let g:notes_suffix = ".txt"
+let g:notes_title_sync = "rename_file"
 
 function! s:emmet_expand_glyph(name)
   return "<span class='glyphicon ".a:name."'></span>"
