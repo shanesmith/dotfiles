@@ -58,13 +58,36 @@ get_dest() {
   echo "$HOME/.$file";
 }
 
+command_exists() {
+  command -v "$1" >/dev/null 2>&1
+}
+
+is_link_to() {
+
+  local from="$1"
+  local to="$2"
+  
+  if [[ -n $is_mac ]]; then
+    if command_exists "greadlink"; then
+      [[ $(greadlink -f "$from") == $src ]]
+    else
+      [[ $(readlink "$from") == $src ]]
+    fi
+    return $?
+  else
+    [[ $(readlink -f "$from") == $src ]]
+    return $?
+  fi
+
+}
+
 do_install() {
   local ret=0
   for file in $DOTFILES; do
     local src=$(get_src "$file")
     local dest=$(get_dest "$file")
     if [[ -L $dest && -z $FORCE ]]; then
-      if [[ $(readlink -f "$dest") == $src ]]; then
+      if is_link_to "$dest" "$src"; then
         echo "Already installed $file"
       else
         echo "Link already exists for $file"
@@ -98,6 +121,10 @@ while [[ $# > 0 ]]; do
   esac
   shift
 done
+
+if [[ -n $is_mac ]] && ! command_exists "greadlink"; then
+  echo "Mac detected without \`greadlink\`, if this install does something wrong you might need to \`brew install coreutils\`."
+fi
 
 do_install
 
