@@ -26,9 +26,11 @@ set guioptions-=T
 "Let VIM figure out the indentation neede in C-style programs - when it can.
 set smartindent
 set autoindent
+set copyindent
 
 "VIM will show the corresponding opening and closing curly brace, bracket or parentesis.
 set showmatch
+set matchtime=1
 
 "Display the status bar at the bottom
 set ruler
@@ -212,7 +214,7 @@ let g:maximizer_default_mapping_key = '<F4>'
 
 "Notes
 let g:notes_directories = ['~/Dropbox/notes']
-let g:notes_suffix = ".txt"
+let g:notes_suffix = ".md"
 let g:notes_title_sync = "rename_file"
 
 function! s:emmet_expand_glyph(name)
