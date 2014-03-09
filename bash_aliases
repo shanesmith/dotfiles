@@ -210,6 +210,8 @@ sudo apt-get $APT_OPTS remove --purge $PURGE
 alias xclip-copy="xclip -i -selection clip"
 alias xclip-paste="xclip -o -selection clip"
 
+alias vv="vagrant"
+
 gittop() {
   cd $(git top)
 }
@@ -265,8 +267,8 @@ __fsel() {
   echo
 }
 
-# Key bindings
-# ------------
+# FZF Key bindings
+# ----------------
 if [[ $- =~ i ]]; then
 
   # Required to refresh the prompt after fzf
