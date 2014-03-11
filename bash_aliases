@@ -18,6 +18,14 @@ alias lld='ll -d'
 
 alias :q='exit'
 
+os_is_mac() {
+  [[ $(uname -s) == "Darwin" ]]
+}
+
+os_is_linux() {
+  [[ $(uname -s) == "Linux" ]]
+}
+
 bak() {
   cp -ai $1{,.bak$2}
 }
@@ -207,8 +215,22 @@ fi
 sudo apt-get $APT_OPTS remove --purge $PURGE
 }
 
-alias xclip-copy="xclip -i -selection clip"
-alias xclip-paste="xclip -o -selection clip"
+
+xclip-copy() {
+  if os_is_mac; then
+    pbcopy -pboard general
+  else
+    xclip -i -selection clip
+  fi
+}
+
+xclip-paste() {
+  if os_is_mac; then
+    pbpaste -pboard general
+  else
+    xclip -o -selection clip
+  fi
+}
 
 alias vv="vagrant"
 
