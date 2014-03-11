@@ -191,7 +191,12 @@ let g:syntastic_html_tidy_quiet_messages = {
 "DBGPavim
 let g:dbgPavimPort = 9009
 let g:dbgPavimBreakAtEntry = 0
-noremap <silent> <Leader>b :Bp<CR>
+let g:dbgPavimKeyRun = "<leader>dr"
+let g:dbgPavimKeyQuit = "<leader>dq"
+let g:dbgPavimKeyToggleBp = "<leader>db"
+let g:dbgPavimKeyHelp = "<leader>dh"
+let g:dbgPavimKeyToggleBae = "<leader>de"
+
 
 "Signify
 highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
