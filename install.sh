@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOTFILES="bashrc bash_aliases bashrc-sshlogin gitconfig gitignore vimrc vim ackrc inputrc colordiffrc fzf fzf.bashrc"
+DOTFILES="bashrc bash_aliases bashrc-sshlogin gitconfig gitignore vimrc vim ackrc inputrc colordiffrc fzf"
 
 is_linux=
 is_mac=
@@ -31,15 +31,21 @@ unset_force() {
 }
 
 get_src() {
-  local file="$1"
-  if [[ "$is_windows" ]]; then
-    case "$file" in
-      bashrc)
+  case "$file" in
+
+    bashrc)
+      if [[ "$is_windows" ]]; then
         echo "$RCPATH/bashrc_msys"
         exit
-        ;;
-    esac
-  fi
+      fi
+      ;;
+
+    fzf)
+      echo "$RCPATH/fzf/fzf"
+      exit
+      ;;
+
+  esac
 
   echo "$RCPATH/$file"
 }

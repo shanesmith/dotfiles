@@ -148,3 +148,6 @@
 [submodule "vim/bundle/sneak"]
 	path = vim/bundle/sneak
 	url = https://github.com/justinmk/vim-sneak
+[submodule "fzf"]
+	path = fzf
+	url = https://github.com/junegunn/fzf
