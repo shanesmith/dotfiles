@@ -166,15 +166,19 @@ alias jg="jobs"
 alias kg="kill %1"
 
 lsps() {
-  ps aux | grep -i $1 | grep -v grep
+  ps aux | grep -i "$1" | grep -v grep
+}
+
+lshs() {
+  history | grep -i "$1" | grep -v lshs
 }
 
 ] () {
-if [[ $(which xdg-open) ]]; then
-  xdg-open "$1"
-elif [[ $(uname) == "Darwin" && $(which open) ]]; then
-  open "$1"
-fi
+  if [[ $(which xdg-open) ]]; then
+    xdg-open "$1"
+  elif [[ $(uname) == "Darwin" && $(which open) ]]; then
+    open "$1"
+  fi
 }
 
 alias frak="fortune -c"
