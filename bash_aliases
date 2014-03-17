@@ -158,7 +158,7 @@ alias jg="jobs"
 alias kg="kill %1"
 
 lsps() {
-  ps aux | grep $1 | grep -v grep
+  ps aux | grep -i $1 | grep -v grep
 }
 
 ] () {
