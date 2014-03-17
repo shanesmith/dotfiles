@@ -340,12 +340,13 @@ onoremap <silent> A] :call searchpair('\[', '', '\]', 'bW') \| normal V%<CR>
 nnoremap <Leader>t :NERDTreeToggle<CR>
 let NERDTreeMapActivateNode = '<Right>'
 let NERDTreeMapCloseDir = '<Left>'
-let NERDTreeMapOpenSplit = 'h'
+let NERDTreeMapOpenSplit = 's'
 let NERDTreeMapOpenVSplit = 'v'
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeShowLineNumbers = 1
 let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeChDirMode = 2
+let NERDTreeIgnore = [ '\.pyc$' ]
 
 "TComment
 nmap \\ :TComment<CR>
