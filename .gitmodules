@@ -151,3 +151,6 @@
 [submodule "fzf"]
 	path = fzf
 	url = https://github.com/junegunn/fzf
+[submodule "vim/bundle/cql"]
+	path = vim/bundle/cql
+	url = https://github.com/elubow/cql-vim
