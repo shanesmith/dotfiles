@@ -17,6 +17,7 @@ alias l='ls -CF'
 alias lld='ll -d'
 
 alias :q='exit'
+alias :Q='exit'
 
 os_is_mac() {
   [[ $(uname -s) == "Darwin" ]]
