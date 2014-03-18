@@ -15,10 +15,7 @@ HISTSIZE=1000
 HISTFILESIZE=2000
 
 # set shell options
-shopt -s histappend cdspell checkwinsize
-if [[ $(uname) != 'Darwin' ]]; then
-  shopt -s dirspell autocd 
-fi
+shopt -s histappend cdspell checkwinsize dirspell autocd globstar
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
