@@ -127,7 +127,7 @@ else
 endif
 
 "Set leader character
-let mapleader = ","
+let mapleader = "\<Space>"
 let maplocalleader = "|"
 
 
@@ -179,7 +179,7 @@ let g:delimitMate_expand_space = 1
 "Syntastic options
 let g:syntastic_check_on_open = 1
 let g:syntastic_objc_compiler = 'clang'
-let g:syntastic_php_checkers = ['php', 'phpmd']
+let g:syntastic_php_checkers = ['php']
 let g:syntastic_html_tidy_quiet_messages = {
       \   'regex': [
       \     '"tabindex" has invalid value "-1"',
