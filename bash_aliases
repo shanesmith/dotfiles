@@ -28,11 +28,27 @@ os_is_linux() {
 }
 
 bak() {
-  cp -ai $1{,.bak$2}
+  local src=${1%/}
+  local dest=$src.bak$2
+
+  if [[ -e $dest ]]; then
+    echo "Already exists: $dest"
+    return
+  fi
+
+  cp -ai "$src" "$dest"
 }
 
 mvbak() {
-  mv -i $1{,.bak$2}
+  local src=${1%/}
+  local dest=$src.bak$2
+
+  if [[ -e $dest ]]; then
+    echo "Already exists: $dest"
+    return
+  fi
+
+  mv -i "$src" "$dest"
 }
 
 alias h="cd ~"
