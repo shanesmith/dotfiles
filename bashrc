@@ -144,6 +144,10 @@ if [[ $TERM =~ xterm* ]]; then
   export PROMPT_COMMAND="_set_title"
 fi
 
+export NODE_PATH=$NODE_PATH:$HOME/.node/lib/node_modules
+
+export PATH=$HOME/.node/bin:$PATH
+
 sources=( "${HOME}/.bash_aliases" "${HOME}/.bashrc-sshlogin" "${HOME}/.bashrc.local"  )
 
 for file in "${sources[@]}"; do
