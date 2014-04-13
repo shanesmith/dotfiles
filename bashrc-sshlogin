@@ -23,21 +23,25 @@ function start_agent {
     ssh-add
 }
 
-if [ -f "$SSH_ENV" ]; then
-    # Find SSH_AUTH_SOCK and SSH_AGENT_PID of the available daemon
-    . ${SSH_ENV} > /dev/null
+if [ -z "$SSH_AUTH_SOCK" ]; then
 
-    # Check if the agent is still running
-    ierr=0
-    ps ${SSH_AGENT_PID} > /dev/null || ierr=1
+  if [ -f "$SSH_ENV" ]; then
+      # Find SSH_AUTH_SOCK and SSH_AGENT_PID of the available daemon
+      . ${SSH_ENV} > /dev/null
 
-    if [ $ierr == "0" ]; then
-      echo > /dev/null
-    else
-      # If not initialize new agent and 
-      # add authentication
-      start_agent;
-    fi
-else
-    start_agent;    
+      # Check if the agent is still running
+      ierr=0
+      ps ${SSH_AGENT_PID} > /dev/null || ierr=1
+
+      if [ $ierr == "0" ]; then
+        echo > /dev/null
+      else
+        # If not initialize new agent and 
+        # add authentication
+        start_agent;
+      fi
+  else
+      start_agent;    
+  fi
+
 fi
