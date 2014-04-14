@@ -40,6 +40,11 @@ get_src() {
       fi
       ;;
 
+    fzf)
+      echo "$RCPATH/fzf/fzf"
+      exit
+      ;;
+
   esac
 
   echo "$RCPATH/$file"
