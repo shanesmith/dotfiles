@@ -290,11 +290,11 @@ fzf() {
   ruby --disable-gems ~/.fzf "$@"
 }
 
-fd() {
+fzd() {
   DIR=$(find ${1:-*} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf) && cd "$DIR"
 }
 
-fda() {
+fzda() {
   DIR=$(find ${1:-.} -type d 2> /dev/null | fzf) && cd "$DIR"
 }
 
