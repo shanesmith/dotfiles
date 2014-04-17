@@ -146,7 +146,7 @@ fi
 
 export NODE_PATH=$NODE_PATH:$HOME/.node/lib/node_modules
 
-export PATH=$HOME/.node/bin:$PATH
+export PATH=$PATH:$HOME/.node/bin
 
 sources=( "${HOME}/.bash_aliases" "${HOME}/.bashrc-sshlogin" "${HOME}/.bashrc.local"  )
 
