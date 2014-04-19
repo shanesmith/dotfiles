@@ -126,6 +126,8 @@ else
   colorscheme desert
 endif
 
+hi CursorLine ctermbg=234 guibg=#1c1c1c
+
 "Set leader character
 let mapleader = "\<Space>"
 let maplocalleader = "|"
@@ -260,8 +262,9 @@ nmap <Leader>c :TagbarToggle<CR>
 """ Custom mappings
 """
 
+nmap <Leader>w :w<CR>
+
 "Window commands
-nmap <Leader>w <C-w>
 noremap <C-Right> <C-w><Right>
 noremap <C-Left> <C-w><Left>
 noremap <C-Down> <C-w><Down>
