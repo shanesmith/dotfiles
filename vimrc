@@ -343,7 +343,12 @@ onoremap <silent> A[ :call searchpair('\[', '', '\]', 'bW') \| normal V%<CR>
 onoremap <silent> A] :call searchpair('\[', '', '\]', 'bW') \| normal V%<CR>
 
 "Toggle NERDTree
-nnoremap <Leader>t :NERDTreeToggle<CR>
+" nnoremap <Leader>t :NERDTreeToggle<CR>
+nnoremap <silent> <Leader>t :call <SID>NERDTreeHere("e")<CR>
+nnoremap <silent> <Leader>tt :call <SID>NERDTreeHere("e")<CR>
+nnoremap <silent> <Leader>tv :call <SID>NERDTreeHere("v")<CR>
+nnoremap <silent> <Leader>ts :call <SID>NERDTreeHere("s")<CR>
+let g:NERDTreeHijackNetrw = 0
 let NERDTreeMapActivateNode = '<Right>'
 let NERDTreeMapCloseDir = '<Left>'
 let NERDTreeMapOpenSplit = 's'
@@ -480,3 +485,41 @@ augroup EmmetMappings
   au FileType html,css nmap <C-Y>Y <plug>(EmmetExpandAbbr)
   au FileType html,css nmap <C-Y><C-Y> <plug>(EmmetExpandAbbr)
 augroup END
+
+
+function! s:NERDTreeHere(split)
+
+  try
+    let p = g:NERDTreePath.New(expand("%:p"))
+  catch /^NERDTree.InvalidArgumentsError/
+    call nerdtree#echo("no file for the current buffer")
+    return
+  endtry
+
+  try
+    let cwd = g:NERDTreePath.New(getcwd())
+  catch /^NERDTree.InvalidArgumentsError/
+    call nerdtree#echo("current directory does not exist.")
+    let cwd = p.getParent()
+  endtry
+
+  if a:split ==? "v"
+    vnew
+  elseif a:split ==? "s"
+    new
+  else
+    enew
+  endif
+
+  if p.isUnder(cwd) || p.equals(cwd)
+    call g:NERDTreeCreator.CreateSecondary(cwd.str())
+  else
+    call g:NERDTreeCreator.CreateSecondary(p.getParent().str())
+  endif
+
+  if !p.equals(cwd) 
+    call b:NERDTreeRoot.reveal(p)
+  endif
+
+endfunction
+
