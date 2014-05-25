@@ -19,6 +19,8 @@ alias lld='ll -d'
 alias :q='exit'
 alias :Q='exit'
 
+alias ag='ag -S --pager="less"'
+
 os_is_mac() {
   [[ $(uname -s) == "Darwin" ]]
 }
