@@ -1,6 +1,9 @@
 "Let's make sure that all the annoying bugs in VI are not displayed in VIM.
 set nocompatible
 
+"Faster ESC timeout
+set timeout ttimeoutlen=100
+
 "set autoindent
 set tabstop=2
 set shiftwidth=2
@@ -126,7 +129,7 @@ else
   colorscheme desert
 endif
 
-hi CursorLine ctermbg=234 guibg=#1c1c1c
+hi CursorLine ctermbg=234 guibg=#404040
 
 "Set leader character
 let mapleader = "\<Space>"
