@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOTFILES="bashrc bash_aliases bashrc-sshlogin gitconfig gitignore vimrc vim ackrc inputrc colordiffrc fzf npmrc"
+DOTFILES="bashrc bash_aliases bashrc-sshlogin gitconfig gitignore vimrc vim ackrc inputrc colordiffrc fzf npmrc agignore"
 
 is_linux=
 is_mac=
