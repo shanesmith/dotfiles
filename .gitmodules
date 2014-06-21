@@ -160,3 +160,15 @@
 [submodule "vim/bundle/startify"]
 	path = vim/bundle/startify
 	url = https://github.com/mhinz/vim-startify
+[submodule "vim/bundle/countjump"]
+	path = vim/bundle/countjump
+	url = https://github.com/vim-scripts/CountJump
+[submodule "vim/bundle/conflictdetection"]
+	path = vim/bundle/conflictdetection
+	url = https://github.com/vim-scripts/ConflictDetection
+[submodule "vim/bundle/conflictmotions"]
+	path = vim/bundle/conflictmotions
+	url = https://github.com/vim-scripts/ConflictMotions
+[submodule "vim/bundle/ingo-library"]
+	path = vim/bundle/ingo-library
+	url = https://github.com/vim-scripts/ingo-library

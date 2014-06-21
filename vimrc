@@ -130,6 +130,8 @@ else
 endif
 
 hi CursorLine ctermbg=234 guibg=#404040
+hi conflictOurs term=bold cterm=bold ctermfg=64 ctermbg=0 gui=bold guifg=#4e9a06 guibg=0 
+hi conflictTheirs term=reverse cterm=bold ctermfg=74 ctermbg=0 gui=bold guifg=#729fcf guibg=0
 
 "Set leader character
 let mapleader = "\<Space>"
@@ -208,6 +210,13 @@ let g:dbgPavimKeyToggleBae = "<leader>de"
 highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
 highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
+
+"Signature
+" - GotoNext/PrevMarkerAny unmap due to conflict with conflictmotions
+let g:SignatureMap = {
+      \ 'GotoNextMarkerAny':  "",
+      \ 'GotoPrevMarkerAny':  "",
+      \ }
 
 "JSON
 let g:vim_json_syntax_conceal = 0
@@ -426,6 +435,10 @@ nnoremap <leader>u :GundoToggle<CR>
 "Don't need help right now, thanks
 imap <F1> <Nop>
 nmap <F1> <Nop>
+
+"ConflictTake
+nnoremap <leader>x= :ConflictTake both<CR>
+nnoremap <leader>x+ :ConflictTake both<CR>
 
 """
 """ Custom ex commands
