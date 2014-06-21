@@ -94,6 +94,7 @@ set backupdir^=~/.vim/backups//
 fixdel
 
 "Pathogen plugin loading
+runtime bundle/pathogen/autoload/pathogen.vim
 call pathogen#infect()
 
 "Syntax highlighting
