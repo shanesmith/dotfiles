@@ -179,10 +179,6 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-"DelimitMate options
-au FileType html let b:delimitMate_matchpairs = '(:),[:],{:}'
-let g:delimitMate_expand_space = 1
-
 "Syntastic options
 let g:syntastic_check_on_open = 1
 let g:syntastic_objc_compiler = 'clang'
