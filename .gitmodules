@@ -31,9 +31,6 @@
 [submodule "vim/bundle/matchit"]
 	path = vim/bundle/matchit
 	url = https://github.com/vim-scripts/matchit.zip
-[submodule "vim/bundle/argtextobj"]
-	path = vim/bundle/argtextobj
-	url = https://github.com/vim-scripts/argtextobj.vim
 [submodule "vim/bundle/indent-object"]
 	path = vim/bundle/indent-object
 	url = https://github.com/michaeljsmith/vim-indent-object
@@ -169,3 +166,6 @@
 [submodule "vim/bundle/pathogen"]
 	path = vim/bundle/pathogen
 	url = https://github.com/tpope/vim-pathogen
+[submodule "vim/bundle/angry"]
+	path = vim/bundle/angry
+	url = https://github.com/b4winckler/vim-angry
