@@ -488,12 +488,12 @@ augroup END
 
 augroup EmmetMappings
   au!
-  au FileType html,css imap <C-Y>Y <plug>(EmmetExpandAbbr)
-  au FileType html,css imap <C-Y><C-Y> <plug>(EmmetExpandAbbr)
-  au FileType html,css vmap <C-Y>Y <plug>(EmmetExpandAbbr)
-  au FileType html,css vmap <C-Y><C-Y> <plug>(EmmetExpandAbbr)
-  au FileType html,css nmap <C-Y>Y <plug>(EmmetExpandAbbr)
-  au FileType html,css nmap <C-Y><C-Y> <plug>(EmmetExpandAbbr)
+  au FileType php,html,css imap <C-Y>Y <plug>(emmet-expand-abbr)
+  au FileType php,html,css imap <C-Y><C-Y> <plug>(emmet-expand-abbr)
+  au FileType php,html,css vmap <C-Y>Y <plug>(emmet-expand-abbr)
+  au FileType php,html,css vmap <C-Y><C-Y> <plug>(emmet-expand-abbr)
+  au FileType php,html,css nmap <C-Y>Y <plug>(emmet-expand-abbr)
+  au FileType php,html,css nmap <C-Y><C-Y> <plug>(emmet-expand-abbr)
 augroup END
 
 
