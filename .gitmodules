@@ -1,9 +1,6 @@
 [submodule "vim/bundle/surround"]
 	path = vim/bundle/surround
 	url = git://github.com/tpope/vim-surround.git
-[submodule "vim/bundle/vim-twig"]
-	path = vim/bundle/vim-twig
-	url = git://github.com/beyondwords/vim-twig.git
 [submodule "vim/bundle/localvimrc"]
 	path = vim/bundle/localvimrc
 	url = git://github.com/vim-scripts/localvimrc
@@ -133,9 +130,6 @@
 [submodule "vim/bundle/notes"]
 	path = vim/bundle/notes
 	url = https://github.com/xolox/vim-notes
-[submodule "vim/bundle/wildfire"]
-	path = vim/bundle/wildfire
-	url = https://github.com/gcmt/wildfire.vim
 [submodule "vim/bundle/easy-align"]
 	path = vim/bundle/easy-align
 	url = https://github.com/junegunn/vim-easy-align
