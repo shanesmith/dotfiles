@@ -509,6 +509,11 @@ augroup END
 
 function! s:NERDTreeHere(split)
 
+  if &modified == 1 && a:split ==? "e"
+    call nerdtree#echo("Buffer has been modified.")
+    return
+  endif
+
   try
     let p = g:NERDTreePath.New(expand("%:p"))
   catch /^NERDTree.InvalidArgumentsError/
