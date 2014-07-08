@@ -274,6 +274,10 @@ nmap <Leader>c :TagbarToggle<CR>
 nmap <Leader>w :w<CR>
 
 "Window commands
+noremap <C-l> <C-w><Right>
+noremap <C-h> <C-w><Left>
+noremap <C-j> <C-w><Down>
+noremap <C-k> <C-w><Up>
 noremap <C-Right> <C-w><Right>
 noremap <C-Left> <C-w><Left>
 noremap <C-Down> <C-w><Down>
@@ -355,8 +359,8 @@ nnoremap <silent> <Leader>tt :call <SID>NERDTreeHere("e")<CR>
 nnoremap <silent> <Leader>tv :call <SID>NERDTreeHere("v")<CR>
 nnoremap <silent> <Leader>ts :call <SID>NERDTreeHere("s")<CR>
 let g:NERDTreeHijackNetrw = 0
-let NERDTreeMapActivateNode = '<Right>'
-let NERDTreeMapCloseDir = '<Left>'
+let NERDTreeMapActivateNode = 'l'
+let NERDTreeMapCloseDir = 'h'
 let NERDTreeMapOpenSplit = 's'
 let NERDTreeMapOpenVSplit = 'v'
 let g:NERDTreeMinimalUI = 1
@@ -436,6 +440,12 @@ nmap <F1> <Nop>
 "ConflictTake
 nnoremap <leader>x= :ConflictTake both<CR>
 nnoremap <leader>x+ :ConflictTake both<CR>
+
+"Expert Mode
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Right> <Nop>
+noremap <Left> <Nop>
 
 """
 """ Custom ex commands
