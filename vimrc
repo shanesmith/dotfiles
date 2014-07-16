@@ -511,6 +511,11 @@ augroup EmmetMappings
   au FileType php,html,css nmap <C-Y><C-Y> <plug>(emmet-expand-abbr)
 augroup END
 
+augroup VimEnterNERDTreeHere
+  au!
+  au VimEnter * call <SID>NERDTreeHere("e") | normal B
+augroup END
+
 
 function! s:NERDTreeHere(split)
 

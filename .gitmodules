@@ -145,9 +145,6 @@
 [submodule "vim/bundle/vdebug"]
 	path = vim/bundle/vdebug
 	url = https://github.com/joonty/vdebug
-[submodule "vim/bundle/startify"]
-	path = vim/bundle/startify
-	url = https://github.com/mhinz/vim-startify
 [submodule "vim/bundle/pad"]
 	path = vim/bundle/pad
 	url = https://github.com/fmoralesc/vim-pad
