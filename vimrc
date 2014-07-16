@@ -35,6 +35,9 @@ set copyindent
 set showmatch
 set matchtime=1
 
+"Show incomplete command
+set showcmd
+
 "Display the status bar at the bottom
 set ruler
 
@@ -446,6 +449,8 @@ noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Right> <Nop>
 noremap <Left> <Nop>
+nmap j gj
+nmap k gk
 
 """
 """ Custom ex commands
