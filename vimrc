@@ -134,8 +134,8 @@ else
 endif
 
 hi CursorLine ctermbg=234 guibg=#404040
-hi conflictOurs term=bold cterm=bold ctermfg=64 ctermbg=0 gui=bold guifg=#4e9a06 guibg=0 
-hi conflictTheirs term=reverse cterm=bold ctermfg=74 ctermbg=0 gui=bold guifg=#729fcf guibg=0
+hi conflictOurs term=bold cterm=bold ctermfg=64 ctermbg=0 gui=bold guifg=#4e9a06 guibg=#000
+hi conflictTheirs term=reverse cterm=bold ctermfg=74 ctermbg=0 gui=bold guifg=#729fcf guibg=#000
 
 "Set leader character
 let mapleader = "\<Space>"
