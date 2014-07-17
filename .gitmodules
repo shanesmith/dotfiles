@@ -6,7 +6,7 @@
 	url = git://github.com/vim-scripts/localvimrc
 [submodule "vim/bundle/ack"]
 	path = vim/bundle/ack
-	url = git@github.com:shanesmith/ack.vim.git
+	url = git@github.com:mileszs/ack.vim.git
 [submodule "vim/bundle/recover"]
 	path = vim/bundle/recover
 	url = https://github.com/chrisbra/Recover.vim
@@ -184,3 +184,6 @@
 [submodule "vim/bundle/autoformat"]
 	path = vim/bundle/autoformat
 	url = https://github.com/Chiel92/vim-autoformat
+[submodule "vim/bundle/dispatch"]
+	path = vim/bundle/dispatch
+	url = https://github.com/tpope/vim-dispatch
