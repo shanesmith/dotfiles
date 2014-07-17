@@ -524,9 +524,15 @@ augroup END
 
 augroup VimEnterNERDTreeHere
   au!
-  au VimEnter * call <SID>NERDTreeHere("e") | normal B
+  au StdinReadPre * let s:std_in=1
+  au VimEnter * call <SID>VimEnterNERDTreeHere()
 augroup END
 
+function! s:VimEnterNERDTreeHere()
+  if !exists("s:std_ind") && argc() == 0
+    call <SID>NERDTreeHere("e") | normal B
+  endif
+endfunction
 
 function! s:NERDTreeHere(split)
 
