@@ -272,12 +272,6 @@ vmap <Tab> <Plug>(LiveEasyAlign)
 "Sneak
 let g:sneak#use_ic_scs = 1
 let g:sneak#streak = 1
-nmap f <Plug>Sneak_s
-nmap F <Plug>Sneak_S
-xmap f <Plug>Sneak_s
-xmap F <Plug>Sneak_S
-omap f <Plug>Sneak_s
-omap F <Plug>Sneak_S
 nmap ]; <Plug>SneakNext
 vmap ]; <Plug>VSneakNext
 nmap [; <Plug>SneakPrevious
