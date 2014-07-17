@@ -229,6 +229,19 @@ let g:ackhighlight = 1
 nnoremap <leader>a :Ack! 
 vnoremap <leader>a "hy:<C-U>Ack! <C-R>h
 
+"Ag - The Silver Searcher
+if executable('ag')
+
+  set grepprg=ag\ --nogroup\ --nocolor
+  let g:ackprg = 'ag --nogroup --nocolor --column -S'
+
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+
+endif
+
 "XMLEdit
 let g:xmledit_enable_html = 1
 let g:xml_use_xhtml = 1
