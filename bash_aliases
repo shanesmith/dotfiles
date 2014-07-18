@@ -165,6 +165,8 @@ scp-tar() {
   tar czf - --dereference -- "${files[@]}" | ssh "$dest_host" "tar xzvf - -C '${dest_path}'"
 }
 
+alias cpsync="rsync -vahP"
+
 date2timestamp() {
   date --date="$1" +%s
 }
