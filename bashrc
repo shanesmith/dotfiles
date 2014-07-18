@@ -78,6 +78,50 @@ __git_ps1_show_upstream() {
 
 }
 
+__vagrant_status() {
+
+  local vagrantdir="$PWD"
+
+  while [[ ! -d "$vagrantdir/.vagrant" && $vagrantdir != "/" ]]; do
+    vagrantdir=$(dirname "$vagrantdir")
+  done
+
+  vagrantdir="$vagrantdir/.vagrant"
+
+  if [[ ! -d $vagrantdir ]]; then
+    return
+  fi
+
+  local -a RunningVMs=()
+  local -a RunningUUIDs=()
+  local -a VMs=()
+  local -a DeadVMs=()
+
+  # Gather the UUIDs of all presently running VMs.
+  while read proc; do
+    proc=${proc#*--startvm[[:space:]]}
+    proc=${proc%%[[:space:]]*}
+    RunningUUIDs+=(${proc})
+  done <<< "$(ps h -C VBoxHeadless -o args)"
+
+  for machinedir in $vagrantdir/machines/*; do
+    if [[ -d $machinedir ]]; then
+      local machinename=$(basename $machinedir)
+      if [[ "${RunningUUIDs[@]}" =~ $(cat "$machinedir/virtualbox/id") ]]; then
+        VMs+=(+$machinename)
+      else
+        VMs+=(-$machinename)
+      fi
+    fi
+  done
+
+  local output="${VMs[*]}"
+
+  if [[ -n $output ]]; then
+    echo " <$(echo $output | tr ' ' ',')>"
+  fi
+}
+
 NONE="\[\033[0m\]"    # unsets color to term's fg color
 
 # regular colors
@@ -110,6 +154,8 @@ if [ "$color_prompt" = yes ]; then
 else
   PS1="$PS1\u@\h${SMILEY}\w [\! \$?]"
 fi
+
+PS1="${PS1}\$(__vagrant_status)"
 
 unset K R G Y B M C W
 unset EMK EMR EMG EMY EMB EMM EMC EMW
