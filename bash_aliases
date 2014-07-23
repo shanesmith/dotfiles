@@ -59,6 +59,10 @@ alias ...="cd ../.."
 cs() {
   cd "$1" && ls
 }
+cddir() {
+  cd $(dirname "$1")
+}
+alias cdir="cddir"
 up() {
   local x=''
   case $1 in
