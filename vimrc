@@ -24,6 +24,7 @@ set mouse=a
 set whichwrap+=<,>,[,],h,l
 
 "Remove toolbar from GUI vim
+set winaltkeys=no
 set guioptions-=T
 
 "Let VIM figure out the indentation neede in C-style programs - when it can.
