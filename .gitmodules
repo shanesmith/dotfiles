@@ -190,3 +190,6 @@
 [submodule "vim/bundle/textobj-delimited"]
 	path = vim/bundle/textobj-delimited
 	url = https://github.com/machakann/vim-textobj-delimited
+[submodule "vim/bundle/endwise"]
+	path = vim/bundle/endwise
+	url = https://github.com/tpope/vim-endwise
