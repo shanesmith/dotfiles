@@ -314,7 +314,7 @@ nnoremap <S-Right> :tabnext<CR>
 nnoremap <S-Left> :tabprevious<CR>
 
 "Show whitespace characters
-nmap <Leader>s :set nolist!<CR>
+nmap <F9> :set list!<CR>
 
 "Stop accidentaly recording
 nnoremap Q q
