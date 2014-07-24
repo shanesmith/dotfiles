@@ -325,8 +325,9 @@ nmap q <nop>
 nnoremap gp `[v`]
 
 "Paste from system clipboard
-nnoremap <leader>v o<ESC>"+p
-nnoremap <leader>V O<ESC>"+p
+set clipboard=unnamed,unnamedplus
+nnoremap <leader>v "+p
+nnoremap <leader>V "+p
 nnoremap <leader>C "+yy
 vnoremap <leader>v "+p
 vnoremap <leader>V "+p
