@@ -372,6 +372,7 @@ onoremap <silent> A] :call searchpair('\[', '', '\]', 'bW') \| normal V%<CR>
 " nnoremap <Leader>t :NERDTreeToggle<CR>
 nnoremap <silent> <Leader>t :call <SID>NERDTreeHere("e")<CR>
 nnoremap <silent> <Leader>tt :call <SID>NERDTreeHere("e")<CR>
+nnoremap <silent> <Leader>ty :call <SID>NERDTreeHere("t")<CR>
 nnoremap <silent> <Leader>tv :call <SID>NERDTreeHere("v")<CR>
 nnoremap <silent> <Leader>ts :call <SID>NERDTreeHere("s")<CR>
 let g:NERDTreeHijackNetrw = 0
@@ -561,6 +562,8 @@ function! s:NERDTreeHere(split)
     vnew
   elseif a:split ==? "s"
     new
+  elseif a:split ==? "t"
+    tabnew
   else
     enew
   endif
