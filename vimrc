@@ -282,6 +282,11 @@ vmap [; <Plug>VSneakPrevious
 " TagBar
 nmap <Leader>c :TagbarToggle<CR>
 
+" WndowSwap
+let g:windowswap_map_keys = 0
+nnoremap <silent> <C-w>w :call WindowSwap#EasyWindowSwap()<CR>
+nnoremap <silent> <C-w><C-w> :call WindowSwap#EasyWindowSwap()<CR>
+
 
 """ 
 """ Custom mappings
