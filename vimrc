@@ -160,6 +160,7 @@ let g:ctrlp_tabpage_position = 'al'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_switch_buffer = 'et'
 let g:ctrlp_extensions=['funky', 'line']
+let g:ctrlp_reuse_window = 'nerdtree'
 let g:ctrlp_prompt_mappings = {
     \ 'ToggleType(1)':        ['<c-right>'],
     \ 'ToggleType(-1)':       ['<c-left>'],
