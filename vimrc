@@ -307,10 +307,10 @@ noremap <C-l> <C-w><Right>
 noremap <C-h> <C-w><Left>
 noremap <C-j> <C-w><Down>
 noremap <C-k> <C-w><Up>
-noremap <C-Right> <C-w><Right>
-noremap <C-Left> <C-w><Left>
-noremap <C-Down> <C-w><Down>
-noremap <C-Up> <C-w><Up>
+noremap <Right> <C-w><Right>
+noremap <Left> <C-w><Left>
+noremap <Down> <C-w><Down>
+noremap <Up> <C-w><Up>
 
 "Search commands
 ""Highlight current word
@@ -472,11 +472,7 @@ nmap <F1> <Nop>
 nnoremap <leader>x= :ConflictTake both<CR>
 nnoremap <leader>x+ :ConflictTake both<CR>
 
-"Expert Mode
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Right> <Nop>
-noremap <Left> <Nop>
+"Better wrap navigation
 nmap j gj
 nmap k gk
 
