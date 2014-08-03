@@ -214,12 +214,20 @@ let g:dbgPavimKeyToggleBae = "<leader>de"
 highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
 highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
+let g:signify_mapping_next_hunk = ']-'
+let g:signify_mapping_prev_hunk = '[-'
 
 "Signature
 " - GotoNext/PrevMarkerAny unmap due to conflict with conflictmotions
 let g:SignatureMap = {
       \ 'GotoNextMarkerAny':  "",
       \ 'GotoPrevMarkerAny':  "",
+      \ 'GotoNextLineAlpha':  "",
+      \ 'GotoPrevLineAlpha':  "",
+      \ 'GotoNextSpotAlpha':  "",
+      \ 'GotoPrevSpotAlpha':  "",
+      \ 'GotoNextMarker'   :  "",
+      \ 'GotoPrevMarker'   :  "",
       \ }
 
 "JSON
