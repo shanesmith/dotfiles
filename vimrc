@@ -354,10 +354,39 @@ nnoremap S diw"0P
 nnoremap U :redo<CR>
 
 "Move lines up/down
-nnoremap <S-Up> :move -2<CR>
-nnoremap <S-Down> :move +1<CR>
-vnoremap <S-Up> :move '<-2<CR>gv
-vnoremap <S-Down> :move '>+1<CR>gv
+nnoremap <S-Up> :call <SID>moveit('up')<CR>
+nnoremap <S-Down> :call <SID>moveit('down')<CR>
+vnoremap <S-Up> :move '<-2<CR>gv=gv
+vnoremap <S-Down> :move '>+1<CR>gv=gv
+inoremap <S-Up> <C-o>:call <SID>moveit('up')<cr>
+inoremap <S-Down> <C-o>:call <SID>moveit('down')<cr>
+
+function! s:reindent_inner()
+  let line = getline('.')
+  if match(line, '^\s*[()\[\]{}]') != -1
+    normal ^=%``
+  endif
+  if match(line, '[()\[\]{}]\s*$') != -1
+    normal $=%``
+  endif
+endfunction
+
+function! s:moveit(where) 
+  if match(getline('.'), '^\s*$') != -1
+    let startpos = line('.')
+    let endpos = search('\S', 'nW') - 1
+    exec startpos . "," . endpos . "delete _"
+  endif
+  if a:where ==? "up"
+    move -2
+    call s:reindent_inner()
+    normal ==j==k^
+  elseif a:where ==? "down"
+    move +1
+    normal ==k==j^
+    call s:reindent_inner()
+  endif
+endfunction
 
 "New lines
 nnoremap <Leader><CR> i<CR><ESC>
