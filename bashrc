@@ -1,8 +1,8 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+export NODE_PATH=$NODE_PATH:$HOME/.node/lib/node_modules
 
-# If not running interactively, don't do anything
+export PATH=$PATH:$HOME/.node/bin
+
+# If not running interactively, stop here
 [ -z "$PS1" ] && return
 
 # Always set TERM to support color
@@ -189,10 +189,6 @@ _set_title() {
 if [[ $TERM =~ xterm* ]]; then
   export PROMPT_COMMAND="_set_title"
 fi
-
-export NODE_PATH=$NODE_PATH:$HOME/.node/lib/node_modules
-
-export PATH=$PATH:$HOME/.node/bin
 
 sources=( "${HOME}/.bash_aliases" "${HOME}/.bashrc-sshlogin" "${HOME}/.bashrc.local"  )
 
