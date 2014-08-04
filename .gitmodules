@@ -196,3 +196,6 @@
 [submodule "vim/bundle/windowswap"]
 	path = vim/bundle/windowswap
 	url = https://github.com/wesQ3/vim-windowswap
+[submodule "vim/bundle/qargs"]
+	path = vim/bundle/qargs
+	url = https://github.com/henrik/vim-qargs
