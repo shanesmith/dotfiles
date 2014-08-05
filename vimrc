@@ -199,6 +199,11 @@ let g:syntastic_html_tidy_quiet_messages = {
       \     'trimming empty <span>',
       \   ],
       \ }
+let g:syntastic_html_tidy_ignore_errors = [
+      \ " proprietary attribute \"ng-",
+      \ " proprietary attribute \"translate",
+      \ " proprietary attribute \"ui-"
+      \]
 
 "DBGPavim
 let g:dbgPavimPort = 9009
