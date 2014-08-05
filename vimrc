@@ -191,6 +191,7 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 let g:syntastic_check_on_open = 1
 let g:syntastic_objc_compiler = 'clang'
 let g:syntastic_php_checkers = ['php']
+let g:syntastic_javascript_checkers = ['jshint', 'jscs']
 let g:syntastic_html_tidy_quiet_messages = {
       \   'regex': [
       \     '"tabindex" has invalid value "-1"',
