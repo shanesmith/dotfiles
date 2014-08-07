@@ -199,3 +199,6 @@
 [submodule "vim/bundle/qargs"]
 	path = vim/bundle/qargs
 	url = https://github.com/henrik/vim-qargs
+[submodule "vim/bundle/nyancat"]
+	path = vim/bundle/nyancat
+	url = https://github.com/koron/nyancat-vim
