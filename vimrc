@@ -283,18 +283,18 @@ let g:user_emmet_settings = {
       \ }
 
 "Easy Align
-vmap <Tab> <Plug>(LiveEasyAlign)
+vnoremap <Tab> <Plug>(LiveEasyAlign)
 
 "Sneak
 let g:sneak#use_ic_scs = 1
 let g:sneak#streak = 1
-nmap ]; <Plug>SneakNext
-vmap ]; <Plug>VSneakNext
-nmap [; <Plug>SneakPrevious
-vmap [; <Plug>VSneakPrevious
+nnoremap ]; <Plug>SneakNext
+vnoremap ]; <Plug>VSneakNext
+nnoremap [; <Plug>SneakPrevious
+vnoremap [; <Plug>VSneakPrevious
 
 " TagBar
-nmap <Leader>c :TagbarToggle<CR>
+nnoremap <Leader>c :TagbarToggle<CR>
 
 " WndowSwap
 let g:windowswap_map_keys = 0
@@ -306,7 +306,7 @@ nnoremap <silent> <C-w><C-w> :call WindowSwap#EasyWindowSwap()<CR>
 """ Custom mappings
 """
 
-nmap <Leader>w :w<CR>
+nnoremap <Leader>w :w<CR>
 
 "Window commands
 noremap <C-l> <C-w><Right>
@@ -334,11 +334,11 @@ nnoremap <S-Right> :tabnext<CR>
 nnoremap <S-Left> :tabprevious<CR>
 
 "Show whitespace characters
-nmap <F9> :set list!<CR>
+nnoremap <F9> :set list!<CR>
 
 "Stop accidentaly recording
 nnoremap Q q
-nmap q <nop>
+nnoremap q <nop>
 
 "Visual select last pasted
 "http://vim.wikia.com/wiki/Selecting_your_pasted_text
@@ -436,10 +436,10 @@ let g:NERDTreeChDirMode = 2
 let NERDTreeIgnore = [ '\.pyc$' ]
 
 "TComment
-nmap \\ :TComment<CR>
-vmap \\ :TComment<CR>
-nmap \* :TCommentBlock<CR>
-vmap \* :TCommentBlock<CR>
+nnoremap \\ :TComment<CR>
+vnoremap \\ :TComment<CR>
+nnoremap \* :TCommentBlock<CR>
+vnoremap \* :TCommentBlock<CR>
 
 "NeoComplete mappings
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
@@ -500,16 +500,19 @@ let g:colorizer_nomap = 1
 nnoremap <leader>u :GundoToggle<CR>
 
 "Don't need help right now, thanks
-imap <F1> <Nop>
-nmap <F1> <Nop>
+inoremap <F1> <Nop>
+nnoremap <F1> <Nop>
 
 "ConflictTake
 nnoremap <leader>x= :ConflictTake both<CR>
 nnoremap <leader>x+ :ConflictTake both<CR>
 
+nnoremap ; :
+nnoremap : ;
+
 "Better wrap navigation
-nmap j gj
-nmap k gk
+nnoremap j gj
+nnoremap k gk
 
 """
 """ Custom ex commands
@@ -562,12 +565,12 @@ augroup END
 
 augroup EmmetMappings
   au!
-  au FileType php,html,css imap <C-Y>Y <plug>(emmet-expand-abbr)
-  au FileType php,html,css imap <C-Y><C-Y> <plug>(emmet-expand-abbr)
-  au FileType php,html,css vmap <C-Y>Y <plug>(emmet-expand-abbr)
-  au FileType php,html,css vmap <C-Y><C-Y> <plug>(emmet-expand-abbr)
-  au FileType php,html,css nmap <C-Y>Y <plug>(emmet-expand-abbr)
-  au FileType php,html,css nmap <C-Y><C-Y> <plug>(emmet-expand-abbr)
+  au FileType php,html,css inoremap <C-Y>Y <plug>(emmet-expand-abbr)
+  au FileType php,html,css inoremap <C-Y><C-Y> <plug>(emmet-expand-abbr)
+  au FileType php,html,css vnoremap <C-Y>Y <plug>(emmet-expand-abbr)
+  au FileType php,html,css vnoremap <C-Y><C-Y> <plug>(emmet-expand-abbr)
+  au FileType php,html,css nnoremap <C-Y>Y <plug>(emmet-expand-abbr)
+  au FileType php,html,css nnoremap <C-Y><C-Y> <plug>(emmet-expand-abbr)
 augroup END
 
 augroup VimEnterNERDTreeHere
