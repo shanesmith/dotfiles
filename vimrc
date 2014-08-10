@@ -164,6 +164,7 @@ let g:ctrlp_reuse_window = 'nerdtree'
 let g:ctrlp_prompt_mappings = {
     \ 'ToggleType(1)':        ['<c-right>'],
     \ 'ToggleType(-1)':       ['<c-left>'],
+    \ 'AcceptSelection("h")': ['<c-x>', '<c-cr>', '<c-h>'],
     \ }
 let g:ctrlp_custom_ignore = {
       \ 'dir':  '\v[\/]\.(git|hg|svn)$',
