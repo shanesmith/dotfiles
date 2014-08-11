@@ -117,18 +117,6 @@ set splitright
 "What to show in character list
 set listchars=tab:>-,trail:',eol:$
 
-"Colorscheme
-if &t_Co == 256 || has("gui_running")
-  let g:aldmeris_transparent = 1
-  let g:aldmeris_css = 0
-  try 
-    colorscheme aldmeris
-  catch
-    colorscheme desert
-  endtry
-else
-  colorscheme desert
-endif
 
 hi CursorLine ctermbg=234 guibg=#404040
 hi conflictOurs term=bold cterm=bold ctermfg=64 ctermbg=0 gui=bold guifg=#4e9a06 guibg=#000
@@ -142,6 +130,152 @@ let maplocalleader = "|"
 """
 """ Plugin options
 """
+call plug#begin('~/.vim/bundle')
+
+Plug 'tpope/vim-abolish'
+
+Plug 'mileszs/ack.vim'
+
+Plug 'bling/vim-airline'
+
+Plug 'veloce/vim-aldmeris'
+
+Plug 'b4winckler/vim-angry'
+
+Plug 'Chiel92/vim-autoformat'
+
+Plug 'jiangmiao/auto-pairs'
+
+Plug 'lilydjwg/colorizer'
+
+Plug 'vim-scripts/ConflictDetection'
+
+Plug 'vim-scripts/ConflictMotions'
+
+Plug 'vim-scripts/CountJump'
+
+Plug 'elubow/cql-vim'
+
+Plug 'hail2u/vim-css3-syntax'
+
+Plug 'kien/ctrlp.vim'
+
+Plug 'tacahiroy/ctrlp-funky'
+
+Plug 'brookhong/DBGPavim'
+
+Plug 'tpope/vim-dispatch'
+
+Plug 'junegunn/vim-easy-align'
+
+Plug 'mattn/emmet-vim'
+
+Plug 'tpope/vim-endwise'
+
+Plug 'terryma/vim-expand-region'
+
+Plug 'tpope/vim-fugitive'
+
+Plug 'sjl/gundo.vim'
+
+Plug 'honza/vim-snippets'
+
+Plug 'othree/html5.vim'
+
+Plug 'michaeljsmith/vim-indent-object'
+
+Plug 'vim-scripts/ingo-library'
+
+Plug 'pangloss/vim-javascript'
+
+Plug 'elzr/vim-json'
+
+Plug 'groenewege/vim-less'
+
+Plug 'vitalk/vim-lesscss'
+
+Plug 'vim-scripts/localvimrc'
+
+Plug 'vim-scripts/matchit.zip'
+
+Plug 'szw/vim-maximizer'
+
+Plug 'vim-scripts/molokai'
+
+Plug 'Shougo/neocomplete.vim'
+
+Plug 'scrooloose/nerdtree'
+
+Plug 'xolox/vim-notes'
+
+Plug 'koron/nyancat-vim'
+
+Plug 'StanAngeloff/php.vim'
+
+Plug 'henrik/vim-qargs'
+
+Plug 'chrisbra/Recover.vim'
+
+Plug 'tpope/vim-repeat'
+
+Plug 'vim-scripts/SearchComplete'
+
+Plug 'kshenoy/vim-signature'
+
+Plug 'mhinz/vim-signify'
+
+Plug 'kana/vim-smartword'
+
+Plug 'justinmk/vim-sneak'
+
+Plug 'tpope/vim-speeddating'
+
+Plug 'chrisbra/SudoEdit.vim'
+
+Plug 'shanesmith/vim-surround'
+
+Plug 'scrooloose/syntastic'
+
+Plug 'majutsushi/tagbar' 
+
+Plug 'tomtom/tcomment_vim'
+
+Plug 'glts/vim-textobj-comment'
+
+Plug 'machakann/vim-textobj-delimited'
+
+Plug 'kana/vim-textobj-entire'
+
+Plug 'kana/vim-textobj-user'
+
+Plug 'whatyouhide/vim-textobj-xmlattr'
+
+Plug 'tpope/vim-unimpaired'
+
+Plug 'joonty/vdebug'
+
+Plug 'thinca/vim-visualstar'
+
+Plug 'wesQ3/vim-windowswap'
+
+Plug 'sukima/xmledit'
+
+Plug 'xolox/vim-misc'
+
+call plug#end()
+
+"Colorscheme
+if &t_Co == 256 || has("gui_running")
+  let g:aldmeris_transparent = 1
+  let g:aldmeris_css = 0
+  try 
+    colorscheme aldmeris
+  catch
+    colorscheme desert
+  endtry
+else
+  colorscheme desert
+endif
 
 "CtrlP options
 let g:ctrlp_map = "<leader>pp"
