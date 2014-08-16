@@ -206,8 +206,6 @@ Plug 'Shougo/neocomplete.vim'
 
 Plug 'scrooloose/nerdtree'
 
-Plug 'xolox/vim-notes'
-
 Plug 'koron/nyancat-vim'
 
 Plug 'StanAngeloff/php.vim'
@@ -259,8 +257,6 @@ Plug 'thinca/vim-visualstar'
 Plug 'wesQ3/vim-windowswap'
 
 Plug 'sukima/xmledit'
-
-Plug 'xolox/vim-misc'
 
 call plug#end()
 
@@ -395,11 +391,6 @@ let g:xml_use_xhtml = 1
 
 "Maximizer
 let g:maximizer_default_mapping_key = '<F4>'
-
-"Notes
-let g:notes_directories = ['~/Dropbox/notes']
-let g:notes_suffix = ".md"
-let g:notes_title_sync = "rename_file"
 
 function! s:emmet_expand_glyph(name)
   return "<span class='glyphicon ".a:name."'></span>"
