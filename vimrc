@@ -264,6 +264,8 @@ Plug 'tommcdo/vim-exchange'
 
 Plug 'christoomey/vim-tmux-navigator'
 
+Plug 'Keithbsmiley/tmux.vim'
+
 call plug#end()
 
 "Colorscheme
