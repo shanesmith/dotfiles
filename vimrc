@@ -555,11 +555,12 @@ let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeChDirMode = 2
 let NERDTreeIgnore = [ '\.pyc$' ]
 
-"TComment
+" TComment
 nnoremap \\ :TComment<CR>
 vnoremap \\ :TComment<CR>
 nnoremap \* :TCommentBlock<CR>
 vnoremap \* :TCommentBlock<CR>
+nmap \  <Plug>TComment-gc
 
 "NeoComplete mappings
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
