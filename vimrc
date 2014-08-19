@@ -636,6 +636,12 @@ nnoremap : ;
 nnoremap j gj
 nnoremap k gk
 
+"Insert mode hjkl
+inoremap <A-h> <Left>
+inoremap <A-j> <Down>
+inoremap <A-k> <Up>
+inoremap <A-l> <Right>
+
 """
 """ Custom ex commands
 """
