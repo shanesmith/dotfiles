@@ -666,9 +666,6 @@ command! QA qa
 command! -range=% -nargs=0 Tab2Space execute '<line1>,<line2>s#^\t\+#\=repeat(" ", len(submatch(0))*' . &ts . ')'
 command! -range=% -nargs=0 Space2Tab execute '<line1>,<line2>s#^\( \{'.&ts.'\}\)\+#\=repeat("\t", len(submatch(0))/' . &ts . ')'
 
-"HelpGrep alias
-cnoremap hg helpgrep<space>
-
 "Source vimrc
 command! ReloadVimrc source $MYVIMRC
 
@@ -714,7 +711,8 @@ augroup END
 
 function! s:VimEnterNERDTreeHere()
   if !exists("s:std_ind") && argc() == 0
-    call <SID>NERDTreeHere("e") | normal B
+    call <SID>NERDTreeHere("e")
+    normal B
   endif
 endfunction
 
