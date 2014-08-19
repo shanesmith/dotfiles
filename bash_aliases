@@ -262,6 +262,7 @@ xclip-paste() {
 }
 
 alias vv="vagrant"
+alias rr="ranger"
 
 gittop() {
   cd $(git top)
