@@ -642,7 +642,12 @@ nnoremap k gk
 """
 
 "Clean out trailing whitespaces
-command! CleanWhitespace %s/\s\+$//g
+command! CleanWhitespace call <SID>CleanWhitespace()
+function! s:CleanWhitespace() 
+  let lastSearch = @/ 
+  %s/\s\+$//ge 
+  let @/ = lastSearch
+endfunction
 
 " Big W also writes
 command! W w
