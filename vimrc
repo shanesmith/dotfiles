@@ -259,6 +259,8 @@ Plug 'sukima/xmledit'
 
 Plug 'tommcdo/vim-exchange'
 
+Plug 'christoomey/vim-tmux-navigator'
+
 call plug#end()
 
 "Colorscheme
@@ -431,10 +433,6 @@ nnoremap <silent> <C-w><C-w> :call WindowSwap#EasyWindowSwap()<CR>
 nnoremap <Leader>w :w<CR>
 
 "Window commands
-noremap <C-l> <C-w><Right>
-noremap <C-h> <C-w><Left>
-noremap <C-j> <C-w><Down>
-noremap <C-k> <C-w><Up>
 noremap <Right> <C-w><Right>
 noremap <Left> <C-w><Left>
 noremap <Down> <C-w><Down>
