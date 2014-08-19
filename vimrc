@@ -117,7 +117,6 @@ set splitright
 "What to show in character list
 set listchars=tab:>-,trail:',eol:$
 
-
 hi CursorLine ctermbg=234 guibg=#404040
 hi conflictOurs term=bold cterm=bold ctermfg=64 ctermbg=0 gui=bold guifg=#4e9a06 guibg=#000
 hi conflictTheirs term=reverse cterm=bold ctermfg=74 ctermbg=0 gui=bold guifg=#729fcf guibg=#000
@@ -257,6 +256,8 @@ Plug 'thinca/vim-visualstar'
 Plug 'wesQ3/vim-windowswap'
 
 Plug 'sukima/xmledit'
+
+Plug 'tommcdo/vim-exchange'
 
 call plug#end()
 
