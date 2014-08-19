@@ -233,7 +233,7 @@ Plug 'shanesmith/vim-surround'
 
 Plug 'scrooloose/syntastic'
 
-Plug 'majutsushi/tagbar' 
+Plug 'majutsushi/tagbar'
 
 Plug 'tomtom/tcomment_vim'
 
@@ -265,7 +265,7 @@ call plug#end()
 if &t_Co == 256 || has("gui_running")
   let g:aldmeris_transparent = 1
   let g:aldmeris_css = 0
-  try 
+  try
     colorscheme aldmeris
   catch
     colorscheme desert
@@ -369,7 +369,7 @@ let g:vim_json_syntax_conceal = 0
 
 "ACK
 let g:ackhighlight = 1
-nnoremap <leader>a :Ack! 
+nnoremap <leader>a :Ack!
 vnoremap <leader>a "hy:<C-U>Ack! <C-R>h
 
 "Ag - The Silver Searcher
@@ -424,7 +424,7 @@ nnoremap <silent> <C-w>w :call WindowSwap#EasyWindowSwap()<CR>
 nnoremap <silent> <C-w><C-w> :call WindowSwap#EasyWindowSwap()<CR>
 
 
-""" 
+"""
 """ Custom mappings
 """
 
@@ -499,7 +499,7 @@ function! s:reindent_inner()
   endif
 endfunction
 
-function! s:moveit(where) 
+function! s:moveit(where)
   if match(getline('.'), '^\s*$') != -1
     let startpos = line('.')
     let endpos = search('\S', 'nW') - 1
@@ -648,9 +648,9 @@ inoremap <A-l> <Right>
 
 "Clean out trailing whitespaces
 command! CleanWhitespace call <SID>CleanWhitespace()
-function! s:CleanWhitespace() 
-  let lastSearch = @/ 
-  %s/\s\+$//ge 
+function! s:CleanWhitespace()
+  let lastSearch = @/
+  %s/\s\+$//ge
   let @/ = lastSearch
 endfunction
 
@@ -771,7 +771,7 @@ function! s:NERDTreeHere(split, ...)
 
 endfunction
 
-function! s:NotesSave() 
+function! s:NotesSave()
 
   let name = input("Save note as: ")
   redraw
@@ -789,9 +789,9 @@ function! s:NotesSave()
     return
   endif
 
-  let path = fnamemodify(fname, ':h') 
+  let path = fnamemodify(fname, ':h')
 
-  if !isdirectory(path) 
+  if !isdirectory(path)
     call mkdir(path, 'p')
   endif
 
@@ -800,14 +800,14 @@ function! s:NotesSave()
 endfunction
 
 function! s:NotesNew()
-  
+
   vnew
 
   set ft=markdown
 
 endfunction
 
-function! s:NotesTree() 
+function! s:NotesTree()
 
   let where = "v"
 
@@ -816,7 +816,7 @@ function! s:NotesTree()
   endif
 
   call <SID>NERDTreeHere(where, g:notes_folder)
-  
+
 endfunction
 
 let g:notes_folder = "~/Dropbox/notes"
