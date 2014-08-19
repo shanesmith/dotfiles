@@ -716,7 +716,7 @@ function! s:VimEnterNERDTreeHere()
   endif
 endfunction
 
-function! s:NERDTreeHere(split)
+function! s:NERDTreeHere(split, ...)
 
   if &modified == 1 && a:split ==? "e"
     call nerdtree#echo("Buffer has been modified.")
@@ -726,16 +726,32 @@ function! s:NERDTreeHere(split)
   try
     let p = g:NERDTreePath.New(expand("%:p"))
   catch /^NERDTree.InvalidArgumentsError/
-    call nerdtree#echo("no file for the current buffer")
-    return
+    call nerdtree#echo("Current file no longer exists.")
   endtry
 
-  try
-    let cwd = g:NERDTreePath.New(getcwd())
-  catch /^NERDTree.InvalidArgumentsError/
-    call nerdtree#echo("current directory does not exist.")
-    let cwd = p.getParent()
-  endtry
+  if a:0 == 0
+
+    try
+      let cwd = g:NERDTreePath.New(getcwd())
+    catch /^NERDTree.InvalidArgumentsError/
+      call nerdtree#echo("Current directory no longers exist.")
+      if !exists("p")
+        call nerdtree#echo("Too many fails! Bailing out!")
+      endif
+      let cwd = p.getParent()
+    endtry
+
+    if !exists("p") || p.isUnder(cwd) || p.equals(cwd)
+      let where = cwd
+    else
+      let where = p.getParent()
+    endif
+
+  else
+
+    let where = g:NERDTreePath.New(expand(a:1))
+
+  endif
 
   if a:split ==? "v"
     vnew
@@ -747,15 +763,64 @@ function! s:NERDTreeHere(split)
     enew
   endif
 
-  if p.isUnder(cwd) || p.equals(cwd)
-    call g:NERDTreeCreator.CreateSecondary(cwd.str())
-  else
-    call g:NERDTreeCreator.CreateSecondary(p.getParent().str())
-  endif
+  call g:NERDTreeCreator.CreateSecondary(where.str())
 
-  if !p.equals(cwd) 
+  if exists("p") && p.isUnder(where) && !p.equals(where)
     call b:NERDTreeRoot.reveal(p)
   endif
 
 endfunction
+
+function! s:NotesSave() 
+
+  let name = input("Save note as: ")
+  redraw
+
+  if name == ""
+    return
+  endif
+
+  let fname = expand(g:notes_folder) . "/" . name . ".md"
+
+  if filereadable(fname)
+    echohl ErrorMsg
+    echomsg "File" fname "already exists!"
+    echohl None
+    return
+  endif
+
+  let path = fnamemodify(fname, ':h') 
+
+  if !isdirectory(path) 
+    call mkdir(path, 'p')
+  endif
+
+  exec "saveas" fnameescape(fname)
+
+endfunction
+
+function! s:NotesNew()
+  
+  vnew
+
+  set ft=markdown
+
+endfunction
+
+function! s:NotesTree() 
+
+  let where = "v"
+
+  if stridx(expand('%:p'), expand(g:notes_folder)) == 0
+    let where = "e"
+  endif
+
+  call <SID>NERDTreeHere(where, g:notes_folder)
+  
+endfunction
+
+let g:notes_folder = "~/Dropbox/notes"
+nnoremap <Leader>nt :call <SID>NotesTree()<CR>
+nnoremap <Leader>nw :call <SID>NotesSave()<CR>
+nnoremap <Leader>nn :call <SID>NotesNew()<CR>
 
