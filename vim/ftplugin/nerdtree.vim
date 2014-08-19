@@ -1,7 +1,4 @@
-if exists("g:loaded_nerdtree_open_multiple")
-  finish
-endif
-let g:loaded_nerdtree_open_multiple=1
+"https://github.com/scrooloose/nerdtree/issues/49
 
 vnoremap <buffer> <CR> :call <SID>OpenMultiple()<cr>
 
