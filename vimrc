@@ -368,7 +368,6 @@ let g:SignatureMap = {
 let g:vim_json_syntax_conceal = 0
 
 "ACK
-let g:ack_use_dispatch = 1
 let g:ackhighlight = 1
 nnoremap <leader>a :Ack! 
 vnoremap <leader>a "hy:<C-U>Ack! <C-R>h
