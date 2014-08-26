@@ -376,7 +376,7 @@ let g:vim_json_syntax_conceal = 0
 
 "ACK
 let g:ackhighlight = 1
-nnoremap <leader>a :Ack!
+nnoremap <leader>a :Ack!<Space>
 vnoremap <leader>a "hy:<C-U>Ack! <C-R>h
 
 "Ag - The Silver Searcher
