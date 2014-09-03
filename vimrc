@@ -648,6 +648,10 @@ inoremap <A-j> <Down>
 inoremap <A-k> <Up>
 inoremap <A-l> <Right>
 
+"Easier substitute
+nnoremap <leader>r :%s/\<<C-r><C-w>\>/
+vnoremap <leader>r "hy:%s/<C-r>"h/
+
 """
 """ Custom ex commands
 """
