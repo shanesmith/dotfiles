@@ -635,6 +635,8 @@ nnoremap <leader>x+ :ConflictTake both<CR>
 
 nnoremap ; :
 nnoremap : ;
+vnoremap ; :
+vnoremap : ;
 
 "Better wrap navigation
 nnoremap j gj
