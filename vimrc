@@ -412,15 +412,15 @@ let g:user_emmet_settings = {
       \ }
 
 "Easy Align
-vnoremap <Tab> <Plug>(LiveEasyAlign)
+vmap <Tab> <Plug>(LiveEasyAlign)
 
 "Sneak
 let g:sneak#use_ic_scs = 1
 let g:sneak#streak = 1
-nnoremap ]; <Plug>SneakNext
-vnoremap ]; <Plug>VSneakNext
-nnoremap [; <Plug>SneakPrevious
-vnoremap [; <Plug>VSneakPrevious
+nmap ]; <Plug>SneakNext
+vmap ]; <Plug>VSneakNext
+nmap [; <Plug>SneakPrevious
+vmap [; <Plug>VSneakPrevious
 
 " TagBar
 nnoremap <Leader>c :TagbarToggle<CR>
@@ -705,12 +705,12 @@ augroup END
 
 augroup EmmetMappings
   au!
-  au FileType php,html,css inoremap <C-Y>Y <plug>(emmet-expand-abbr)
-  au FileType php,html,css inoremap <C-Y><C-Y> <plug>(emmet-expand-abbr)
-  au FileType php,html,css vnoremap <C-Y>Y <plug>(emmet-expand-abbr)
-  au FileType php,html,css vnoremap <C-Y><C-Y> <plug>(emmet-expand-abbr)
-  au FileType php,html,css nnoremap <C-Y>Y <plug>(emmet-expand-abbr)
-  au FileType php,html,css nnoremap <C-Y><C-Y> <plug>(emmet-expand-abbr)
+  au FileType php,html,css imap <C-Y>Y <plug>(emmet-expand-abbr)
+  au FileType php,html,css imap <C-Y><C-Y> <plug>(emmet-expand-abbr)
+  au FileType php,html,css vmap <C-Y>Y <plug>(emmet-expand-abbr)
+  au FileType php,html,css vmap <C-Y><C-Y> <plug>(emmet-expand-abbr)
+  au FileType php,html,css nmap <C-Y>Y <plug>(emmet-expand-abbr)
+  au FileType php,html,css nmap <C-Y><C-Y> <plug>(emmet-expand-abbr)
 augroup END
 
 augroup VimEnterNERDTreeHere
