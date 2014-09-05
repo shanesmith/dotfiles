@@ -495,10 +495,10 @@ inoremap <S-Down> <C-o>:call <SID>moveit('down')<cr>
 function! s:reindent_inner()
   let line = getline('.')
   if match(line, '^\s*[()\[\]{}]') != -1
-    normal ^=%``
+    normal! ^=%``
   endif
   if match(line, '[()\[\]{}]\s*$') != -1
-    normal $=%``
+    normal! $=%``
   endif
 endfunction
 
@@ -511,10 +511,10 @@ function! s:moveit(where)
   if a:where ==? "up"
     move -2
     call s:reindent_inner()
-    normal ==j==k^
+    normal! ==j==k^
   elseif a:where ==? "down"
     move +1
-    normal ==k==j^
+    normal! ==k==j^
     call s:reindent_inner()
   endif
 endfunction
@@ -529,18 +529,18 @@ vnoremap <Leader>o <ESC>`<dv`>i<CR><CR><ESC>kp`[v`]
 inoremap jk <ESC>
 
 "Text-object for matching whole-line pairs
-vnoremap <silent> A{ :normal [{V%<CR>
-vnoremap <silent> A} :normal [{V%<CR>
-vnoremap <silent> A( :normal [(V%<CR>
-vnoremap <silent> A) :normal [(V%<CR>
-vnoremap <silent> A[ :call searchpair('\[', '', '\]', 'bW') \| normal V%<CR>
-vnoremap <silent> A] :call searchpair('\[', '', '\]', 'bW') \| normal V%<CR>
-onoremap <silent> A{ :normal [{V%<CR>
-onoremap <silent> A} :normal [{V%<CR>
-onoremap <silent> A( :normal [(V%<CR>
-onoremap <silent> A) :normal [(V%<CR>
-onoremap <silent> A[ :call searchpair('\[', '', '\]', 'bW') \| normal V%<CR>
-onoremap <silent> A] :call searchpair('\[', '', '\]', 'bW') \| normal V%<CR>
+vnoremap <silent> A{ :normal! [{V%<CR>
+vnoremap <silent> A} :normal! [{V%<CR>
+vnoremap <silent> A( :normal! [(V%<CR>
+vnoremap <silent> A) :normal! [(V%<CR>
+vnoremap <silent> A[ :call searchpair('\[', '', '\]', 'bW') \| normal! V%<CR>
+vnoremap <silent> A] :call searchpair('\[', '', '\]', 'bW') \| normal! V%<CR>
+onoremap <silent> A{ :normal! [{V%<CR>
+onoremap <silent> A} :normal! [{V%<CR>
+onoremap <silent> A( :normal! [(V%<CR>
+onoremap <silent> A) :normal! [(V%<CR>
+onoremap <silent> A[ :call searchpair('\[', '', '\]', 'bW') \| normal! V%<CR>
+onoremap <silent> A] :call searchpair('\[', '', '\]', 'bW') \| normal! V%<CR>
 
 "Toggle NERDTree
 " nnoremap <Leader>t :NERDTreeToggle<CR>
