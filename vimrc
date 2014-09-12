@@ -395,6 +395,10 @@ endif
 "XMLEdit
 let g:xmledit_enable_html = 1
 let g:xml_use_xhtml = 1
+function! HtmlAttribCallback(xml_tag)
+  "disable this sort of thing
+  return 0
+endfunction
 
 "Maximizer
 let g:maximizer_default_mapping_key = '<F4>'
