@@ -527,7 +527,7 @@ endfunction
 nnoremap <Leader><CR> i<CR><ESC>
 nnoremap <Leader>o o<ESC>k
 nnoremap <Leader>O O<ESC>j
-vnoremap <Leader>o <ESC>`<dv`>i<CR><CR><ESC>kp`[v`]
+vnoremap <Leader>o di<CR><CR><ESC>k]p`[v`]==`[v`]
 
 "Better escape
 inoremap jk <ESC>
