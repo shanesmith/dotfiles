@@ -258,7 +258,7 @@ Plug 'thinca/vim-visualstar'
 
 Plug 'wesQ3/vim-windowswap'
 
-Plug 'sukima/xmledit'
+Plug 'shanesmith/xmledit'
 
 Plug 'tommcdo/vim-exchange'
 
