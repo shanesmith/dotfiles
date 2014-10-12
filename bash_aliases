@@ -19,6 +19,8 @@ alias lld='ll -d'
 alias :q='exit'
 alias :Q='exit'
 
+alias ger="gerrit"
+
 alias ag='ag -S --pager="less"'
 
 os_is_mac() {
