@@ -441,10 +441,10 @@ nnoremap <silent> <C-w><C-w> :call WindowSwap#EasyWindowSwap()<CR>
 nnoremap <Leader>w :w<CR>
 
 "Window commands
-noremap <Right> <C-w><Right>
-noremap <Left> <C-w><Left>
-noremap <Down> <C-w><Down>
-noremap <Up> <C-w><Up>
+inoremap <silent> <c-h> <ESC>:TmuxNavigateLeft<cr>
+inoremap <silent> <c-j> <ESC>:TmuxNavigateDown<cr>
+inoremap <silent> <c-k> <ESC>:TmuxNavigateUp<cr>
+inoremap <silent> <c-l> <ESC>:TmuxNavigateRight<cr>
 
 "Search commands
 ""Highlight current word
