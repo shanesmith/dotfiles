@@ -265,6 +265,12 @@ Plug 'christoomey/vim-tmux-navigator'
 
 Plug 'Keithbsmiley/tmux.vim'
 
+Plug 'sjl/vitality.vim'
+
+Plug 'FelikZ/ctrlp-py-matcher'
+
+Plug 'edkolev/tmuxline.vim'
+
 call plug#end()
 
 "Colorscheme
@@ -303,6 +309,7 @@ let g:ctrlp_custom_ignore = {
       \ 'dir':  '\v[\/]\.(git|hg|svn)$',
       \ 'file': '\vtags|\.(exe|so|dll|DS_Store)$'
       \ }
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 "LocalVimrc options
 let g:localvimrc_sandbox=0
