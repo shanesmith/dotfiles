@@ -1,2 +1,4 @@
 vim/bundle/
+vim/swaps/
+vim/backups/
 vim/autoload/plug.vim.old
