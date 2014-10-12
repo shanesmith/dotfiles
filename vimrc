@@ -1,4 +1,4 @@
-"Let's make sure that all the annoying bugs in VI are not displayed in VIM.
+" Let's make sure that all the annoying bugs in VI are not displayed in VIM.
 set nocompatible
 
 "Faster ESC timeout
@@ -127,7 +127,6 @@ hi link jsObjectBraces Special
 "Set leader character
 let mapleader = "\<Space>"
 let maplocalleader = "|"
-
 
 """
 """ Plugin options
@@ -621,6 +620,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#hunks#enabled = 0
 let g:airline#extensions#branch#enabled = 0
+let g:airline#extensions#tmuxline#enabled = 0
 
 "Colorizer
 let g:colorizer_startup = 1
