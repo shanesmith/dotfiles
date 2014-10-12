@@ -53,12 +53,14 @@
   er-done = "!f() { git commit -m \"$1\" && git push; }; f"
   newb = checkout --track -b
 	hardhead = reset --hard HEAD
+	hardup = reset --hard @{u}
 	pick = cherry-pick
   pup = "!f(){ [ $# -eq 1 ] && git checkout $1 && git pull && git co -; }; f"
 	stat = show --name-status
   hs = "!f(){ git log -g --oneline -n${1:-100} | awk '/checkout:/ { if (system(\"git show-ref --quiet --verify refs/heads/\"$NF) == 0) print substr($2, 7)\" \"$NF }' | sort -k2 -u | sort -k1 -n | tail +2 | cut -d' ' -f2; }; f"
   base = merge-base HEAD
-  sweep = "!f() { git branch --merged ${1:-HEAD} | grep -v '^\\*' | grep -v '^ master$' | xargs git branch -d; }; f"
+  sweep = "!f() { echo "Would delete branches:"; git branch --merged ${1:-HEAD} | grep -v '^\\*' | grep -v '^ master$'; }; f"
+  sweepit = "!f() { git branch --merged ${1:-HEAD} | grep -v '^\\*' | grep -v '^ master$' | xargs git branch -d; }; f"
   for = fetch origin
 
 [color]
