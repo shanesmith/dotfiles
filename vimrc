@@ -324,6 +324,7 @@ let g:ctrlp_map = "<leader>pp"
 nnoremap <leader>p  :CtrlP<cr>
 nnoremap <leader>pf :CtrlPFunky<cr>
 nnoremap <leader>pl :CtrlPLine<cr>
+nnoremap <leader>pb :CtrlPBuffer<cr>
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_use_caching = 1000
@@ -494,7 +495,7 @@ nnoremap <S-Right> :tabnext<CR>
 nnoremap <S-Left> :tabprevious<CR>
 
 "Show whitespace characters
-nnoremap <F9> :set list!<CR>
+nnoremap <F7> :set list!<CR>
 
 "Stop accidentaly recording
 nnoremap Q q
