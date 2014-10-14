@@ -281,8 +281,8 @@ httpython() {
 # https://wiki.archlinux.org/index.php/Sudo#Passing_aliases
 alias sudo='sudo '
 
-alias vimrc='vim ~/.vimrc'
-alias bashrc='vim ~/.bashrc'
+alias vimrc='cd ~/Code/rc && vim vimrc'
+alias bashrc='cd ~/Code/rc && vim bashrc'
 
 git_remove-merged-branches() {
   local branches=$(git branch --merged | sed -e '/^*/d' -e '/master/d')
