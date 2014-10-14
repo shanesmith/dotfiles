@@ -228,8 +228,6 @@ Plug 'kana/vim-smartword'
 
 Plug 'justinmk/vim-sneak'
 
-Plug 'tpope/vim-speeddating'
-
 Plug 'chrisbra/SudoEdit.vim'
 
 Plug 'shanesmith/vim-surround'
@@ -272,8 +270,39 @@ Plug 'FelikZ/ctrlp-py-matcher'
 
 Plug 'edkolev/tmuxline.vim'
 
+Plug 'lfilho/cosco.vim'
+
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
+nnoremap <leader>jf :TernDef<CR>
+nnoremap <leader>jd :TernDoc<CR>
+nnoremap <leader>jr :TernRefs<CR>
+
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
 let g:ycm_autoclose_preview_window_after_insertion = 1
+
+Plug 'rargo/vim-line-jump'
+let g:NERDTreeMapToggleFilters = "0"
+augroup LineJumpNerdTree
+  autocmd BufEnter NERD_tree_\d\+ nnoremap <buffer> <nowait> <silent> f <ESC>:silent! call LineJumpSelectForward()<cr>
+  autocmd BufEnter NERD_tree_\d\+ nnoremap <buffer> <nowait> <silent> ; <ESC>:silent! call LineJumpMoveForward()<cr>
+  autocmd BufEnter NERD_tree_\d\+ nnoremap <buffer> <nowait> <silent> b <ESC>:silent! call LineJumpSelectBackward()<cr>
+  autocmd BufEnter NERD_tree_\d\+ nnoremap <buffer> <nowait> <silent> , <ESC>:silent! call LineJumpMoveBackward()<cr>
+
+  autocmd BufEnter NERD_tree_\d\+ nnoremap <buffer> <nowait> <silent> gh <ESC>:silent! call LineJumpMoveTop()<cr>
+  autocmd BufEnter NERD_tree_\d\+ nnoremap <buffer> <nowait> <silent> gm <ESC>:silent! call LineJumpMoveMiddle()<cr>
+  autocmd BufEnter NERD_tree_\d\+ nnoremap <buffer> <nowait> <silent> gl <ESC>:silent! call LineJumpMoveBottom()<cr>
+augroup END
+
+Plug 'AndrewRadev/switch.vim'
+nnoremap <silent> - :Switch<CR>
+
+Plug 'Keithbsmiley/investigate.vim'
+
+Plug 'maxbrunsfeld/vim-yankstack'
+
+Plug 'gorkunov/smartpairs.vim'
 
 call plug#end()
 
@@ -430,6 +459,11 @@ nnoremap <Leader>c :TagbarToggle<CR>
 let g:windowswap_map_keys = 0
 nnoremap <silent> <C-w>w :call WindowSwap#EasyWindowSwap()<CR>
 nnoremap <silent> <C-w><C-w> :call WindowSwap#EasyWindowSwap()<CR>
+
+" Cosco
+autocmd FileType javascript,php,css,java,c,cpp nnoremap <silent> ;; :call cosco#commaOrSemiColon()<CR>
+autocmd FileType javascript,php,css,java,c,cpp vnoremap <silent> ;; :call cosco#commaOrSemiColon()<CR>
+autocmd FileType javascript,php,css,java,c,cpp inoremap <silent> ;; <C-o>:call cosco#commaOrSemiColon()<CR>
 
 
 """
