@@ -206,8 +206,6 @@ Plug 'szw/vim-maximizer'
 
 Plug 'vim-scripts/molokai'
 
-Plug 'Shougo/neocomplete.vim'
-
 Plug 'scrooloose/nerdtree'
 
 Plug 'koron/nyancat-vim'
@@ -274,6 +272,9 @@ Plug 'FelikZ/ctrlp-py-matcher'
 
 Plug 'edkolev/tmuxline.vim'
 
+Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
+let g:ycm_autoclose_preview_window_after_insertion = 1
+
 call plug#end()
 
 "Colorscheme
@@ -317,19 +318,6 @@ let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 "LocalVimrc options
 let g:localvimrc_sandbox=0
 let g:localvimrc_persistent=1
-
-"NeoComplete options
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-let g:neocomplete#enable_auto_select = 0
-let g:neocomplete#enable_insert_char_pre = 1
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 "Syntastic options
 let g:syntastic_check_on_open = 1
@@ -579,19 +567,6 @@ vnoremap \\ :TComment<CR>
 nnoremap \* :TCommentBlock<CR>
 vnoremap \* :TCommentBlock<CR>
 nmap \  <Plug>TComment-gc
-
-"NeoComplete mappings
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return pumvisible() ? neocomplete#smart_close_popup() : "\<CR>"
-endfunction
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
-inoremap <expr><C-g> neocomplete#undo_completion()
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<BS>"
-inoremap <expr><C-y> neocomplete#close_popup()
-inoremap <expr><C-e> neocomplete#cancel_popup()
-inoremap <expr><C-l> neocomplete#complete_common_string()
 
 "Smartwords
 map w <Plug>(smartword-w)
