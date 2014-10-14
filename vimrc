@@ -114,6 +114,9 @@ set scrolloff=5
 "Split pane to right when :vsplit
 set splitright
 
+"Don't highlight long lines
+set synmaxcol=800
+
 "What to show in character list
 set listchars=tab:>-,trail:',eol:$
 
