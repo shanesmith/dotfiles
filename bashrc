@@ -1,6 +1,6 @@
 export NODE_PATH=$NODE_PATH:$HOME/.node/lib/node_modules
 
-export PATH=$PATH:$HOME/.node/bin
+export PATH=$PATH:$HOME/.node/bin:$HOME/bin
 
 # If not running interactively, stop here
 [ -z "$PS1" ] && return
