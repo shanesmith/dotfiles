@@ -678,6 +678,9 @@ inoremap <A-l> <Right>
 nnoremap <leader>r :%s/\<<C-r><C-w>\>/
 vnoremap <leader>r "hy:%s/<C-r>h/
 
+"Quick Quit
+nnoremap QQ :quit<CR>
+
 """
 """ Custom ex commands
 """
