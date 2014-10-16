@@ -9,7 +9,7 @@ is_windows=
 case $(uname) in
   Linux)
     is_linux="yes"
-    DOTFILES="$DOTFILES Xmodmap"
+    DOTFILES="$DOTFILES Xmodmap imwheelrc"
     ;;
   Darwin)
     is_mac="yes"
