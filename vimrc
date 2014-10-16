@@ -162,7 +162,7 @@ Plug 'elubow/cql-vim'
 
 Plug 'hail2u/vim-css3-syntax'
 
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 
 Plug 'tacahiroy/ctrlp-funky'
 
