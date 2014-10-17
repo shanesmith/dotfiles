@@ -18,6 +18,7 @@ alias lld='ll -d'
 
 alias :q='exit'
 alias :Q='exit'
+alias QQ='exit'
 
 alias ger="gerrit"
 
