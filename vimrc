@@ -138,7 +138,7 @@ call plug#begin('~/.vim/bundle')
 
 Plug 'tpope/vim-abolish'
 
-Plug 'mileszs/ack.vim'
+Plug 'shanesmith/ack.vim'
 
 Plug 'bling/vim-airline'
 
