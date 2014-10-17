@@ -286,9 +286,9 @@ Plug 'rargo/vim-line-jump'
 let g:NERDTreeMapToggleFilters = "0"
 augroup LineJumpNerdTree
   autocmd BufEnter NERD_tree_\d\+ nnoremap <buffer> <nowait> <silent> f <ESC>:silent! call LineJumpSelectForward()<cr>
-  autocmd BufEnter NERD_tree_\d\+ nnoremap <buffer> <nowait> <silent> ; <ESC>:silent! call LineJumpMoveForward()<cr>
+  autocmd BufEnter NERD_tree_\d\+ nnoremap <buffer> <nowait> <silent> > <ESC>:silent! call LineJumpMoveForward()<cr>
   autocmd BufEnter NERD_tree_\d\+ nnoremap <buffer> <nowait> <silent> b <ESC>:silent! call LineJumpSelectBackward()<cr>
-  autocmd BufEnter NERD_tree_\d\+ nnoremap <buffer> <nowait> <silent> , <ESC>:silent! call LineJumpMoveBackward()<cr>
+  autocmd BufEnter NERD_tree_\d\+ nnoremap <buffer> <nowait> <silent> <lt> <ESC>:silent! call LineJumpMoveBackward()<cr>
 
   autocmd BufEnter NERD_tree_\d\+ nnoremap <buffer> <nowait> <silent> gh <ESC>:silent! call LineJumpMoveTop()<cr>
   autocmd BufEnter NERD_tree_\d\+ nnoremap <buffer> <nowait> <silent> gm <ESC>:silent! call LineJumpMoveMiddle()<cr>
@@ -593,6 +593,8 @@ let NERDTreeMapActivateNode = 'l'
 let NERDTreeMapCloseDir = 'h'
 let NERDTreeMapOpenSplit = 's'
 let NERDTreeMapOpenVSplit = 'v'
+let NERDTreeMapJumpNextSibling = ''
+let NERDTreeMapJumpPrevSibling = ''
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeShowLineNumbers = 1
 let g:NERDTreeAutoDeleteBuffer = 1
