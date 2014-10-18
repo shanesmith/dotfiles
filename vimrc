@@ -308,6 +308,10 @@ Plug 'fisadev/vim-ctrlp-cmdpalette'
 
 call plug#end()
 
+"Called after the plugin setup so that yankstack doesn't overwrite mappings
+"(ex: surround's vmap S)
+call yankstack#setup()
+
 "Colorscheme
 if &t_Co == 256 || has("gui_running")
   let g:aldmeris_transparent = 1
