@@ -218,8 +218,6 @@ Plug 'chrisbra/Recover.vim'
 
 Plug 'tpope/vim-repeat'
 
-Plug 'vim-scripts/SearchComplete'
-
 Plug 'kshenoy/vim-signature'
 
 Plug 'mhinz/vim-signify'
