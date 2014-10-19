@@ -592,9 +592,9 @@ endfunction
 
 "New lines
 nnoremap <Leader><CR> i<CR><ESC>
-nnoremap <Leader>o o<ESC>k
-nnoremap <Leader>O O<ESC>j
-vnoremap <Leader>o di<CR><CR><ESC>k]p`[v`]==`[v`]
+nnoremap <Leader>o mzo<ESC>g`z:delm z<CR>
+nnoremap <Leader>O mzO<ESC>g`z:delm z<CR>
+vnoremap <Leader>o "zdi<CR><CR><ESC>k"z]P`[=`]`[v`]
 
 "Better escape
 inoremap jk <ESC>
