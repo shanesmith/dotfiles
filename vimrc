@@ -489,6 +489,29 @@ nnoremap <silent> <Leader>/ :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<C
 nnoremap <silent> <2-LeftMouse> :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<CR>
 ""Clear search (and Highlight)
 nnoremap <silent> <Leader>\ :let @/=""<CR>
+"Search history navigation
+nnoremap <silent> [/ :call <SID>search_hist('back')<CR>
+nnoremap <silent> ]/ :call <SID>search_hist('forward')<CR>
+
+let s:search_hist_index = 0
+let s:search_last_nr = 0
+function! s:search_hist(direction)
+  if s:search_last_nr != histnr('search')
+    let s:search_hist_index = 0
+    let s:search_last_nr = histnr('search')
+  endif
+  if a:direction == 'back'
+    if s:search_hist_index > histnr('search') * -1
+      let s:search_hist_index = s:search_hist_index - 1
+    endif
+  else
+    if s:search_hist_index < 0
+      let s:search_hist_index = s:search_hist_index + 1
+    endif
+  endif
+  let @/ = histget('search', s:search_hist_index - 1)
+  echo s:search_hist_index @/
+endfunction
 
 "Next/Previous result
 nnoremap <F3> n
