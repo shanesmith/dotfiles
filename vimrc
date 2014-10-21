@@ -550,7 +550,7 @@ vnoremap <leader>V "+p
 vnoremap <leader>c "+y
 
 "Stamp word (replace current word with last delete/yank)
-nnoremap S diw"0P
+nnoremap S "_diw"0P
 
 "Map U to redo
 nnoremap U :redo<CR>
