@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOTFILES="bashrc bash_aliases bashrc-sshlogin gitconfig gitignore vimrc vim gvimrc ackrc inputrc colordiffrc fzf npmrc agignore tmux.conf"
+DOTFILES="bashrc bash_aliases bashrc-sshlogin gitconfig gitignore vimrc vim gvimrc ackrc inputrc colordiffrc fzf npmrc agignore tmux.conf bin"
 
 is_linux=
 is_mac=
@@ -53,14 +53,22 @@ get_src() {
 
 get_dest() {
   local file="$1"
-  if [[ "$is_windows" ]]; then
-    case "$file" in
-      vim)
+
+  case "$file" in 
+
+    vim)
+      if [[ "$is_windows" ]]; then
         echo "$HOME/vimfiles"
         exit
-        ;;
-    esac
-  fi
+      fi
+      ;;
+
+    bin)
+      echo "$HOME/bin"
+      exit
+      ;;
+
+  esac
 
   echo "$HOME/.$file";
 }

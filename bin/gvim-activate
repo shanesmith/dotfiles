@@ -1,0 +1,3 @@
+#!/bin/bash
+
+xdotool search --class gvim windowactivate %2 || gvim
