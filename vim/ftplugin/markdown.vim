@@ -8,7 +8,7 @@ function! s:Underline(char)
   let posline = line(".")
   let poscol = col(".")
 
-  execute "normal yypVr".a:char
+  execute "normal \"zyy\"zpVr".a:char
 
   let nextline = getline(line(".") + 1)
 
