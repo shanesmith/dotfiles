@@ -844,6 +844,7 @@ function! s:NERDTreeHere(split, ...)
 
 endfunction
 
+"TODO automatic date prefix?
 function! s:NotesSave()
 
   let name = input("Save note as: ")
@@ -874,7 +875,9 @@ endfunction
 
 function! s:NotesNew()
 
-  vnew
+  if bufname('%') != ''
+    vnew
+  endif
 
   set ft=markdown
 
@@ -884,7 +887,7 @@ function! s:NotesTree()
 
   let where = "v"
 
-  if stridx(expand('%:p'), expand(g:notes_folder)) == 0
+  if stridx(expand('%:p'), expand(g:notes_folder)) == 0 || (bufname('%') == '' && line('$') == 1 && getline(1) == '')
     let where = "e"
   endif
 
@@ -896,4 +899,6 @@ let g:notes_folder = "~/Dropbox/notes"
 nnoremap <Leader>nt :call <SID>NotesTree()<CR>
 nnoremap <Leader>nw :call <SID>NotesSave()<CR>
 nnoremap <Leader>nn :call <SID>NotesNew()<CR>
+nnoremap <leader>np :exec "CtrlP" g:notes_folder<CR>
+nnoremap <leader>pn :exec "CtrlP" g:notes_folder<CR>
 
