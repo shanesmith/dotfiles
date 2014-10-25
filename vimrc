@@ -466,9 +466,22 @@ nnoremap <silent> <C-w>w :call WindowSwap#EasyWindowSwap()<CR>
 nnoremap <silent> <C-w><C-w> :call WindowSwap#EasyWindowSwap()<CR>
 
 " Cosco
-autocmd FileType javascript,php,css,java,c,cpp nnoremap <silent> ;; :call cosco#commaOrSemiColon()<CR>
+autocmd FileType javascript,php,css,java,c,cpp nnoremap <silent> ;; :call <SID>custom_cosco()<CR>
 autocmd FileType javascript,php,css,java,c,cpp vnoremap <silent> ;; :call cosco#commaOrSemiColon()<CR>
-autocmd FileType javascript,php,css,java,c,cpp inoremap <silent> ;; <C-o>:call cosco#commaOrSemiColon()<CR>
+autocmd FileType javascript,php,css,java,c,cpp inoremap <silent> ;; <C-o>:call <SID>custom_cosco()<CR>
+function! s:custom_cosco()
+  let travel = 0
+  if match(getline('.'), '^\s*$') != -1
+    let travel = 1
+    normal! mz
+    normal! }(
+  endif
+  call cosco#commaOrSemiColon()
+  if travel
+    normal! `z
+    delm z
+  endif
+endfunction
 
 
 """
