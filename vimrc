@@ -562,6 +562,9 @@ vnoremap <leader>v "+p
 vnoremap <leader>V "+p
 vnoremap <leader>c "+y
 
+"Like it should be
+nnoremap Y y$
+
 "Stamp word (replace current word with last delete/yank)
 nnoremap S "_diw"0P
 
