@@ -5,8 +5,12 @@ export PATH=$PATH:$HOME/.node/bin:$HOME/bin
 # If not running interactively, stop here
 [ -z "$PS1" ] && return
 
-# Always set TERM to support color
-export TERM="xterm-256color"
+# start with tmux if we have it
+if command -v tmux >/dev/null && [[ ! $TERM =~ screen ]]; then
+  exec tmux -2
+else
+  export TERM="xterm-256color"
+fi
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
