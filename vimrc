@@ -612,6 +612,38 @@ onoremap <silent> A( :normal! [(V%<CR>
 onoremap <silent> A) :normal! [(V%<CR>
 onoremap <silent> A[ :call searchpair('\[', '', '\]', 'bW') \| normal! V%<CR>
 onoremap <silent> A] :call searchpair('\[', '', '\]', 'bW') \| normal! V%<CR>
+nnoremap <silent> dS{ :call <SID>delete_surrounding_lines("{}")<CR>
+nnoremap <silent> dS} :call <SID>delete_surrounding_lines("{}")<CR>
+nnoremap <silent> dS[ :call <SID>delete_surrounding_lines("[]")<CR>
+nnoremap <silent> dS] :call <SID>delete_surrounding_lines("[]")<CR>
+nnoremap <silent> dS( :call <SID>delete_surrounding_lines("()")<CR>
+nnoremap <silent> dS) :call <SID>delete_surrounding_lines("()")<CR>
+
+function! s:delete_surrounding_lines(pair)
+  let syng_strcom = 'string\|regex\|comment\c'
+  let skip_expr = "synIDattr(synID(line('.'),col('.'),1),'name') =~ '".syng_strcom."'"
+
+  let char = map(split(a:pair, '\zs'), '"\\V" . v:val')
+
+  normal! mz
+
+  let startline = searchpair(char[0], '', char[1], 'bW', skip_expr)
+
+  delete _
+
+  let endline = searchpair(char[0], '', char[1], '', skip_expr)
+
+  delete _
+
+  let numlines = endline - startline
+
+  exec startline . "," . endline . "normal! =="
+
+  normal! `z
+
+  delm z
+
+endfunction
 
 "Toggle NERDTree
 " nnoremap <Leader>t :NERDTreeToggle<CR>
