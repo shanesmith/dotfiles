@@ -144,8 +144,6 @@ Plug 'bling/vim-airline'
 
 Plug 'veloce/vim-aldmeris'
 
-Plug 'b4winckler/vim-angry'
-
 Plug 'Chiel92/vim-autoformat'
 
 Plug 'jiangmiao/auto-pairs'
@@ -303,6 +301,8 @@ Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'gorkunov/smartpairs.vim'
 
 Plug 'fisadev/vim-ctrlp-cmdpalette'
+
+Plug 'wellle/targets.vim'
 
 call plug#end()
 
