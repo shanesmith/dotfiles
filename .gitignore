@@ -2,3 +2,5 @@ vim/bundle/
 vim/swaps/
 vim/backups/
 vim/autoload/plug.vim.old
+tmux/plugins/*
+!tmux/plugins/tpm
