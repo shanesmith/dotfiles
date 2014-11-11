@@ -6,10 +6,12 @@ export PATH=$PATH:$HOME/.node/bin:$HOME/bin
 [ -z "$PS1" ] && return
 
 # start with tmux if we have it
-if command -v tmux >/dev/null && [[ ! $TERM =~ screen ]]; then
-  tmux has-session && exec tmux -2 attach || exec tmux -2
-else
-  export TERM="xterm-256color"
+if [[ ! $TERM =~ screen ]]; then
+  if command -v tmux >/dev/null; then
+    tmux has-session && exec tmux -2 attach || exec tmux -2
+  else
+    export TERM="xterm-256color"
+  fi
 fi
 
 # don't put duplicate lines in the history. See bash(1) for more options
