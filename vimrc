@@ -747,8 +747,8 @@ vnoremap ; :
 vnoremap : ;
 
 "Better wrap navigation
-nnoremap j gj
-nnoremap k gk
+nmap <expr> j (v:count == 0 ? 'gj' : 'j')
+nmap <expr> k (v:count == 0 ? 'gk' : 'k')
 
 "Insert mode hjkl
 inoremap <A-h> <Left>
