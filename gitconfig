@@ -41,8 +41,8 @@
   skip-worktree = update-index --skip-worktree --
   no-skip-worktree = update-index --no-skip-worktree --
   show-skip-worktree = !git ls-files -v | grep \"^S\"
-  cc = commit -m
-  cca = commit -am
+  cc = "!f() { if [[ -n $1 ]]; then git commit -m \"$1\"; else git commit; fi; }; f"
+  cca = "!f() { if [[ -n $1 ]]; then git commit -a -m \"$1\"; else git commit -a; fi; }; f"
   amend = commit --amend
   fixup = commit --amend --reuse-message=HEAD
   wip = commit -m 'wip'
