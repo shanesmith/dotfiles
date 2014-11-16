@@ -26,6 +26,7 @@ set whichwrap+=<,>,[,],h,l
 "Remove toolbar from GUI vim
 set winaltkeys=no
 set guioptions-=T
+set guioptions+=c
 
 "Let VIM figure out the indentation neede in C-style programs - when it can.
 set smartindent
