@@ -547,7 +547,7 @@ nnoremap <C-t>q :tabclose<CR>
 nnoremap <F7> :set list!<CR>
 
 "Stop accidentaly recording
-nnoremap Q q
+noremap ! q
 nnoremap q <nop>
 
 "Visual select last pasted
@@ -762,7 +762,9 @@ nnoremap <leader>r :%s/\<<C-r><C-w>\>/<C-r><C-w>
 vnoremap <leader>r "hy:%s/<C-r>h/
 
 "Quick Quit
+nnoremap Q <nop>
 nnoremap QQ :quit<CR>
+nnoremap Q!! :quit!<CR>
 
 """
 """ Custom ex commands
