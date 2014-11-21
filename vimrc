@@ -122,8 +122,6 @@ set synmaxcol=800
 set listchars=tab:>-,trail:',eol:$
 
 hi CursorLine ctermbg=234 guibg=#404040
-hi conflictOurs term=bold cterm=bold ctermfg=64 ctermbg=0 gui=bold guifg=#4e9a06 guibg=#000
-hi conflictTheirs term=reverse cterm=bold ctermfg=74 ctermbg=0 gui=bold guifg=#729fcf guibg=#000
 
 hi link jsParens Operator
 hi link jsObjectBraces Special
@@ -310,6 +308,16 @@ call plug#end()
 "Called after the plugin setup so that yankstack doesn't overwrite mappings
 "(ex: surround's vmap S)
 call yankstack#setup()
+
+augroup AldmerisColorTweaks
+  au!
+  au ColorScheme aldmeris call <SID>AldmerisColorTweaks()
+augroup END
+
+function! s:AldmerisColorTweaks()
+  hi DiffAdd term=bold cterm=bold ctermfg=64 ctermbg=0 gui=bold guifg=#4e9a06 guibg=#000
+  hi DiffText term=reverse cterm=bold ctermfg=74 ctermbg=0 gui=bold guifg=#729fcf guibg=#000
+endfunction
 
 "Colorscheme
 if &t_Co == 256 || has("gui_running")
@@ -741,6 +749,13 @@ nnoremap <leader>u :GundoToggle<CR>
 "Don't need help right now, thanks
 inoremap <F1> <Nop>
 nnoremap <F1> <Nop>
+
+"ConflictDetection
+let g:ConflictDetection_WarnEvents = ''
+highlight  conflictOursMarker term=bold ctermfg=16 gui=bold guifg=#000 cterm=bold ctermbg=102
+highlight  conflictBaseMarker term=bold ctermfg=16 gui=bold guifg=#000 cterm=bold ctermbg=102
+highlight  conflictTheirsMarker term=bold ctermfg=16 gui=bold guifg=#000 cterm=bold ctermbg=102
+highlight  conflictSeparatorMarkerSymbol term=bold ctermfg=16 gui=bold guifg=#000 cterm=bold ctermbg=102
 
 "ConflictTake
 nnoremap <leader>x= :ConflictTake both<CR>
