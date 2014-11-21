@@ -563,6 +563,9 @@ vnoremap <leader>v "+p
 vnoremap <leader>V "+p
 vnoremap <leader>c "+y
 
+"Inline mode paste
+inoremap <C-p> <C-o>p
+
 "Like it should be
 nnoremap Y y$
 
@@ -712,6 +715,7 @@ inoremap <C-e> <C-o>$
 "Next/Previous quick fix
 nnoremap <C-n> :cnext<CR>
 nnoremap <C-p> :cprevious<CR>
+nnoremap <leader>q :copen<CR>
 " nnoremap <C-j> :lnext<CR>
 " nnoremap <C-k> :lprevious<CR>
 
