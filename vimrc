@@ -277,19 +277,6 @@ nnoremap <leader>jr :TernRefs<CR>
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
-Plug 'rargo/vim-line-jump'
-let g:NERDTreeMapToggleFilters = "0"
-augroup LineJumpNerdTree
-  autocmd BufEnter NERD_tree_\d\+ nnoremap <buffer> <nowait> <silent> f <ESC>:silent! call LineJumpSelectForward()<cr>
-  autocmd BufEnter NERD_tree_\d\+ nnoremap <buffer> <nowait> <silent> > <ESC>:silent! call LineJumpMoveForward()<cr>
-  autocmd BufEnter NERD_tree_\d\+ nnoremap <buffer> <nowait> <silent> b <ESC>:silent! call LineJumpSelectBackward()<cr>
-  autocmd BufEnter NERD_tree_\d\+ nnoremap <buffer> <nowait> <silent> <lt> <ESC>:silent! call LineJumpMoveBackward()<cr>
-
-  autocmd BufEnter NERD_tree_\d\+ nnoremap <buffer> <nowait> <silent> gh <ESC>:silent! call LineJumpMoveTop()<cr>
-  autocmd BufEnter NERD_tree_\d\+ nnoremap <buffer> <nowait> <silent> gm <ESC>:silent! call LineJumpMoveMiddle()<cr>
-  autocmd BufEnter NERD_tree_\d\+ nnoremap <buffer> <nowait> <silent> gl <ESC>:silent! call LineJumpMoveBottom()<cr>
-augroup END
-
 Plug 'AndrewRadev/switch.vim'
 nnoremap <silent> - :Switch<CR>
 
