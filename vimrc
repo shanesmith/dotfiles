@@ -316,6 +316,8 @@ endif
 "CtrlP options
 let g:ctrlp_map = "<leader>pp"
 nnoremap <leader>p  :CtrlP<cr>
+vnoremap <leader>p  "hy:call <SID>CtrlPWithInput(@h)<CR>
+vnoremap <leader>pp "hy:call <SID>CtrlPWithInput(@h)<CR>
 nnoremap <leader>pf :CtrlPFunky<cr>
 nnoremap <leader>pl :CtrlPLine<cr>
 nnoremap <leader>pb :CtrlPBuffer<cr>
@@ -338,6 +340,12 @@ let g:ctrlp_custom_ignore = {
       \ 'file': '\vtags|\.(exe|so|dll|DS_Store)$'
       \ }
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+
+function! s:CtrlPWithInput(input)
+  let g:ctrlp_default_input = a:input
+  CtrlP
+  let g:ctrlp_default_input = ""
+endfunction
 
 "LocalVimrc options
 let g:localvimrc_sandbox=0
