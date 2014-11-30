@@ -282,8 +282,6 @@ nnoremap <silent> - :Switch<CR>
 
 Plug 'Keithbsmiley/investigate.vim'
 
-Plug 'maxbrunsfeld/vim-yankstack'
-
 Plug 'gorkunov/smartpairs.vim'
 
 Plug 'fisadev/vim-ctrlp-cmdpalette'
@@ -291,10 +289,6 @@ Plug 'fisadev/vim-ctrlp-cmdpalette'
 Plug 'wellle/targets.vim'
 
 call plug#end()
-
-"Called after the plugin setup so that yankstack doesn't overwrite mappings
-"(ex: surround's vmap S)
-call yankstack#setup()
 
 augroup AldmerisColorTweaks
   au!
