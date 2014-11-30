@@ -777,10 +777,10 @@ nnoremap Q!! :quit!<CR>
 """
 
 "Clean out trailing whitespaces
-command! CleanWhitespace call <SID>CleanWhitespace()
-function! s:CleanWhitespace()
+command! -rang=% CleanWhitespace <line1>,<line2>call <SID>CleanWhitespace()
+function! s:CleanWhitespace() range
   let lastSearch = @/
-  %s/\s\+$//ge
+  exec a:firstline . "," . a:lastline . "s/\\s\\+$//ge"
   let @/ = lastSearch
 endfunction
 
