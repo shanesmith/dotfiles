@@ -765,7 +765,16 @@ inoremap <A-l> <Right>
 
 "Easier substitute
 nnoremap <leader>r :%s/\<<C-r><C-w>\>/<C-r><C-w>
-vnoremap <leader>r "hy:%s/<C-r>h/
+vnoremap <leader>r "hy:<C-\>e<SID>subsub()<CR>
+function! s:subsub()
+  let numlines = strlen(substitute(@h, "[^\\n]", "", "g"))
+  if numlines == 0
+    let cmd = "%s/" . @h . "/" . @h
+  else
+    let cmd = "'<,'>s/"
+  endif
+  return cmd
+endfunction
 
 "Quick Quit
 nnoremap Q <nop>
