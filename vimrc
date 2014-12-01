@@ -4,6 +4,12 @@ set nocompatible
 "Faster ESC timeout
 set timeout ttimeoutlen=100
 
+set title
+if &term == "screen-256color"
+  set t_ts=]2;
+  set t_fs=\\
+endif
+
 "set autoindent
 set tabstop=2
 set shiftwidth=2
@@ -974,3 +980,7 @@ nnoremap <Leader>nn :call <SID>NotesNew()<CR>
 nnoremap <leader>np :exec "CtrlP" g:notes_folder<CR>
 nnoremap <leader>pn :exec "CtrlP" g:notes_folder<CR>
 
+augroup TitleString
+  au!
+  auto BufEnter * let &titlestring = "Vim@" . hostname() . "/" . expand("%:p")
+augroup END
