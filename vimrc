@@ -745,6 +745,8 @@ highlight  conflictTheirsMarker term=bold ctermfg=16 gui=bold guifg=#000 cterm=b
 highlight  conflictSeparatorMarkerSymbol term=bold ctermfg=16 gui=bold guifg=#000 cterm=bold ctermbg=102
 
 "ConflictTake
+let g:ConflictMotions_ConflictMapping = 'X'
+let g:ConflictMotions_SectionMapping = '='
 nnoremap <leader>x= :ConflictTake both<CR>
 nnoremap <leader>x+ :ConflictTake both<CR>
 
