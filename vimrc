@@ -384,8 +384,12 @@ let g:dbgPavimKeyToggleBae = "<leader>de"
 highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
 highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
-let g:signify_mapping_next_hunk = ']-'
-let g:signify_mapping_prev_hunk = '[-'
+nmap ]- <plug>(signify-next-hunk)
+nmap [- <plug>(signify-prev-hunk)
+omap i- <plug>(signify-motion-inner-pending)
+xmap i- <plug>(signify-motion-inner-visual)
+omap a- <plug>(signify-motion-outer-pending)
+xmap a- <plug>(signify-motion-outer-visual)
 
 "Signature
 " - GotoNext/PrevMarkerAny unmap due to conflict with conflictmotions
