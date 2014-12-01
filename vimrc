@@ -294,6 +294,10 @@ Plug 'fisadev/vim-ctrlp-cmdpalette'
 
 Plug 'wellle/targets.vim'
 
+Plug 'henrik/vim-indexed-search'
+
+Plug 'rhysd/committia.vim'
+
 call plug#end()
 
 augroup AldmerisColorTweaks
