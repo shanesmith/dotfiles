@@ -85,3 +85,5 @@
   host = gerrit.rim.net
   user = shansmith
   port = 29418
+
+# vim: ft=gitconfig
