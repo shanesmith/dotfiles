@@ -34,6 +34,9 @@ set mouse=a
 "Wrap at start/end of line
 set whichwrap+=<,>,[,],h,l
 
+"Don't fold... ever...
+set nofoldenable
+
 "Remove toolbar from GUI vim
 set winaltkeys=no
 set guioptions-=T
