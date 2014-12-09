@@ -564,6 +564,10 @@ nnoremap <C-t>o :tabonly<CR>
 nnoremap <C-t>c :tabclose<CR>
 nnoremap <C-t>q :tabclose<CR>
 
+"Only works in GUI
+nnoremap <C-Tab> :tabnext<CR>
+nnoremap <C-S-Tab> :tabprev<CR>
+
 "Show whitespace characters
 nnoremap <F7> :set list!<CR>
 
