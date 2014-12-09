@@ -7,10 +7,9 @@ export PATH=$PATH:$HOME/.node/bin:$HOME/bin
 
 # start with tmux if we have it
 if [[ ! $TERM =~ screen ]]; then
+  export TERM="xterm-256color"
   if command -v tmux >/dev/null; then
     tmux has-session && exec tmux -2 attach || exec tmux -2
-  else
-    export TERM="xterm-256color"
   fi
 fi
 
