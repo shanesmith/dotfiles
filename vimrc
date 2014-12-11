@@ -41,7 +41,10 @@ set nofoldenable
 set winaltkeys=no
 set guioptions-=T
 set guioptions+=c
-set guifont=Ubuntu\ Mono\ derivative\ Powerline
+set guifont=Droid_Sans_Mono_for_Powerline:h11,Ubuntu_Mono_derivative_Powerline
+if has("gui_macvim")
+  set macmeta
+endif
 
 "Let VIM figure out the indentation neede in C-style programs - when it can.
 set smartindent
