@@ -344,6 +344,7 @@ nnoremap <leader>pf :CtrlPFunky<cr>
 nnoremap <leader>pl :CtrlPLine<cr>
 nnoremap <leader>pb :CtrlPBuffer<cr>
 nnoremap <leader>pc :CtrlPCmdPalette<cr>
+nnoremap <leader>pw :call <SID>CtrlPWithInput("<C-R><C-W>")<CR>
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_use_caching = 1000
