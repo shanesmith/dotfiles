@@ -722,10 +722,10 @@ vnoremap \* :TCommentBlock<CR>
 nmap \  <Plug>TComment_gc
 
 "Smartwords
-map w <Plug>(smartword-w)
-map b <Plug>(smartword-b)
-map e <Plug>(smartword-e)
-map ge <Plug>(smartword-ge)
+map qw <Plug>(smartword-w)
+map qb <Plug>(smartword-b)
+map qe <Plug>(smartword-e)
+map qge <Plug>(smartword-ge)
 
 "Bash style command line
 cnoremap <C-a> <Home>
