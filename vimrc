@@ -558,8 +558,6 @@ nnoremap <F3> n
 nnoremap <S-F3> N
 
 "Tab commands
-nnoremap <S-Right> :tabnext<CR>
-nnoremap <S-Left> :tabprevious<CR>
 nnoremap [t :tabprev<CR>
 nnoremap ]t :tabnext<CR>
 nnoremap <C-t>n :tabnew<CR>
