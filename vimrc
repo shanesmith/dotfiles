@@ -751,6 +751,20 @@ nnoremap <leader>q :copen<CR>
 "Toggle relative line numbers
 nnoremap <leader>l :set relativenumber!<CR>
 
+"Operations on surrounding functions
+nnoremap dsf :call <SID>SurroundingFunction('d')<CR>
+nnoremap csf :call <SID>SurroundingFunction('c')<CR>
+function! s:SurroundingFunction(op)
+  normal! [(
+  call search('\v%(%(\i|\.)@<!).', 'bW')
+  normal! "_dt(
+  if a:op ==? 'c'
+    startinsert
+  elseif a:op ==? 'd'
+    exec "normal \<Plug>Dsurround("
+  endif
+endfunction
+
 "Airline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#whitespace#enabled = 0
