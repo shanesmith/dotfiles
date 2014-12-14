@@ -718,7 +718,7 @@ nnoremap \\ :TComment<CR>
 vnoremap \\ :TComment<CR>
 nnoremap \* :TCommentBlock<CR>
 vnoremap \* :TCommentBlock<CR>
-nmap \  <Plug>TComment-gc
+nmap \  <Plug>TComment_gc
 
 "Smartwords
 map w <Plug>(smartword-w)
