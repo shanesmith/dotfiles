@@ -235,7 +235,7 @@ Plug 'tpope/vim-repeat'
 
 Plug 'kshenoy/vim-signature'
 
-Plug 'mhinz/vim-signify'
+Plug 'airblade/vim-gitgutter'
 
 Plug 'kana/vim-smartword'
 
@@ -404,16 +404,15 @@ let g:dbgPavimKeyHelp = "<leader>dh"
 let g:dbgPavimKeyToggleBae = "<leader>de"
 
 
-"Signify
-highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
-highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
-highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
-nmap ]- <plug>(signify-next-hunk)
-nmap [- <plug>(signify-prev-hunk)
-omap i- <plug>(signify-motion-inner-pending)
-xmap i- <plug>(signify-motion-inner-visual)
-omap a- <plug>(signify-motion-outer-pending)
-xmap a- <plug>(signify-motion-outer-visual)
+"GitGutter
+highlight GitGutterAdd    cterm=bold ctermbg=237  ctermfg=119
+highlight GitGutterDelete cterm=bold ctermbg=237  ctermfg=167
+highlight GitGutterChange cterm=bold ctermbg=237  ctermfg=227
+nmap ]- <plug>GitGutterNextHunk
+nmap [- <plug>GitGutterPrevHunk
+nmap <leader>-s <plug>GitGutterStageHunk
+nmap <leader>-r <plug>GitGutterRevertHunk
+nmap <leader>-p <plug>GitGutterPreviewHunk
 
 "Signature
 " - GotoNext/PrevMarkerAny unmap due to conflict with conflictmotions
