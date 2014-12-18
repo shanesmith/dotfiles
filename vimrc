@@ -879,6 +879,12 @@ augroup CursorLine
   au WinLeave * setlocal nocursorline
 augroup END
 
+"Load opend file on last known position
+augroup LoadLastKnownPosition
+  au!
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+augroup END
+
 augroup EmmetMappings
   au!
   au FileType php,html,css imap <C-Y>Y <plug>(emmet-expand-abbr)
