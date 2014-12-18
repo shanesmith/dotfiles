@@ -32,6 +32,13 @@ os_is_linux() {
   [[ $(uname -s) == "Linux" ]]
 }
 
+npm_upgrade() {
+  for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f2)
+  do
+    npm -g install "$package"
+  done
+}
+
 bak() {
   local src=${1%/}
   local dest=$src.bak$2
