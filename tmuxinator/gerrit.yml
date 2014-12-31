@@ -1,0 +1,15 @@
+
+name: gerrit-cli
+
+root: ~/Code/gerrit-cli
+
+windows:
+  - first:
+      layout: even-horizontal
+      panes:
+        - main:
+          - clear
+          - git status
+        - sandbox:
+          - cd ~/Code/mac-sandbox
+          - clear

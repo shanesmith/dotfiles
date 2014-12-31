@@ -1,0 +1,19 @@
+
+name: macadamian
+
+root: ~/Code/harris-patpoa
+
+windows:
+  - first:
+      layout: '3e15,238x74,0,0{117x74,0,0,46,120x74,118,0[120x11,118,0,48,120x62,118,12,49]}'
+      panes:
+        - status:
+          - clear
+          - git status
+        - grunt:
+          - clear
+          - grunt
+        - lol:
+          - clear
+          - git lol
+

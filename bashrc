@@ -40,6 +40,9 @@ if ! shopt -oq posix; then
   elif command -v brew >/dev/null && [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
   fi
+  if [ -f ~/Code/rc/misc/tmuxinator-completion.bash ]; then
+    . ~/Code/rc/misc/tmuxinator-completion.bash
+  fi
 fi
 
 # set variable identifying the chroot you work in (used in the prompt below)

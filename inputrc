@@ -15,8 +15,8 @@
 "\ed": kill-whole-line
 "\C-d": kill-whole-line
 
-"\C-j": menu-complete
-"\C-k": menu-complete-backward
+# "\C-j": menu-complete
+# "\C-k": menu-complete-backward
 
 # this lets you hit tab to auto-complete a file or 
 # directory name ignoring case
