@@ -609,6 +609,8 @@ nnoremap U :redo<CR>
 "Move lines up/down
 nnoremap <S-Up> :call <SID>moveit('up')<CR>
 nnoremap <S-Down> :call <SID>moveit('down')<CR>
+nnoremap <S-Left> :call <SID>moveit('left')<CR>
+nnoremap <S-Right> :call <SID>moveit('right')<CR>
 vnoremap <S-Up> :move '<-2<CR>gv=gv
 vnoremap <S-Down> :move '>+1<CR>gv=gv
 inoremap <S-Up> <C-o>:call <SID>moveit('up')<cr>
@@ -625,20 +627,49 @@ function! s:reindent_inner()
 endfunction
 
 function! s:moveit(where)
+
   if match(getline('.'), '^\s*$') != -1
     let startpos = line('.')
     let endpos = search('\S', 'nW') - 1
     exec startpos . "," . endpos . "delete _"
   endif
-  if a:where ==? "up"
+
+  if a:where ==? "left"
+    let curpos = line('.')
+    normal {
+    let targetpos = line('.')
+    if targetpos - curpos == -1
+      let targetpos = (targetpos - 1)
+    endif
+    call cursor(curpos, 1)
+    exec 'move' targetpos
+    call s:reindent_inner()
+    exec "normal =}\<C-o>"
+
+  elseif a:where ==? "right"
+    let curpos = line('.')
+    normal }
+    let targetpos = line('.')
+    if targetpos - curpos == 1
+      let targetpos = (targetpos + 1)
+    endif
+    call cursor(curpos, 1)
+    exec 'move' (targetpos - 1)
+    normal! ==
+    exec "normal ={\<C-o>"
+    call s:reindent_inner()
+
+  elseif a:where ==? "up"
     move -2
     call s:reindent_inner()
     normal! ==j==k^
+
   elseif a:where ==? "down"
     move +1
     normal! ==k==j^
     call s:reindent_inner()
   endif
+
 endfunction
 
 "New lines
