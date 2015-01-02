@@ -312,6 +312,8 @@ Plug 'henrik/vim-indexed-search'
 
 Plug 'rhysd/committia.vim'
 
+Plug 'ntpeters/vim-better-whitespace'
+
 call plug#end()
 
 augroup AldmerisColorTweaks
@@ -322,6 +324,7 @@ augroup END
 function! s:AldmerisColorTweaks()
   hi DiffAdd term=bold cterm=bold ctermfg=64 ctermbg=0 gui=bold guifg=#4e9a06 guibg=#000
   hi DiffText term=reverse cterm=bold ctermfg=74 ctermbg=0 gui=bold guifg=#729fcf guibg=#000
+  hi ExtraWhitespace ctermbg=124 guibg=#af0000
 endfunction
 
 "Colorscheme
@@ -833,14 +836,6 @@ nnoremap Q!! :quit!<CR>
 """
 """ Custom ex commands
 """
-
-"Clean out trailing whitespaces
-command! -rang=% CleanWhitespace <line1>,<line2>call <SID>CleanWhitespace()
-function! s:CleanWhitespace() range
-  let lastSearch = @/
-  exec a:firstline . "," . a:lastline . "s/\\s\\+$//ge"
-  let @/ = lastSearch
-endfunction
 
 " Big W also writes
 command! W w
