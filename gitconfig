@@ -1,3 +1,5 @@
+# vim: ft=gitconfig
+
 [user]
   name = Shane Smith
   email = shane.smith.baz@gmail.com
@@ -86,5 +88,3 @@
   host = gerrit.rim.net
   user = shansmith
   port = 29418
-
-# vim: ft=gitconfig
