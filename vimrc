@@ -864,6 +864,17 @@ nnoremap Q <nop>
 nnoremap QQ :quit<CR>
 nnoremap Q!! :quit!<CR>
 
+nnoremap <silent><expr> yp ':let b:silly="' . v:register . '"<CR>:set opfunc=<SID>YouPaste<CR>g@'
+vnoremap <silent><expr> p ':<C-U>let b:silly="' . v:register . '"<CR>:<C-U>call <SID>YouPaste(visualmode(), 1)<CR>'
+function! s:YouPaste(type, ...)
+  if a:0
+    let [mark1, mark2] = ['`<', '`>']
+  else
+    let [mark1, mark2] = ['`[', '`]']
+  endif
+  exec 'normal ' . mark1 . 'v' . mark2 . '"_d"' . b:silly . 'P'
+endfunction
+
 """
 """ Custom ex commands
 """
