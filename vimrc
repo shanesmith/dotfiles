@@ -389,6 +389,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_objc_compiler = 'clang'
 let g:syntastic_php_checkers = ['php']
 let g:syntastic_javascript_checkers = ['jshint', 'jscs']
+let g:syntastic_scss_checkers = ['scss_lint']
 let g:syntastic_html_tidy_quiet_messages = {
       \   'regex': [
       \     '"tabindex" has invalid value "-1"',
