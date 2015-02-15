@@ -611,15 +611,130 @@ nnoremap Y y$
 "Map U to redo
 nnoremap U :redo<CR>
 
+"Squash blank lines
+nnoremap <silent> <leader><BS> :call <SID>squash_blank_lines()<CR>
+
+function! s:squash_blank_lines(...)
+  let leaveblanklines = a:0 ? a:1 : 1
+  let linenum = a:0 > 1 ? a:2 : '.'
+  let delstart = prevnonblank(linenum) + 1
+  let delend = nextnonblank(linenum) - (leaveblanklines+1)
+  if delend - delstart >= 0
+    exec delstart . "," . delend . "delete _"
+  endif
+endfunction
+
 "Move lines up/down
-nnoremap <S-Up> :call <SID>moveit('up')<CR>
-nnoremap <S-Down> :call <SID>moveit('down')<CR>
-nnoremap <S-Left> :call <SID>moveit('left')<CR>
-nnoremap <S-Right> :call <SID>moveit('right')<CR>
-vnoremap <S-Up> :move '<-2<CR>gv=gv
-vnoremap <S-Down> :move '>+1<CR>gv=gv
-inoremap <S-Up> <C-o>:call <SID>moveit('up')<cr>
-inoremap <S-Down> <C-o>:call <SID>moveit('down')<cr>
+nnoremap <silent> <C-Up>    :call      <SID>moveit('up',    'n')<CR>
+nnoremap <silent> <C-Down>  :call      <SID>moveit('down',  'n')<CR>
+nnoremap <silent> <C-Left>  :call      <SID>moveit('left',  'n')<CR>
+nnoremap <silent> <C-Right> :call      <SID>moveit('right', 'n')<CR>
+vnoremap <silent> <C-Up>    :call      <SID>moveit('up',    visualmode())<CR>
+vnoremap <silent> <C-Down>  :call      <SID>moveit('down',  visualmode())<CR>
+vnoremap <silent> <C-Left>  :call      <SID>moveit('left',  visualmode())<CR>
+vnoremap <silent> <C-Right> :call      <SID>moveit('right', visualmode())<CR>
+inoremap <silent> <C-Up>    <C-o>:call <SID>moveit('up',    'i')<cr>
+inoremap <silent> <C-Down>  <C-o>:call <SID>moveit('down',  'i')<cr>
+inoremap <silent> <C-Left>  <C-o>:call <SID>moveit('left',  'i')<CR>
+inoremap <silent> <C-Right> <C-o>:call <SID>moveit('right', 'i')<CR>
+
+function! s:moveit(where, mode) range
+
+  let firstline = a:firstline
+  let lastline = a:lastline
+
+  if a:mode !=? 'v' && match(getline('.'), '^\s*$') != -1
+    call s:squash_blank_lines(0)
+    let firstline = line('.')
+    if a:where ==? "up" || a:where ==? "left"
+      let firstline = firstline - 1
+    endif
+    let lastline = firstline
+  endif
+
+  let is_prev_line_blank = (match(getline(firstline-1), '^\s*$') != -1) 
+  let is_next_line_blank = (match(getline(lastline+1), '^\s*$') != -1)
+
+  if is_prev_line_blank && is_next_line_blank
+
+    if a:where ==? "left"
+      call s:squash_blank_lines(0, firstline-1)
+
+    elseif a:where  ==? "right"
+      call s:squash_blank_lines(0, lastline+1)
+      normal k
+
+    elseif a:where ==? "up"
+      exec (firstline-1) . "delete _"
+
+    elseif a:where ==? "down"
+      exec (lastline+1) . "delete _"
+      normal k
+
+    endif
+
+  else
+
+    if a:where ==? "left"
+      if is_prev_line_blank
+        let targetline = prevnonblank(firstline-1)
+      else
+        let targetline = line("'{")
+      endif
+      call s:do_moveit(firstline, lastline, targetline)
+      call s:reindent_inner()
+      if a:mode ==? 'v'
+        normal! gv=
+      else
+        normal! ==
+      endif
+      exec "normal =}\<C-o>"
+
+    elseif a:where ==? "right"
+      if is_next_line_blank
+        let targetline = nextnonblank(lastline+1) - 1
+      else
+        call cursor(lastline, 1)
+        let targetline = line("'}") - 1
+      endif
+      call s:do_moveit(firstline, lastline, targetline)
+      exec "normal ={\<C-o>"
+      if a:mode ==? 'v'
+        normal! gv=
+      else
+        normal! ==
+      endif
+      call s:reindent_inner()
+
+    elseif a:where ==? "up"
+      let targetline = (firstline-2)
+      call s:do_moveit(firstline, lastline, targetline)
+      call s:reindent_inner()
+      if a:mode ==? 'v'
+        normal! gv=j==k^
+      else
+        normal! ==j==k^
+      endif
+
+    elseif a:where ==? "down"
+      let targetline = (lastline+1)
+      call s:do_moveit(firstline, lastline, targetline)
+      if a:mode ==? 'v'
+        normal! gv=k==j^
+      else
+        normal! ==k==j^
+      endif
+      call s:reindent_inner()
+
+    endif
+
+  endif
+
+  if a:mode ==? 'v'
+    normal! gv^
+  endif
+
+endfunction
 
 function! s:reindent_inner()
   let line = getline('.')
@@ -631,51 +746,11 @@ function! s:reindent_inner()
   endif
 endfunction
 
-function! s:moveit(where)
-
-  if match(getline('.'), '^\s*$') != -1
-    let startpos = line('.')
-    let endpos = search('\S', 'nW') - 1
-    exec startpos . "," . endpos . "delete _"
-  endif
-
-  if a:where ==? "left"
-    let curpos = line('.')
-    normal {
-    let targetpos = line('.')
-    if targetpos - curpos == -1
-      let targetpos = (targetpos - 1)
-    endif
-    call cursor(curpos, 1)
-    exec 'move' targetpos
-    call s:reindent_inner()
-    exec "normal =}\<C-o>"
-
-  elseif a:where ==? "right"
-    let curpos = line('.')
-    normal }
-    let targetpos = line('.')
-    if targetpos - curpos == 1
-      let targetpos = (targetpos + 1)
-    endif
-    call cursor(curpos, 1)
-    exec 'move' (targetpos - 1)
-    normal! ==
-    exec "normal ={\<C-o>"
-    call s:reindent_inner()
-
-  elseif a:where ==? "up"
-    move -2
-    call s:reindent_inner()
-    normal! ==j==k^
-
-  elseif a:where ==? "down"
-    move +1
-    normal! ==k==j^
-    call s:reindent_inner()
-  endif
-
+function! s:do_moveit(first, last, target)
+  exec a:first . "," . a:last . "move" a:target
 endfunction
+
+
 
 "New lines
 nnoremap <Leader><CR> i<CR><ESC>
