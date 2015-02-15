@@ -1185,3 +1185,8 @@ augroup TitleString
   au!
   auto BufEnter * let &titlestring = "Vim@" . hostname() . "/" . expand("%:p")
 augroup END
+
+augroup JSONRC
+  au!
+  auto BufNewFile,BufRead .jscsrc,.jshintrc setf json
+augroup END
