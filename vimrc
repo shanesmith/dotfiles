@@ -761,6 +761,8 @@ function! s:do_moveit(first, last, target)
 endfunction
 
 
+"New space
+nnoremap <Leader><Space> i<Space><ESC>l
 
 "New lines
 nnoremap <Leader><CR> i<CR><ESC>
