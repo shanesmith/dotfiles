@@ -340,7 +340,7 @@ if [[ $- =~ i ]]; then
   bind '"\er": redraw-current-line'
 
   # CTRL-T - Paste the selected file path into the command line
-  bind '"\C-t": " \C-u \C-a\C-d$(__fsel)\e\C-e\C-y\C-a\C-y\ey\C-h\C-e\er"'
+  bind '"\C-f": " \C-u \C-a\C-d$(__fsel)\e\C-e\C-y\C-a\C-y\ey\C-h\C-e\er"'
 
   # CTRL-R - Paste the selected command from history into the command line
   bind '"\C-r": " \C-e\C-u$(HISTTIMEFORMAT= history | fzf +s | sed \"s/ *[0-9]* *//\")\e\C-e\er"'
