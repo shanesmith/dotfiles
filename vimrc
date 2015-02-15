@@ -789,6 +789,12 @@ function! s:InsertBlankLine(type, count) range
   endif
 endfunction
 
+
+"Indent visual
+vnoremap > >gv
+vnoremap < <gv
+vnoremap = =gv
+
 "Text-object for matching whole-line pairs
 vnoremap <silent> A{ :normal! [{V%<CR>
 vnoremap <silent> A} :normal! [{V%<CR>
