@@ -608,6 +608,16 @@ inoremap <C-p> <C-o>p
 "Like it should be
 nnoremap Y y$
 
+"Save 30% keystrokes
+nnoremap dw daw
+nnoremap cw ciw
+nnoremap yw yiw
+nnoremap vW viW
+nnoremap dW daW
+nnoremap cW ciW
+nnoremap yW yiW
+nnoremap vW viW
+
 "Map U to redo
 nnoremap U :redo<CR>
 
