@@ -114,6 +114,10 @@ set backspace=indent,eol,start
 "Directories
 set directory^=~/.vim/swaps//
 set backupdir^=~/.vim/backups//
+set undodir=~/.vim/undodir//
+
+"Persistent undo file
+set undofile
 
 "Fix delete key
 fixdel
