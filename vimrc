@@ -882,9 +882,9 @@ cnoremap <C-e> <End>
 nnoremap H ^
 vnoremap H ^
 onoremap H ^
-nnoremap L $
-vnoremap L $
-onoremap L $
+nnoremap L g_
+vnoremap L g_
+onoremap L g_
 inoremap <C-a> <C-o>^
 inoremap <C-e> <C-o>$
 
