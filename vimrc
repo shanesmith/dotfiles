@@ -766,12 +766,28 @@ nnoremap <Leader><Space> i<Space><ESC>l
 
 "New lines
 nnoremap <Leader><CR> i<CR><ESC>
-nnoremap <Leader>o mzo<ESC>g`z:delm z<CR>
-nnoremap <Leader>O mzO<ESC>g`z:delm z<CR>
-vnoremap <Leader>o "zdi<CR><CR><ESC>k"z]P`[=`]`[v`]
 
-"Better escape
-inoremap jk <ESC>
+nnoremap <Leader>O :<C-U>call <SID>InsertBlankLine('n-up', v:count1)<CR>
+nnoremap <Leader>o :<C-U>call <SID>InsertBlankLine('n-down', v:count1)<CR>
+vnoremap <Leader>o :call <SID>InsertBlankLine(visualmode(), v:count1)<CR>
+
+function! s:InsertBlankLine(type, count) range
+  let what = repeat([''], a:count)
+
+  if a:type ==? 'v'
+
+    exec "normal! `>a\<CR>\<ESC>`<i\<CR>\<ESC>" . (a:firstline+1) . "GV" .  (a:lastline+1) . "G"
+
+  elseif a:type ==# 'n-down'
+
+    call append(a:lastline, what)
+
+  elseif a:type ==# 'n-up'
+
+    call append(a:firstline-1, what)
+
+  endif
+endfunction
 
 "Text-object for matching whole-line pairs
 vnoremap <silent> A{ :normal! [{V%<CR>
