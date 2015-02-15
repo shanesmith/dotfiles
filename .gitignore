@@ -1,6 +1,7 @@
 vim/bundle/
 vim/swaps/
 vim/backups/
+vim/undodir/
 vim/autoload/plug.vim.old
 tmux/plugins/*
 !tmux/plugins/tpm
