@@ -979,6 +979,7 @@ nnoremap QQ :quit<CR>
 nnoremap Q!! :quit!<CR>
 
 nnoremap <silent><expr> yp ':let b:silly="' . v:register . '"<CR>:set opfunc=<SID>YouPaste<CR>g@'
+nnoremap <silent><expr> ypp 'V:<C-U>let b:silly="' . v:register . '"<CR>:<C-U>call <SID>YouPaste(visualmode(), 1)<CR>'
 vnoremap <silent><expr> p ':<C-U>let b:silly="' . v:register . '"<CR>:<C-U>call <SID>YouPaste(visualmode(), 1)<CR>'
 function! s:YouPaste(type, ...)
   if a:0
@@ -988,6 +989,12 @@ function! s:YouPaste(type, ...)
   endif
   exec 'normal ' . mark1 . 'v' . mark2 . '"_d"' . b:silly . 'P'
 endfunction
+
+"Quick formatting
+nnoremap \q gqip
+
+"Clear a line
+nnoremap dc cc<esc>
 
 """
 """ Custom ex commands
