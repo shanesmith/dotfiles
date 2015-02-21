@@ -253,7 +253,7 @@ Plug 'glts/vim-textobj-comment'
 
 Plug 'machakann/vim-textobj-delimited'
 
-Plug 'kana/vim-textobj-entire'
+Plug 'shanesmith/vim-textobj-entire'
 
 Plug 'kana/vim-textobj-user'
 
