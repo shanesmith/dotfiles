@@ -185,19 +185,13 @@ Plug 'hail2u/vim-css3-syntax'
 
 Plug 'ctrlpvim/ctrlp.vim'
 
-Plug 'tacahiroy/ctrlp-funky'
-
 Plug 'brookhong/DBGPavim'
-
-Plug 'tpope/vim-dispatch'
 
 Plug 'junegunn/vim-easy-align'
 
 Plug 'mattn/emmet-vim'
 
 Plug 'tpope/vim-endwise'
-
-Plug 'terryma/vim-expand-region'
 
 Plug 'tpope/vim-fugitive'
 
@@ -216,8 +210,6 @@ Plug 'shanesmith/vim-javascript', {'branch': 'develop'}
 Plug 'elzr/vim-json'
 
 Plug 'groenewege/vim-less'
-
-Plug 'vitalk/vim-lesscss'
 
 Plug 'vim-scripts/localvimrc'
 
@@ -285,8 +277,6 @@ Plug 'Keithbsmiley/tmux.vim'
 
 Plug 'sjl/vitality.vim'
 
-Plug 'FelikZ/ctrlp-py-matcher'
-
 Plug 'edkolev/tmuxline.vim'
 
 Plug 'lfilho/cosco.vim'
@@ -303,8 +293,6 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 
 Plug 'AndrewRadev/switch.vim'
 nnoremap <silent> - :Switch<CR>
-
-Plug 'Keithbsmiley/investigate.vim'
 
 Plug 'gorkunov/smartpairs.vim'
 
@@ -371,7 +359,6 @@ let g:ctrlp_custom_ignore = {
       \ 'dir':  '\v[\/]\.(git|hg|svn)$',
       \ 'file': '\vtags|\.(exe|so|dll|DS_Store)$'
       \ }
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 function! s:CtrlPWithInput(input)
   let g:ctrlp_default_input = a:input
