@@ -198,7 +198,7 @@ if [[ $TERM =~ xterm* ]]; then
   export PROMPT_COMMAND="_set_title"
 fi
 
-sources=( "${HOME}/.bash_aliases" "${HOME}/.bashrc-sshlogin" "${HOME}/.bashrc.local"  )
+sources=( "${HOME}/.bash_aliases" "${HOME}/.bash_sshauth" "${HOME}/.bashrc.local"  )
 
 for file in "${sources[@]}"; do
   if [ -f "$file" ]; then
