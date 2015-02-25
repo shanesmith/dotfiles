@@ -4,7 +4,7 @@
 #
 # Checks authentication environment.
 # If the ssh-agent is not running, starts a new one.
-# 
+#
 
 SSH_ENV=$HOME/.ssh/env-$HOSTNAME
 
@@ -23,7 +23,7 @@ function start_agent {
     ssh-add
 }
 
-if [ -z "$SSH_AUTH_SOCK" ]; then
+if [ -z "$SSH_AUTH_SOCK" ] || [ ! -f "$SSH_AUTH_SOCK" ]; then
 
   if [ -f "$SSH_ENV" ]; then
       # Find SSH_AUTH_SOCK and SSH_AGENT_PID of the available daemon
@@ -36,12 +36,12 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
       if [ $ierr == "0" ]; then
         echo > /dev/null
       else
-        # If not initialize new agent and 
+        # If not initialize new agent and
         # add authentication
         start_agent;
       fi
   else
-      start_agent;    
+      start_agent;
   fi
 
 fi
