@@ -296,13 +296,22 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
 Plug 'AndrewRadev/switch.vim'
-nnoremap <silent> - :Switch<CR>
+let g:switch_mapping = "-"
+let g:switch_custom_definitions =
+      \ [
+      \   ['left', 'right'],
+      \   ['top', 'bottom'],
+      \   ['padding', 'margin'],
+      \   ['absolute', 'relative', 'fixed']
+      \ ]
+" nnoremap <silent> - :Switch<CR>
 
-Plug 'gorkunov/smartpairs.vim'
+" Plug 'gorkunov/smartpairs.vim'
 
 Plug 'fisadev/vim-ctrlp-cmdpalette'
 
 Plug 'wellle/targets.vim'
+let g:targets_quotes = ""
 
 Plug 'henrik/vim-indexed-search'
 
