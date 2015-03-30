@@ -245,7 +245,7 @@ Plug 'justinmk/vim-sneak'
 
 Plug 'chrisbra/SudoEdit.vim'
 
-Plug 'shanesmith/vim-surround'
+Plug 'tpope/vim-surround'
 
 Plug 'scrooloose/syntastic'
 
