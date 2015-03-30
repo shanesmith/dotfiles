@@ -145,6 +145,10 @@ set synmaxcol=800
 "What to show in character list
 set listchars=tab:>-,trail:',eol:$
 
+if has("gui_gtk2")
+  set lines=999 columns=999
+endif
+
 hi CursorLine ctermbg=234 guibg=#404040
 
 hi link jsParens Operator
