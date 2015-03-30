@@ -996,6 +996,32 @@ nnoremap \q gqip
 "Clear a line
 nnoremap dc cc<esc>
 
+"Swap quotes
+nnoremap <leader>' :call <SID>SwapQuotes()<CR>
+function! s:SwapQuotes()
+  let origline = line('.')
+  let origcol = col('.')
+  exec "norm! va'o"
+  exec "norm! \<Esc>"
+  let singlecol = col('.')
+  if singlecol == origcol && getline('.')[singlecol-1] != "'" || singlecol > origcol
+    let singlecol = -1
+  endif
+  call cursor(origline, origcol)
+  exec "norm! va\"o"
+  exec "norm! \<Esc>"
+  let doublecol = col('.')
+  if doublecol == origcol && getline('.')[doublecol-1] != '"' || doublecol > origcol
+    let doublecol = -1
+  endif
+  call cursor(origline, origcol)
+  if singlecol > doublecol
+    norm cs'"
+  else
+    norm cs"'
+  endif
+endfunction
+
 """
 """ Custom ex commands
 """
