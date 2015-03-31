@@ -77,6 +77,7 @@ export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWSTASHSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
 export GIT_PS1_SHOWUPSTREAM=true
+export GIT_PS1_DESCRIBE_STYLE=branch
 
 save_function() {
     local ORIG_FUNC=$(declare -f $1)
