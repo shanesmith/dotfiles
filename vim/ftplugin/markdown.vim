@@ -1,19 +1,21 @@
 setlocal colorcolumn=80
 
-nnoremap <buffer> \= :call <SID>Underline("=")<CR>
-nnoremap <buffer> \- :call <SID>Underline("-")<CR>
+nnoremap <buffer> <silent> \= :call <SID>Underline("=")<CR>
+nnoremap <buffer> <silent> \- :call <SID>Underline("-")<CR>
 
 function! s:Underline(char)
 
   let posline = line(".")
   let poscol = col(".")
 
-  execute "normal \"zyy\"zpVr".a:char
+  t.
+
+  execute "normal! Vr".a:char
 
   let nextline = getline(line(".") + 1)
 
   if match(nextline, "^[-=]\\+$") != -1
-    normal jdd
+    normal! jdd
   endif
 
   call cursor(posline, poscol)
