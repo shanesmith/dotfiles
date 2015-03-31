@@ -43,6 +43,15 @@ if ! shopt -oq posix; then
   if [ -f ~/Code/rc/misc/tmuxinator-completion.bash ]; then
     . ~/Code/rc/misc/tmuxinator-completion.bash
   fi
+  if command -v grunt >/dev/null; then
+    . <(grunt --completion=bash)
+  fi
+  if command -v npm >/dev/null; then
+    . <(npm completion)
+  fi
+  if command -v gerrit >/dev/null; then
+    . <(gerrit completion)
+  fi
 fi
 
 # set variable identifying the chroot you work in (used in the prompt below)

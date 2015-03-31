@@ -21,6 +21,7 @@ alias :Q='exit'
 alias QQ='exit'
 
 alias ger="gerrit"
+command -v gerrit >/dev/null && complete -F _gerrit_completion ger
 
 alias ag='ag -S --pager="less"'
 
