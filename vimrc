@@ -1061,6 +1061,8 @@ command! -range=% -nargs=0 Space2Tab execute '<line1>,<line2>s#^\( \{'.&ts.'\}\)
 "Source vimrc
 command! ReloadVimrc source $MYVIMRC
 
+command! -nargs=1 -complete=syntax Scratch vnew | setf <args>
+
 """
 """ AutoCmd
 """
