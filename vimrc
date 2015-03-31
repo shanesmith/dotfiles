@@ -595,6 +595,8 @@ nnoremap q <nop>
 "http://vim.wikia.com/wiki/Selecting_your_pasted_text
 nnoremap gp `[v`]
 
+vnoremap gy ygv<ESC>
+
 "Paste from system clipboard
 set clipboard=unnamed,unnamedplus
 
@@ -883,6 +885,7 @@ nnoremap \\ :TComment<CR>
 vnoremap \\ :TComment<CR>
 nnoremap \* :TCommentBlock<CR>
 vnoremap \* :TCommentBlock<CR>
+nnoremap \p :t.<CR>k:TComment<CR>j
 nmap \  <Plug>TComment_gc
 
 "Smartwords
