@@ -319,6 +319,8 @@ Plug 'rhysd/committia.vim'
 
 Plug 'ntpeters/vim-better-whitespace'
 
+Plug 'rhysd/clever-f.vim'
+
 call plug#end()
 
 augroup AldmerisColorTweaks
