@@ -53,7 +53,7 @@
   delete-submodule = "!f() { if [ -d $1 ]; then echo "Removing from .gitmodule..."; git config -f .gitmodules --remove-section submodule.$1; echo "Removing from .git/config..."; git config -f .git/config --remove-section submodule.$1; echo "Removing from cache..."; git rm --cached $1; echo "Removing directory..."; rm -rf $1; fi }; f"
   remove-merged-branches = "!git_remove-merged-branches"
   er-done = "!f() { git commit -m \"$1\" && git push; }; f"
-  newb = checkout --track -b
+  newb = "!f(){ upbranch=${2:-$(git rev-parse --symbolic-full-name --abbrev-ref '@{u}')}; git checkout -b \"$1\"; git branch -u \"$upbranch\"; }; f"
 	hardhead = reset --hard HEAD
 	hardup = reset --hard @{u}
 	pick = cherry-pick
