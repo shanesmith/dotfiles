@@ -1174,14 +1174,20 @@ endfunction
 "TODO automatic date prefix?
 function! s:NotesSave()
 
-  let name = input("Save note as: ")
+  exec "cd" expand(g:notes_folder)
+  let name = input("Save note as: ", fnamemodify(bufname("%"), ':.:r'), "file")
   redraw
+  cd -
 
   if name == ""
     return
   endif
 
-  let fname = expand(g:notes_folder) . "/" . name . ".md"
+  let fname = expand(g:notes_folder) . "/" . name
+
+  if fnamemodify(fname, ":e") != "md"
+    let fname .= ".md"
+  endif
 
   if filereadable(fname)
     echohl ErrorMsg
@@ -1206,7 +1212,11 @@ function! s:NotesNew()
     vnew
   endif
 
-  set ft=markdown
+  let fname = expand(g:notes_folder) . "/"  . strftime("%Y-%m-%d--%H-%M") . ".md"
+
+  exec "saveas" fnameescape(fname)
+
+  setf markdown
 
 endfunction
 
