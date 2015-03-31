@@ -597,15 +597,18 @@ nnoremap gp `[v`]
 
 "Paste from system clipboard
 set clipboard=unnamed,unnamedplus
-nnoremap <leader>v "+p
-nnoremap <leader>V "+p
-nnoremap <leader>C "+yy
-vnoremap <leader>v "+p
-vnoremap <leader>V "+p
-vnoremap <leader>c "+y
 
 "Inline mode paste
-inoremap <C-p> <C-o>p
+inoremap <C-p> <C-\><C-o>:call <SID>InlinePaste()<cr>
+function! s:InlinePaste()
+  let pasteop = 'P'
+  let linelength = strlen(getline('.'))
+  let colpos = col('.')
+  if colpos == linelength + 1
+    let pasteop = 'p'
+  endif
+  exec 'normal! ' . pasteop
+endfunction
 
 "Like it should be
 nnoremap Y y$
