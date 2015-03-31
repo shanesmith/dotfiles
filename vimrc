@@ -306,7 +306,7 @@ let g:switch_custom_definitions =
       \ ]
 " nnoremap <silent> - :Switch<CR>
 
-" Plug 'gorkunov/smartpairs.vim'
+Plug 'gorkunov/smartpairs.vim'
 
 Plug 'fisadev/vim-ctrlp-cmdpalette'
 
