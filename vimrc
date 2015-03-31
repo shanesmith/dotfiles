@@ -652,6 +652,18 @@ inoremap <silent> <C-Up>    <C-o>:call <SID>moveit('up',    'i')<cr>
 inoremap <silent> <C-Down>  <C-o>:call <SID>moveit('down',  'i')<cr>
 inoremap <silent> <C-Left>  <C-o>:call <SID>moveit('left',  'i')<CR>
 inoremap <silent> <C-Right> <C-o>:call <SID>moveit('right', 'i')<CR>
+nnoremap <silent> <S-Up>    :call      <SID>moveit('up',    'n')<CR>
+nnoremap <silent> <S-Down>  :call      <SID>moveit('down',  'n')<CR>
+nnoremap <silent> <S-Left>  :call      <SID>moveit('left',  'n')<CR>
+nnoremap <silent> <S-Right> :call      <SID>moveit('right', 'n')<CR>
+vnoremap <silent> <S-Up>    :call      <SID>moveit('up',    visualmode())<CR>
+vnoremap <silent> <S-Down>  :call      <SID>moveit('down',  visualmode())<CR>
+vnoremap <silent> <S-Left>  :call      <SID>moveit('left',  visualmode())<CR>
+vnoremap <silent> <S-Right> :call      <SID>moveit('right', visualmode())<CR>
+inoremap <silent> <S-Up>    <C-o>:call <SID>moveit('up',    'i')<cr>
+inoremap <silent> <S-Down>  <C-o>:call <SID>moveit('down',  'i')<cr>
+inoremap <silent> <S-Left>  <C-o>:call <SID>moveit('left',  'i')<CR>
+inoremap <silent> <S-Right> <C-o>:call <SID>moveit('right', 'i')<CR>
 
 function! s:moveit(where, mode) range
 
