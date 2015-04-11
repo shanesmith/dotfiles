@@ -60,6 +60,9 @@ set matchtime=1
 "Show incomplete command
 set showcmd
 
+"No preview window
+set completeopt-=preview
+
 "Display the status bar at the bottom
 set ruler
 
