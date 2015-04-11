@@ -119,8 +119,10 @@ set undodir=~/.vim/undodir//
 "Persistent undo file
 set undofile
 
-"Fix delete key
-fixdel
+if !has('nvim')
+  "Fix delete key
+  fixdel
+endif
 
 "Syntax highlighting
 syntax on
