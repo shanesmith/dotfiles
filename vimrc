@@ -677,6 +677,35 @@ function! s:moveit(where, mode) range
   let firstline = a:firstline
   let lastline = a:lastline
 
+  if a:mode ==? 'n'
+
+    let line1 = getline('.')
+    if match(line1, '^\s*-\s') != -1
+
+      let line2num = -1
+
+      if a:where ==? "up"
+        let line2num = line('.') - 2
+      elseif a:where ==? "down"
+        let line2num = line('.') + 2
+      endif
+
+      if line2num <= 1 || line2num >= line('$')
+        return
+      endif
+
+      let line2 = getline(line2num)
+      if match(line2, '^\s*-\s') != -1
+        call setline('.', line2)
+        call setline(line2num, line1)
+        call cursor(line2num, 0)
+        return
+      endif
+
+    endif
+
+  endif
+
   if a:mode !=? 'v' && match(getline('.'), '^\s*$') != -1
     call s:squash_blank_lines(0)
     let firstline = line('.')
@@ -686,7 +715,7 @@ function! s:moveit(where, mode) range
     let lastline = firstline
   endif
 
-  let is_prev_line_blank = (match(getline(firstline-1), '^\s*$') != -1) 
+  let is_prev_line_blank = (match(getline(firstline-1), '^\s*$') != -1)
   let is_next_line_blank = (match(getline(lastline+1), '^\s*$') != -1)
 
   if is_prev_line_blank && is_next_line_blank
