@@ -248,8 +248,6 @@ Plug 'kana/vim-smartword'
 
 Plug 'justinmk/vim-sneak'
 
-Plug 'chrisbra/SudoEdit.vim'
-
 Plug 'tpope/vim-surround'
 
 Plug 'scrooloose/syntastic'
@@ -325,6 +323,8 @@ Plug 'rhysd/committia.vim'
 Plug 'ntpeters/vim-better-whitespace'
 
 Plug 'rhysd/clever-f.vim'
+
+Plug 'tpope/vim-eunuch'
 
 call plug#end()
 
