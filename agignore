@@ -1,1 +1,7 @@
 *.min.js
+.git
+.DS_Store
+.svn
+node_modules
+*.swp
+*.swo
