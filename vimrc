@@ -1159,6 +1159,10 @@ function! s:NERDTreeHere(split, ...)
 
   try
     let p = g:NERDTreePath.New(expand("%:p"))
+    if p.isUnixHiddenPath()
+      let showhidden = g:NERDTreeShowHidden
+      let g:NERDTreeShowHidden = 1
+    endif
   catch /^NERDTree.InvalidArgumentsError/
     call nerdtree#echo("Current file no longer exists.")
   endtry
@@ -1201,6 +1205,9 @@ function! s:NERDTreeHere(split, ...)
 
   if exists("p") && p.isUnder(where) && !p.equals(where)
     call b:NERDTreeRoot.reveal(p)
+    if exists("showhidden")
+      let g:NERDTreeShowHidden = showhidden
+    endif
   endif
 
 endfunction
