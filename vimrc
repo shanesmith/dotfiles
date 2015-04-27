@@ -194,7 +194,7 @@ Plug 'hail2u/vim-css3-syntax'
 
 Plug 'ctrlpvim/ctrlp.vim'
 
-Plug 'brookhong/DBGPavim'
+" Plug 'brookhong/DBGPavim'
 
 Plug 'junegunn/vim-easy-align'
 
@@ -252,7 +252,7 @@ Plug 'tpope/vim-surround'
 
 Plug 'scrooloose/syntastic'
 
-Plug 'majutsushi/tagbar'
+" Plug 'majutsushi/tagbar'
 
 Plug 'tomtom/tcomment_vim'
 
@@ -268,7 +268,7 @@ Plug 'whatyouhide/vim-textobj-xmlattr'
 
 Plug 'tpope/vim-unimpaired'
 
-Plug 'joonty/vdebug'
+" Plug 'joonty/vdebug'
 
 Plug 'thinca/vim-visualstar'
 
