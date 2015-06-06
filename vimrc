@@ -310,7 +310,6 @@ let g:switch_custom_definitions =
       \   ['padding', 'margin'],
       \   ['absolute', 'relative', 'fixed']
       \ ]
-" nnoremap <silent> - :Switch<CR>
 
 Plug 'gorkunov/smartpairs.vim'
 
@@ -367,8 +366,6 @@ let g:ctrlp_map = "<leader>pp"
 nnoremap <leader>p  :CtrlP<cr>
 vnoremap <leader>p  "hy:call <SID>CtrlPWithInput(@h)<CR>
 vnoremap <leader>pp "hy:call <SID>CtrlPWithInput(@h)<CR>
-nnoremap <leader>pf :CtrlPFunky<cr>
-nnoremap <leader>pl :CtrlPLine<cr>
 nnoremap <leader>pb :CtrlPBuffer<cr>
 nnoremap <leader>pc :CtrlPCmdPalette<cr>
 nnoremap <leader>pw :call <SID>CtrlPWithInput("<C-R><C-W>")<CR>
@@ -379,7 +376,6 @@ let g:ctrlp_max_height = 50
 let g:ctrlp_tabpage_position = 'al'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_switch_buffer = 'et'
-let g:ctrlp_extensions=['funky', 'line']
 let g:ctrlp_reuse_window = 'nerdtree'
 let g:ctrlp_prompt_mappings = {
     \ 'ToggleType(1)':        ['<c-right>'],
@@ -486,11 +482,11 @@ endfunction
 "Maximizer
 let g:maximizer_default_mapping_key = '<F4>'
 
+"Emmet
 function! s:emmet_expand_glyph(name)
   return "<span class='glyphicon ".a:name."'></span>"
 endfunction
 
-"Emmet
 let g:emmet_html5 = 0
 let g:user_emmet_settings = {
       \   'custom_expands': {
@@ -986,9 +982,6 @@ let g:airline#extensions#hunks#enabled = 0
 let g:airline#extensions#branch#enabled = 0
 let g:airline#extensions#tmuxline#enabled = 0
 
-"Colorizer
-let g:colorizer_startup = 1
-let g:colorizer_nomap = 1
 
 "Gundo
 nnoremap <leader>u :GundoToggle<CR>
