@@ -630,7 +630,7 @@ nnoremap Y y$
 nnoremap dw daw
 nnoremap cw ciw
 nnoremap yw yiw
-nnoremap vW viW
+nnoremap vw viw
 nnoremap dW daW
 nnoremap cW ciW
 nnoremap yW yiW
