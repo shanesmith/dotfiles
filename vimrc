@@ -329,6 +329,13 @@ Plug 'rhysd/clever-f.vim'
 
 Plug 'tpope/vim-eunuch'
 
+Plug 'AndrewRadev/splitjoin.vim'
+
+Plug 'mustache/vim-mustache-handlebars'
+
+Plug 'diepm/vim-rest-console'
+let g:vrc_trigger = '<F5>'
+
 call plug#end()
 
 augroup AldmerisColorTweaks
