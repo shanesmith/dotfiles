@@ -180,7 +180,10 @@ Plug 'Chiel92/vim-autoformat'
 
 Plug 'jiangmiao/auto-pairs'
 
-Plug 'lilydjwg/colorizer'
+Plug 'chrisbra/Colorizer'
+let g:colorizer_auto_filetype='css,scss,sass'
+let g:colorizer_auto_color = 1
+let g:colorizer_colornames = 0
 
 Plug 'vim-scripts/ConflictDetection'
 
