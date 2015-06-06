@@ -911,6 +911,7 @@ nnoremap <silent> <Leader>tt :call <SID>NERDTreeHere("e")<CR>
 nnoremap <silent> <Leader>ty :call <SID>NERDTreeHere("t")<CR>
 nnoremap <silent> <Leader>tv :call <SID>NERDTreeHere("v")<CR>
 nnoremap <silent> <Leader>ts :call <SID>NERDTreeHere("s")<CR>
+nnoremap <silent> <Leader>tb :call <SID>NERDTreeHere("e") \| normal B<CR>
 let g:NERDTreeHijackNetrw = 0
 let NERDTreeMapActivateNode = 'l'
 let NERDTreeMapCloseDir = 'h'
