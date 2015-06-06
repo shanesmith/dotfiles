@@ -458,7 +458,7 @@ if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
   let g:ackprg = 'ag --nogroup --nocolor --column -S'
 
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" --hidden --ignore .git --ignore .svn --ignore .DS_Store --ignore .*.sw[a-z]'
+  let g:ctrlp_user_command = 'ag $(python -c "import os.path; print os.path.relpath(%s,''${PWD}'')") -l --nocolor -g ""'
 
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
