@@ -64,9 +64,11 @@
   sweep = "!f() { echo "Would delete branches:"; git branch --merged ${1:-HEAD} | grep -v '^\\*' | grep -v '^  *master$'; }; f"
   sweepit = "!f() { git branch --merged ${1:-HEAD} | grep -v '^\\*' | grep -v '^  *master$' | xargs git branch -d; }; f"
   for = fetch origin
+  fol = "!git fetch origin && git lol"
   mash = "!git stash && git merge && git stash pop"
   rash = "!git stash && git rebase && git stash pop"
   cash = "!f() { git stash && git checkout $1 && git stash pop; }; f"
+  cob = "checkout -b"
 
 [color]
   ui = auto
