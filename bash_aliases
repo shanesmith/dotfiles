@@ -213,6 +213,8 @@ lshs() {
   history | grep -i "$1" | grep -v lshs
 }
 
+alias suitup="mux rc && mux gerrit && mux mac && exit"
+
 ] () {
   if [[ $(which xdg-open) ]]; then
     xdg-open "$1"
@@ -311,6 +313,12 @@ git_whitespace_fix() {
   for FILE in $(exec git diff-index --check HEAD -- | sed '/^[+-]/d' | cut -d: -f1 | uniq); do
     sed -i 's/[[:space:]]*$//' "$FILE"
   done
+}
+
+relative_path() {
+  # also available on non-OSX systems as
+  #   realpath --relative-to="$file1" "$file2"
+  python -c "import os.path; print os.path.relpath('$1', '${2:-$PWD}')"
 }
 
 fzf() {
