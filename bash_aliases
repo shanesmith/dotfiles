@@ -83,7 +83,7 @@ up() {
         x="$x../"
       done
       ;;
-    *)  
+    *)
       x=$(pwd | perl -pe 's|(.*'$1'[^/]*)/.*|\1|i')
       ;;
   esac
@@ -124,16 +124,16 @@ d() {
     function ltrim(s) { sub(/^[ \t\r\n]+/, "", s); return s }
     function rtrim(s) { sub(/[ \t\r\n]+$/, "", s); return s }
     function trim(s) { return rtrim(ltrim(s)); }
-    BEGIN { 
-      lines = 0  
-    } 
+    BEGIN {
+      lines = 0
+    }
     search=="" || tolower($0) ~ tolower(search) {
       $1="";
       printf "%2s  %s\n", NR-1, trim($0);
-      lines++ 
+      lines++
     }
     lines == max && max != 0 {
-      exit 
+      exit
     }
   '
 }
@@ -237,28 +237,28 @@ alias apt-update="sudo apt-get update"
 alias apt-upgrade="sudo apt-get update && sudo apt-get upgrade"
 alias apt-dist-upgrade="sudo apt-get update && sudo apt-get dist-upgrade"
 apt-list-ppa() {
-for APT in `find /etc/apt/ -name *.list`; do
-  grep -o "^deb http://ppa.launchpad.net/[a-z0-9-]\+/[a-z0-9.-]\+" $APT | while read ENTRY ; do
-  USER=`echo $ENTRY | cut -d/ -f4`
-  PPA=`echo $ENTRY | cut -d/ -f5`
-  echo ppa:$USER/$PPA
-done
+  for APT in `find /etc/apt/ -name *.list`; do
+    grep -o "^deb http://ppa.launchpad.net/[a-z0-9-]\+/[a-z0-9.-]\+" $APT | while read ENTRY ; do
+      USER=`echo $ENTRY | cut -d/ -f4`
+      PPA=`echo $ENTRY | cut -d/ -f5`
+      echo ppa:$USER/$PPA
+    done
   done
 }
 remove-old-kernels() {
-local KEEP=1
-local PURGE=
-local CANDIDATES=$(ls -tr /boot/vmlinuz-* | grep -v "$(uname -r)$" | head -n -1 | cut -d- -f2- | awk '{print "linux-image-" $0}')
-for c in $CANDIDATES; do
-  dpkg-query -s "$c" >/dev/null 2>&1 && PURGE="$PURGE $c"
-done
+  local KEEP=1
+  local PURGE=
+  local CANDIDATES=$(ls -tr /boot/vmlinuz-* | grep -v "$(uname -r)$" | head -n -1 | cut -d- -f2- | awk '{print "linux-image-" $0}')
+  for c in $CANDIDATES; do
+    dpkg-query -s "$c" >/dev/null 2>&1 && PURGE="$PURGE $c"
+  done
 
-if [ -z "$PURGE" ]; then
-  echo "No kernels are eligible for removal"
-  exit 0
-fi
+  if [ -z "$PURGE" ]; then
+    echo "No kernels are eligible for removal"
+    exit 0
+  fi
 
-sudo apt-get $APT_OPTS remove --purge $PURGE
+  sudo apt-get $APT_OPTS remove --purge $PURGE
 }
 
 
