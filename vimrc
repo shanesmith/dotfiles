@@ -352,6 +352,9 @@ function! s:AldmerisColorTweaks()
   hi ExtraWhitespace ctermbg=124 guibg=#af0000
 endfunction
 
+"Markdown
+let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json', 'ruby', 'sass', 'xml', 'html']
+
 "Colorscheme
 if &t_Co == 256 || has("gui_running")
   let g:aldmeris_transparent = 1
