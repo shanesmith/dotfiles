@@ -335,6 +335,10 @@ Plug 'mustache/vim-mustache-handlebars'
 Plug 'diepm/vim-rest-console'
 let g:vrc_trigger = '<F5>'
 
+Plug 'terryma/vim-multiple-cursors'
+let g:multi_cursor_exit_from_visual_mode = 0
+let g:multi_cursor_exit_from_insert_mode = 0
+
 call plug#end()
 
 augroup AldmerisColorTweaks
