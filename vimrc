@@ -996,6 +996,14 @@ let g:airline#extensions#hunks#enabled = 0
 let g:airline#extensions#branch#enabled = 0
 let g:airline#extensions#tmuxline#enabled = 0
 
+function! airline#extensions#tabline#title(n)
+  let title = g:TabDirs[a:n]
+  if empty(title) 
+    let title = getcwd()
+  endif
+  return substitute(fnamemodify(title, ':~'), '\v\w\zs.{-}\ze(\\|/)', '', 'g')
+endfunction
+
 
 "Gundo
 nnoremap <leader>u :GundoToggle<CR>
