@@ -205,11 +205,11 @@ Plug 'mattn/emmet-vim'
 
 Plug 'tpope/vim-endwise'
 
-Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-fugitive'
 
-Plug 'sjl/gundo.vim'
+" Plug 'sjl/gundo.vim'
 
-Plug 'honza/vim-snippets'
+" Plug 'honza/vim-snippets'
 
 Plug 'othree/html5.vim'
 
@@ -247,7 +247,7 @@ Plug 'kshenoy/vim-signature'
 
 Plug 'airblade/vim-gitgutter'
 
-Plug 'kana/vim-smartword'
+" Plug 'kana/vim-smartword'
 
 Plug 'justinmk/vim-sneak'
 
