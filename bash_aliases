@@ -20,6 +20,8 @@ alias :q='exit'
 alias :Q='exit'
 alias QQ='exit'
 
+alias cl='clear'
+
 alias ger="gerrit"
 command -v gerrit >/dev/null && complete -F _gerrit_completion ger
 
