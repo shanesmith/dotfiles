@@ -216,6 +216,7 @@ lshs() {
 }
 
 alias suitup="mux rc && mux gerrit && mux mac && exit"
+alias kill-tmux="tmux kill-session -a && tmux kill-session"
 
 ] () {
   if [[ $(which xdg-open) ]]; then
