@@ -44,7 +44,7 @@ set guioptions-=T
 set guioptions+=c
 if has("gui_macvim")
   set macmeta
-  set guifont=Droid_Sans_Mono_for_Powerline:h11
+  set guifont=Droid_Sans_Mono_for_Powerline:h10
 elseif has("gui_gtk2")
   set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 10
 endif
