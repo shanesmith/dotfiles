@@ -80,6 +80,17 @@ function! s:InlinePaste()
   exec 'normal! ' . pasteop
 endfunction
 
+"Smart indent pasting
+nnoremap p :call <SID>smart_paste('p')<CR>
+nnoremap P :call <SID>smart_paste('P')<CR>
+
+function! s:smart_paste(cmd)
+  exec 'normal! "' . v:register . a:cmd
+  if getregtype(v:register) == 'V'
+    normal! =']
+  endif
+endfunction
+
 "Like it should be
 nnoremap Y y$
 
