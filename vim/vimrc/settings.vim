@@ -22,6 +22,9 @@ set shiftwidth=2
 set shiftround
 set expandtab
 
+"set spell language
+set spelllang=en_ca
+
 "set modelines enabled
 set modeline
 set modelines=5

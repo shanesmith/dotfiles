@@ -1,4 +1,4 @@
-setlocal colorcolumn=80
+setlocal colorcolumn=80 spell
 
 nnoremap <buffer> <silent> \= :call <SID>Underline("=")<CR>
 nnoremap <buffer> <silent> \- :call <SID>Underline("-")<CR>
