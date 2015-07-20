@@ -81,8 +81,8 @@ function! s:InlinePaste()
 endfunction
 
 "Smart indent pasting
-nnoremap p :call <SID>smart_paste('p')<CR>
-nnoremap P :call <SID>smart_paste('P')<CR>
+nnoremap <silent> p :call <SID>smart_paste('p')<CR>
+nnoremap <silent> P :call <SID>smart_paste('P')<CR>
 
 function! s:smart_paste(cmd)
   exec 'normal! "' . v:register . a:cmd
@@ -294,9 +294,9 @@ nnoremap <Leader><Space> i<Space><ESC>l
 "New lines
 nnoremap <Leader><CR> i<CR><ESC>
 
-nnoremap <Leader>O :<C-U>call <SID>InsertBlankLine('n-up', v:count1)<CR>
-nnoremap <Leader>o :<C-U>call <SID>InsertBlankLine('n-down', v:count1)<CR>
-vnoremap <Leader>o :call <SID>InsertBlankLine(visualmode(), v:count1)<CR>
+nnoremap <silent> <Leader>O :<C-U>call <SID>InsertBlankLine('n-up', v:count1)<CR>
+nnoremap <silent> <Leader>o :<C-U>call <SID>InsertBlankLine('n-down', v:count1)<CR>
+vnoremap <silent> <Leader>o :call <SID>InsertBlankLine(visualmode(), v:count1)<CR>
 
 function! s:InsertBlankLine(type, count) range
   let what = repeat([''], a:count)
