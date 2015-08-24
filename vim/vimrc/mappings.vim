@@ -62,8 +62,32 @@ inoremap <C-S-Tab> <ESC>:tabprev<CR>
 nnoremap <F7> :set list!<CR>
 
 "Stop accidentaly recording
-noremap ! q
+function! s:MacroMap()
+  nnoremap ! q
+  nnoremap !! :call <SID>RecordMacro()<cr>
+endfunction
+function! s:MacroUnmap()
+  nunmap !
+  nunmap !!
+endfunction
+function! s:RecordMacro()
+  call <SID>MacroUnmap()
+  nnoremap ! :call <SID>StopRecordMacro()<cr>
+  normal! qq
+endfunction
+function! s:StopRecordMacro()
+  call <SID>MacroMap()
+  normal! q
+  let @q = substitute(@q, "!$", "", "")
+  if len(@q) > 0
+    normal! @q
+    undo
+  endif
+endfunction
+
 nnoremap q <nop>
+call <SID>MacroMap()
+
 
 "Visual select last pasted
 "http://vim.wikia.com/wiki/Selecting_your_pasted_text
