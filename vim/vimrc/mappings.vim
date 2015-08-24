@@ -1,4 +1,7 @@
 
+"Toggle spellchecker
+nnoremap <F11> :setlocal spell!<CR>
+
 "Resync syntax
 nnoremap <F12> :syntax sync fromstart<CR>
 
