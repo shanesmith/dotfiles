@@ -113,7 +113,7 @@ nnoremap <silent> P :call <SID>smart_paste('P')<CR>
 
 function! s:smart_paste(cmd)
   exec 'normal! "' . v:register . a:cmd
-  if getregtype(v:register) == 'V'
+  if getregtype(v:register) ==# 'V'
     normal! =']
   endif
 endfunction
