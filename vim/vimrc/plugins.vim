@@ -166,6 +166,7 @@ Plug 'koron/nyancat-vim'
 " Plug 'sjl/gundo.vim'
 " nnoremap <leader>u :GundoToggle<CR>
 
+Plug 'dohsimpson/vim-macroeditor'
 
 """
 """ Display
