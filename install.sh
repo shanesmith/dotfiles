@@ -2,6 +2,8 @@
 
 DOTFILES="bashrc bash_aliases bash_sshauth gitconfig gitignore vimrc vim ackrc inputrc colordiffrc fzf npmrc agignore tmux.conf tmux bin tmuxinator"
 
+LINUX_DOTFILES="Xmodmap imwheelrc"
+
 is_linux=
 is_mac=
 is_windows=
@@ -9,7 +11,7 @@ is_windows=
 case $(uname) in
   Linux)
     is_linux="yes"
-    DOTFILES="$DOTFILES Xmodmap imwheelrc"
+    DOTFILES="$DOTFILES $LINUX_DOTFILES"
     ;;
   Darwin)
     is_mac="yes"
