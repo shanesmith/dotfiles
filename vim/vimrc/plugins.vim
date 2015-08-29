@@ -315,6 +315,8 @@ let g:vim_json_syntax_conceal = 0
 
 Plug 'groenewege/vim-less'
 
+Plug 'suan/vim-instant-markdown'
+let g:instant_markdown_autostart = 0
 
 
 """
