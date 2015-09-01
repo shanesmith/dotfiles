@@ -127,6 +127,8 @@ endfunction
 
 Plug 'tpope/vim-unimpaired'
 
+Plug 'KabbAmine/lazyList.vim'
+
 " Plug 'majutsushi/tagbar'
 " nnoremap <Leader>c :TagbarToggle<CR>
 
