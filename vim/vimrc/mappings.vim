@@ -409,13 +409,6 @@ onoremap L g_
 inoremap <C-a> <C-o>^
 inoremap <C-e> <C-o>$
 
-"Next/Previous quick fix
-nnoremap <C-n> :cnext<CR>
-nnoremap <C-p> :cprevious<CR>
-nnoremap <leader>q :copen<CR>
-" nnoremap <C-j> :lnext<CR>
-" nnoremap <C-k> :lprevious<CR>
-
 "Toggle relative line numbers
 nnoremap <leader>l :set relativenumber!<CR>
 
