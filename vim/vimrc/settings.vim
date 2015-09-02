@@ -32,6 +32,9 @@ set modelines=5
 "Viminfo
 set viminfo+=!
 
+"Session options
+set sessionoptions=blank,buffers,curdir,folds,globals,help,tabpages,winsize
+
 "Enable mouse
 set mouse=a
 
