@@ -1,4 +1,5 @@
 *.min.js
+*.min.css
 .git
 .DS_Store
 .svn
