@@ -52,7 +52,7 @@ if has("gui_macvim")
   set macmeta
   set guifont=Droid_Sans_Mono_for_Powerline:h10
 elseif has("gui_gtk2")
-  set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 10
+  set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 9
 endif
 
 "Let VIM figure out the indentation neede in C-style programs - when it can.
