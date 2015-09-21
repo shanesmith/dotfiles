@@ -51,6 +51,8 @@ nnoremap <C-t><C-t> :tabnew<CR>
 nnoremap <C-t>o :tabonly<CR>
 nnoremap <C-t>c :tabclose<CR>
 nnoremap <C-t>q :tabclose<CR>
+nnoremap <C-t>> :tabm +1<CR>
+nnoremap <C-t>< :tabm -1<CR>
 
 "Only works in GUI
 nnoremap <C-Tab> :tabnext<CR>
