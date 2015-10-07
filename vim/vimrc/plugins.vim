@@ -4,8 +4,6 @@ call plug#begin('~/.vim/bundle')
 """ File Navigation and Search
 """
 
-Plug 'henrik/vim-indexed-search'
-
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 Plug 'thinca/vim-visualstar'
@@ -226,6 +224,8 @@ nmap <leader>-s <plug>GitGutterStageHunk
 nmap <leader>-r <plug>GitGutterRevertHunk
 nmap <leader>-p <plug>GitGutterPreviewHunk
 
+Plug 'vim-scripts/SyntaxRange'
+
 
 """
 """ Motions
@@ -257,6 +257,16 @@ nnoremap <leader>x+ :ConflictTake both<CR>
 Plug 'vim-scripts/CountJump'
 
 Plug 'vim-scripts/matchit.zip'
+
+Plug 'machakann/vim-columnmove'
+let g:columnmove_no_default_key_mappings = 1
+let g:columnmove_strict_wbege = 0
+nmap ]c <Plug>(columnmove-W)
+xmap ]c <Plug>(columnmove-W)
+omap ]c <Plug>(columnmove-W)
+nmap [c <Plug>(columnmove-gE)
+xmap [c <Plug>(columnmove-gE)
+omap [c <Plug>(columnmove-gE)
 
 
 """
