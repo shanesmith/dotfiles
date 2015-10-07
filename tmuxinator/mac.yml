@@ -1,10 +1,10 @@
 
-name: macadamian
+name: nova
 
-root: ~/Code/harris-harrprvpoa
+root: ~/Code/nova
 
 windows:
-  - harrprvpoa:
+  - nova:
       layout: '3e15,238x74,0,0{117x74,0,0,46,120x74,118,0[120x11,118,0,48,120x62,118,12,49]}'
       panes:
         - status:
@@ -13,21 +13,6 @@ windows:
         - grunt:
           - clear
         - lol:
-          - clear
-          - git lol
-
-  - patpoa:
-      layout: '3e15,238x74,0,0{117x74,0,0,46,120x74,118,0[120x11,118,0,48,120x62,118,12,49]}'
-      panes:
-        - status:
-          - cd ../harris-patpoa
-          - clear
-          - git status
-        - grunt:
-          - cd ../harris-patpoa
-          - clear
-        - lol:
-          - cd ../harris-patpoa
           - clear
           - git lol
 
