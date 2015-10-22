@@ -168,6 +168,7 @@ Plug 'koron/nyancat-vim'
 
 Plug 'dohsimpson/vim-macroeditor'
 
+
 """
 """ Display
 """
@@ -182,7 +183,6 @@ let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#hunks#enabled = 0
 let g:airline#extensions#branch#enabled = 0
 let g:airline#extensions#tmuxline#enabled = 0
-
 
 Plug 'veloce/vim-aldmeris'
 let g:aldmeris_transparent = 1
@@ -376,14 +376,13 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 """
 
 Plug 'mattn/emmet-vim'
+let g:user_emmet_complete_tag = 1
+let g:emmet_install_only_plug = 1
 augroup EmmetMappings
   au!
-  au FileType php,html,css imap <C-Y>Y <plug>(emmet-expand-abbr)
-  au FileType php,html,css imap <C-Y><C-Y> <plug>(emmet-expand-abbr)
-  au FileType php,html,css vmap <C-Y>Y <plug>(emmet-expand-abbr)
-  au FileType php,html,css vmap <C-Y><C-Y> <plug>(emmet-expand-abbr)
-  au FileType php,html,css nmap <C-Y>Y <plug>(emmet-expand-abbr)
-  au FileType php,html,css nmap <C-Y><C-Y> <plug>(emmet-expand-abbr)
+  au FileType php,html,css imap <buffer> <C-Y> <plug>(emmet-expand-abbr)
+  au FileType php,html,css vmap <buffer> <C-Y> <plug>(emmet-expand-abbr)
+  au FileType php,html,css nmap <buffer> <C-Y> <plug>(emmet-expand-abbr)
 augroup END
 function! s:emmet_expand_glyph(name)
   return "<span class='glyphicon ".a:name."'></span>"
@@ -395,7 +394,12 @@ let g:user_emmet_settings = {
       \   },
       \ }
 
-" Plug 'honza/vim-snippets'
+Plug 'sirver/ultisnips'
+let g:UltiSnipsExpandTrigger = '<C-y>'
+let g:UltiSnipsJumpForwardTrigger = '<C-f>'
+let g:UltiSnipsJumpBackwardTrigger = '<C-b>'
+
+Plug 'honza/vim-snippets'
 
 
 """

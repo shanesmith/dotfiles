@@ -49,3 +49,8 @@ augroup JSONRC
   au!
   auto BufNewFile,BufRead .jscsrc,.jshintrc setf json
 augroup END
+
+augroup js
+  au!
+  au FileType javascript UltiSnipsAddFiletypes javascript.javascript-angular.javascript-jasmine
+augroup END
