@@ -329,6 +329,8 @@ Plug 'groenewege/vim-less'
 Plug 'suan/vim-instant-markdown'
 let g:instant_markdown_autostart = 0
 
+Plug 'kchmck/vim-coffee-script'
+
 
 """
 """ Debugging
