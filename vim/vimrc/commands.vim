@@ -24,7 +24,7 @@ augroup END " }
 " Close vim if NERDTree is the last window
 augroup nerdtree_vimrc
   autocmd!
-  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 augroup END
 
 " Show cursorline only on current window

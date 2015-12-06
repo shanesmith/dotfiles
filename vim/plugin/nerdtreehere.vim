@@ -56,7 +56,7 @@ function! s:NERDTreeHere(split, ...)
     enew
   endif
 
-  call g:NERDTreeCreator.CreateSecondary(where.str())
+  call g:NERDTreeCreator.CreateWindowTree(where.str())
 
   if exists("p") && p.isUnder(where) && !p.equals(where)
     call b:NERDTreeRoot.reveal(p)
