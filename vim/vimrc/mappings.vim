@@ -451,6 +451,7 @@ nnoremap Q <nop>
 nnoremap QQ :quit<CR>
 nnoremap Q!! :quit!<CR>
 
+"You Paste
 nnoremap <silent><expr> yp ':let b:silly="' . v:register . '"<CR>:set opfunc=<SID>YouPaste<CR>g@'
 nnoremap <silent><expr> ypp 'V:<C-U>let b:silly="' . v:register . '"<CR>:<C-U>call <SID>YouPaste(visualmode(), 1)<CR>'
 vnoremap <silent><expr> p ':<C-U>let b:silly="' . v:register . '"<CR>:<C-U>call <SID>YouPaste(visualmode(), 1)<CR>'
@@ -460,7 +461,65 @@ function! s:YouPaste(type, ...)
   else
     let [mark1, mark2] = ['`[', '`]']
   endif
-  exec 'normal ' . mark1 . 'v' . mark2 . '"_d"' . b:silly . 'P'
+  exec 'normal! ' . mark1 . 'v' . mark2 . '"_d"' . b:silly . 'P'
+endfunction
+
+"Duplicate
+nnoremap <silent> [d :set opfunc=<SID>DuplicateUp<CR>g@
+nnoremap <silent> ]d :set opfunc=<SID>DuplicateDown<CR>g@
+nnoremap <silent> [dd V:<C-U>call <SID>DuplicateUp(visualmode())<CR>
+nnoremap <silent> ]dd V:<C-U>call <SID>DuplicateDown(visualmode())<CR>
+vnoremap <silent> [d :<C-U>call <SID>DuplicateUp(visualmode())<CR>
+vnoremap <silent> ]d :<C-U>call <SID>DuplicateDown(visualmode())<CR>
+function! s:DuplicateUp(type)
+  call <SID>Duplicate(a:type, 'up')
+endfunction
+function! s:DuplicateDown(type)
+  call <SID>Duplicate(a:type, 'down')
+endfunction
+function! s:Duplicate(type, direction)
+  let vselect = a:type
+  if a:type ==? 'v'
+    let [mark1, mark2] = ['`<', '`>']
+  else
+    let [mark1, mark2] = ['`[', '`]']
+  endif
+  if a:type == 'char'
+    let vselect = 'v'
+  elseif vselect == 'line' || vselect == 'block'
+    let vselect = 'V'
+  endif
+  let vselect = mark1 . vselect . mark2
+  exec 'normal! ' . vselect . '"hy'
+  if a:direction ==? 'up'
+    normal! `<"hP
+  else
+    normal! `>"hp
+  endif
+endfunction
+
+"Duplicate and comment
+nnoremap <silent> \d :set opfunc=<SID>DuplicateAndComment<CR>g@
+nnoremap <silent> \dd V:<C-U>call <SID>DuplicateAndComment(visualmode())<CR>
+vnoremap <silent> \d :<C-U>call <SID>DuplicateAndComment(visualmode())<CR>
+function! s:DuplicateAndComment(type)
+  if a:type ==? 'v'
+    let [mark1, mark2] = ['`<', '`>']
+  else
+    let [mark1, mark2] = ['`[', '`]']
+  endif
+  let vselect = a:type
+  if vselect == 'char'
+    let vselect = 'v'
+  elseif vselect == 'line' || vselect == 'block'
+    let vselect = 'V'
+  endif
+  let vselect = mark1 . vselect . mark2
+  exec 'normal! ' . vselect . '"hy' . vselect . ":TComment\<CR>"
+  '>put h
+  if match(getline(line("'<")-1), '^\s*$') != -1
+    call append(line("'>"), '')
+  endif
 endfunction
 
 "Quick formatting

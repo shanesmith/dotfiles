@@ -287,7 +287,6 @@ nnoremap \\ :TComment<CR>
 vnoremap \\ :TComment<CR>
 nnoremap \* :TCommentBlock<CR>
 vnoremap \* :TCommentBlock<CR>
-nnoremap \p :t.<CR>k:TComment<CR>j
 nmap \  <Plug>TComment_gc
 
 
