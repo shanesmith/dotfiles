@@ -5,6 +5,7 @@ nnoremap <silent> <Leader>tv :call <SID>NERDTreeHere("v")<CR>
 nnoremap <silent> <Leader>ts :call <SID>NERDTreeHere("s")<CR>
 nnoremap <silent> <Leader>tb :call <SID>NERDTreeHere("e") \| normal B<CR>
 
+" based on NERDTreeFind (lib/nerdtree/ui_glue.vim)
 function! s:NERDTreeHere(split, ...)
 
   if &modified == 1 && a:split ==? "e"
@@ -59,10 +60,15 @@ function! s:NERDTreeHere(split, ...)
   call g:NERDTreeCreator.CreateWindowTree(where.str())
 
   if exists("p") && p.isUnder(where) && !p.equals(where)
-    call b:NERDTreeRoot.reveal(p)
+
+    let node = b:NERDTree.root.reveal(p)
+    call b:NERDTree.render()
+    call node.putCursorHere(1,0)
+
     if exists("showhidden")
       let g:NERDTreeShowHidden = showhidden
     endif
+
   endif
 
 endfunction
