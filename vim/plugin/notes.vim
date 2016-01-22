@@ -30,7 +30,14 @@ function! s:NotesSave()
     call mkdir(path, 'p')
   endif
 
-  exec "saveas" fnameescape(fname)
+  let orig = expand("%:p")
+
+  exec "keepalt saveas" fnameescape(fname)
+
+  if orig !=# expand("%:p")
+    silent exe "bwipe!" fnameescape(orig)
+    call delete(orig)
+  endif
 
 endfunction
 
@@ -52,11 +59,28 @@ function! s:NotesTree()
 
   let where = "v"
 
-  if stridx(expand('%:p'), expand(g:notes_folder)) == 0 || (bufname('%') == '' && line('$') == 1 && getline(1) == '')
+  if stridx(expand('%:p'), expand(g:notes_folder)) == 0 || (bufname('%') == '' && line('$') == 1 && getline(1) == '') || &ft == "nerdtree"
     let where = "e"
   endif
 
   call g:NERDTreeHere(where, g:notes_folder)
+
+endfunction
+
+function! s:DeleteFileIfEmpty(buffer)
+  let lines = getbufline(a:buffer, 1, '$')
+  let numlines = len(lines)
+  let file = fnamemodify(bufname(a:buffer), ':p')
+
+  if numlines == 0
+    " BufUnload gets called twice...
+    return
+  endif
+
+  if numlines == 1 && lines[0] =~ "^\\s*$"
+    call delete(file)
+    echom "Removed empty note:" file
+  endif
 
 endfunction
 
@@ -66,4 +90,9 @@ nnoremap <Leader>nw :call <SID>NotesSave()<CR>
 nnoremap <Leader>nn :call <SID>NotesNew()<CR>
 nnoremap <leader>np :exec "CtrlP" g:notes_folder<CR>
 nnoremap <leader>pn :exec "CtrlP" g:notes_folder<CR>
+
+augroup notes
+  au!
+  au BufUnload ~/Dropbox/notes/* call <SID>DeleteFileIfEmpty(str2nr(expand("<abuf>")))
+augroup END
 
