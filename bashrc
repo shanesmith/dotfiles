@@ -28,7 +28,8 @@ HISTFILESIZE=2000
 shopt -s histappend cdspell checkwinsize dirspell autocd globstar
 
 # make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+$(which lesspipe >/dev/null) && eval "$(lesspipe)"
+$(which lesspipe.sh >/dev/null) && eval "$(lesspipe.sh)"
 
 # default options for less
 export LESS="-SRi"
