@@ -9,6 +9,9 @@ nnoremap <F12> :syntax sync fromstart<CR>
 nnoremap <Leader>w :w<CR>
 
 "Search commands
+""Consistent next/prev result
+nnoremap <expr> n 'Nn'[v:searchforward]
+nnoremap <expr> N 'nN'[v:searchforward]
 ""Highlight current word
 nnoremap <silent> <Leader>/ :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<CR>
 nnoremap <silent> <2-LeftMouse> :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<CR>
