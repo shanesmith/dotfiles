@@ -56,7 +56,7 @@ function! s:NotesTree()
     let where = "e"
   endif
 
-  call <SID>NERDTreeHere(where, g:notes_folder)
+  call g:NERDTreeHere(where, g:notes_folder)
 
 endfunction
 

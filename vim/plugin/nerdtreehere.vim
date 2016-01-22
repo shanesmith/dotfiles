@@ -1,12 +1,12 @@
-nnoremap <silent> <Leader>t :call <SID>NERDTreeHere("e")<CR>
-nnoremap <silent> <Leader>tt :call <SID>NERDTreeHere("e")<CR>
-nnoremap <silent> <Leader>ty :call <SID>NERDTreeHere("t")<CR>
-nnoremap <silent> <Leader>tv :call <SID>NERDTreeHere("v")<CR>
-nnoremap <silent> <Leader>ts :call <SID>NERDTreeHere("s")<CR>
-nnoremap <silent> <Leader>tb :call <SID>NERDTreeHere("e") \| normal B<CR>
+nnoremap <silent> <Leader>t :call g:NERDTreeHere("e")<CR>
+nnoremap <silent> <Leader>tt :call g:NERDTreeHere("e")<CR>
+nnoremap <silent> <Leader>ty :call g:NERDTreeHere("t")<CR>
+nnoremap <silent> <Leader>tv :call g:NERDTreeHere("v")<CR>
+nnoremap <silent> <Leader>ts :call g:NERDTreeHere("s")<CR>
+nnoremap <silent> <Leader>tb :call g:NERDTreeHere("e") \| normal B<CR>
 
 " based on NERDTreeFind (lib/nerdtree/ui_glue.vim)
-function! s:NERDTreeHere(split, ...)
+function! g:NERDTreeHere(split, ...)
 
   if &modified == 1 && a:split ==? "e"
     call nerdtree#echo("Buffer has been modified.")
@@ -75,8 +75,10 @@ endfunction
 
 function! s:VimEnterNERDTreeHere()
   if !exists("s:std_ind") && argc() == 0
-    call <SID>NERDTreeHere("e")
-    normal B
+    call g:NERDTreeHere("e")
+    if has("gui_running")
+      normal B
+    endif
   endif
 endfunction
 
