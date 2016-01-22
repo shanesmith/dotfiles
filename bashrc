@@ -121,12 +121,22 @@ __vagrant_status() {
   local -a VMs=()
   local -a DeadVMs=()
 
+  if [[ $(uname -s) == "Darwin" ]]; then
+    local proclist="$(ps -ww -o args= -p $(pgrep VBoxHeadless) 2>/dev/null)"
+  else
+    local proclist="$(ps h -C VBoxHeadless -o args)"
+  fi
+
+  if [[ -z $proclist ]]; then
+    return
+  fi
+
   # Gather the UUIDs of all presently running VMs.
   while read proc; do
     proc=${proc#*--startvm[[:space:]]}
     proc=${proc%%[[:space:]]*}
     RunningUUIDs+=(${proc})
-  done <<< "$(ps h -C VBoxHeadless -o args)"
+  done <<< "$proclist"
 
   for machinedir in $vagrantdir/machines/*; do
     if [[ -d $machinedir ]]; then
