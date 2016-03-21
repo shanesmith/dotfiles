@@ -212,7 +212,7 @@ lshs() {
   history | grep -i "$1" | grep -v lshs
 }
 
-alias suitup="mux rc && mux gerrit && mux mac && exit"
+alias suitup="mux rc && mux gerrit && mux mac && mux annafrlan && exit"
 alias kill-tmux="tmux kill-session -a && tmux kill-session"
 
 ] () {
