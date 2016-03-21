@@ -85,6 +85,9 @@
 [push]
   default = tracking  # deprecated, update to "upstream" when removed
 
+[tig "bind"]
+  main = C <git checkout %(commit)
+
 [gerrit "default"]
 	host = partners.macadamian.com
 	port = 29418
