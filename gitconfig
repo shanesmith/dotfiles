@@ -66,8 +66,8 @@
   sweepit = "!f() { git branch --merged ${1:-HEAD} | grep -v '^\\*' | grep -v '^  *master$' | xargs git branch -d; }; f"
   for = fetch origin
   fol = "!git fetch origin && git lol"
-  mash = "!git stash && git merge && git stash pop"
-  rash = "!git stash && git rebase && git stash pop"
+  mash = "!f() { git stash && git merge $1 && git stash pop; }; f"
+  rash = "!f() { git stash && git rebase $1 && git stash pop; }; f"
   cash = "!f() { git stash && git checkout $1 && git stash pop; }; f"
   cob = "checkout -b"
   revmerge = "!f() { git rebase \"origin/$1\" && git checkout \"$1\" && git merge -; }; f"
