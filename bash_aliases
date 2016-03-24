@@ -325,6 +325,10 @@ relative_path() {
   python -c "import os.path; print os.path.relpath('$1', '${2:-$PWD}')"
 }
 
+port_holder() {
+  sudo lsof -nP -sTCP:LISTEN -i"TCP:$1"
+}
+ 
 fzf() {
   ruby --disable-gems ~/.fzf "$@"
 }
