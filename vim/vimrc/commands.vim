@@ -13,7 +13,12 @@ command! -range=% -nargs=0 Space2Tab execute '<line1>,<line2>s#^\( \{'.&ts.'\}\)
 "Source vimrc
 command! ReloadVimrc source $MYVIMRC
 
-command! -nargs=1 -complete=syntax Scratch vnew | setf <args>
+command! -nargs=? -complete=syntax Scratch call <SID>NewScratch(<f-args>)
+function! s:NewScratch(...)
+  let type = a:0 ? a:1 : 'markdown'
+  vnew
+  exec "setf" type
+endfunction
 
 " http://www.bestofvim.com/tip/auto-reload-your-vimrc/
 augroup reload_vimrc " {
