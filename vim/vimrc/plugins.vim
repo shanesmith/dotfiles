@@ -293,6 +293,8 @@ omap [c <Plug>(columnmove-gE)
 """
 
 Plug 'ntpeters/vim-better-whitespace'
+let g:current_line_whitespace_disabled_soft = 1
+command! WhitespaceStrip StripWhitespace
 
 Plug 'Chiel92/vim-autoformat'
 
