@@ -281,6 +281,8 @@ xclip-paste() {
 }
 
 alias vv="vagrant"
+complete -F _vagrant vv
+
 alias rr="ranger"
 
 gittop() {
