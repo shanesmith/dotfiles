@@ -9,10 +9,27 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'thinca/vim-visualstar'
 
 Plug 'shanesmith/ack.vim'
-nnoremap <leader>a :Ack!<Space>""<Left>
-vnoremap <leader>a "hy:<C-U>Ack! "<C-R>h"
+command! -nargs=* MyAck call <SID>MyAck(0, <f-args>)
+command! -nargs=* MyAckRegEx call <SID>MyAck(1, <f-args>)
+function! s:MyAck(regex, ...)
+  let args = ""
+  if !a:regex
+    let args .= " -Q"
+  endif
+  if a:0 == 0
+    let what = expand("<cword>")
+  else
+    let what = join(a:000, ' ')
+  endif
+  let args .= " \"" . what . "\""
+  call ack#Ack('grep!', args)
+endfunction
+nnoremap <leader>aa :MyAck<space>
+nnoremap <leader>aq :MyAckRegEx<space>
+vnoremap <leader>aa "hy:<C-U>MyAck <C-R>h
+vnoremap <leader>aq "hy:<C-U>MyAckRegEx <C-R>h
 if executable('ag')
-  let g:ackprg = 'ag --nogroup --column -S'
+  let g:ackprg = 'ag --nogroup --column -S $* \| grep -v -e "^.*\.min\.js:" -e "^.*\.min\.css:"'
 endif
 let g:ackhighlight = 1
 let g:ack_mappings = {
