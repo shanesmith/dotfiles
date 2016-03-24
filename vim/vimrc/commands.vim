@@ -21,10 +21,10 @@ function! s:NewScratch(...)
 endfunction
 
 " http://www.bestofvim.com/tip/auto-reload-your-vimrc/
-augroup reload_vimrc " {
-    autocmd!
-    autocmd BufWritePost $MYVIMRC,~/Code/rc/vimrc source $MYVIMRC | if (exists('g:loaded_airline') && g:loaded_airline) | call airline#load_theme() | endif
-augroup END " }
+" augroup reload_vimrc " {
+"     autocmd!
+"     autocmd BufWritePost $MYVIMRC,~/Code/rc/vimrc,~/Code/rc/vim/* source $MYVIMRC | if (exists('g:loaded_airline') && g:loaded_airline) | call airline#load_theme() | endif
+" augroup END " }
 
 " Close vim if NERDTree is the last window
 augroup nerdtree_vimrc
