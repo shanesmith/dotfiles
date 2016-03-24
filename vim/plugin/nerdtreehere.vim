@@ -3,7 +3,7 @@ nnoremap <silent> <Leader>tt :call g:NERDTreeHere("e")<CR>
 nnoremap <silent> <Leader>ty :call g:NERDTreeHere("t")<CR>
 nnoremap <silent> <Leader>tv :call g:NERDTreeHere("v")<CR>
 nnoremap <silent> <Leader>ts :call g:NERDTreeHere("s")<CR>
-nnoremap <silent> <Leader>tb :call g:NERDTreeHere("e") \| normal B<CR>
+nnoremap <silent> <Leader>tb :only \| call g:NERDTreeHere("e") \| normal B<CR>
 
 " based on NERDTreeFind (lib/nerdtree/ui_glue.vim)
 function! g:NERDTreeHere(split, ...)
