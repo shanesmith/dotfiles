@@ -101,6 +101,8 @@ Plug 'chrisbra/Recover.vim'
 
 Plug 'diepm/vim-rest-console'
 let g:vrc_trigger = '<F5>'
+command! RestTab tabnew | setf rest
+
 
 Plug 'terryma/vim-multiple-cursors'
 let g:multi_cursor_exit_from_visual_mode = 0
