@@ -159,6 +159,20 @@ __vagrant_status() {
   fi
 }
 
+__nvm_status() {
+  if ! type -t nvm >/dev/null; then
+    return
+  fi
+
+  local current=$(nvm current)
+
+  if [[ $current == "system" ]]; then
+    return
+  fi
+
+  echo " <nvm-$current>"
+}
+
 NONE="\[\033[0m\]"    # unsets color to term's fg color
 
 # regular colors
@@ -192,7 +206,7 @@ else
   PS1="$PS1\u@\h${SMILEY}\w [\! \$?]"
 fi
 
-PS1="${PS1}\$(__vagrant_status)"
+PS1="${PS1}\$(__vagrant_status)\$(__nvm_status)"
 
 unset K R G Y B M C W
 unset EMK EMR EMG EMY EMB EMM EMC EMW
