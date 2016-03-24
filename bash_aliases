@@ -250,19 +250,17 @@ apt-list-ppa() {
   done
 }
 remove-old-kernels() {
-  local KEEP=1
-  local PURGE=
-  local CANDIDATES=$(ls -tr /boot/vmlinuz-* | grep -v "$(uname -r)$" | head -n -1 | cut -d- -f2- | awk '{print "linux-image-" $0}')
-  for c in $CANDIDATES; do
-    dpkg-query -s "$c" >/dev/null 2>&1 && PURGE="$PURGE $c"
-  done
+  local OLDCONF=$(dpkg -l|grep "^rc"|awk '{print $2}')
+  local CURKERNEL=$(uname -r|sed 's/-*[a-z]//g'|sed 's/-386//g')
+  local LINUXPKG="linux-(image|headers|ubuntu-modules|restricted-modules)"
+  local METALINUXPKG="linux-(image|headers|restricted-modules)-(generic|i386|server|common|rt|xen)"
+  local OLDKERNELS=$(dpkg -l|awk '{print $2}'|grep -E $LINUXPKG |grep -vE $METALINUXPKG|grep -v $CURKERNEL)
 
-  if [ -z "$PURGE" ]; then
-    echo "No kernels are eligible for removal"
-    exit 0
-  fi
+  echo "Removing old config files..."
+  sudo apt-get install --purge $OLDCONF
 
-  sudo apt-get $APT_OPTS remove --purge $PURGE
+  echo "Removing old kernels..."
+  sudo apt-get install --purge $OLDKERNELS
 }
 
 
