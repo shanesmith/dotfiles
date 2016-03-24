@@ -127,14 +127,17 @@ endfunction
 nnoremap Y y$
 
 "Save 30% keystrokes
-nnoremap dw daw
-nnoremap cw ciw
-nnoremap yw yiw
-nnoremap vw viw
-nnoremap dW daW
-nnoremap cW ciW
-nnoremap yW yiW
-nnoremap vW viW
+vnoremap w :<C-U>normal! viw<CR>
+omap w :normal vw<CR>
+
+vnoremap W :<C-U>normal! vaW<CR>
+omap W :normal vW<CR>
+
+" vnoremap p :<C-U>normal! vip<CR>
+" omap p :normal vip<CR>
+
+" vnoremap P :<C-U>normal! vap<CR>
+" omap P :normal vap<CR>
 
 "Map U to redo
 nnoremap U :redo<CR>
