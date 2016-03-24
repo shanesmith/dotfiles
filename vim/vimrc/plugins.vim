@@ -398,18 +398,18 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 """
 
 Plug 'mattn/emmet-vim'
+let g:emmet_html5 = 0
 let g:user_emmet_complete_tag = 1
 let g:emmet_install_only_plug = 1
 augroup EmmetMappings
   au!
-  au FileType php,html,css imap <buffer> <C-Y> <plug>(emmet-expand-abbr)
-  au FileType php,html,css vmap <buffer> <C-Y> <plug>(emmet-expand-abbr)
-  au FileType php,html,css nmap <buffer> <C-Y> <plug>(emmet-expand-abbr)
+  au FileType php,html,html.handlebars,css imap <buffer> <C-Y> <plug>(emmet-expand-abbr)
+  au FileType php,html,html.handlebars,css vmap <buffer> <C-Y> <plug>(emmet-expand-abbr)
+  au FileType php,html,html.handlebars,css nmap <buffer> <C-Y> <plug>(emmet-expand-abbr)
 augroup END
 function! s:emmet_expand_glyph(name)
   return "<span class='glyphicon ".a:name."'></span>"
 endfunction
-let g:emmet_html5 = 0
 let g:user_emmet_settings = {
       \   'custom_expands': {
       \     '^glyphicon-\S\+$': function("<SID>emmet_expand_glyph")
@@ -418,10 +418,31 @@ let g:user_emmet_settings = {
 
 Plug 'sirver/ultisnips'
 let g:UltiSnipsExpandTrigger = '<C-y>'
-let g:UltiSnipsJumpForwardTrigger = '<C-f>'
-let g:UltiSnipsJumpBackwardTrigger = '<C-b>'
+let g:UltiSnipsJumpForwardTrigger = "<nop>"
+let g:UltiSnipsJumpBackwardTrigger = "<nop>"
 
-Plug 'honza/vim-snippets'
+function! s:PumOrUltisnips(forward)
+    if pumvisible() == 1
+        return a:forward ? "\<C-n>" : "\<C-p>"
+    else if a:forward
+        call UltiSnips#JumpForwards()
+        if g:ulti_jump_forwards_res == 0
+            return "\<tab>"
+        endif
+    else
+        call UltiSnips#JumpBackwards()
+        if g:ulti_jump_backwards_res == 0
+            return "\<s-tab>"
+        endif
+    endif
+    return ""
+endfunction
+inoremap <silent> <tab> <C-R>=PumOrUltisnips(1)<CR>
+inoremap <silent> <s-tab> <C-R>=PumOrUltisnips(0)<CR>
+snoremap <silent> <tab> <Esc>:call UltiSnips#JumpForwards()<CR>
+snoremap <silent> <s-tab> <Esc>:call UltiSnips#JumpBackwards()<CR>
+
+" Plug 'honza/vim-snippets'
 
 
 """
