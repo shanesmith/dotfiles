@@ -49,6 +49,9 @@ if ! shopt -oq posix; then
   if [ -f ~/Code/rc/misc/tmuxinator-completion.bash ]; then
     . ~/Code/rc/misc/tmuxinator-completion.bash
   fi
+  if [ -f ~/Code/rc/misc/vagrant-completion.bash ]; then
+    . ~/Code/rc/misc/vagrant-completion.bash
+  fi
   if command -v grunt >/dev/null; then
     . <(grunt --completion=bash)
   fi
