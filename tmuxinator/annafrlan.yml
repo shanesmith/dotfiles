@@ -1,0 +1,11 @@
+
+name: annafrlan
+
+root: ~/Code/annafrlan.ca
+
+windows:
+  - first:
+      layout: even-horizontal
+      panes:
+        - main:
+          - clear
