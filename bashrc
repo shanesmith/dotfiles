@@ -231,3 +231,5 @@ for file in "${sources[@]}"; do
     . "$file"
   fi
 done
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
