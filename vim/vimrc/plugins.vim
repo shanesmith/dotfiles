@@ -524,9 +524,31 @@ let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascr
 
 " Required to be after plug#end()
 function! airline#extensions#tabline#title(n)
-  let title = g:TabDirs[a:n]
-  if empty(title)
-    let title = getcwd()
+
+  if a:n == tabpagenr() 
+
+    let cwd = getcwd()
+
+    if haslocaldir()
+
+      let i = 1
+
+      while i <= winnr('$')
+        if !haslocaldir(i)
+          let cwd = getcwd(i)
+          break
+        endif
+        let i += 1
+      endwhile
+
+    endif
+
+  else
+
+    let cwd = g:TabDirs[a:n]
+
   endif
-  return substitute(fnamemodify(title, ':~'), '\v\w\zs.{-}\ze(\\|/)', '', 'g')
+
+  return substitute(fnamemodify(cwd, ':~'), '\v\w\zs.{-}\ze(\\|/)', '', 'g')
+
 endfunction
