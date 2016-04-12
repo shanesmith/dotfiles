@@ -329,6 +329,10 @@ port_holder() {
   sudo lsof -nP -sTCP:LISTEN -i"TCP:$1"
 }
 
+rebash() {
+  exec bash -l
+}
+
 # fzf() {
 #   ruby --disable-gems ~/.fzf "$@"
 # }
