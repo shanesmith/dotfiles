@@ -394,7 +394,7 @@ let g:syntastic_html_tidy_ignore_errors = [
       \   " proprietary attribute \"ui-"
       \ ]
 
-Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --tern-completer' }
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
 " Plug 'brookhong/DBGPavim'
