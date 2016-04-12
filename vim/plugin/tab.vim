@@ -33,7 +33,7 @@ func! s:TabCallEnterFunc()
 			if g:TabDirs[nr] != ""
 				"echo "page nr dir not empty"
 				let saveTabDirs = g:TabDirs[:]
-				let g:TabDirs[nr] = getcwd()
+				let g:TabDirs[nr] = <SID>GetTabWorkingDir() 
 				let g:TabDirs[nr+1 : ] = saveTabDirs[nr : ]
 			else
 				"echo "page nr dir empty"
@@ -77,8 +77,30 @@ func! s:TabCallLeaveFunc()
 		"echo "some page close"
 	else
 		"echo "page the same"
-		let g:TabDirs[nr] = getcwd() "save dir
+		let g:TabDirs[nr] = <SID>GetTabWorkingDir() "save dir
 	endif
 	let g:PreTabNr = nr
 	let nr = tabpagenr()
+endfunc
+
+func! s:GetTabWorkingDir()
+
+  let cwd = getcwd()
+
+  if haslocaldir()
+
+    let i = 1
+
+    while i <= winnr('$')
+      if !haslocaldir(i)
+        let cwd = getcwd(i)
+        break
+      endif
+      let i += 1
+    endwhile
+
+  endif
+
+  return cwd
+
 endfunc
