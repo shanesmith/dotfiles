@@ -480,6 +480,12 @@ Plug 'kana/vim-textobj-user'
 
 Plug 'whatyouhide/vim-textobj-xmlattr'
 
+Plug 'kana/vim-textobj-function'
+
+Plug 'thinca/vim-textobj-function-javascript'
+
+Plug 'coderifous/textobj-word-column.vim'
+
 
 """
 """ Windows
