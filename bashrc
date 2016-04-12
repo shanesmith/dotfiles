@@ -2,7 +2,7 @@ export NODE_PATH=$NODE_PATH:$HOME/.node/lib/node_modules
 
 export PATH=$PATH:$HOME/.node/bin:$HOME/bin.local:$HOME/bin
 
-if command -v brew >/dev/null && brew --prefix nvm >/dev/null; then
+if command -v brew >/dev/null && brew list nvm >/dev/null; then
   export NVM_DIR=~/.nvm
   . $(brew --prefix nvm)/nvm.sh
 fi
