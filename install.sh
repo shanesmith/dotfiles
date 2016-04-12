@@ -132,6 +132,11 @@ install_file() {
   fi
 }
 
+update_git_submodules() {
+  git submodule update --init --recursive
+  fzf/install --all
+}
+
 while [[ $# > 0 ]]; do
   case $1 in
     -f) set_force;;
@@ -142,6 +147,8 @@ done
 if [[ -n $is_mac ]] && ! command_exists "greadlink"; then
   echo "Mac detected without \`greadlink\`, if this install does something wrong you might need to \`brew install coreutils\`."
 fi
+
+update_git_submodules
 
 do_install
 
