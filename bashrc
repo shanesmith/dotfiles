@@ -250,3 +250,6 @@ for file in "${sources[@]}"; do
 done
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# start with a happy :)
+true
