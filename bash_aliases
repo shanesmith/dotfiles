@@ -333,6 +333,8 @@ rebash() {
   exec bash -l
 }
 
+alias icanhazip="curl http://icanhazip.com/s"
+
 # fzf() {
 #   ruby --disable-gems ~/.fzf "$@"
 # }
