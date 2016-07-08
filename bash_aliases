@@ -204,6 +204,30 @@ alias hs="history"
 alias jg="jobs"
 alias kg="kill %1"
 
+alias dk="docker"
+complete -F _docker dk
+
+alias dkc="docker-compose"
+complete -F _docker_compose dkc
+
+docker_bash() {
+  docker run --rm -it "$1" bash
+}
+
+docker_clean_images() {
+  docker rmi $(docker images -q -f dangling=true)
+}
+
+docker_clean_containers() {
+  docker rm $(docker ps -f status=dead -f status=exited -aq)
+}
+
+docker_launch_machine() {
+  docker-machine start
+  eval "$(docker-machine env)"
+  echo "Environment set."
+}
+
 lsps() {
   ps aux | grep -i "$1" | grep -v grep
 }

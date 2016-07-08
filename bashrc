@@ -7,6 +7,10 @@ if command -v brew >/dev/null && brew list nvm >/dev/null; then
   . $(brew --prefix nvm)/nvm.sh
 fi
 
+if command -v docker-machine >/dev/null; then
+  eval "$(docker-machine env 2>/dev/null)"
+fi
+
 # If not running interactively, stop here
 [ -z "$PS1" ] && return
 
