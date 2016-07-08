@@ -361,7 +361,7 @@ let g:vim_json_syntax_conceal = 0
 
 Plug 'groenewege/vim-less'
 
-Plug 'suan/vim-instant-markdown'
+Plug 'suan/vim-instant-markdown', { 'do': 'npm install -g instant-markdown-d' }
 let g:instant_markdown_autostart = 0
 
 Plug 'kchmck/vim-coffee-script'
