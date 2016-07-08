@@ -159,9 +159,7 @@ __vagrant_status() {
     if [[ -d $machinedir ]]; then
       local machinename=$(basename $machinedir)
       if [[ "${RunningUUIDs[@]}" =~ $(cat "$machinedir/virtualbox/id") ]]; then
-        VMs+=(+$machinename)
-      else
-        VMs+=(-$machinename)
+        VMs+=($machinename)
       fi
     fi
   done
