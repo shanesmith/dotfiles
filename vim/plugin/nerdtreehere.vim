@@ -74,12 +74,27 @@ function! g:NERDTreeHere(split, ...)
 endfunction
 
 function! s:VimEnterNERDTreeHere()
-  if !exists("s:std_ind") && argc() == 0
-    call g:NERDTreeHere("e")
-    if has("gui_running")
-      normal B
-    endif
+
+  if exists("s:std_ind")
+    return
   endif
+
+  if argc() != 0
+
+    if isdirectory(argv(0))
+      exec "cd" argv(0)
+    else
+      return
+    endif
+
+  endif
+
+  call g:NERDTreeHere("e")
+
+  if has("gui_running")
+    normal B
+  endif
+
 endfunction
 
 augroup VimEnterNERDTreeHere
