@@ -21,7 +21,7 @@ function! s:MyAck(regex, ...)
   else
     let what = join(a:000, ' ')
   endif
-  let args .= " \"" . what . "\""
+  let args .= " -- \"" . what . "\""
   call ack#Ack('grep!', args)
 endfunction
 nnoremap <leader>aa :MyAck<space>
