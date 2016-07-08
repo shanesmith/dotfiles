@@ -38,11 +38,11 @@ $(which lesspipe.sh >/dev/null) && eval "$(lesspipe.sh)"
 # default options for less
 export LESS="-SRi"
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-## needs to come before setting PS1 for __git_ps1 check
+# needs to come before setting PS1 for __git_ps1 check
 if ! shopt -oq posix; then
+
+  export DOCKER_COMPLETION_SHOW_IMAGE_IDS="non-intermediate"
+
   if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
   elif [ -f /etc/bash_completion ]; then
@@ -50,21 +50,31 @@ if ! shopt -oq posix; then
   elif command -v brew >/dev/null && [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
   fi
-  if [ -f ~/Code/rc/misc/tmuxinator-completion.bash ]; then
-    . ~/Code/rc/misc/tmuxinator-completion.bash
-  fi
-  if [ -f ~/Code/rc/misc/vagrant-completion.bash ]; then
-    . ~/Code/rc/misc/vagrant-completion.bash
-  fi
+
+  for file in "${HOME}"/Code/rc/completion/*; do
+    . "$file"
+  done
+
+  # if [ -f ~/Code/rc/misc/tmuxinator-completion.bash ]; then
+  #   . ~/Code/rc/misc/tmuxinator-completion.bash
+  # fi
+  #
+  # if [ -f ~/Code/rc/misc/vagrant-completion.bash ]; then
+  #   . ~/Code/rc/misc/vagrant-completion.bash
+  # fi
+
   if command -v grunt >/dev/null; then
     . <(grunt --completion=bash)
   fi
+
   if command -v npm >/dev/null; then
     . <(npm completion)
   fi
+
   if command -v gerrit >/dev/null; then
     . <(gerrit completion)
   fi
+
 fi
 
 # set variable identifying the chroot you work in (used in the prompt below)
@@ -245,7 +255,11 @@ if [[ $TERM =~ xterm* ]]; then
   export PROMPT_COMMAND="_set_title"
 fi
 
-sources=( "${HOME}/.bash_aliases" "${HOME}/.bash_sshauth" "${HOME}/.bashrc.local"  )
+sources=(
+  "${HOME}/.bash_aliases"
+  "${HOME}/.bash_sshauth"
+  "${HOME}/.bashrc.local"
+)
 
 for file in "${sources[@]}"; do
   if [ -f "$file" ]; then
