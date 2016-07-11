@@ -228,10 +228,10 @@ let g:colorizer_colornames = 0
 
 Plug 'vim-scripts/ConflictDetection'
 let g:ConflictDetection_WarnEvents = ''
-highlight conflictOursMarker term=bold ctermfg=16 gui=bold guifg=#000 cterm=bold ctermbg=102
-highlight conflictBaseMarker term=bold ctermfg=16 gui=bold guifg=#000 cterm=bold ctermbg=102
-highlight conflictTheirsMarker term=bold ctermfg=16 gui=bold guifg=#000 cterm=bold ctermbg=102
-highlight conflictSeparatorMarkerSymbol term=bold ctermfg=16 gui=bold guifg=#000 cterm=bold ctermbg=102
+highlight conflictOursMarker term=bold ctermfg=16 gui=bold guifg=#000000 cterm=bold ctermbg=102
+highlight conflictBaseMarker term=bold ctermfg=16 gui=bold guifg=#000000 cterm=bold ctermbg=102
+highlight conflictTheirsMarker term=bold ctermfg=16 gui=bold guifg=#000000 cterm=bold ctermbg=102
+highlight conflictSeparatorMarkerSymbol term=bold ctermfg=16 gui=bold guifg=#000000 cterm=bold ctermbg=102
 
 Plug 'kshenoy/vim-signature'
 " GotoNext/PrevMarkerAny unmap due to conflict with conflictmotions
