@@ -190,6 +190,44 @@ __nvm_status() {
   echo " <nvm-$current>"
 }
 
+__ssh_keys_status() {
+  if ! ssh-add -l >/dev/null 2>&1; then
+    return
+  fi
+
+  echo -e " {\u00A7}"
+}
+
+if command -v docker-compose >/dev/null; then
+
+  __docker_compose_status() {
+    if [[ -z "$COMPOSE_FILE" ]]; then
+      return
+    fi
+
+    local status=$(echo "$COMPOSE_FILE" | sed -e 's/docker-compose\.yml/./' -e 's/docker-compose\.//' -e 's/\.yml//')
+
+    echo " +${status}+"
+  }
+
+else
+
+  __docker_compose_status() {
+    return
+  }
+
+fi
+
+__jobs_status() {
+  local cnt=$(jobs | wc -l | awk '{print $1}')
+
+  if [[ $cnt -eq 0 ]]; then
+    return
+  fi
+
+  echo " $cnt"
+}
+
 NONE="\[\033[0m\]"    # unsets color to term's fg color
 
 # regular colors
@@ -213,7 +251,7 @@ EMC="\[\033[1;36m\]"
 EMW="\[\033[1;37m\]"
 
 SMILEY='$([[ $? -eq 0 ]] && echo ":)" || echo "'$EMR':('$NONE'")'
-HAS_JOBS='$(cnt=$(jobs | wc -l) && [[ $cnt -ne 0 ]] && echo " $cnt" || echo "")'
+HAS_JOBS='$(__jobs_status)'
 
 PS1='${debian_chroot:+($debian_chroot)}'
 
@@ -223,18 +261,18 @@ else
   PS1="$PS1\u@\h${SMILEY}\w [\! \$?]"
 fi
 
-PS1="${PS1}\$(__vagrant_status)\$(__nvm_status)"
-
-unset K R G Y B M C W
-unset EMK EMR EMG EMY EMB EMM EMC EMW
-unset NONE SMILEY HAS_JOBS
-unset color_prompt
+PS1="${PS1}\$(__vagrant_status)\$(__nvm_status)\$(__ssh_keys_status)\$(__docker_compose_status)"
 
 if [[ $(type -t __git_ps1) == "function" ]]; then
   PS1="$PS1\$(__git_ps1 ' (%s)')"
 fi
 
 PS1="$PS1\n\\$ "
+
+unset K R G Y B M C W
+unset EMK EMR EMG EMY EMB EMM EMC EMW
+unset NONE SMILEY HAS_JOBS
+unset color_prompt
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
