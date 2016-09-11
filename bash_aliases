@@ -222,6 +222,11 @@ docker_clean_containers() {
   docker rm $(docker ps -f status=dead -f status=exited -aq)
 }
 
+docker_clean_all() {
+  docker_clean_containers
+  docker_clean_images
+}
+
 docker_launch_machine() {
   docker-machine start
   eval "$(docker-machine env)"
