@@ -60,6 +60,11 @@ if ! shopt -oq posix; then
     . "$file"
   done
 
+  if [ -d /Applications/Docker.app ]; then
+    . /Applications/Docker.app/Contents/Resources/etc/docker.bash-completion
+    . /Applications/Docker.app/Contents/Resources/etc/docker-compose.bash-completion
+  fi
+
   # if [ -f ~/Code/rc/misc/tmuxinator-completion.bash ]; then
   #   . ~/Code/rc/misc/tmuxinator-completion.bash
   # fi
