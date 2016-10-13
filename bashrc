@@ -2,7 +2,7 @@ export NODE_PATH=$NODE_PATH:$HOME/.node/lib/node_modules
 
 export PATH=$PATH:$HOME/.node/bin:$HOME/bin.local:$HOME/bin
 
-if command -v javac >/dev/null; then
+if [[ -n "$(ls -A /Library/Java/JavaVirtualMachines)" ]]; then
   # macOS only?
   export JAVA_HOME=$($(dirname $(readlink $(which javac)))/java_home)
 fi
