@@ -101,7 +101,7 @@ nnoremap gp `[v`]
 vnoremap gy ygv<ESC>
 
 "Inline mode paste
-inoremap <C-p> <C-\><C-o>:call <SID>InlinePaste()<cr>
+inoremap <C-p> <C-\><C-o>:call <SID>InlinePaste()<CR><Right>
 function! s:InlinePaste()
   let pasteop = 'P'
   let linelength = strlen(getline('.'))
