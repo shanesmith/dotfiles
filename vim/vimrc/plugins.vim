@@ -329,7 +329,10 @@ nmap \  <Plug>TComment_gc
 """ File Types
 """
 
-Plug 'mustache/vim-mustache-handlebars'
+Plug 'sheerun/vim-polyglot'
+let g:vim_json_syntax_conceal = 0
+hi link jsParens Operator
+hi link jsObjectBraces Special
 
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
 nnoremap <leader>jf :TernDef<CR>
@@ -344,28 +347,8 @@ function! HtmlAttribCallback(xml_tag)
   return 0
 endfunction
 
-Plug 'StanAngeloff/php.vim'
-
-Plug 'elubow/cql-vim'
-
-Plug 'hail2u/vim-css3-syntax'
-
-Plug 'othree/html5.vim'
-
-Plug 'shanesmith/vim-javascript', {'branch': 'develop'}
-hi link jsParens Operator
-hi link jsObjectBraces Special
-
-Plug 'elzr/vim-json'
-let g:vim_json_syntax_conceal = 0
-
-Plug 'groenewege/vim-less'
-
 Plug 'suan/vim-instant-markdown', { 'do': 'npm install -g instant-markdown-d' }
 let g:instant_markdown_autostart = 0
-
-Plug 'kchmck/vim-coffee-script'
-
 
 """
 """ Debugging
