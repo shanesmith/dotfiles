@@ -241,7 +241,21 @@ lshs() {
   history | grep -i "$1" | grep -v lshs
 }
 
-alias suitup="mux annafrlan && mux rc && mux gerrit && mux mac && exit"
+suitup() {
+  local suitup_file="$HOME/.tmuxinator/suitup/$HOSTNAME"
+
+  if [[ ! -f "$suitup_file" ]]; then
+    echo "Suitup file does not exist: $suitup_file"
+    return 1
+  fi
+
+  while read -r line; do
+    mux "$line"
+  done < "$suitup_file"
+
+  exit
+}
+
 alias kill-tmux="tmux kill-session -a && tmux kill-session"
 
 ] () {
