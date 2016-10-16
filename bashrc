@@ -223,6 +223,14 @@ else
 
 fi
 
+if ! type __git_ps1 >/dev/null; then
+
+  __git_ps1() {
+    return
+  }
+
+fi
+
 __jobs_status() {
   local cnt=$(jobs | wc -l | awk '{print $1}')
 
@@ -266,13 +274,9 @@ else
   PS1="$PS1\u@\h${SMILEY}\w [\! \$?]"
 fi
 
-PS1="${PS1}\$(__vagrant_status)\$(__nvm_status)\$(__ssh_keys_status)\$(__docker_compose_status)"
+PS1="${PS1}\$(__vagrant_status)\$(__nvm_status)\$(__docker_compose_status)\$(__git_ps1 ' (%s)')\$(__ssh_keys_status)"
 
-if [[ $(type -t __git_ps1) == "function" ]]; then
-  PS1="$PS1\$(__git_ps1 ' (%s)')"
-fi
-
-PS1="$PS1\n\\$ "
+PS1="${PS1}\n\\$ "
 
 unset K R G Y B M C W
 unset EMK EMR EMG EMY EMB EMM EMC EMW
