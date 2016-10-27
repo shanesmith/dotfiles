@@ -5,9 +5,32 @@
   email = shane.smith.baz@gmail.com
 
 [alias]
+# Abbreviations
   st = status
   shoe = show
+  br = branch
+  co = checkout
+  pop = stash pop
   unstage = reset HEAD --
+  staged = diff --staged
+  top = rev-parse --show-toplevel
+  gerrit = !gerrit
+  git = !git
+  wdiff = diff --color-words
+  wshow = show --color-words
+  wshoe = !git wshow
+  amend = commit --amend
+  fixup = commit --amend --reuse-message=HEAD
+  wip = commit -m 'wip'
+  hardhead = reset --hard HEAD
+  hardup = reset --hard @{u}
+  pick = cherry-pick
+  for = fetch origin
+  continue = rebase --continue
+  stat = show --name-status
+  base = merge-base HEAD
+
+# Log
   lol = "!f() { local extra=\"\"; if git rev-parse -q --verify '@{u}' >/dev/null 2>&1; then extra=\"$extra @{u}\"; fi; git log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cd>%Creset %s' --color --graph --date=relative --branches --remotes=origin/[m]aster HEAD $extra $@; }; f"
   lolb = "!f() { local extra=\"\"; if git rev-parse -q --verify '@{u}' >/dev/null 2>&1; then extra=\"$extra @{u}\"; fi; git log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cd>%Creset %s' --color --graph --date=relative HEAD $extra $@; }; f"
   lolf = "!f() { local extra=\"\"; if git rev-parse -q --verify '@{u}' >/dev/null 2>&1; then extra=\"$extra @{u}\"; fi; git log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cd>%Creset %s' --color --graph --date=relative --name-status --branches --remotes=origin/[m]aster HEAD $extra $@; }; f"
@@ -16,11 +39,9 @@
   lall = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --graph --all
   lallf = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --graph --all --name-status
   logf = log --name-status
-  co = checkout
-  pop = stash pop
   k = !gitk --all >/dev/null 2>&1 &
-  staged = diff --staged
-  top = rev-parse --show-toplevel
+
+# Git-SVN
   s = svn
   slog = svn log --show-commit
   slogf = svn log --show-commit --verbose
@@ -28,52 +49,48 @@
   sshow = "!f() { git show $(git svn find-rev r$1); }; f" # git sshow <rev>
   scheckout = "!f() { git checkout $(git svn find-rev r$1); }; f"
   sco = !git scheckout
-  gerrit = !gerrit
-  git = !git
-  vc = "!vim $(git status --porcelain | awk '/^(UU|AA)/ { print $2 }')"
-  mvc = "!mvim $(git status --porcelain | awk '/^(UU|AA)/ { print $2 }')"
-  ignore = "!f() { [ ! -e .gitignore ] && touch .gitignore; echo $1 >> .gitignore; }; f"
-  this = "!git init && git add ."
-  wdiff = diff --color-words
-  wshow = show --color-words
-  wshoe = !git wshow
+
+# Special ignore
   assume-unchanged = update-index --assume-unchanged --
   no-assume-unchanged = update-index --no-assume-unchanged --
   show-assume-unchanged = !git ls-files -v | grep \"^[[:lower:]]\"
   skip-worktree = update-index --skip-worktree --
   no-skip-worktree = update-index --no-skip-worktree --
   show-skip-worktree = !git ls-files -v | grep \"^S\"
-  cc = "!f() { if [ -n \"$1\" ]; then git commit -m \"$1\"; else git commit; fi; }; f"
-  cca = "!f() { if [ -n \"$1\" ]; then git commit -a -m \"$1\"; else git commit -a; fi; }; f"
-  amend = commit --amend
-  fixup = commit --amend --reuse-message=HEAD
-  wip = commit -m 'wip'
-  grep-add = "!f() { git ls-files -m -o --exclude-standard | grep \"$1\" | xargs git add --; }; f"
+
+# Edit conflicts
+  vc = "!vim $(git status --porcelain | awk '/^(UU|AA)/ { print $2 }')"
+  mvc = "!mvim $(git status --porcelain | awk '/^(UU|AA)/ { print $2 }')"
+
+# Submodules
   remove-submodule = "!f() { if [ -d $1 ]; then echo "Removing from .gitmodule..."; git config -f .gitmodules --remove-section submodule.$1; echo "Removing from .git/config..."; git config -f .git/config --remove-section submodule.$1; echo "Removing from cache..."; git rm --cached $1; fi }; f"
   delete-submodule = "!f() { if [ -d $1 ]; then echo "Removing from .gitmodule..."; git config -f .gitmodules --remove-section submodule.$1; echo "Removing from .git/config..."; git config -f .git/config --remove-section submodule.$1; echo "Removing from cache..."; git rm --cached $1; echo "Removing directory..."; rm -rf $1; fi }; f"
   remove-merged-branches = "!git_remove-merged-branches"
-  er-done = "!f() { git commit -m \"$1\" && git push; }; f"
+
+# Branch
+  bracoa = "!f() { git checkout -b \"$1\" && git commit -a -m \"${2:-wip}\" && git checkout -; }; f"
+  bracop = "!f() { git checkout -b \"$1\" && git add -p && git commit -m \"${2:-wip}\" && git checkout -; }; f"
+  cob = "!f() { git checkout $(git show-ref --verify --quiet refs/heads/\"$1\" || echo '-b') \"$1\" $2; }; f"
   newb = "!f(){ upbranch=${2:-$(git rev-parse --symbolic-full-name --abbrev-ref '@{u}')}; git checkout -b \"$1\"; git branch -u \"$upbranch\"; }; f"
-	hardhead = reset --hard HEAD
-	hardup = reset --hard @{u}
-	pick = cherry-pick
+  hs = "!f(){ git log -g --oneline -n${1:-100} | awk '/checkout:/ { if (system(\"git show-ref --quiet --verify refs/heads/\"$NF) == 0) print substr($2, 7)\" \"$NF }' | sort -k2 -u | sort -k1 -n | tail +2 | cut -d' ' -f2; }; f"
   pup = "!f(){ [ $# -eq 1 ] && git checkout $1 && git pull && git co -; }; f"
   mup = "!f(){ [ $# -eq 1 ] && git checkout $1 && git merge && git co -; }; f"
-	stat = show --name-status
-  hs = "!f(){ git log -g --oneline -n${1:-100} | awk '/checkout:/ { if (system(\"git show-ref --quiet --verify refs/heads/\"$NF) == 0) print substr($2, 7)\" \"$NF }' | sort -k2 -u | sort -k1 -n | tail +2 | cut -d' ' -f2; }; f"
-  base = merge-base HEAD
-  sweep = "!f() { echo "Would delete branches:"; git branch --merged ${1:-HEAD} | grep -v '^\\*' | grep -v '^  *master$'; }; f"
+  sweep = "!f() { echo \"Would delete branches:\"; git branch --merged ${1:-HEAD} | grep -v '^\\*' | grep -v '^  *master$'; }; f"
   sweepit = "!f() { git branch --merged ${1:-HEAD} | grep -v '^\\*' | grep -v '^  *master$' | xargs git branch -d; }; f"
-  for = fetch origin
-  fol = "!git fetch origin && git lol"
+
+# Commit
+  cc = "!f() { if [ -n \"$1\" ]; then git commit -m \"$1\"; else git commit; fi; }; f"
+  cca = "!f() { if [ -n \"$1\" ]; then git commit -a -m \"$1\"; else git commit -a; fi; }; f"
+
+# Misc
+  this = "!git init && git add ."
+  ignore = "!f() { echo $1 >> .gitignore; }; f"
+  grep-add = "!f() { git ls-files -m -o --exclude-standard | grep \"$1\" | xargs git add --; }; f"
+  er-done = "!f() { git commit -m \"$1\" && git push; }; f"
   mash = "!f() { git stash && git merge $1 && git stash pop; }; f"
   rash = "!f() { git stash && git rebase $1 && git stash pop; }; f"
   cash = "!f() { git stash && git checkout $1 && git stash pop; }; f"
-  cob = "!f() { git checkout $(git show-ref --verify --quiet refs/heads/\"$1\" || echo '-b') \"$1\"; }; f"
   rmerge = "!f() { git rebase \"origin/$1\" && git checkout \"$1\" && git merge -; }; f"
-  continue = rebase --continue
-  bracoa = "!f() { git checkout -b \"$1\" && git commit -a -m \"${2:-wip}\" && git checkout -; }; f"
-  bracop = "!f() { git checkout -b \"$1\" && git add -p && git commit -m \"${2:-wip}\" && git checkout -; }; f"
 
 [color]
   ui = auto
