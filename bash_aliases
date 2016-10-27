@@ -242,7 +242,7 @@ lshs() {
 }
 
 suitup() {
-  local suitup_file="$HOME/.tmuxinator/suitup/$HOSTNAME"
+  local suitup_file="$HOME/.tmuxinator/suitup/${HOSTNAME%%.*}"
 
   if [[ ! -f "$suitup_file" ]]; then
     echo "Suitup file does not exist: $suitup_file"
