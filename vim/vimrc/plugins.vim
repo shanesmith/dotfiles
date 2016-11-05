@@ -248,6 +248,7 @@ let g:SignatureMap = {
 
 
 Plug 'airblade/vim-gitgutter'
+let g:gitgutter_map_keys = 0
 highlight GitGutterAdd    cterm=bold ctermbg=237  ctermfg=119
 highlight GitGutterDelete cterm=bold ctermbg=237  ctermfg=167
 highlight GitGutterChange cterm=bold ctermbg=237  ctermfg=227
@@ -256,6 +257,10 @@ nmap [- <plug>GitGutterPrevHunk
 nmap <leader>-s <plug>GitGutterStageHunk
 nmap <leader>-r <plug>GitGutterRevertHunk
 nmap <leader>-p <plug>GitGutterPreviewHunk
+omap i- <Plug>GitGutterTextObjectInnerPending
+omap a- <Plug>GitGutterTextObjectOuterPending
+xmap i- <Plug>GitGutterTextObjectInnerVisual
+xmap a- <Plug>GitGutterTextObjectOuterVisual
 
 Plug 'vim-scripts/SyntaxRange'
 
@@ -318,6 +323,7 @@ Plug 'junegunn/vim-easy-align'
 vmap <Tab> <Plug>(LiveEasyAlign)
 
 Plug 'tomtom/tcomment_vim'
+let g:tcommentTextObjectInlineComment = ''
 nnoremap \\ :TComment<CR>
 vnoremap \\ :TComment<CR>
 nnoremap \* :TCommentBlock<CR>
@@ -467,8 +473,7 @@ Plug 'kana/vim-textobj-function'
 
 Plug 'thinca/vim-textobj-function-javascript'
 
-Plug 'coderifous/textobj-word-column.vim'
-
+" Plug 'coderifous/textobj-word-column.vim'
 
 """
 """ Windows
