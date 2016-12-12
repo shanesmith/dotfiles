@@ -1,10 +1,10 @@
-snippet fn "function"
+snippet fn "function" w
 function ${1:function_name}(${2:argument}) {
 	${VISUAL}$0
 }
 endsnippet
 
-snippet fna "function (anonymous)"
+snippet fna "function (anonymous)" w
 function(${1}) {
 	${VISUAL}$0
 }
@@ -16,16 +16,16 @@ var ${1:function_name} = function(${2}) {
 };
 endsnippet
 
-snippet cl "console.log"
+snippet cl "console.log" w
 console.log(${1:"${2:value}"});
 endsnippet
 
-snippet cle "console.error"
+snippet cle "console.error" w
 console.error(${1:"${2:value}"});
 endsnippet
 
-snippet rq "require"
-require("${1}");
+snippet rq "require" b
+var ${1} = require("$1");
 endsnippet
 
 ###
@@ -34,8 +34,8 @@ endsnippet
 
 snippet befi "before each + inject" b
 beforeEach(inject(function($1) {
-			$0
-			}));
+	$0
+}));
 endsnippet
 
 snippet aconf "angular config" i
@@ -75,7 +75,7 @@ endsnippet
 
 
 ###
-### Jasmine
+### Unit Test
 ###
 
 snippet bef "before each" b
@@ -110,4 +110,8 @@ endsnippet
 
 snippet ecw "expect to have been called with" b
 expect(${1:target}).toHaveBeenCalledWith(${2:arguments});
+endsnippet
+
+snippet thb "to.have.been" b
+to.have.been
 endsnippet
