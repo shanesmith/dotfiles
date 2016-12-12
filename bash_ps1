@@ -154,7 +154,7 @@ __ssh_keys_status() {
     return
   fi
 
-  echo -e " {\u00A7}"
+  echo -e " {\xC2\xA7}"
 }
 
 __docker_compose_status() {
