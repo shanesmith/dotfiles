@@ -1,0 +1,213 @@
+if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+  # We have color support; assume it's compliant with Ecma-48
+  # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+  # a case would tend to support setf rather than setaf.)
+  color_prompt=yes
+else
+  color_prompt=
+fi
+
+if [ "$color_prompt" = yes ]; then
+
+  NONE="\[\033[0m\]"    # unsets color to term's fg color
+
+  # regular colors
+  K="\[\033[0;30m\]"    # black
+  R="\[\033[0;31m\]"    # red
+  G="\[\033[0;32m\]"    # green
+  Y="\[\033[0;33m\]"    # yellow
+  B="\[\033[0;34m\]"    # blue
+  M="\[\033[0;35m\]"    # magenta
+  C="\[\033[0;36m\]"    # cyan
+  W="\[\033[0;37m\]"    # white
+
+  # empahsized (bolded) colors
+  EMK="\[\033[1;30m\]"
+  EMR="\[\033[1;31m\]"
+  EMG="\[\033[1;32m\]"
+  EMY="\[\033[1;33m\]"
+  EMB="\[\033[1;34m\]"
+  EMM="\[\033[1;35m\]"
+  EMC="\[\033[1;36m\]"
+  EMW="\[\033[1;37m\]"
+
+else
+
+  NONE=""
+
+  K=""
+  R=""
+  G=""
+  Y=""
+  B=""
+  M=""
+  C=""
+  W=""
+
+  EMK=""
+  EMR=""
+  EMG=""
+  EMY=""
+  EMB=""
+  EMM=""
+  EMC=""
+  EMW=""
+
+fi
+
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWSTASHSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
+export GIT_PS1_SHOWUPSTREAM=true
+export GIT_PS1_DESCRIBE_STYLE=branch
+
+save_function() {
+    local ORIG_FUNC=$(declare -f $1)
+    local NEWNAME_FUNC="$2${ORIG_FUNC#$1}"
+    eval "$NEWNAME_FUNC"
+}
+
+if ! type -t __orig_git_ps1_show_upstream >/dev/null; then
+  save_function __git_ps1_show_upstream __orig_git_ps1_show_upstream
+fi
+
+__git_ps1_show_upstream() { 
+  __orig_git_ps1_show_upstream
+
+  local upstream="$(git rev-parse --symbolic-full-name --abbrev-ref '@{upstream}' 2>/dev/null)"
+
+  if [[ -n $upstream ]]; then
+    b="$b $p$upstream"
+    p=""
+  fi
+
+}
+
+__vagrant_status() {
+
+  local vagrantdir="$PWD"
+
+  while [[ ! -d "$vagrantdir/.vagrant" && $vagrantdir != "/" ]]; do
+    vagrantdir=$(dirname "$vagrantdir")
+  done
+
+  vagrantdir="$vagrantdir/.vagrant"
+
+  if [[ ! -d $vagrantdir ]]; then
+    return
+  fi
+
+  local -a RunningVMs=()
+  local -a RunningUUIDs=()
+  local -a VMs=()
+  local -a DeadVMs=()
+
+  if [[ $(uname -s) == "Darwin" ]]; then
+    local proclist="$(ps -ww -o args= -p $(pgrep VBoxHeadless) 2>/dev/null)"
+  else
+    local proclist="$(ps h -C VBoxHeadless -o args)"
+  fi
+
+  if [[ -z $proclist ]]; then
+    return
+  fi
+
+  # Gather the UUIDs of all presently running VMs.
+  while read proc; do
+    proc=${proc#*--startvm[[:space:]]}
+    proc=${proc%%[[:space:]]*}
+    RunningUUIDs+=(${proc})
+  done <<< "$proclist"
+
+  for machinedir in $vagrantdir/machines/*; do
+    if [[ -d $machinedir ]]; then
+      local machinename=$(basename $machinedir)
+      if [[ "${RunningUUIDs[@]}" =~ $(cat "$machinedir/virtualbox/id") ]]; then
+        VMs+=($machinename)
+      fi
+    fi
+  done
+
+  local output="${VMs[*]}"
+
+  if [[ -n $output ]]; then
+    echo " <$(echo $output | tr ' ' ',')>"
+  fi
+}
+
+__nvm_status() {
+  if ! type -t nvm >/dev/null; then
+    return
+  fi
+
+  local current=$(nvm current)
+
+  if [[ $current == "system" ]]; then
+    return
+  fi
+
+  echo " <nvm-$current>"
+}
+
+__ssh_keys_status() {
+  if ! ssh-add -l >/dev/null 2>&1; then
+    return
+  fi
+
+  echo -e " {\u00A7}"
+}
+
+__docker_compose_status() {
+  if ! command -v docker-compose >/dev/null || [[ -z "$COMPOSE_FILE" ]]; then
+    return
+  fi
+
+  local status=$(echo "$COMPOSE_FILE" | sed -e 's/docker-compose\.yml/./' -e 's/docker-compose\.//' -e 's/\.yml//')
+
+  echo " +${status}+"
+}
+
+if ! type __git_ps1 >/dev/null; then
+
+  __git_ps1() {
+    return
+  }
+
+fi
+
+__jobs_status() {
+  local cnt=$(jobs | wc -l | awk '{print $1}')
+
+  if [[ $cnt -eq 0 ]]; then
+    return
+  fi
+
+  echo " $cnt"
+}
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+  debian_chroot=$(cat /etc/debian_chroot)
+  if [ -z "${debian_chroot}" ]; then
+    debian_chroot="(${debian_chroot})"
+  fi
+fi
+
+SMILEY='$([[ $? -eq 0 ]] && echo ":)" || echo "'$EMR':('$NONE'")'
+JOB_STATUS="${Y}\$(__jobs_status)${NONE}"
+
+HOST_COLOR=$([ -z "$SSH_CLIENT" ] && echo "${G}" || echo "${Y}" )
+HOST="${HOST_COLOR}\u@\h${NONE}"
+
+CWD="${C}\w${NONE}"
+
+PS1="${debian_chroot}${HOST}${SMILEY}${CWD} ${W}[\!${JOB_STATUS}${W}]${NONE}"
+
+PS1="${PS1}\$(__vagrant_status)\$(__nvm_status)\$(__docker_compose_status)\$(__git_ps1 ' (%s)')\$(__ssh_keys_status)"
+
+PS1="${PS1}\n\\$ "
+
+unset K R G Y B M C W
+unset EMK EMR EMG EMY EMB EMM EMC EMW
+unset NONE HOST CWD SMILEY JOB_STATUS
+unset color_prompt
