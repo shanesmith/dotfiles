@@ -20,7 +20,7 @@ function start_agent {
     . ${SSH_ENV} > /dev/null
 }
 
-if [ -z "$SSH_AUTH_SOCK" ] || [ ! -f "$SSH_AUTH_SOCK" ]; then
+if [ -z "$SSH_AUTH_SOCK" ] || [ ! -S "$SSH_AUTH_SOCK" ]; then
 
   if [ -f "$SSH_ENV" ]; then
       # Find SSH_AUTH_SOCK and SSH_AGENT_PID of the available daemon
