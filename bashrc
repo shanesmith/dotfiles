@@ -84,22 +84,6 @@ if ! shopt -oq posix; then
 
 fi
 
-title() {
-  export TITLE="$*"
-}
-
-_set_title() {
-  if [ "x$TITLE" = "x" ]; then
-    echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"
-  else
-    echo -ne "\033]0;${TITLE}\007"
-  fi
-}
-
-if [[ $TERM =~ xterm* ]]; then
-  export PROMPT_COMMAND="_set_title"
-fi
-
 sources=(
   "${HOME}/.bash_ps1"
   "${HOME}/.bash_aliases"
