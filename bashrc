@@ -27,21 +27,30 @@ if [[ ! $TERM =~ screen ]]; then
   fi
 fi
 
-# don't put duplicate lines in the history. See bash(1) for more options
-# ... or force ignoredups and ignorespace
-HISTCONTROL=ignoredups:ignorespace
-HISTSIZE=1000
-HISTFILESIZE=2000
-
 # set shell options
 shopt -s histappend cdspell checkwinsize dirspell autocd globstar
+
+# Some additional evironment variables
+export EDITOR=vim
+export CLICOLOR=1
+
+export MYSQL_PS1="mysql://\u@\h \d> "
+
+# don't put duplicate lines in the history. See bash(1) for more options
+# ... or force ignoredups and ignorespace
+export HISTCONTROL=ignoredups:ignorespace
+export HISTSIZE=1000
+export HISTFILESIZE=2000
+
+# default options for less
+export LESS="-SRi"
+
+# github allows more api hits (ex: for searches) when authenticated
+export HOMEBREW_GITHUB_API_TOKEN=f9cca0a2af5001e17aa2eab63ebf78bd9599890c
 
 # make less more friendly for non-text input files, see lesspipe(1)
 $(which lesspipe >/dev/null) && eval "$(lesspipe)"
 $(which lesspipe.sh >/dev/null) && eval "$(lesspipe.sh)"
-
-# default options for less
-export LESS="-SRi"
 
 # needs to come before setting PS1 for __git_ps1 check
 if ! shopt -oq posix; then
@@ -75,17 +84,10 @@ if ! shopt -oq posix; then
 
 fi
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
-# Some additional evironment variables
-export EDITOR=vim
-export CLICOLOR=1
-
-export MYSQL_PS1="mysql://\u@\h \d> "
-
 title() {
   export TITLE="$*"
 }
+
 _set_title() {
   if [ "x$TITLE" = "x" ]; then
     echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"
@@ -93,6 +95,7 @@ _set_title() {
     echo -ne "\033]0;${TITLE}\007"
   fi
 }
+
 if [[ $TERM =~ xterm* ]]; then
   export PROMPT_COMMAND="_set_title"
 fi
@@ -102,6 +105,8 @@ sources=(
   "${HOME}/.bash_aliases"
   "${HOME}/.bash_sshauth"
   "${HOME}/.bashrc.local"
+  "${HOME}/.rvm/scripts/rvm"
+  "${HOME}/.fzf.bash"
 )
 
 for file in "${sources[@]}"; do
@@ -110,7 +115,6 @@ for file in "${sources[@]}"; do
   fi
 done
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # start with a happy :)
 true
