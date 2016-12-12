@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOTFILES="bashrc bash_aliases bash_sshauth gitconfig gitignore vimrc vim ackrc inputrc colordiffrc fzf npmrc agignore tmux.conf tmux bin tmuxinator"
+DOTFILES="bashrc bash_ps1 bash_aliases bash_sshauth gitconfig gitignore vimrc vim ackrc inputrc colordiffrc fzf npmrc agignore tmux.conf tmux bin tmuxinator"
 
 LINUX_DOTFILES="Xmodmap imwheelrc"
 
