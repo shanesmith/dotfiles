@@ -1,5 +1,5 @@
 #!/bin/bash
-#
+
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -23,6 +23,8 @@ alias QQ='exit'
 alias cl='clear'
 
 alias ag='ag -S --pager="less"'
+
+alias ion='ionic'
 
 os_is_mac() {
   [[ $(uname -s) == "Darwin" ]]
@@ -377,6 +379,10 @@ rebash() {
 }
 
 alias icanhazip="curl http://icanhazip.com/s"
+
+cask() {
+  brew cask "$@"
+}
 
 # fzf() {
 #   ruby --disable-gems ~/.fzf "$@"
