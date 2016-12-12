@@ -1,18 +1,18 @@
 
-name: m21lab
+name: mac
 
 root: ~/Code
 
 windows:
-  - azureiothubdemo:
-      root: ~/Code/azureiothubdemo
-      layout: '3e15,238x74,0,0{117x74,0,0,46,120x74,118,0[120x11,118,0,48,120x62,118,12,49]}'
+  - apollo:
+      root: ~/Code/apollo
+      layout: '7fff,275x84,0,0{136x84,0,0,12,138x84,137,0[138x33,137,0,13,138x50,137,34,14]}'
       panes:
+        - work:
+          - clear
         - status:
           - clear
           - git status
-        - grunt:
-          - clear
         - lol:
           - clear
           - git lol
