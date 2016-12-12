@@ -378,10 +378,17 @@ rebash() {
   exec bash -l
 }
 
-alias icanhazip="curl http://icanhazip.com/s"
-
 cask() {
   brew cask "$@"
+}
+
+# alias icanhazip="curl http://icanhazip.com/s"
+icanhazip() {
+  ifconfig | awk '
+    /^[^[:space:]]/ { name = substr($1, 0, length($1) - 1) }
+    /^[[:space:]]+inet / && name != "lo0" { print name " " $2 }
+  '
+  echo "external $(curl -s http://icanhazip.com/s)"
 }
 
 # fzf() {
