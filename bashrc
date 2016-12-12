@@ -75,11 +75,6 @@ if ! shopt -oq posix; then
 
 fi
 
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-  debian_chroot=$(cat /etc/debian_chroot)
-fi
-
 if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
   # We have color support; assume it's compliant with Ecma-48
   # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
@@ -87,6 +82,54 @@ if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
   color_prompt=yes
 else
   color_prompt=
+fi
+
+if [ "$color_prompt" = yes ]; then
+
+  NONE="\[\033[0m\]"    # unsets color to term's fg color
+
+  # regular colors
+  K="\[\033[0;30m\]"    # black
+  R="\[\033[0;31m\]"    # red
+  G="\[\033[0;32m\]"    # green
+  Y="\[\033[0;33m\]"    # yellow
+  B="\[\033[0;34m\]"    # blue
+  M="\[\033[0;35m\]"    # magenta
+  C="\[\033[0;36m\]"    # cyan
+  W="\[\033[0;37m\]"    # white
+
+  # empahsized (bolded) colors
+  EMK="\[\033[1;30m\]"
+  EMR="\[\033[1;31m\]"
+  EMG="\[\033[1;32m\]"
+  EMY="\[\033[1;33m\]"
+  EMB="\[\033[1;34m\]"
+  EMM="\[\033[1;35m\]"
+  EMC="\[\033[1;36m\]"
+  EMW="\[\033[1;37m\]"
+
+else
+
+  NONE=""
+
+  K=""
+  R=""
+  G=""
+  Y=""
+  B=""
+  M=""
+  C=""
+  W=""
+
+  EMK=""
+  EMR=""
+  EMG=""
+  EMY=""
+  EMB=""
+  EMM=""
+  EMC=""
+  EMW=""
+
 fi
 
 export GIT_PS1_SHOWDIRTYSTATE=true
@@ -229,38 +272,22 @@ __jobs_status() {
   echo " $cnt"
 }
 
-NONE="\[\033[0m\]"    # unsets color to term's fg color
-
-# regular colors
-K="\[\033[0;30m\]"    # black
-R="\[\033[0;31m\]"    # red
-G="\[\033[0;32m\]"    # green
-Y="\[\033[0;33m\]"    # yellow
-B="\[\033[0;34m\]"    # blue
-M="\[\033[0;35m\]"    # magenta
-C="\[\033[0;36m\]"    # cyan
-W="\[\033[0;37m\]"    # white
-
-# empahsized (bolded) colors
-EMK="\[\033[1;30m\]"
-EMR="\[\033[1;31m\]"
-EMG="\[\033[1;32m\]"
-EMY="\[\033[1;33m\]"
-EMB="\[\033[1;34m\]"
-EMM="\[\033[1;35m\]"
-EMC="\[\033[1;36m\]"
-EMW="\[\033[1;37m\]"
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+  debian_chroot=$(cat /etc/debian_chroot)
+  if [ -z "${debian_chroot}" ]; then
+    debian_chroot="(${debian_chroot})"
+  fi
+fi
 
 SMILEY='$([[ $? -eq 0 ]] && echo ":)" || echo "'$EMR':('$NONE'")'
-HAS_JOBS='$(__jobs_status)'
+JOB_STATUS="${Y}\$(__jobs_status)${NONE}"
 
-PS1='${debian_chroot:+($debian_chroot)}'
+HOST="${G}\u@\h${NONE}"
 
-if [ "$color_prompt" = yes ]; then
-  PS1="${PS1}${G}\u@\h${NONE}${SMILEY}${C}\w${NONE} ${W}[\!${Y}${HAS_JOBS}${W}]${NONE}"
-else
-  PS1="$PS1\u@\h${SMILEY}\w [\! \$?]"
-fi
+CWD="${C}\w${NONE}"
+
+PS1="${debian_chroot}${HOST}${SMILEY}${CWD} ${W}[\!${JOB_STATUS}${W}]${NONE}"
 
 PS1="${PS1}\$(__vagrant_status)\$(__nvm_status)\$(__docker_compose_status)\$(__git_ps1 ' (%s)')\$(__ssh_keys_status)"
 
@@ -268,7 +295,7 @@ PS1="${PS1}\n\\$ "
 
 unset K R G Y B M C W
 unset EMK EMR EMG EMY EMB EMM EMC EMW
-unset NONE SMILEY HAS_JOBS
+unset NONE HOST CWD SMILEY JOB_STATUS
 unset color_prompt
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
