@@ -114,7 +114,6 @@ set smartcase
 
 "Line numbers
 set number
-set relativenumber
 
 "Add matching pairs for %
 set matchpairs+=<:>
