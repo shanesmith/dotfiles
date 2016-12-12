@@ -283,7 +283,8 @@ fi
 SMILEY='$([[ $? -eq 0 ]] && echo ":)" || echo "'$EMR':('$NONE'")'
 JOB_STATUS="${Y}\$(__jobs_status)${NONE}"
 
-HOST="${G}\u@\h${NONE}"
+HOST_COLOR=$([ -z "$SSH_CLIENT" ] && echo "${G}" || echo "${Y}" )
+HOST="${HOST_COLOR}\u@\h${NONE}"
 
 CWD="${C}\w${NONE}"
 
