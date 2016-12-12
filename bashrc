@@ -7,9 +7,9 @@ if [[ -n "$(ls -A /Library/Java/JavaVirtualMachines)" ]]; then
   export JAVA_HOME=$($(dirname $(readlink $(which javac)))/java_home)
 fi
 
-if command -v brew >/dev/null && brew list nvm >/dev/null; then
+if command -v brew >/dev/null && [ -d $(brew --prefix)/opt/nvm ]; then
   export NVM_DIR=~/.nvm
-  . $(brew --prefix nvm)/nvm.sh
+  . $(brew --prefix)/opt/nvm/nvm.sh
 fi
 
 if command -v docker-machine >/dev/null; then
@@ -65,20 +65,8 @@ if ! shopt -oq posix; then
     . /Applications/Docker.app/Contents/Resources/etc/docker-compose.bash-completion
   fi
 
-  # if [ -f ~/Code/rc/misc/tmuxinator-completion.bash ]; then
-  #   . ~/Code/rc/misc/tmuxinator-completion.bash
-  # fi
-  #
-  # if [ -f ~/Code/rc/misc/vagrant-completion.bash ]; then
-  #   . ~/Code/rc/misc/vagrant-completion.bash
-  # fi
-
   if command -v grunt >/dev/null; then
     . <(grunt --completion=bash)
-  fi
-
-  if command -v npm >/dev/null; then
-    . <(npm completion)
   fi
 
   if command -v gerrit >/dev/null; then
