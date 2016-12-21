@@ -302,10 +302,10 @@ remove-old-kernels() {
   local OLDKERNELS=$(dpkg -l|awk '{print $2}'|grep -E $LINUXPKG |grep -vE $METALINUXPKG|grep -v $CURKERNEL)
 
   echo "Removing old config files..."
-  sudo apt-get install --purge $OLDCONF
+  sudo apt-get purge $OLDCONF
 
   echo "Removing old kernels..."
-  sudo apt-get install --purge $OLDKERNELS
+  sudo apt-get purge $OLDKERNELS
 }
 
 
