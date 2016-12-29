@@ -59,3 +59,38 @@ augroup js
   au!
   au FileType javascript UltiSnipsAddFiletypes javascript.javascript-angular.javascript-jasmine
 augroup END
+
+augroup folds
+  au!
+  au CursorHold,BufWinEnter * call CheckFolds()
+augroup END
+
+fu! CheckFolds()
+  let hasfolds = 0
+
+  if foldlevel('.') > 0
+    let hasfolds = 1
+
+  else
+    let view = winsaveview()
+    let currentline = line('.')
+
+    normal! zk
+
+    if line('.') != l:currentline
+      let hasfolds = 1
+    else
+
+      normal! zj
+
+      if line('.') != l:currentline
+        let hasfolds = 1
+      endif
+
+    endif
+
+    call winrestview(l:view)
+  endif
+
+  let &foldcolumn = l:hasfolds
+endfu
