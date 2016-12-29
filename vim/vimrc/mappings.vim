@@ -109,7 +109,7 @@ function! s:InlinePaste()
   if colpos == linelength + 1
     let pasteop = 'p'
   endif
-  exec 'normal! ' . pasteop
+  exec 'normal! "0' . pasteop
 endfunction
 
 "Smart indent pasting

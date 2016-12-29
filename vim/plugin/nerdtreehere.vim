@@ -100,5 +100,5 @@ endfunction
 augroup VimEnterNERDTreeHere
   au!
   au StdinReadPre * let s:std_in=1
-  au VimEnter * call <SID>VimEnterNERDTreeHere()
+  au VimEnter * call <SID>VimEnterNERDTreeHere() " TODO profile me!
 augroup END
