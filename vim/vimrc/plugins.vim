@@ -102,7 +102,20 @@ Plug 'chrisbra/Recover.vim'
 
 Plug 'diepm/vim-rest-console'
 let g:vrc_trigger = '<F5>'
-command! RestTab tabnew | setf rest
+command! RestTab call <SID>rest_tab()
+command! RESTTab call <SID>rest_tab()
+function! s:rest_tab()
+  tabnew
+  setf rest
+  setlocal buftype=nofile
+  call append(0, [
+        \ "# http://example.com",
+        \ "# Content-Type: application/json",
+        \ "# POST /foo/bar",
+        \ "# {\"key\": \"value\"}",
+        \ ""
+        \ ])
+endfunction
 
 
 Plug 'terryma/vim-multiple-cursors'
