@@ -331,23 +331,25 @@ nnoremap <Leader><CR> i<CR><ESC>
 
 nnoremap <silent> <Leader>O :<C-U>call <SID>InsertBlankLine('n-up', v:count1)<CR>
 nnoremap <silent> <Leader>o :<C-U>call <SID>InsertBlankLine('n-down', v:count1)<CR>
+
 vnoremap <silent> <Leader>o :call <SID>InsertBlankLine(visualmode(), v:count1)<CR>
+
+inoremap <silent> <C-o><C-o> <C-\><C-o>:call <SID>InsertBlankLine('n-both', 1)<CR>
+inoremap <silent> <C-o><C-i> <C-o>"_cc
 
 function! s:InsertBlankLine(type, count) range
   let what = repeat([''], a:count)
 
   if a:type ==? 'v'
-
     exec "normal! `>a\<CR>\<ESC>`<i\<CR>\<ESC>" . (a:firstline+1) . "GV" .  (a:lastline+1) . "G"
+  endif
 
-  elseif a:type ==# 'n-down'
-
+  if a:type ==# 'n-down' || a:type ==# 'n-both'
     call append(a:lastline, what)
+  endif
 
-  elseif a:type ==# 'n-up'
-
+  if a:type ==# 'n-up' || a:type ==# 'n-both'
     call append(a:firstline-1, what)
-
   endif
 endfunction
 
