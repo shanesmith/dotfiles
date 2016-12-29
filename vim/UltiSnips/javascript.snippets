@@ -1,3 +1,7 @@
+snippet strict "use strict" b
+"use strict";
+endsnippet
+
 snippet fn "function" w
 function ${1:function_name}(${2:argument}) {
 	${VISUAL}$0
@@ -25,7 +29,7 @@ console.error(${1:"${2:value}"});
 endsnippet
 
 snippet rq "require" b
-var ${1} = require("$1");
+const ${1} = require("$1");
 endsnippet
 
 ###
