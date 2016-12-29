@@ -199,14 +199,22 @@ let g:localvimrc_persistent=1
 Plug 'szw/vim-maximizer'
 let g:maximizer_default_mapping_key = '<F4>'
 
-Plug 'koron/nyancat-vim'
-
 " Plug 'tpope/vim-fugitive'
 
 " Plug 'sjl/gundo.vim'
 " nnoremap <leader>u :GundoToggle<CR>
 
 Plug 'dohsimpson/vim-macroeditor'
+
+"""
+""" LOLz
+"""
+
+Plug 'koron/nyancat-vim'
+
+" TODO start hackertyper in nofile buffer instead of editing file
+Plug 'mjbrownie/hackertyper.vim'
+command! StartHackerTyper w! %.hackertyper | exec "normal ggdG" | call hackertyper#startHackerTyper() | startinsert
 
 
 """
@@ -332,6 +340,8 @@ omap [c <Plug>(columnmove-gE)
 """ Formatting
 """
 
+Plug 'editorconfig/editorconfig-vim'
+
 Plug 'ntpeters/vim-better-whitespace'
 let g:current_line_whitespace_disabled_soft = 1
 command! WhitespaceStrip StripWhitespace
@@ -365,6 +375,8 @@ Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
 nnoremap <leader>jf :TernDef<CR>
 nnoremap <leader>jd :TernDoc<CR>
 nnoremap <leader>jr :TernRefs<CR>
+
+Plug 'heavenshell/vim-jsdoc'
 
 Plug 'shanesmith/xmledit'
 let g:xmledit_enable_html = 1
@@ -506,6 +518,7 @@ nnoremap <silent> <C-w>w :call WindowSwap#EasyWindowSwap()<CR>
 nnoremap <silent> <C-w><C-w> :call WindowSwap#EasyWindowSwap()<CR>
 
 Plug 'christoomey/vim-tmux-navigator'
+
 inoremap <silent> <c-h> <ESC>:TmuxNavigateLeft<cr>
 inoremap <silent> <c-j> <ESC>:TmuxNavigateDown<cr>
 inoremap <silent> <c-k> <ESC>:TmuxNavigateUp<cr>
