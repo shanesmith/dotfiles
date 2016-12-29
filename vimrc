@@ -1,11 +1,1513 @@
 
-runtime vimrc/settings.vim
+"{{{ Settings
 
-runtime vimrc/plugins.vim
+" Let's make sure that all the annoying bugs in VI are not displayed in VIM.
+set nocompatible
 
-runtime vimrc/colorscheme.vim
+"Faster ESC timeout
+set timeout ttimeoutlen=100
 
-runtime vimrc/mappings.vim
+set title
+if &term == "screen-256color"
+  set t_ts=]2;
+  set t_fs=\\
+  " tmux will send xterm-style keys when its xterm-keys option is on
+  execute "set <xUp>=\e[1;*A"
+  execute "set <xDown>=\e[1;*B"
+  execute "set <xRight>=\e[1;*C"
+  execute "set <xLeft>=\e[1;*D"
+endif
 
-runtime vimrc/commands.vim
+"set autoindent
+set tabstop=2
+set shiftwidth=2
+set shiftround
+set expandtab
 
+"set spell language
+set spelllang=en_ca
+
+"set modelines enabled
+set modeline
+set modelines=5
+
+"Viminfo
+set viminfo+=!
+
+"Session options
+set sessionoptions=blank,buffers,curdir,folds,globals,help,tabpages,winsize
+
+"Enable mouse
+set mouse=a
+
+"Wrap at start/end of line
+set whichwrap+=<,>,[,],h,l
+
+"Custom Fold Text
+set foldtext=CustomFoldText()
+fu! CustomFoldText()
+  "modified from http://www.gregsexton.org/2011/03/improving-the-text-displayed-in-a-fold/
+  let fs = v:foldstart
+
+  while getline(fs) =~ '^\s*$' 
+    let fs = nextnonblank(fs + 1)
+  endwhile
+
+  if fs > v:foldend
+    let line = getline(v:foldstart)
+  else
+    let line = substitute(getline(fs), '\t', repeat(' ', &tabstop), 'g')
+  endif
+
+  let w = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
+  let foldSize = 1 + v:foldend - v:foldstart
+  let foldSizeStr = " " . foldSize . " lines "
+  let foldLevelStr = repeat("+--", v:foldlevel)
+  let lineCount = line("$")
+  let foldPercentage = printf("[%.1f", (foldSize*1.0)/lineCount*100) . "%] "
+  let foldchar = matchstr(&fillchars, 'fold:\zs.')
+  let expansionString = ' ' . repeat(foldchar, w - strwidth(foldSizeStr.line.foldLevelStr.foldPercentage) - 1)
+  return line . expansionString . foldSizeStr . foldPercentage . foldLevelStr
+endf
+
+function! NeatFoldText()
+  " http://dhruvasagar.com/2013/03/28/vim-better-foldtext
+  let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+  let lines_count = v:foldend - v:foldstart + 1
+  let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
+  let foldchar = matchstr(&fillchars, 'fold:\zs.')
+  let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
+  let foldtextend = lines_count_text . repeat(foldchar, 8)
+  let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
+  return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
+endfunction
+
+"Remove toolbar from GUI vim
+set winaltkeys=no
+set guioptions-=T
+set guioptions+=c
+if has("gui_macvim")
+  set macmeta
+  set guifont=Droid_Sans_Mono_for_Powerline:h10
+elseif has("gui_gtk2")
+  set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 9
+endif
+
+"Let VIM figure out the indentation neede in C-style programs - when it can.
+set smartindent
+set autoindent
+set copyindent
+
+"VIM will show the corresponding opening and closing curly brace, bracket or parentesis.
+set showmatch
+set matchtime=1
+
+"Show incomplete command
+set showcmd
+
+"No preview window
+set completeopt-=preview
+
+"Display the status bar at the bottom
+set ruler
+
+"Faster drawing... apparently...
+set lazyredraw
+
+"Mostly for a better maximizer
+set winminwidth=0
+set winminheight=0
+
+"Error bell
+set noerrorbells
+if has("gui_macvim")
+  set visualbell
+else
+  set novisualbell
+endif
+set t_vb=
+
+"Always display tab and status bar
+set laststatus=2
+set showtabline=2
+
+"Show cursorline
+set cursorline
+
+"Command tab completion behaviour
+set wildmode=longest,list
+
+"Match words as we type a search string. We may be able to find the word we are looking for before being done typing.
+set incsearch
+
+"Highlight matched search
+set hlsearch
+
+"Default global substitute
+set gdefault
+
+"Be smart about character case while searching
+set ignorecase
+set smartcase
+
+"Line numbers
+set number
+
+"Add matching pairs for %
+set matchpairs+=<:>
+
+"Backspace behaviour
+set backspace=indent,eol,start
+
+"Directories
+set directory^=~/.vim/swaps//
+set backupdir^=~/.vim/backups//
+set undodir=~/.vim/undodir//
+
+"Persistent undo file
+set undofile
+
+if !has('nvim')
+  "Fix delete key
+  fixdel
+endif
+
+"Syntax highlighting
+syntax on
+
+"File type detection and plugin loading
+filetype plugin indent on
+
+"Past toggle <F8>
+nnoremap <F8> :set invpaste paste?<CR>
+set pastetoggle=<F8>
+set noshowmode
+
+"Scroll offset
+set scrolloff=5
+
+"Split pane to right when :vsplit
+set splitright
+
+"Don't highlight long lines
+set synmaxcol=800
+
+"What to show in character list
+set listchars=tab:>-,trail:',eol:$
+
+"Paste from system clipboard
+set clipboard=unnamed,unnamedplus
+
+if has("gui_gtk2")
+  set lines=999 columns=999
+endif
+
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+endif
+
+"Set leader character
+let mapleader = "\<Space>"
+let maplocalleader = "|"
+
+"}}} Settings
+
+"{{{ Plugins
+
+call plug#begin('~/.vim/bundle')
+
+"""
+""" File Navigation and Search
+"""
+
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+Plug 'thinca/vim-visualstar'
+
+Plug 'shanesmith/ack.vim'
+command! -nargs=* MyAck call <SID>MyAck(0, <f-args>)
+command! -nargs=* MyAckRegEx call <SID>MyAck(1, <f-args>)
+function! s:MyAck(regex, ...)
+  let args = ""
+  if !a:regex
+    let args .= " -Q"
+  endif
+  if a:0 == 0
+    let what = expand("<cword>")
+  else
+    let what = join(a:000, ' ')
+  endif
+  let args .= " -- \"" . what . "\""
+  call ack#Ack('grep!', args)
+endfunction
+nnoremap <leader>aa :MyAck<space>
+nnoremap <leader>aq :MyAckRegEx<space>
+vnoremap <leader>aa "hy:<C-U>MyAck <C-R>h
+vnoremap <leader>aq "hy:<C-U>MyAckRegEx <C-R>h
+if executable('ag')
+  let g:ackprg = 'ag --nogroup --column -S $* \| grep -v -e "^.*\.min\.js:" -e "^.*\.min\.css:"'
+endif
+let g:ackhighlight = 1
+let g:ack_mappings = {
+      \ "<C-t>": "<C-W><CR><C-W>T",
+      \ "<C-s>": "<C-W><CR>:exe 'wincmd ' (&splitbelow ? 'J' : 'K')<CR><C-W>p<C-W>J<C-W>p",
+      \ "s": "<C-W><CR>:exe 'wincmd ' (&splitbelow ? 'J' : 'K')<CR><C-W>p<C-W>J<C-W>p",
+      \ "<C-v>": "<C-W><CR>:exe 'wincmd ' (&splitright ? 'L' : 'H')<CR><C-W>p<C-W>J<C-W>p",
+      \ "v":     "<C-W><CR>:exe 'wincmd ' (&splitright ? 'L' : 'H')<CR><C-W>p<C-W>J<C-W>p",
+      \ "<CR>":  ":let ack_qf_line=line('.')<CR><C-w>p:exec ack_qf_line . 'cc'<CR>"
+      \ }
+
+Plug 'ctrlpvim/ctrlp.vim'
+let g:ctrlp_map = "<leader>pp"
+nnoremap <leader>p  :CtrlP<cr>
+vnoremap <leader>p  "hy:call <SID>CtrlPWithInput(@h)<CR>
+vnoremap <leader>pp "hy:call <SID>CtrlPWithInput(@h)<CR>
+nnoremap <leader>pb :CtrlPBuffer<cr>
+nnoremap <leader>pc :CtrlPCmdPalette<cr>
+nnoremap <leader>pw :call <SID>CtrlPWithInput("<C-R><C-W>")<CR>
+let g:ctrlp_match_window_reversed = 0
+let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_use_caching = 1000
+let g:ctrlp_max_height = 101
+let g:ctrlp_tabpage_position = 'al'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_switch_buffer = 'et'
+let g:ctrlp_reuse_window = 'nerdtree'
+let g:ctrlp_prompt_mappings = {
+    \ 'ToggleType(1)':        ['<c-right>'],
+    \ 'ToggleType(-1)':       ['<c-left>']
+    \ }
+let g:ctrlp_custom_ignore = {
+      \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+      \ 'file': '\vtags|\.(exe|so|dll|DS_Store)$'
+      \ }
+function! s:CtrlPWithInput(input)
+  let g:ctrlp_default_input = a:input
+  CtrlP
+  let g:ctrlp_default_input = ""
+endfunction
+if executable('ag')
+  let g:ctrlp_user_command = 'ag $(python -c "import os.path; print os.path.relpath(%s,''${PWD}'')") -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+Plug 'scrooloose/nerdtree'
+let g:NERDTreeHijackNetrw = 0
+let NERDTreeMapActivateNode = 'l'
+let NERDTreeMapCloseDir = 'h'
+let NERDTreeMapOpenSplit = 's'
+let NERDTreeMapOpenVSplit = 'v'
+let NERDTreeMapJumpNextSibling = ''
+let NERDTreeMapJumpPrevSibling = ''
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeShowLineNumbers = 1
+let g:NERDTreeAutoDeleteBuffer = 1
+let g:NERDTreeChDirMode = 2
+let NERDTreeIgnore = [ '\.pyc$' ]
+
+Plug 'henrik/vim-qargs'
+
+Plug 'chrisbra/Recover.vim'
+
+
+"""
+""" Utilities
+"""
+
+Plug 'diepm/vim-rest-console'
+let g:vrc_trigger = '<F5>'
+command! RestTab call <SID>rest_tab()
+command! RESTTab call <SID>rest_tab()
+function! s:rest_tab()
+  tabnew
+  setf rest
+  setlocal buftype=nofile
+  call append(0, [
+        \ "# http://example.com",
+        \ "# Content-Type: application/json",
+        \ "# POST /foo/bar",
+        \ "# {\"key\": \"value\"}",
+        \ ""
+        \ ])
+endfunction
+
+
+Plug 'terryma/vim-multiple-cursors'
+let g:multi_cursor_exit_from_visual_mode = 0
+let g:multi_cursor_exit_from_insert_mode = 0
+
+Plug 'tpope/vim-eunuch'
+
+Plug 'rhysd/committia.vim'
+
+Plug 'AndrewRadev/switch.vim'
+let g:switch_mapping = "-"
+let g:switch_custom_definitions =
+      \ [
+      \   ['left', 'right'],
+      \   ['top', 'bottom'],
+      \   ['padding', 'margin'],
+      \   ['absolute', 'relative', 'fixed']
+      \ ]
+
+autocmd FileType javascript let b:switch_custom_definitions =
+      \[
+      \   {
+      \     'function\((.*)\)': '\1 =>'
+      \   }
+      \]
+
+Plug 'fisadev/vim-ctrlp-cmdpalette'
+
+Plug 'lfilho/cosco.vim'
+autocmd FileType javascript,php,css,java,c,cpp nnoremap <silent> ;; :call <SID>custom_cosco()<CR>
+autocmd FileType javascript,php,css,java,c,cpp vnoremap <silent> ;; :call cosco#commaOrSemiColon()<CR>
+autocmd FileType javascript,php,css,java,c,cpp inoremap <silent> ;; <C-o>:call <SID>custom_cosco()<CR>
+function! s:custom_cosco()
+  let travel = 0
+  if match(getline('.'), '^\s*$') != -1
+    let travel = 1
+    normal! mz
+    normal! }(
+  endif
+  call cosco#commaOrSemiColon()
+  if travel
+    normal! `z
+    delm z
+  endif
+endfunction
+
+Plug 'tpope/vim-unimpaired'
+
+Plug 'KabbAmine/lazyList.vim'
+
+" Plug 'majutsushi/tagbar'
+" nnoremap <Leader>c :TagbarToggle<CR>
+
+Plug 'tpope/vim-surround'
+nnoremap dsf :call <SID>SurroundingFunction('d')<CR>
+nnoremap csf :call <SID>SurroundingFunction('c')<CR>
+function! s:SurroundingFunction(op)
+  normal! [(
+  call search('\v%(%(\i|\.)@<!).', 'bW')
+  normal! "_dt(
+  if a:op ==? 'c'
+    startinsert
+  elseif a:op ==? 'd'
+    exec "normal \<Plug>Dsurround("
+  endif
+endfunction
+
+Plug 'tpope/vim-repeat'
+
+Plug 'tpope/vim-abolish'
+
+Plug 'tpope/vim-endwise'
+
+Plug 'vim-scripts/ingo-library'
+
+Plug 'vim-scripts/localvimrc'
+let g:localvimrc_sandbox=0
+let g:localvimrc_persistent=1
+
+Plug 'szw/vim-maximizer'
+let g:maximizer_default_mapping_key = '<F4>'
+
+" Plug 'tpope/vim-fugitive'
+
+" Plug 'sjl/gundo.vim'
+" nnoremap <leader>u :GundoToggle<CR>
+
+Plug 'dohsimpson/vim-macroeditor'
+
+"""
+""" LOLz
+"""
+
+Plug 'koron/nyancat-vim'
+
+" TODO start hackertyper in nofile buffer instead of editing file
+Plug 'mjbrownie/hackertyper.vim'
+command! StartHackerTyper w! %.hackertyper | exec "normal ggdG" | call hackertyper#startHackerTyper() | startinsert
+
+
+"""
+""" Display
+"""
+
+Plug 'vim-scripts/molokai'
+
+Plug 'vim-airline/vim-airline'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#show_close_button = 0
+let g:airline#extensions#hunks#enabled = 0
+let g:airline#extensions#branch#enabled = 0
+let g:airline#extensions#tmuxline#enabled = 0
+let g:airline_mode_map = {
+      \ '__' : '-',
+      \ 'n'  : 'N',
+      \ 'i'  : 'I',
+      \ 'R'  : 'R',
+      \ 'c'  : 'C',
+      \ 'v'  : 'V',
+      \ 'V'  : 'V',
+      \ '' : 'V',
+      \ 's'  : 'S',
+      \ 'S'  : 'S',
+      \ '' : 'S',
+      \ }
+
+Plug 'veloce/vim-aldmeris'
+let g:aldmeris_transparent = 1
+let g:aldmeris_css = 0
+
+Plug 'chrisbra/Colorizer'
+let g:colorizer_auto_filetype='css,scss,sass'
+let g:colorizer_auto_color = 0
+let g:colorizer_colornames = 0
+
+Plug 'vim-scripts/ConflictDetection'
+let g:ConflictDetection_WarnEvents = ''
+highlight conflictOursMarker term=bold ctermfg=16 gui=bold guifg=#000000 cterm=bold ctermbg=102
+highlight conflictBaseMarker term=bold ctermfg=16 gui=bold guifg=#000000 cterm=bold ctermbg=102
+highlight conflictTheirsMarker term=bold ctermfg=16 gui=bold guifg=#000000 cterm=bold ctermbg=102
+highlight conflictSeparatorMarkerSymbol term=bold ctermfg=16 gui=bold guifg=#000000 cterm=bold ctermbg=102
+
+Plug 'kshenoy/vim-signature'
+" GotoNext/PrevMarkerAny unmap due to conflict with conflictmotions
+let g:SignatureMap = {
+      \ 'GotoNextMarkerAny':  "",
+      \ 'GotoPrevMarkerAny':  "",
+      \ 'GotoNextLineAlpha':  "",
+      \ 'GotoPrevLineAlpha':  "",
+      \ 'GotoNextSpotAlpha':  "",
+      \ 'GotoPrevSpotAlpha':  "",
+      \ 'GotoNextMarker'   :  "",
+      \ 'GotoPrevMarker'   :  "",
+      \ }
+
+
+Plug 'airblade/vim-gitgutter'
+let g:gitgutter_map_keys = 0
+highlight GitGutterAdd    cterm=bold ctermbg=237  ctermfg=119
+highlight GitGutterDelete cterm=bold ctermbg=237  ctermfg=167
+highlight GitGutterChange cterm=bold ctermbg=237  ctermfg=227
+nmap ]- <plug>GitGutterNextHunk
+nmap [- <plug>GitGutterPrevHunk
+nmap <leader>-s <plug>GitGutterStageHunk
+nmap <leader>-r <plug>GitGutterRevertHunk
+nmap <leader>-p <plug>GitGutterPreviewHunk
+omap i- <Plug>GitGutterTextObjectInnerPending
+omap a- <Plug>GitGutterTextObjectOuterPending
+xmap i- <Plug>GitGutterTextObjectInnerVisual
+xmap a- <Plug>GitGutterTextObjectOuterVisual
+
+Plug 'vim-scripts/SyntaxRange'
+
+
+"""
+""" Motions
+"""
+
+Plug 'rhysd/clever-f.vim'
+
+" Plug 'kana/vim-smartword'
+" map qw <Plug>(smartword-w)
+" map qb <Plug>(smartword-b)
+" map qe <Plug>(smartword-e)
+" map qge <Plug>(smartword-ge)
+
+Plug 'justinmk/vim-sneak'
+let g:sneak#use_ic_scs = 1
+let g:sneak#streak = 1
+let g:sneak#s_next = 1
+nmap ]; <Plug>SneakNext
+vmap ]; <Plug>VSneakNext
+nmap [; <Plug>SneakPrevious
+vmap [; <Plug>VSneakPrevious
+
+Plug 'vim-scripts/ConflictMotions'
+let g:ConflictMotions_ConflictMapping = 'X'
+let g:ConflictMotions_SectionMapping = '='
+nnoremap <leader>x= :ConflictTake both<CR>
+nnoremap <leader>x+ :ConflictTake both<CR>
+
+Plug 'vim-scripts/CountJump'
+
+Plug 'vim-scripts/matchit.zip'
+
+Plug 'machakann/vim-columnmove'
+let g:columnmove_no_default_key_mappings = 1
+let g:columnmove_strict_wbege = 0
+nmap ]c <Plug>(columnmove-W)
+xmap ]c <Plug>(columnmove-W)
+omap ]c <Plug>(columnmove-W)
+nmap [c <Plug>(columnmove-gE)
+xmap [c <Plug>(columnmove-gE)
+omap [c <Plug>(columnmove-gE)
+
+
+"""
+""" Formatting
+"""
+
+Plug 'editorconfig/editorconfig-vim'
+
+Plug 'ntpeters/vim-better-whitespace'
+let g:current_line_whitespace_disabled_soft = 1
+command! WhitespaceStrip StripWhitespace
+
+Plug 'Chiel92/vim-autoformat'
+
+Plug 'jiangmiao/auto-pairs'
+
+Plug 'junegunn/vim-easy-align'
+vmap <Tab> <Plug>(LiveEasyAlign)
+
+Plug 'tomtom/tcomment_vim'
+let g:tcommentTextObjectInlineComment = ''
+nnoremap \\ :TComment<CR>
+vnoremap \\ :TComment<CR>
+nnoremap \* :TCommentBlock<CR>
+vnoremap \* :TCommentBlock<CR>
+nmap \  <Plug>TComment_gc
+
+
+"""
+""" File Types
+"""
+
+Plug 'sheerun/vim-polyglot'
+let g:vim_json_syntax_conceal = 0
+hi link jsParens Operator
+hi link jsObjectBraces Special
+
+Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
+nnoremap <leader>jf :TernDef<CR>
+nnoremap <leader>jd :TernDoc<CR>
+nnoremap <leader>jr :TernRefs<CR>
+
+Plug 'heavenshell/vim-jsdoc'
+
+Plug 'shanesmith/xmledit'
+let g:xmledit_enable_html = 1
+let g:xml_use_xhtml = 1
+function! HtmlAttribCallback(xml_tag)
+  "disable this sort of thing
+  return 0
+endfunction
+
+Plug 'suan/vim-instant-markdown', { 'do': 'npm install -g instant-markdown-d' }
+let g:instant_markdown_autostart = 0
+
+"""
+""" Debugging
+"""
+
+" Plug 'joonty/vdebug'
+
+Plug 'scrooloose/syntastic'
+let g:syntastic_check_on_open = 1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_objc_compiler = 'clang'
+let g:syntastic_php_checkers = ['php']
+let g:syntastic_javascript_checkers = []
+let g:syntastic_scss_checkers = ['scss_lint']
+let g:syntastic_html_tidy_quiet_messages = {
+      \   'regex': [
+      \     '"tabindex" has invalid value "-1"',
+      \     '<div> proprietary attribute "tabindex"',
+      \     '<img> lacks "alt" attribute',
+      \     'trimming empty <span>',
+      \   ],
+      \ }
+let g:syntastic_html_tidy_ignore_errors = [
+      \   " proprietary attribute \"ng-",
+      \   " proprietary attribute \"translate",
+      \   " proprietary attribute \"ui-"
+      \ ]
+
+augroup SyntasticJS
+  au!
+  auto FileType javascript call <SID>SetJavascriptCheckers(expand("<afile>:p:h"))
+augroup END
+
+function! s:SetJavascriptCheckers(dir)
+  let checkers = []
+
+  let cfg = findfile(".eslintrc.json", escape(a:dir, ' ') . ';')
+  if cfg !=# ''
+    call add(checkers, "eslint")
+  endif
+
+  let cfg = findfile(".jscsrc", escape(a:dir, ' ') . ';')
+  if cfg !=# ''
+    call add(checkers, "jscs")
+  endif
+
+  let cfg = findfile(".jshintrc", escape(a:dir, ' ') . ';')
+  if cfg !=# ''
+    call add(checkers, "jshint")
+  endif
+
+  let b:syntastic_checkers = checkers
+endfunction
+
+
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --tern-completer' }
+let g:ycm_autoclose_preview_window_after_insertion = 1
+
+" Plug 'brookhong/DBGPavim'
+" let g:dbgPavimPort = 9009
+" let g:dbgPavimBreakAtEntry = 0
+" let g:dbgPavimKeyRun = "<leader>dr"
+" let g:dbgPavimKeyQuit = "<leader>dq"
+" let g:dbgPavimKeyToggleBp = "<leader>db"
+" let g:dbgPavimKeyHelp = "<leader>dh"
+" let g:dbgPavimKeyToggleBae = "<leader>de"
+
+
+"""
+""" Snippets
+"""
+
+Plug 'mattn/emmet-vim'
+let g:emmet_html5 = 0
+let g:user_emmet_complete_tag = 1
+let g:emmet_install_only_plug = 1
+augroup EmmetMappings
+  au!
+  au FileType php,html,html.handlebars,css imap <buffer> <C-Y> <plug>(emmet-expand-abbr)
+  au FileType php,html,html.handlebars,css vmap <buffer> <C-Y> <plug>(emmet-expand-abbr)
+  au FileType php,html,html.handlebars,css nmap <buffer> <C-Y> <plug>(emmet-expand-abbr)
+augroup END
+function! s:emmet_expand_glyph(name)
+  return "<span class='glyphicon ".a:name."'></span>"
+endfunction
+let g:user_emmet_settings = {
+      \   'custom_expands': {
+      \     '^glyphicon-\S\+$': function("<SID>emmet_expand_glyph")
+      \   },
+      \ }
+
+Plug 'sirver/ultisnips'
+let g:UltiSnipsExpandTrigger = '<C-y>'
+let g:UltiSnipsJumpForwardTrigger = "<nop>"
+let g:UltiSnipsJumpBackwardTrigger = "<nop>"
+
+function! s:PumOrUltisnips(forward)
+    if pumvisible() == 1
+        return a:forward ? "\<C-n>" : "\<C-p>"
+    else if a:forward
+        call UltiSnips#JumpForwards()
+        if g:ulti_jump_forwards_res == 0
+            return "\<tab>"
+        endif
+    else
+        call UltiSnips#JumpBackwards()
+        if g:ulti_jump_backwards_res == 0
+            return "\<s-tab>"
+        endif
+    endif
+    return ""
+endfunction
+inoremap <silent> <tab> <C-R>=PumOrUltisnips(1)<CR>
+inoremap <silent> <s-tab> <C-R>=PumOrUltisnips(0)<CR>
+snoremap <silent> <tab> <Esc>:call UltiSnips#JumpForwards()<CR>
+snoremap <silent> <s-tab> <Esc>:call UltiSnips#JumpBackwards()<CR>
+
+" Plug 'honza/vim-snippets'
+
+
+"""
+""" Text Objects
+"""
+
+Plug 'wellle/targets.vim'
+let g:targets_quotes = ""
+
+Plug 'gorkunov/smartpairs.vim'
+
+Plug 'michaeljsmith/vim-indent-object'
+
+Plug 'glts/vim-textobj-comment'
+
+Plug 'machakann/vim-textobj-delimited'
+
+Plug 'shanesmith/vim-textobj-entire'
+
+Plug 'kana/vim-textobj-user'
+
+Plug 'whatyouhide/vim-textobj-xmlattr'
+
+Plug 'kana/vim-textobj-function'
+
+Plug 'thinca/vim-textobj-function-javascript'
+
+" Plug 'coderifous/textobj-word-column.vim'
+
+"""
+""" Windows
+"""
+
+Plug 'wesQ3/vim-windowswap'
+let g:windowswap_map_keys = 0
+nnoremap <silent> <C-w>w :call WindowSwap#EasyWindowSwap()<CR>
+nnoremap <silent> <C-w><C-w> :call WindowSwap#EasyWindowSwap()<CR>
+
+Plug 'christoomey/vim-tmux-navigator'
+
+inoremap <silent> <c-h> <ESC>:TmuxNavigateLeft<cr>
+inoremap <silent> <c-j> <ESC>:TmuxNavigateDown<cr>
+inoremap <silent> <c-k> <ESC>:TmuxNavigateUp<cr>
+inoremap <silent> <c-l> <ESC>:TmuxNavigateRight<cr>
+
+Plug 'Keithbsmiley/tmux.vim'
+
+Plug 'sjl/vitality.vim'
+
+Plug 'edkolev/tmuxline.vim'
+
+
+"""
+""" Operations
+"""
+
+Plug 'tommcdo/vim-exchange'
+
+Plug 'AndrewRadev/splitjoin.vim'
+
+call plug#end()
+
+"Markdown
+let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json', 'ruby', 'sass', 'xml', 'html']
+
+" Required to be after plug#end()
+function! airline#extensions#tabline#title(n)
+
+  if a:n == tabpagenr() 
+
+    let cwd = getcwd()
+
+    if haslocaldir()
+
+      let i = 1
+
+      while i <= winnr('$')
+        if !haslocaldir(i)
+          let cwd = getcwd(i)
+          break
+        endif
+        let i += 1
+      endwhile
+
+    endif
+
+  else
+
+    let cwd = g:TabDirs[a:n]
+
+  endif
+
+  return substitute(fnamemodify(cwd, ':~'), '\v\w\zs.{-}\ze(\\|/)', '', 'g')
+
+endfunction
+
+"}}}
+
+"{{{ Colorscheme
+
+if &t_Co == 256 || has("gui_running")
+  try
+    colorscheme aldmeris
+  catch
+    colorscheme desert
+  endtry
+else
+  colorscheme desert
+endif
+
+hi CursorLine ctermbg=234 guibg=#404040
+hi ExtraWhitespace ctermbg=124 guibg=#af0000
+hi DiffAdd term=bold cterm=bold ctermfg=64 ctermbg=0 gui=bold guifg=#4e9a06 guibg=#000000
+hi DiffText term=reverse cterm=bold ctermfg=74 ctermbg=0 gui=bold guifg=#729fcf guibg=#000000
+hi LineNr guibg=#222222 guifg=#888a85
+" hi conflictOurs term=bold cterm=bold ctermfg=64 ctermbg=0 gui=bold guifg=#4e9a06 guibg=#000
+" hi conflictTheirs term=reverse cterm=bold ctermfg=74 ctermbg=0 gui=bold guifg=#729fcf guibg=#000
+
+"}}}
+
+"{{{ Mappings
+
+"Toggle spellchecker
+nnoremap <F11> :setlocal spell!<CR>
+
+"Resync syntax
+nnoremap <F12> :syntax sync fromstart<CR>
+
+"Write
+nnoremap <Leader>w :w<CR>
+
+"Search commands
+""Consistent next/prev result
+nnoremap <expr> n 'Nn'[v:searchforward]
+nnoremap <expr> N 'nN'[v:searchforward]
+""Highlight current word
+nnoremap <silent> <Leader>/ :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<CR>
+nnoremap <silent> <2-LeftMouse> :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<CR>
+""Clear search (and Highlight)
+nnoremap <silent> <Leader>\ :let @/=""<CR>
+"Search history navigation
+nnoremap <silent> [/ :call <SID>search_hist('back')<CR>
+nnoremap <silent> ]/ :call <SID>search_hist('forward')<CR>
+
+let s:search_hist_index = 0
+let s:search_last_nr = 0
+function! s:search_hist(direction)
+  if s:search_last_nr != histnr('search')
+    let s:search_hist_index = 0
+    let s:search_last_nr = histnr('search')
+  endif
+  if a:direction == 'back'
+    if s:search_hist_index > histnr('search') * -1
+      let s:search_hist_index = s:search_hist_index - 1
+    endif
+  else
+    if s:search_hist_index < 0
+      let s:search_hist_index = s:search_hist_index + 1
+    endif
+  endif
+  let @/ = histget('search', s:search_hist_index - 1)
+  echo s:search_hist_index @/
+endfunction
+
+"Next/Previous result
+nnoremap <F3> n
+nnoremap <S-F3> N
+
+"Tab commands
+nnoremap [t :tabprev<CR>
+nnoremap ]t :tabnext<CR>
+nnoremap <C-t>n :tabnew<CR>
+nnoremap <C-t>t :tabnew<CR>
+nnoremap <C-t><C-t> :tabnew<CR>
+nnoremap <C-t>o :tabonly<CR>
+nnoremap <C-t>c :tabclose<CR>
+nnoremap <C-t>q :tabclose<CR>
+nnoremap <C-t>> :tabm +1<CR>
+nnoremap <C-t>< :tabm -1<CR>
+
+"Only works in GUI
+nnoremap <C-Tab> :tabnext<CR>
+nnoremap <C-S-Tab> :tabprev<CR>
+inoremap <C-Tab> <ESC>:tabnext<CR>
+inoremap <C-S-Tab> <ESC>:tabprev<CR>
+
+"Show whitespace characters
+nnoremap <F7> :set list!<CR>
+
+"Stop accidentaly recording
+function! s:MacroMap()
+  nnoremap ! q
+  nnoremap !! :call <SID>RecordMacro()<cr>
+endfunction
+function! s:MacroUnmap()
+  nunmap !
+  nunmap !!
+endfunction
+function! s:RecordMacro()
+  call <SID>MacroUnmap()
+  nnoremap ! :call <SID>StopRecordMacro()<cr>
+  normal! qq
+endfunction
+function! s:StopRecordMacro()
+  call <SID>MacroMap()
+  normal! q
+  let @q = substitute(@q, "!$", "", "")
+  if len(@q) > 0
+    normal! @q
+    undo
+  endif
+endfunction
+
+nnoremap q <nop>
+call <SID>MacroMap()
+
+
+"Visual select last pasted
+"http://vim.wikia.com/wiki/Selecting_your_pasted_text
+nnoremap gp `[v`]
+
+vnoremap gy ygv<ESC>
+
+"Inline mode paste
+inoremap <C-p> <C-\><C-o>:call <SID>InlinePaste()<CR><Right>
+function! s:InlinePaste()
+  let pasteop = 'P'
+  let linelength = strlen(getline('.'))
+  let colpos = col('.')
+  if colpos == linelength + 1
+    let pasteop = 'p'
+  endif
+  exec 'normal! "0' . pasteop
+endfunction
+
+"Smart indent pasting
+nnoremap <silent> p :call <SID>smart_paste('p')<CR>
+nnoremap <silent> P :call <SID>smart_paste('P')<CR>
+
+function! s:smart_paste(cmd)
+  exec 'normal! "' . v:register . a:cmd
+  if getregtype(v:register) ==# 'V'
+    normal! =']
+  endif
+endfunction
+
+"Like it should be
+nnoremap Y y$
+
+"Save 30% keystrokes
+vnoremap w :<C-U>normal! viw<CR>
+omap w :normal vw<CR>
+
+vnoremap W :<C-U>normal! vaW<CR>
+omap W :normal vW<CR>
+
+" vnoremap p :<C-U>normal! vip<CR>
+" omap p :normal vip<CR>
+
+" vnoremap P :<C-U>normal! vap<CR>
+" omap P :normal vap<CR>
+
+"Map U to redo
+nnoremap U :redo<CR>
+
+"Squash blank lines
+nnoremap <silent> <leader><BS> :call <SID>squash_blank_lines()<CR>
+
+function! s:squash_blank_lines(...)
+  let leaveblanklines = a:0 ? a:1 : 1
+  let linenum = a:0 > 1 ? a:2 : '.'
+  let delstart = prevnonblank(linenum) + 1
+  let delend = nextnonblank(linenum) - (leaveblanklines+1)
+  if delend - delstart >= 0
+    exec delstart . "," . delend . "delete _"
+  endif
+endfunction
+
+"Move lines up/down
+nnoremap <silent> <C-Up>    :call      <SID>moveit('up',    'n')<CR>
+nnoremap <silent> <C-Down>  :call      <SID>moveit('down',  'n')<CR>
+nnoremap <silent> <C-Left>  :call      <SID>moveit('left',  'n')<CR>
+nnoremap <silent> <C-Right> :call      <SID>moveit('right', 'n')<CR>
+vnoremap <silent> <C-Up>    :call      <SID>moveit('up',    visualmode())<CR>
+vnoremap <silent> <C-Down>  :call      <SID>moveit('down',  visualmode())<CR>
+vnoremap <silent> <C-Left>  :call      <SID>moveit('left',  visualmode())<CR>
+vnoremap <silent> <C-Right> :call      <SID>moveit('right', visualmode())<CR>
+inoremap <silent> <C-Up>    <C-o>:call <SID>moveit('up',    'i')<cr>
+inoremap <silent> <C-Down>  <C-o>:call <SID>moveit('down',  'i')<cr>
+inoremap <silent> <C-Left>  <C-o>:call <SID>moveit('left',  'i')<CR>
+inoremap <silent> <C-Right> <C-o>:call <SID>moveit('right', 'i')<CR>
+nnoremap <silent> <S-Up>    :call      <SID>moveit('up',    'n')<CR>
+nnoremap <silent> <S-Down>  :call      <SID>moveit('down',  'n')<CR>
+nnoremap <silent> <S-Left>  :call      <SID>moveit('left',  'n')<CR>
+nnoremap <silent> <S-Right> :call      <SID>moveit('right', 'n')<CR>
+vnoremap <silent> <S-Up>    :call      <SID>moveit('up',    visualmode())<CR>
+vnoremap <silent> <S-Down>  :call      <SID>moveit('down',  visualmode())<CR>
+vnoremap <silent> <S-Left>  :call      <SID>moveit('left',  visualmode())<CR>
+vnoremap <silent> <S-Right> :call      <SID>moveit('right', visualmode())<CR>
+inoremap <silent> <S-Up>    <C-o>:call <SID>moveit('up',    'i')<cr>
+inoremap <silent> <S-Down>  <C-o>:call <SID>moveit('down',  'i')<cr>
+inoremap <silent> <S-Left>  <C-o>:call <SID>moveit('left',  'i')<CR>
+inoremap <silent> <S-Right> <C-o>:call <SID>moveit('right', 'i')<CR>
+
+function! s:moveit(where, mode) range
+
+  let firstline = a:firstline
+  let lastline = a:lastline
+
+  if a:mode ==? 'n'
+
+    let line1 = getline('.')
+    if match(line1, '^\s*-\s') != -1
+
+      let line2num = -1
+
+      if a:where ==? "up"
+        let line2num = line('.') - 2
+      elseif a:where ==? "down"
+        let line2num = line('.') + 2
+      endif
+
+      if line2num <= 1 || line2num >= line('$')
+        return
+      endif
+
+      let line2 = getline(line2num)
+      if match(line2, '^\s*-\s') != -1
+        call setline('.', line2)
+        call setline(line2num, line1)
+        call cursor(line2num, 0)
+        return
+      endif
+
+    endif
+
+  endif
+
+  if a:mode !=? 'v' && match(getline('.'), '^\s*$') != -1
+    call s:squash_blank_lines(0)
+    let firstline = line('.')
+    if a:where ==? "up" || a:where ==? "left"
+      let firstline = firstline - 1
+    endif
+    let lastline = firstline
+  endif
+
+  let is_prev_line_blank = (match(getline(firstline-1), '^\s*$') != -1)
+  let is_next_line_blank = (match(getline(lastline+1), '^\s*$') != -1)
+
+  if is_prev_line_blank && is_next_line_blank
+
+    if a:where ==? "left"
+      call s:squash_blank_lines(0, firstline-1)
+
+    elseif a:where  ==? "right"
+      call s:squash_blank_lines(0, lastline+1)
+      normal k
+
+    elseif a:where ==? "up"
+      exec (firstline-1) . "delete _"
+
+    elseif a:where ==? "down"
+      exec (lastline+1) . "delete _"
+      normal k
+
+    endif
+
+  else
+
+    if a:where ==? "left"
+      if is_prev_line_blank
+        let targetline = prevnonblank(firstline-1)
+      else
+        let targetline = line("'{")
+      endif
+      call s:do_moveit(firstline, lastline, targetline)
+      call s:reindent_inner()
+      if a:mode ==? 'v'
+        normal! gv=
+      else
+        normal! ==
+      endif
+      exec "normal =}\<C-o>"
+
+    elseif a:where ==? "right"
+      if is_next_line_blank
+        let targetline = nextnonblank(lastline+1) - 1
+      else
+        call cursor(lastline, 1)
+        let targetline = line("'}") - 1
+      endif
+      call s:do_moveit(firstline, lastline, targetline)
+      exec "normal ={\<C-o>"
+      if a:mode ==? 'v'
+        normal! gv=
+      else
+        normal! ==
+      endif
+      call s:reindent_inner()
+
+    elseif a:where ==? "up"
+      let targetline = (firstline-2)
+      call s:do_moveit(firstline, lastline, targetline)
+      call s:reindent_inner()
+      if a:mode ==? 'v'
+        normal! gv=j==k^
+      else
+        normal! ==j==k^
+      endif
+
+    elseif a:where ==? "down"
+      let targetline = (lastline+1)
+      call s:do_moveit(firstline, lastline, targetline)
+      if a:mode ==? 'v'
+        normal! gv=k==j^
+      else
+        normal! ==k==j^
+      endif
+      call s:reindent_inner()
+
+    endif
+
+  endif
+
+  if a:mode ==? 'v'
+    normal! gv^
+  endif
+
+endfunction
+
+function! s:reindent_inner()
+  let line = getline('.')
+  if match(line, '^\s*[()\[\]{}]') != -1
+    normal! ^=%``
+  endif
+  if match(line, '[()\[\]{}]\s*$') != -1
+    normal! $=%``
+  endif
+endfunction
+
+function! s:do_moveit(first, last, target)
+  exec a:first . "," . a:last . "move" a:target
+endfunction
+
+
+"New space
+nnoremap <Leader><Space> i<Space><ESC>l
+
+"New lines
+nnoremap <Leader><CR> i<CR><ESC>
+
+nnoremap <silent> <Leader>O :<C-U>call <SID>InsertBlankLine('n-up', v:count1)<CR>
+nnoremap <silent> <Leader>o :<C-U>call <SID>InsertBlankLine('n-down', v:count1)<CR>
+
+vnoremap <silent> <Leader>o :call <SID>InsertBlankLine(visualmode(), v:count1)<CR>
+
+inoremap <silent> <C-o><C-o> <C-\><C-o>:call <SID>InsertBlankLine('n-both', 1)<CR>
+inoremap <silent> <C-o><C-i> <C-o>"_cc
+
+function! s:InsertBlankLine(type, count) range
+  let what = repeat([''], a:count)
+
+  if a:type ==? 'v'
+    exec "normal! `>a\<CR>\<ESC>`<i\<CR>\<ESC>" . (a:firstline+1) . "GV" .  (a:lastline+1) . "G"
+  endif
+
+  if a:type ==# 'n-down' || a:type ==# 'n-both'
+    call append(a:lastline, what)
+  endif
+
+  if a:type ==# 'n-up' || a:type ==# 'n-both'
+    call append(a:firstline-1, what)
+  endif
+endfunction
+
+
+"Indent visual
+vnoremap > >gv
+vnoremap < <gv
+vnoremap = =gv
+
+"Text-object for matching whole-line pairs
+vnoremap <silent> A{ :normal! [{V%<CR>
+vnoremap <silent> A} :normal! [{V%<CR>
+vnoremap <silent> A( :normal! [(V%<CR>
+vnoremap <silent> A) :normal! [(V%<CR>
+vnoremap <silent> A[ :call searchpair('\[', '', '\]', 'bW') \| normal! V%<CR>
+vnoremap <silent> A] :call searchpair('\[', '', '\]', 'bW') \| normal! V%<CR>
+onoremap <silent> A{ :normal! [{V%<CR>
+onoremap <silent> A} :normal! [{V%<CR>
+onoremap <silent> A( :normal! [(V%<CR>
+onoremap <silent> A) :normal! [(V%<CR>
+onoremap <silent> A[ :call searchpair('\[', '', '\]', 'bW') \| normal! V%<CR>
+onoremap <silent> A] :call searchpair('\[', '', '\]', 'bW') \| normal! V%<CR>
+nnoremap <silent> dS{ :call <SID>delete_surrounding_lines("{}")<CR>
+nnoremap <silent> dS} :call <SID>delete_surrounding_lines("{}")<CR>
+nnoremap <silent> dS[ :call <SID>delete_surrounding_lines("[]")<CR>
+nnoremap <silent> dS] :call <SID>delete_surrounding_lines("[]")<CR>
+nnoremap <silent> dS( :call <SID>delete_surrounding_lines("()")<CR>
+nnoremap <silent> dS) :call <SID>delete_surrounding_lines("()")<CR>
+
+function! s:delete_surrounding_lines(pair)
+  let syng_strcom = 'string\|regex\|comment\c'
+  let skip_expr = "synIDattr(synID(line('.'),col('.'),1),'name') =~ '".syng_strcom."'"
+
+  let char = map(split(a:pair, '\zs'), '"\\V" . v:val')
+
+  normal! mz
+
+  let startline = searchpair(char[0], '', char[1], 'bW', skip_expr)
+
+  delete _
+
+  let endline = searchpair(char[0], '', char[1], '', skip_expr)
+
+  delete _
+
+  let numlines = endline - startline
+
+  exec startline . "," . endline . "normal! =="
+
+  normal! `z
+
+  delm z
+
+endfunction
+
+"Bash style command line
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+
+"Easier line start/end movement
+nnoremap H ^
+vnoremap H ^
+onoremap H ^
+nnoremap L g_
+vnoremap L g_
+onoremap L g_
+inoremap <C-a> <C-o>^
+inoremap <C-e> <C-o>$
+
+"Toggle relative line numbers
+nnoremap <leader>l :set relativenumber!<CR>
+
+"Don't need help right now, thanks
+inoremap <F1> <Nop>
+nnoremap <F1> <Nop>
+
+nnoremap ; :
+nnoremap : ;
+vnoremap ; :
+vnoremap : ;
+
+"Better wrap navigation
+nmap <expr> j (v:count == 0 ? 'gj' : 'j')
+nmap <expr> k (v:count == 0 ? 'gk' : 'k')
+
+"Insert mode hjkl
+inoremap <A-h> <Left>
+inoremap <A-j> <Down>
+inoremap <A-k> <Up>
+inoremap <A-l> <Right>
+
+"Easier substitute
+nnoremap <leader>r :%s/\<<C-r><C-w>\>/<C-r><C-w>
+vnoremap <leader>r "hy:<C-\>e<SID>subsub()<CR>
+function! s:subsub()
+  let numlines = strlen(substitute(@h, "[^\\n]", "", "g"))
+  if numlines == 0
+    let cmd = "%s/" . @h . "/" . @h
+  else
+    let cmd = "'<,'>s/"
+  endif
+  return cmd
+endfunction
+
+"Quick Quit
+nnoremap Q <nop>
+nnoremap QQ :quit<CR>
+nnoremap Q!! :quit!<CR>
+
+"You Paste
+nnoremap <silent><expr> yp ':let b:silly="' . v:register . '"<CR>:set opfunc=<SID>YouPaste<CR>g@'
+nnoremap <silent><expr> ypp 'V:<C-U>let b:silly="' . v:register . '"<CR>:<C-U>call <SID>YouPaste(visualmode(), 1)<CR>'
+vnoremap <silent><expr> p ':<C-U>let b:silly="' . v:register . '"<CR>:<C-U>call <SID>YouPaste(visualmode(), 1)<CR>'
+function! s:YouPaste(type, ...)
+  if a:0
+    let [mark1, mark2] = ['`<', '`>']
+  else
+    let [mark1, mark2] = ['`[', '`]']
+  endif
+  exec 'normal! ' . mark1 . 'v' . mark2 . '"_d"' . b:silly . 'P'
+endfunction
+
+"Duplicate
+nnoremap <silent> [d :set opfunc=<SID>DuplicateUp<CR>g@
+nnoremap <silent> ]d :set opfunc=<SID>DuplicateDown<CR>g@
+nnoremap <silent> [dd V:<C-U>call <SID>DuplicateUp(visualmode())<CR>
+nnoremap <silent> ]dd V:<C-U>call <SID>DuplicateDown(visualmode())<CR>
+vnoremap <silent> [d :<C-U>call <SID>DuplicateUp(visualmode())<CR>
+vnoremap <silent> ]d :<C-U>call <SID>DuplicateDown(visualmode())<CR>
+function! s:DuplicateUp(type)
+  call <SID>Duplicate(a:type, 'up')
+endfunction
+function! s:DuplicateDown(type)
+  call <SID>Duplicate(a:type, 'down')
+endfunction
+function! s:Duplicate(type, direction)
+  let vselect = a:type
+  if a:type ==? 'v'
+    let [mark1, mark2] = ['`<', '`>']
+  else
+    let [mark1, mark2] = ['`[', '`]']
+  endif
+  if a:type == 'char'
+    let vselect = 'v'
+  elseif vselect == 'line' || vselect == 'block'
+    let vselect = 'V'
+  endif
+  let vselect = mark1 . vselect . mark2
+  exec 'normal! ' . vselect . '"hy'
+  if a:direction ==? 'up'
+    normal! `<"hP
+  else
+    normal! `>"hp
+  endif
+endfunction
+
+"Duplicate and comment
+nnoremap <silent> \d :set opfunc=<SID>DuplicateAndComment<CR>g@
+nnoremap <silent> \dd V:<C-U>call <SID>DuplicateAndComment(visualmode())<CR>
+vnoremap <silent> \d :<C-U>call <SID>DuplicateAndComment(visualmode())<CR>
+function! s:DuplicateAndComment(type)
+  if a:type ==? 'v'
+    let [mark1, mark2] = ['`<', '`>']
+  else
+    let [mark1, mark2] = ['`[', '`]']
+  endif
+  let vselect = a:type
+  if vselect == 'char'
+    let vselect = 'v'
+  elseif vselect == 'line' || vselect == 'block'
+    let vselect = 'V'
+  endif
+  let vselect = mark1 . vselect . mark2
+  exec 'normal! ' . vselect . '"hy' . vselect . ":TComment\<CR>"
+  '>put h
+  if match(getline(line("'<")-1), '^\s*$') != -1
+    call append(line("'>"), '')
+  endif
+endfunction
+
+"Quick formatting
+nnoremap \q gqip
+
+"Clear a line
+nnoremap dc cc<esc>
+
+"Swap quotes
+nnoremap <leader>' :call <SID>SwapQuotes()<CR>
+function! s:SwapQuotes()
+  let origline = line('.')
+  let origcol = col('.')
+  exec "norm! va'o"
+  exec "norm! \<Esc>"
+  let singlecol = col('.')
+  if singlecol == origcol && getline('.')[singlecol-1] != "'" || singlecol > origcol
+    let singlecol = -1
+  endif
+  call cursor(origline, origcol)
+  exec "norm! va\"o"
+  exec "norm! \<Esc>"
+  let doublecol = col('.')
+  if doublecol == origcol && getline('.')[doublecol-1] != '"' || doublecol > origcol
+    let doublecol = -1
+  endif
+  call cursor(origline, origcol)
+  if singlecol > doublecol
+    norm cs'"
+  else
+    norm cs"'
+  endif
+endfunction
+
+"}}}
+
+"{{{ Commands
+
+" Big W also writes
+command! W w
+command! Wq wq
+command! WQ wq
+command! Q q
+command! Qa qa
+command! QA qa
+
+"Super ReTab
+command! -range=% -nargs=0 Tab2Space execute '<line1>,<line2>s#^\t\+#\=repeat(" ", len(submatch(0))*' . &ts . ')'
+command! -range=% -nargs=0 Space2Tab execute '<line1>,<line2>s#^\( \{'.&ts.'\}\)\+#\=repeat("\t", len(submatch(0))/' . &ts . ')'
+
+"Source vimrc
+command! ReloadVimrc source $MYVIMRC
+
+command! -nargs=? -complete=syntax Scratch call <SID>NewScratch(<f-args>)
+function! s:NewScratch(...)
+  let type = a:0 ? a:1 : 'markdown'
+  vnew
+  exec "setf" type
+endfunction
+
+" http://www.bestofvim.com/tip/auto-reload-your-vimrc/
+" augroup reload_vimrc " {
+"     autocmd!
+"     autocmd BufWritePost $MYVIMRC,~/Code/rc/vimrc,~/Code/rc/vim/* source $MYVIMRC | if (exists('g:loaded_airline') && g:loaded_airline) | call airline#load_theme() | endif
+" augroup END " }
+
+" Close vim if NERDTree is the last window
+augroup nerdtree_vimrc
+  autocmd!
+  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+augroup END
+
+" Show cursorline only on current window
+augroup CursorLine
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  au WinLeave * setlocal nocursorline
+augroup END
+
+"Load opend file on last known position
+augroup LoadLastKnownPosition
+  au!
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+augroup END
+
+augroup TitleString
+  au!
+  auto BufEnter * let &titlestring = "Vim@" . hostname() . "/" . expand("%:p")
+augroup END
+
+augroup JSONRC
+  au!
+  auto BufNewFile,BufRead .jscsrc,.jshintrc setf json
+augroup END
+
+augroup js
+  au!
+  au FileType javascript UltiSnipsAddFiletypes javascript.javascript-angular.javascript-jasmine
+augroup END
+
+augroup folds
+  au!
+  au CursorHold,BufWinEnter * call CheckFolds()
+augroup END
+
+fu! CheckFolds()
+  let hasfolds = 0
+
+  if foldlevel('.') > 0
+    let hasfolds = 1
+
+  else
+    let view = winsaveview()
+    let currentline = line('.')
+
+    normal! zk
+
+    if line('.') != l:currentline
+      let hasfolds = 1
+    else
+
+      normal! zj
+
+      if line('.') != l:currentline
+        let hasfolds = 1
+      endif
+
+    endif
+
+    call winrestview(l:view)
+  endif
+
+  let &foldcolumn = l:hasfolds
+endfu
+
+"}}}
+
+" vim: set fdm=marker:
