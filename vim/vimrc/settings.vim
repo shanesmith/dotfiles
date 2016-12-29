@@ -41,8 +41,44 @@ set mouse=a
 "Wrap at start/end of line
 set whichwrap+=<,>,[,],h,l
 
-"Don't fold... ever...
-set nofoldenable
+"Custom Fold Text
+set foldtext=CustomFoldText()
+fu! CustomFoldText()
+  "modified from http://www.gregsexton.org/2011/03/improving-the-text-displayed-in-a-fold/
+  let fs = v:foldstart
+
+  while getline(fs) =~ '^\s*$' 
+    let fs = nextnonblank(fs + 1)
+  endwhile
+
+  if fs > v:foldend
+    let line = getline(v:foldstart)
+  else
+    let line = substitute(getline(fs), '\t', repeat(' ', &tabstop), 'g')
+  endif
+
+  let w = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
+  let foldSize = 1 + v:foldend - v:foldstart
+  let foldSizeStr = " " . foldSize . " lines "
+  let foldLevelStr = repeat("+--", v:foldlevel)
+  let lineCount = line("$")
+  let foldPercentage = printf("[%.1f", (foldSize*1.0)/lineCount*100) . "%] "
+  let foldchar = matchstr(&fillchars, 'fold:\zs.')
+  let expansionString = ' ' . repeat(foldchar, w - strwidth(foldSizeStr.line.foldLevelStr.foldPercentage) - 1)
+  return line . expansionString . foldSizeStr . foldPercentage . foldLevelStr
+endf
+
+function! NeatFoldText()
+  " http://dhruvasagar.com/2013/03/28/vim-better-foldtext
+  let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+  let lines_count = v:foldend - v:foldstart + 1
+  let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
+  let foldchar = matchstr(&fillchars, 'fold:\zs.')
+  let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
+  let foldtextend = lines_count_text . repeat(foldchar, 8)
+  let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
+  return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
+endfunction
 
 "Remove toolbar from GUI vim
 set winaltkeys=no
