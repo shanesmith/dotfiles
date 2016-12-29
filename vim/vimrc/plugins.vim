@@ -400,7 +400,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_objc_compiler = 'clang'
 let g:syntastic_php_checkers = ['php']
-let g:syntastic_javascript_checkers = ['jshint', 'jscs']
+let g:syntastic_javascript_checkers = []
 let g:syntastic_scss_checkers = ['scss_lint']
 let g:syntastic_html_tidy_quiet_messages = {
       \   'regex': [
@@ -415,6 +415,33 @@ let g:syntastic_html_tidy_ignore_errors = [
       \   " proprietary attribute \"translate",
       \   " proprietary attribute \"ui-"
       \ ]
+
+augroup SyntasticJS
+  au!
+  auto FileType javascript call <SID>SetJavascriptCheckers(expand("<afile>:p:h"))
+augroup END
+
+function! s:SetJavascriptCheckers(dir)
+  let checkers = []
+
+  let cfg = findfile(".eslintrc.json", escape(a:dir, ' ') . ';')
+  if cfg !=# ''
+    call add(checkers, "eslint")
+  endif
+
+  let cfg = findfile(".jscsrc", escape(a:dir, ' ') . ';')
+  if cfg !=# ''
+    call add(checkers, "jscs")
+  endif
+
+  let cfg = findfile(".jshintrc", escape(a:dir, ' ') . ';')
+  if cfg !=# ''
+    call add(checkers, "jshint")
+  endif
+
+  let b:syntastic_checkers = checkers
+endfunction
+
 
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --tern-completer' }
 let g:ycm_autoclose_preview_window_after_insertion = 1
