@@ -136,6 +136,13 @@ let g:switch_custom_definitions =
       \   ['absolute', 'relative', 'fixed']
       \ ]
 
+autocmd FileType javascript let b:switch_custom_definitions =
+      \[
+      \   {
+      \     'function\((.*)\)': '\1 =>'
+      \   }
+      \]
+
 Plug 'fisadev/vim-ctrlp-cmdpalette'
 
 Plug 'lfilho/cosco.vim'
