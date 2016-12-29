@@ -35,6 +35,7 @@ let g:ackhighlight = 1
 let g:ack_mappings = {
       \ "<C-t>": "<C-W><CR><C-W>T",
       \ "<C-s>": "<C-W><CR>:exe 'wincmd ' (&splitbelow ? 'J' : 'K')<CR><C-W>p<C-W>J<C-W>p",
+      \ "s": "<C-W><CR>:exe 'wincmd ' (&splitbelow ? 'J' : 'K')<CR><C-W>p<C-W>J<C-W>p",
       \ "<C-v>": "<C-W><CR>:exe 'wincmd ' (&splitright ? 'L' : 'H')<CR><C-W>p<C-W>J<C-W>p",
       \ "v":     "<C-W><CR>:exe 'wincmd ' (&splitright ? 'L' : 'H')<CR><C-W>p<C-W>J<C-W>p",
       \ "<CR>":  ":let ack_qf_line=line('.')<CR><C-w>p:exec ack_qf_line . 'cc'<CR>"
