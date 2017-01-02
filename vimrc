@@ -462,9 +462,6 @@ let g:airline_mode_map = {
       \ '' : 'S',
       \ }
 
-Plug 'veloce/vim-aldmeris'
-let g:aldmeris_transparent = 1
-let g:aldmeris_css = 0
 
 Plug 'chrisbra/Colorizer'
 let g:colorizer_auto_filetype='css,scss,sass'
