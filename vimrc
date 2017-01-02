@@ -474,6 +474,8 @@ highlight conflictOursMarker term=bold ctermfg=16 gui=bold guifg=#000000 cterm=b
 highlight conflictBaseMarker term=bold ctermfg=16 gui=bold guifg=#000000 cterm=bold ctermbg=102
 highlight conflictTheirsMarker term=bold ctermfg=16 gui=bold guifg=#000000 cterm=bold ctermbg=102
 highlight conflictSeparatorMarkerSymbol term=bold ctermfg=16 gui=bold guifg=#000000 cterm=bold ctermbg=102
+" hi conflictOurs term=bold cterm=bold ctermfg=64 ctermbg=0 gui=bold guifg=#4e9a06 guibg=#000
+" hi conflictTheirs term=reverse cterm=bold ctermfg=74 ctermbg=0 gui=bold guifg=#729fcf guibg=#000
 
 Plug 'kshenoy/vim-signature'
 " GotoNext/PrevMarkerAny unmap due to conflict with conflictmotions
@@ -557,6 +559,7 @@ Plug 'editorconfig/editorconfig-vim'
 
 Plug 'ntpeters/vim-better-whitespace'
 let g:current_line_whitespace_disabled_soft = 1
+hi ExtraWhitespace ctermbg=124 guibg=#af0000
 command! WhitespaceStrip StripWhitespace
 
 Plug 'Chiel92/vim-autoformat'
@@ -829,13 +832,6 @@ else
   colorscheme desert
 endif
 
-hi CursorLine ctermbg=234 guibg=#404040
-hi ExtraWhitespace ctermbg=124 guibg=#af0000
-hi DiffAdd term=bold cterm=bold ctermfg=64 ctermbg=0 gui=bold guifg=#4e9a06 guibg=#000000
-hi DiffText term=reverse cterm=bold ctermfg=74 ctermbg=0 gui=bold guifg=#729fcf guibg=#000000
-hi LineNr guibg=#222222 guifg=#888a85
-" hi conflictOurs term=bold cterm=bold ctermfg=64 ctermbg=0 gui=bold guifg=#4e9a06 guibg=#000
-" hi conflictTheirs term=reverse cterm=bold ctermfg=74 ctermbg=0 gui=bold guifg=#729fcf guibg=#000
 
 "}}}
 

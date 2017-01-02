@@ -1,7 +1,6 @@
 " Modified version of Aldmeris colorscheme
 let g:aldmeris_transparent = 1
 
-
 " Vim color scheme
 " Name:         aldmeris.vim
 " Maintainer:   Vincent Velociter <vincent.velociter@gmail.com>
@@ -152,6 +151,7 @@ if has("gui_running")
     let s:aluminium5  = "#555753"
     let s:aluminium6  = "#2e3436"
     let s:black       = "#000000"
+    let s:cursorline  = "#3a4040"
 elseif &t_Co == 256 && g:aldmeris_termcolors == "tango"
     let s:butter1     = "11"
     let s:butter2     = "220"
@@ -173,6 +173,7 @@ elseif &t_Co == 256 && g:aldmeris_termcolors == "tango"
     let s:aluminium5  = "8"
     let s:aluminium6  = "0"
     let s:black       = "16"
+    let s:cursorline  = "234"
 elseif &t_Co == 256
     let s:butter1     = "221"
     let s:butter2     = "220"
@@ -194,6 +195,7 @@ elseif &t_Co == 256
     let s:aluminium5  = "240"
     let s:aluminium6  = "236"
     let s:black       = "16"
+    let s:cursorline  = "234"
 else
     let s:butter1     = "LightYellow"
     let s:butter2     = "Yellow"
@@ -215,6 +217,7 @@ else
     let s:aluminium5  = "DarkGray"
     let s:aluminium6  = "DarkGrey"
     let s:black       = "Black"
+    let s:cursorline  = "DarkGray"
 endif
 if (!has("gui_running") && g:aldmeris_transparent == 1)
     let s:aluminium6 = "NONE"
@@ -246,25 +249,22 @@ endif
 " Highlight default (:help highlight-default) {{{
 " -------------------------------------------
 call s:Hi( 'ColorColumn',   s:aluminium5,   "NONE" )
-" Conceal		placeholder characters substituted for concealed
 call s:Hi( 'Cursor',        s:aluminium2,   s:black )
-" CursorIM	like Cursor, but used when in IME mode
 call s:Hi( 'CursorColumn',  s:aluminium5,   "NONE",         "NONE" )
-call s:Hi( 'CursorLine',    s:aluminium5,   "NONE",         "NONE" )
+call s:Hi( 'CursorLine',    s:cursorline,   "NONE",         "NONE" )
+call s:Hi( 'CursorLineNr',  "NONE",         s:butter1,      "NONE" )
 call s:Hi( 'Directory',     s:aluminium6,   s:skyblue1,     "NONE" )
-call s:Hi( 'DiffAdd',       s:aluminium5,   s:chameleon3,   "bold" )
+call s:Hi( 'DiffAdd',       s:black,        s:chameleon3,   "bold" )
 call s:Hi( 'DiffChange',    s:aluminium5,   s:orange1,      "bold" )
 call s:Hi( 'DiffDelete',    s:aluminium5,   s:scarletred2,  "bold" )
-call s:Hi( 'DiffText',      s:aluminium5,   s:skyblue1,     "bold" )
+call s:Hi( 'DiffText',      s:black,        s:skyblue1,     "bold" )
 call s:Hi( 'ErrorMsg',      s:scarletred2,  s:aluminium1 )
 call s:Hi( 'VertSplit',     s:aluminium4,   s:aluminium6,   "bold" )
 call s:Hi( 'Folded',        s:aluminium6,   s:aluminium3,   "bold,underline" )
 call s:Hi( 'FoldColumn',    s:aluminium3,   s:aluminium5 )
 call s:Hi( 'SignColumn',    s:aluminium3,   s:aluminium5 )
-" IncSearch	'incsearch' highlighting
-call s:Hi( 'LineNr',        s:black,        s:aluminium5 )
+call s:Hi( 'LineNr',        s:aluminium6,   s:aluminium4 )
 call s:Hi( 'MatchParen',    s:plum1,        s:aluminium1 )
-" ModeMsg		'showmode' message (e.g. , "-- INSERT --")
 call s:Hi( 'MoreMsg',       s:aluminium6,   s:chameleon1,   "bold" )
 call s:Hi( 'NonText',       s:aluminium6,   s:aluminium5 )
 call s:Hi( 'Pmenu',         s:black,        s:aluminium3 )
@@ -274,25 +274,21 @@ call s:Hi( 'PmenuThumb',    s:aluminium4,   s:aluminium4 )
 call s:Hi( 'Question',      s:aluminium6,   s:chameleon1,   "bold" )
 call s:Hi( 'Search',        s:chameleon3,   s:aluminium1 )
 call s:Hi( 'SpecialKey',    s:aluminium6,   s:aluminium5 )
-    if has("gui_running")
-call s:Hi( 'SpellBad',      s:aluminium6,   "NONE",         "undercurl",   s:scarletred1 )
-call s:Hi( 'SpellCap',      s:aluminium6,   "NONE",         "undercurl",   s:skyblue1 )
-call s:Hi( 'SpellLocal',    s:aluminium6,   "NONE",         "undercurl",   s:orange1 )
-call s:Hi( 'SpellRare',     s:aluminium6,   "NONE",         "undercurl",   s:plum1 )
-    else
-call s:Hi( 'SpellBad',      s:scarletred2,  "NONE",         "undercurl" )
-call s:Hi( 'SpellCap',      s:skyblue2,     "NONE",         "undercurl" )
-call s:Hi( 'SpellLocal',    s:orange2,      "NONE",         "undercurl" )
-call s:Hi( 'SpellRare',     s:plum2,        "NONE",         "undercurl" )
-    endif
+if has("gui_running")
+  call s:Hi( 'SpellBad',      s:aluminium6,   "NONE",         "undercurl",   s:scarletred1 )
+  call s:Hi( 'SpellCap',      s:aluminium6,   "NONE",         "undercurl",   s:skyblue1 )
+  call s:Hi( 'SpellLocal',    s:aluminium6,   "NONE",         "undercurl",   s:orange1 )
+  call s:Hi( 'SpellRare',     s:aluminium6,   "NONE",         "undercurl",   s:plum1 )
+else
+  call s:Hi( 'SpellBad',      s:scarletred2,  "NONE",         "undercurl" )
+  call s:Hi( 'SpellCap',      s:skyblue2,     "NONE",         "undercurl" )
+  call s:Hi( 'SpellLocal',    s:orange2,      "NONE",         "undercurl" )
+  call s:Hi( 'SpellRare',     s:plum2,        "NONE",         "undercurl" )
+endif
 call s:Hi( 'StatusLine',    s:aluminium6,   s:aluminium3,   "bold,reverse" )
 call s:Hi( 'StatusLineNC',  s:aluminium4,   s:aluminium6,   "NONE" )
-" TabLine		tab pages line, not active tab page label
-" TabLineFill	tab pages line, where there are no labels
-" TabLineSel	tab pages line, active tab page label
 call s:Hi( 'Title',         s:aluminium6,   s:butter1,       "bold" )
 call s:Hi( 'Visual',        s:aluminium4,   s:aluminium1 )
-" VisualNOS	Visual mode selection when vim is "Not Owning the Selection".
 call s:Hi( 'WarningMsg',    s:aluminium6,   s:scarletred1 )
 call s:Hi( 'WildMenu',      s:butter2,      s:aluminium6  )
 " }}}
