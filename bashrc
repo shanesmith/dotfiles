@@ -90,7 +90,6 @@ sources=(
   "${HOME}/.bash_sshauth"
   "${HOME}/.bashrc.local"
   "${HOME}/.rvm/scripts/rvm"
-  "${HOME}/.fzf.bash"
 )
 
 for file in "${sources[@]}"; do

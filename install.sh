@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOTFILES="bashrc bash_ps1 bash_aliases bash_sshauth gitconfig gitignore vimrc vim ackrc inputrc colordiffrc fzf npmrc agignore tmux.conf tmux bin tmuxinator"
+DOTFILES="bashrc bash_ps1 bash_aliases bash_sshauth gitconfig gitignore vimrc vim ackrc inputrc colordiffrc npmrc agignore tmux.conf tmux bin tmuxinator"
 
 LINUX_DOTFILES="Xmodmap imwheelrc"
 
@@ -41,11 +41,6 @@ get_src() {
         echo "$RCPATH/bashrc_msys"
         exit
       fi
-      ;;
-
-    fzf)
-      echo "$RCPATH/fzf/fzf"
-      exit
       ;;
 
   esac
@@ -134,7 +129,6 @@ install_file() {
 
 update_git_submodules() {
   git submodule update --init --recursive
-  fzf/install --all
 }
 
 while [[ $# > 0 ]]; do
