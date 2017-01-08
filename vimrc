@@ -48,7 +48,7 @@ fu! CustomFoldText()
   "modified from http://www.gregsexton.org/2011/03/improving-the-text-displayed-in-a-fold/
   let fs = v:foldstart
 
-  while getline(fs) =~ '^\s*$' 
+  while getline(fs) =~ '^\s*$'
     let fs = nextnonblank(fs + 1)
   endwhile
 
@@ -796,7 +796,7 @@ call yankstack#setup()
 
 function! airline#extensions#tabline#title(n)
 
-  if a:n == tabpagenr() 
+  if a:n == tabpagenr()
 
     let cwd = getcwd()
 
