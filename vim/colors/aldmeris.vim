@@ -371,5 +371,16 @@ hi link cssGeneratedContentProp cssRenderProp
 hi link cssValueLength Boolean
 hi link cssPseudoClassId Identifier
 " }}}
+" JS Colors {{{
+" ----------
+hi link jsObjectBraces      Special
+hi link jsBrackets          Special
+hi link jsParens            Statement
+hi link jsFuncParens        Statement
+hi link jsFuncBraces        Statement
+hi link jsGlobalObjects     Statement
+hi link jsGlobalNodeObjects Statement
+" }}}
+
 
 " vim: set fdm=marker:

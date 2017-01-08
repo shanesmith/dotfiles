@@ -584,8 +584,6 @@ nmap \  <Plug>TComment_gc
 
 Plug 'sheerun/vim-polyglot'
 let g:vim_json_syntax_conceal = 0
-hi link jsParens Operator
-hi link jsObjectBraces Special
 
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
 nnoremap <leader>jf :TernDef<CR>
