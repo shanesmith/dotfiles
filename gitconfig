@@ -105,6 +105,9 @@
 [push]
   default = tracking  # deprecated, update to "upstream" when removed
 
+[rebase]
+  autosquash = true
+
 [tig "bind"]
   main = C <git checkout %(commit)
 
