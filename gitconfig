@@ -11,7 +11,7 @@
   br = branch
   co = checkout
   pop = stash pop
-  unstage = reset HEAD --
+  unstage = reset HEAD
   staged = diff --staged
   top = rev-parse --show-toplevel
   gerrit = !gerrit
