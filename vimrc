@@ -422,6 +422,8 @@ let g:maximizer_default_mapping_key = '<F4>'
 
 Plug 'dohsimpson/vim-macroeditor'
 
+Plug 'maxbrunsfeld/vim-yankstack'
+
 """
 """ LOLz
 """
@@ -565,6 +567,9 @@ command! WhitespaceStrip StripWhitespace
 Plug 'Chiel92/vim-autoformat'
 
 Plug 'jiangmiao/auto-pairs'
+let g:AutoPairsShortcutToggle = ''
+let g:AutoPairsShortcutJump = ''
+
 
 Plug 'junegunn/vim-easy-align'
 vmap <Tab> <Plug>(LiveEasyAlign)
@@ -785,6 +790,9 @@ call plug#end()
 let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json', 'ruby', 'sass', 'xml', 'html']
 
 " Required to be after plug#end()
+
+call yankstack#setup()
+
 function! airline#extensions#tabline#title(n)
 
   if a:n == tabpagenr() 
@@ -953,15 +961,15 @@ function! s:InlinePaste()
 endfunction
 
 "Smart indent pasting
-nnoremap <silent> p :call <SID>smart_paste('p')<CR>
-nnoremap <silent> P :call <SID>smart_paste('P')<CR>
-
-function! s:smart_paste(cmd)
-  exec 'normal! "' . v:register . a:cmd
-  if getregtype(v:register) ==# 'V'
-    normal! =']
-  endif
-endfunction
+" nnoremap <silent> p :call <SID>smart_paste('p')<CR>
+" nnoremap <silent> P :call <SID>smart_paste('P')<CR>
+"
+" function! s:smart_paste(cmd)
+"   exec 'normal! "' . v:register . a:cmd
+"   if getregtype(v:register) ==# 'V'
+"     normal! =']
+"   endif
+" endfunction
 
 "Like it should be
 nnoremap Y y$
