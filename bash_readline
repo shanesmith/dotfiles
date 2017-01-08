@@ -1,0 +1,46 @@
+#!/bin/bash
+
+__readline_insert() {
+  READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}$1${READLINE_LINE:$READLINE_POINT}"
+  READLINE_POINT=$(( $READLINE_POINT + ${#1} ))
+}
+
+__readline_replace() {
+  READLINE_LINE="$1"
+  READLINE_POINT="${#1}"
+}
+
+_fzf_git_lol() {
+  local sha="$(git lol | fzf --ansi --reverse --no-sort --tiebreak=index | grep -ow '[a-z0-9]\{7\}' | head -1)"
+  if [[ -n $sha ]]; then
+    __readline_insert "$sha"
+  fi
+}
+
+_fzf_history() { 
+  local line
+  shopt -u nocaseglob nocasematch
+  line=$(HISTTIMEFORMAT= history | fzf --no-sort --tac +m -n2..,.. --tiebreak=index --toggle-sort=ctrl-r | awk '{ $1=""; print $0 }' | sed 's/^ *//')
+  __readline_replace "$line"
+}
+
+_fzf_files() {
+  local file="$(fzf)"
+  if [[ -n $file ]]; then
+    __readline_insert "$file"
+  fi
+}
+
+_fzf_cd() {
+  local dir=$(command find -L . \( -path '*/\.*' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \) -prune -o -type d -print 2> /dev/null | sed 1d | cut -b3- | fzf)
+  __readline_replace "cd ${dir}"
+}
+
+if command -v fzf >/dev/null; then
+  bind -x '"\C-r": _fzf_history'
+  bind -x '"\C-ff": _fzf_files'
+  bind -x '"\C-f\C-f": _fzf_files'
+  bind -x '"\C-fg": _fzf_git_lol'
+  bind -x '"\C-fc": _fzf_cd'
+fi
+

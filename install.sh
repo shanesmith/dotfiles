@@ -1,6 +1,8 @@
 #!/bin/bash
 
-DOTFILES="bashrc bash_ps1 bash_aliases bash_sshauth gitconfig gitignore vimrc vim ackrc inputrc colordiffrc npmrc agignore tmux.conf tmux bin tmuxinator"
+# TODO install .bash_profile on macOS (others?) with `. ~/.bashrc`
+
+DOTFILES="bashrc bash_ps1 bash_aliases bash_sshauth bash_readline gitconfig gitignore vimrc vim ackrc inputrc colordiffrc npmrc agignore tmux.conf tmux bin tmuxinator"
 
 LINUX_DOTFILES="Xmodmap imwheelrc"
 

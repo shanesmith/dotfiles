@@ -88,6 +88,7 @@ sources=(
   "${HOME}/.bash_ps1"
   "${HOME}/.bash_aliases"
   "${HOME}/.bash_sshauth"
+  "${HOME}/.bash_readline"
   "${HOME}/.bashrc.local"
   "${HOME}/.rvm/scripts/rvm"
 )
