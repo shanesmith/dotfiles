@@ -1451,11 +1451,6 @@ augroup LoadLastKnownPosition
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 augroup END
 
-augroup TitleString
-  au!
-  auto BufEnter * let &titlestring = "Vim@" . hostname() . "/" . expand("%:p")
-augroup END
-
 augroup JSONRC
   au!
   auto BufNewFile,BufRead .jscsrc,.jshintrc setf json
