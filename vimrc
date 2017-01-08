@@ -1448,7 +1448,13 @@ endfunction
 command! -nargs=? -complete=syntax Scratch call <SID>NewScratch(<f-args>)
 function! s:NewScratch(...)
   let type = a:0 ? a:1 : 'markdown'
-  vnew
+
+  if &ft == 'nerdtree'
+    enew
+  else
+    vnew
+  endif
+
   exec "setf" type
 endfunction
 
