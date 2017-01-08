@@ -140,20 +140,34 @@ d() {
   '
 }
 g() {
-  local show=0
-  local num="+"
-  if [[ $# -eq 0 ]]; then
-    while [[ $num == "+" ]]; do
-      (( show += 10 ))
-      d "$show"
-      read -p "Go to: "
-      num="$REPLY"
-    done
+  local dir
+
+  if command -v fzf >/dev/null; then
+
+    dir="$(d 0 | fzf | awk '{print $2}')"
+
   else
-    num=$1
+
+    local show=0
+    local num="+"
+
+    if [[ $# -eq 0 ]]; then
+      while [[ $num == "+" ]]; do
+        (( show += 10 ))
+        d "$show"
+        read -p "Go to: "
+        num="$REPLY"
+      done
+    else
+      num=$1
+    fi
+
+    dir=$(d 0 | awk -v line=$num 'NR==line+1 { $1=""; print $0; exit }')
+
   fi
-  local dir=$(d 0 | awk -v line=$num 'NR==line+1 { $1=""; print $0; exit }')
+
   dir=$(eval echo ${dir//>})
+
   cd "$dir"
 }
 
