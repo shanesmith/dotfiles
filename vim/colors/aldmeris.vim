@@ -382,5 +382,8 @@ hi link jsGlobalObjects     Statement
 hi link jsGlobalNodeObjects Statement
 " }}}
 
+if exists('g:loaded_airline')
+  AirlineTheme dark
+endif
 
 " vim: set fdm=marker:
