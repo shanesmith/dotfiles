@@ -464,6 +464,7 @@ let g:airline_mode_map = {
       \ '' : 'S',
       \ }
 
+Plug 'morhetz/gruvbox'
 
 Plug 'chrisbra/Colorizer'
 let g:colorizer_auto_filetype='css,scss,sass'
