@@ -34,6 +34,7 @@ os_is_linux() {
   [[ $(uname -s) == "Linux" ]]
 }
 
+alias npr="npm run"
 npm_upgrade() {
   for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f2)
   do
