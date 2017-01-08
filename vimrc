@@ -1168,7 +1168,13 @@ function! s:reindent_inner()
 endfunction
 
 function! s:do_moveit(first, last, target)
+  " https://github.com/vim/vim/issues/536
+  let saveFoldMethod = &fdm
+  let &fdm = "manual"
+
   exec a:first . "," . a:last . "move" a:target
+
+  let &fdm = saveFoldMethod
 endfunction
 
 
