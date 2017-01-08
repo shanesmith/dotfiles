@@ -1,6 +1,5 @@
 
 "{{{ Settings
-
 " Let's make sure that all the annoying bugs in VI are not displayed in VIM.
 set nocompatible
 
@@ -89,6 +88,8 @@ set guioptions+=c
 if has("gui_macvim")
   set macmeta
   set guifont=Droid_Sans_Mono_for_Powerline:h10
+elseif exists('neovim_dot_app')
+  call MacSetFont('Droid Sans Mono for Powerline', 10)
 elseif has("gui_gtk2")
   set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 9
 endif
@@ -99,7 +100,6 @@ set autoindent
 set copyindent
 
 "VIM will show the corresponding opening and closing curly brace, bracket or parentesis.
-set showmatch
 set matchtime=1
 
 "Show incomplete command
@@ -111,8 +111,12 @@ set completeopt-=preview
 "Display the status bar at the bottom
 set ruler
 
-"Faster drawing... apparently...
-set lazyredraw
+if !exists('neovim_dot_app')
+  "Faster drawing... apparently...
+  set lazyredraw
+
+  set showmatch
+endif
 
 "Mostly for a better maximizer
 set winminwidth=0
@@ -120,11 +124,7 @@ set winminheight=0
 
 "Error bell
 set noerrorbells
-if has("gui_macvim")
-  set visualbell
-else
-  set novisualbell
-endif
+set visualbell
 set t_vb=
 
 "Always display tab and status bar
@@ -759,7 +759,6 @@ nnoremap <silent> <C-w>w :call WindowSwap#EasyWindowSwap()<CR>
 nnoremap <silent> <C-w><C-w> :call WindowSwap#EasyWindowSwap()<CR>
 
 Plug 'christoomey/vim-tmux-navigator'
-
 inoremap <silent> <c-h> <ESC>:TmuxNavigateLeft<cr>
 inoremap <silent> <c-j> <ESC>:TmuxNavigateDown<cr>
 inoremap <silent> <c-k> <ESC>:TmuxNavigateUp<cr>
@@ -834,6 +833,11 @@ endif
 "}}}
 
 "{{{ Mappings
+
+if has("nvim")
+  " quick fix for https://github.com/neovim/neovim/issues/2048
+  nnoremap <silent> <BS> :<C-U>TmuxNavigateLeft<CR>
+endif
 
 "Toggle spellchecker
 nnoremap <F11> :setlocal spell!<CR>
