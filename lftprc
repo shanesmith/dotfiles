@@ -1,0 +1,10 @@
+alias ll ls -lF
+
+alias lls !ls
+alias lll !ls -ahlF
+
+alias QQ exit
+
+set cmd:default-protocol "sftp"
+
+set cmd:prompt "\\[\\033[1;35m\\]lftp\\[\\033[0m\\] \\S\\? \\[\\033[0;32m\\]\\u\\@\\h\\[\\033[0m\\]:\\[\\033[0;36m\\]\\w\\[\\033[0m\\]> "
