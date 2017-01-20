@@ -1,5 +1,5 @@
 
-"{{{ Settings
+" Settings {{{
 " Let's make sure that all the annoying bugs in VI are not displayed in VIM.
 set nocompatible
 
@@ -212,7 +212,7 @@ let maplocalleader = "|"
 
 "}}} Settings
 
-"{{{ Plugins
+" Plugins {{{
 
 call plug#begin('~/.vim/bundle')
 
@@ -826,7 +826,7 @@ endfunction
 
 "}}}
 
-"{{{ Colorscheme
+" Colorscheme {{{
 
 if &t_Co == 256 || has("gui_running")
   try
@@ -841,7 +841,7 @@ endif
 
 "}}}
 
-"{{{ Mappings
+" Mappings {{{
 
 if has("nvim")
   " quick fix for https://github.com/neovim/neovim/issues/2048
@@ -1419,7 +1419,7 @@ endfunction
 
 "}}}
 
-"{{{ Commands
+" Commands {{{
 
 " Big W also writes
 command! W w
@@ -1457,6 +1457,10 @@ function! s:NewScratch(...)
 
   exec "setf" type
 endfunction
+
+"}}}
+
+" AutoCommands {{{
 
 " http://www.bestofvim.com/tip/auto-reload-your-vimrc/
 " augroup reload_vimrc " {
