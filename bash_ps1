@@ -160,12 +160,12 @@ ${debian_chroot}\
 ${HOST}\
 \$(__smiley)\
 ${CWD}\
+\$(__ssh_keys_status)\
 \$(__jobs_status)\
 \$(__vagrant_status)\
 \$(__nvm_status)\
 \$(__docker_compose_status)\
 \$(__git_ps1 ' (%s)')\
-\$(__ssh_keys_status)\
 \n\
 ${HISTORY_NUMBER}\
  \
