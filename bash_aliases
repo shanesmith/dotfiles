@@ -34,12 +34,24 @@ os_is_linux() {
   [[ $(uname -s) == "Linux" ]]
 }
 
-alias npr="npm run"
+alias npr="npm run" # run script
+alias npl="npm-run" # run with local patch
 npm_upgrade() {
   for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f2)
   do
     npm -g install "$package"
   done
+}
+
+npm_list_license() {
+  npm list --depth=0 \
+    | tail -n +2 \
+    | awk '! /^\s*$/ {print $2}' \
+    | while read package; do 
+      # sed 's/@.*$//' <<<"$package" | xargs -I'{}' npm --no-progress info '{}' license
+      local license=$(sed 's/@.*$//' <<<"$package" | xargs -I'{}' npm --no-progress info '{}' license)
+      echo "$package ($license)"
+    done
 }
 
 bak() {
