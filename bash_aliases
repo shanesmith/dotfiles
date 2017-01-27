@@ -417,6 +417,15 @@ icanhazip() {
   echo "external $(curl -s http://icanhazip.com/s)"
 }
 
+man() {
+  local what="$(type -t "$1")"
+  if [[ "$what" == "builtin" ]]; then
+    help "$1"
+  else
+    /usr/bin/man "$1"
+  fi
+}
+
 __ansi_color() {
   local code
 
