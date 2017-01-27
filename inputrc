@@ -24,3 +24,10 @@
 # this lets you hit tab to auto-complete a file or 
 # directory name ignoring case
 set completion-ignore-case On
+
+# option completion-prefix-display-length disables colors...
+set colored-completion-prefix On
+
+set menu-complete-display-prefix On
+
+set visible-stats On
