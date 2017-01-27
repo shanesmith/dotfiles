@@ -3,13 +3,13 @@ snippet strict "use strict" b
 endsnippet
 
 snippet fn "function" w
-function ${1:function_name}(${2:argument}) {
+function(${1}) {
 	${VISUAL}$0
 }
 endsnippet
 
-snippet fna "function (anonymous)" w
-function(${1}) {
+snippet fnn "named function" w
+function ${1:function_name}(${2:argument}) {
 	${VISUAL}$0
 }
 endsnippet
