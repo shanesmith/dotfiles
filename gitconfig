@@ -41,7 +41,6 @@
   k = !gitk --all >/dev/null 2>&1 &
 
 # Git-SVN
-  s = svn
   slog = svn log --show-commit
   slogf = svn log --show-commit --verbose
   slol = svn log --show-commit --oneline
@@ -76,6 +75,8 @@
   mup = "!f(){ [ $# -eq 1 ] && git checkout $1 && git merge && git co -; }; f"
   sweep = "!f() { echo \"Would delete branches:\"; git branch --merged ${1:-HEAD} | grep -v '^\\*' | grep -v '^  *master$'; }; f"
   sweepit = "!f() { git branch --merged ${1:-HEAD} | grep -v '^\\*' | grep -v '^  *master$' | xargs git branch -d; }; f"
+  upstream = "!f() { git branch --set-upstream-to=\"$1\"; }; f"
+  topic = "!gerrit topic"
 
 # Commit
   cc = "!f() { if [ -n \"$1\" ]; then git commit -m \"$1\"; else git commit; fi; }; f"
