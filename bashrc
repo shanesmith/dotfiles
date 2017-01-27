@@ -28,7 +28,7 @@ if [[ ! $TERM =~ screen ]]; then
 fi
 
 # set shell options
-shopt -s histappend cdspell checkwinsize dirspell autocd globstar
+shopt -s histappend cdspell checkwinsize dirspell direxpand autocd globstar no_empty_cmd_completion
 
 # Some additional evironment variables
 export EDITOR=vim
