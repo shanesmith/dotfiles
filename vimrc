@@ -417,8 +417,8 @@ let g:maximizer_default_mapping_key = '<F4>'
 
 " Plug 'tpope/vim-fugitive'
 
-" Plug 'sjl/gundo.vim'
-" nnoremap <leader>u :GundoToggle<CR>
+Plug 'sjl/gundo.vim'
+nnoremap <leader>u :GundoToggle<CR>
 
 Plug 'dohsimpson/vim-macroeditor'
 
@@ -501,6 +501,8 @@ xmap i- <Plug>GitGutterTextObjectInnerVisual
 xmap a- <Plug>GitGutterTextObjectOuterVisual
 
 Plug 'vim-scripts/SyntaxRange'
+
+Plug 'lfv89/vim-interestingwords'
 
 
 """
