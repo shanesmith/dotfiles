@@ -571,11 +571,11 @@ vmap <Tab> <Plug>(LiveEasyAlign)
 
 Plug 'tomtom/tcomment_vim'
 let g:tcommentTextObjectInlineComment = ''
-nnoremap \\ :TComment<CR>
-vnoremap \\ :TComment<CR>
-nnoremap \* :TCommentBlock<CR>
-vnoremap \* :TCommentBlock<CR>
-nmap \  <Plug>TComment_gc
+nnoremap <silent> \\ :TComment<CR>
+vnoremap <silent> \\ :TComment<CR>
+nnoremap <silent> \* :TCommentBlock<CR>
+vnoremap <silent> \* :TCommentBlock<CR>
+nmap \ <Plug>TComment_gc
 
 
 """
