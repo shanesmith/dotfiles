@@ -45,9 +45,6 @@ export HISTFILESIZE=2000
 # default options for less
 export LESS="-SRi"
 
-# github allows more api hits (ex: for searches) when authenticated
-export HOMEBREW_GITHUB_API_TOKEN=f9cca0a2af5001e17aa2eab63ebf78bd9599890c
-
 # make less more friendly for non-text input files, see lesspipe(1)
 $(which lesspipe >/dev/null) && eval "$(lesspipe)"
 $(which lesspipe.sh >/dev/null) && eval "$(lesspipe.sh)"
