@@ -382,6 +382,17 @@ hi link jsGlobalObjects     Statement
 hi link jsGlobalNodeObjects Statement
 " }}}
 
+highlight conflictOursMarker   term=bold ctermfg=16 gui=bold guifg=#AAAAAA guibg=#000000 cterm=bold ctermbg=102
+highlight conflictBaseMarker   term=bold ctermfg=16 gui=bold guifg=#AAAAAA guibg=#000000 cterm=bold ctermbg=102
+highlight conflictTheirsMarker term=bold ctermfg=16 gui=bold guifg=#AAAAAA guibg=#000000 cterm=bold ctermbg=102
+highlight conflictSeparatorMarkerSymbol term=bold ctermfg=16 gui=bold guifg=#AAAAAA guibg=#000000 cterm=bold ctermbg=102
+
+highlight GitGutterAdd    cterm=bold ctermbg=237  ctermfg=119
+highlight GitGutterDelete cterm=bold ctermbg=237  ctermfg=167
+highlight GitGutterChange cterm=bold ctermbg=237  ctermfg=227
+
+hi ExtraWhitespace ctermbg=124 guibg=#af0000
+
 if exists('g:loaded_airline')
   AirlineTheme dark
 endif

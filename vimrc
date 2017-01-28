@@ -473,12 +473,6 @@ let g:colorizer_colornames = 0
 
 Plug 'vim-scripts/ConflictDetection'
 let g:ConflictDetection_WarnEvents = ''
-highlight conflictOursMarker term=bold ctermfg=16 gui=bold guifg=#000000 cterm=bold ctermbg=102
-highlight conflictBaseMarker term=bold ctermfg=16 gui=bold guifg=#000000 cterm=bold ctermbg=102
-highlight conflictTheirsMarker term=bold ctermfg=16 gui=bold guifg=#000000 cterm=bold ctermbg=102
-highlight conflictSeparatorMarkerSymbol term=bold ctermfg=16 gui=bold guifg=#000000 cterm=bold ctermbg=102
-" hi conflictOurs term=bold cterm=bold ctermfg=64 ctermbg=0 gui=bold guifg=#4e9a06 guibg=#000
-" hi conflictTheirs term=reverse cterm=bold ctermfg=74 ctermbg=0 gui=bold guifg=#729fcf guibg=#000
 
 Plug 'kshenoy/vim-signature'
 " GotoNext/PrevMarkerAny unmap due to conflict with conflictmotions
@@ -496,9 +490,6 @@ let g:SignatureMap = {
 
 Plug 'airblade/vim-gitgutter'
 let g:gitgutter_map_keys = 0
-highlight GitGutterAdd    cterm=bold ctermbg=237  ctermfg=119
-highlight GitGutterDelete cterm=bold ctermbg=237  ctermfg=167
-highlight GitGutterChange cterm=bold ctermbg=237  ctermfg=227
 nmap ]- <plug>GitGutterNextHunk
 nmap [- <plug>GitGutterPrevHunk
 nmap <leader>-s <plug>GitGutterStageHunk
@@ -562,7 +553,6 @@ Plug 'editorconfig/editorconfig-vim'
 
 Plug 'ntpeters/vim-better-whitespace'
 let g:current_line_whitespace_disabled_soft = 1
-hi ExtraWhitespace ctermbg=124 guibg=#af0000
 command! WhitespaceStrip StripWhitespace
 
 Plug 'Chiel92/vim-autoformat'
