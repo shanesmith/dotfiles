@@ -423,6 +423,8 @@ nnoremap <leader>u :GundoToggle<CR>
 Plug 'dohsimpson/vim-macroeditor'
 
 Plug 'maxbrunsfeld/vim-yankstack'
+let g:yankstack_yank_keys = ['c', 'C', 'd', 'D', 'x', 'X', 'y', 'Y'] " remove s key (that's for sneak)
+
 
 """
 """ LOLz
