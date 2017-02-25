@@ -17,6 +17,13 @@ if &term == "screen-256color"
   execute "set <xLeft>=\e[1;*D"
 endif
 
+" formatoptions
+" https://stackoverflow.com/questions/16030639/vim-formatoptions-or/23326474#23326474
+augroup formatoptions
+  au!
+  autocmd BufEnter * setlocal formatoptions-=o formatoptions+=nj
+augroup END
+
 "set autoindent
 set tabstop=2
 set shiftwidth=2
