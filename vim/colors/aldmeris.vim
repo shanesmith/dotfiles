@@ -255,7 +255,7 @@ call s:Hi( 'CursorLine',    s:cursorline,   "NONE",         "NONE" )
 call s:Hi( 'CursorLineNr',  "NONE",         s:butter1,      "NONE" )
 call s:Hi( 'Directory',     s:aluminium6,   s:skyblue1,     "NONE" )
 call s:Hi( 'DiffAdd',       s:black,        s:chameleon3,   "bold" )
-call s:Hi( 'DiffChange',    s:aluminium5,   s:orange1,      "bold" )
+call s:Hi( 'DiffChange',    s:black,        s:orange1,      "bold" )
 call s:Hi( 'DiffDelete',    s:aluminium5,   s:scarletred2,  "bold" )
 call s:Hi( 'DiffText',      s:black,        s:skyblue1,     "bold" )
 call s:Hi( 'ErrorMsg',      s:scarletred2,  s:aluminium1 )
@@ -392,6 +392,8 @@ highlight GitGutterDelete cterm=bold ctermbg=237  ctermfg=167
 highlight GitGutterChange cterm=bold ctermbg=237  ctermfg=227
 
 hi ExtraWhitespace ctermbg=124 guibg=#af0000
+
+highlight MatchTag cterm=underline gui=underline
 
 if exists('g:loaded_airline')
   AirlineTheme dark
