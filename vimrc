@@ -1508,12 +1508,12 @@ command! -range=% -nargs=0 Space2Tab execute '<line1>,<line2>s#^\( \{'.&ts.'\}\)
 command! ReloadVimrc source $MYVIMRC
 
 command! SyntaxGroup call <SID>SyntaxGroup()
-function s:SyntaxGroup()
+function! s:SyntaxGroup()
   let id = synID(line('.'), col('.'), 1)
   let name = synIDattr(id, 'name')
   let transName = synIDattr(synIDtrans(id), 'name')
   echo  name . ' -> ' . transName
-  exec "hi" transName
+  exec "verb hi" transName
 endfunction
 
 command! -nargs=? -complete=syntax Scratch call <SID>NewScratch(<f-args>)
