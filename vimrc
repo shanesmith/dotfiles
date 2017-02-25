@@ -777,6 +777,7 @@ nnoremap <silent> <C-w>w :call WindowSwap#EasyWindowSwap()<CR>
 nnoremap <silent> <C-w><C-w> :call WindowSwap#EasyWindowSwap()<CR>
 
 Plug 'christoomey/vim-tmux-navigator'
+let g:tmux_navigator_disable_when_zoomed = 1
 inoremap <silent> <c-h> <ESC>:TmuxNavigateLeft<cr>
 inoremap <silent> <c-j> <ESC>:TmuxNavigateDown<cr>
 inoremap <silent> <c-k> <ESC>:TmuxNavigateUp<cr>
