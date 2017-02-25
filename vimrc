@@ -1490,6 +1490,8 @@ nnoremap gi gUli
 
 " Commands {{{
 
+command! CountMatches %s///rn
+
 " Big W also writes
 command! W w
 command! Wq wq
