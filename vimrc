@@ -761,6 +761,10 @@ Plug 'kana/vim-textobj-function'
 
 Plug 'thinca/vim-textobj-function-javascript'
 
+Plug 'beloglazov/vim-textobj-quotes'
+xmap q iq
+omap q iq
+
 " Plug 'coderifous/textobj-word-column.vim'
 
 "}}}
@@ -790,6 +794,10 @@ Plug 'edkolev/tmuxline.vim'
 "" Operations {{{
 
 Plug 'tommcdo/vim-exchange'
+
+Plug 'AndrewRadev/sideways.vim'
+nnoremap <leader><left> :SidewaysLeft<CR>
+nnoremap <leader><right> :SidewaysRight<CR>
 
 Plug 'AndrewRadev/splitjoin.vim'
 
