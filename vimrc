@@ -1529,6 +1529,8 @@ function! s:NewScratch(...)
   exec "setf" type
 endfunction
 
+command! CountPlugins echo len(keys(g:plugs))
+
 "}}}
 
 " AutoCommands {{{
