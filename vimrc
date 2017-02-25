@@ -587,6 +587,7 @@ nmap \ <Plug>TComment_gc
 "" File Types {{{
 
 Plug 'sheerun/vim-polyglot'
+let g:jsx_ext_required = 1
 let g:vim_json_syntax_conceal = 0
 
 Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
