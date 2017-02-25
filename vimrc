@@ -223,9 +223,7 @@ let maplocalleader = "|"
 
 call plug#begin('~/.vim/bundle')
 
-"""
-""" File Navigation and Search
-"""
+"" File Navigation and Search {{{
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
@@ -318,10 +316,9 @@ Plug 'henrik/vim-qargs'
 
 Plug 'chrisbra/Recover.vim'
 
+"}}}
 
-"""
-""" Utilities
-"""
+"" Utilities {{{
 
 Plug 'diepm/vim-rest-console'
 let g:vrc_trigger = '<F5>'
@@ -432,10 +429,9 @@ Plug 'dohsimpson/vim-macroeditor'
 Plug 'maxbrunsfeld/vim-yankstack'
 let g:yankstack_yank_keys = ['c', 'C', 'd', 'D', 'x', 'X', 'y', 'Y'] " remove s key (that's for sneak)
 
+"}}}
 
-"""
-""" LOLz
-"""
+"" LOLz {{{
 
 Plug 'koron/nyancat-vim'
 
@@ -443,10 +439,9 @@ Plug 'koron/nyancat-vim'
 Plug 'mjbrownie/hackertyper.vim'
 command! StartHackerTyper w! %.hackertyper | exec "normal ggdG" | call hackertyper#startHackerTyper() | startinsert
 
+"}}}
 
-"""
-""" Display
-"""
+"" Display {{{
 
 Plug 'vim-scripts/molokai'
 
@@ -514,9 +509,9 @@ Plug 'vim-scripts/SyntaxRange'
 Plug 'lfv89/vim-interestingwords'
 
 
-"""
-""" Motions
-"""
+"}}}
+
+"" Motions {{{
 
 Plug 'rhysd/clever-f.vim'
 
@@ -556,9 +551,9 @@ xmap [c <Plug>(columnmove-gE)
 omap [c <Plug>(columnmove-gE)
 
 
-"""
-""" Formatting
-"""
+"}}}
+
+"" Formatting {{{
 
 Plug 'editorconfig/editorconfig-vim'
 
@@ -585,9 +580,9 @@ vnoremap <silent> \* :TCommentBlock<CR>
 nmap \ <Plug>TComment_gc
 
 
-"""
-""" File Types
-"""
+"}}}
+
+"" File Types {{{
 
 Plug 'sheerun/vim-polyglot'
 let g:vim_json_syntax_conceal = 0
@@ -610,9 +605,9 @@ endfunction
 Plug 'suan/vim-instant-markdown', { 'do': 'npm install -g instant-markdown-d' }
 let g:instant_markdown_autostart = 0
 
-"""
-""" Debugging
-"""
+"}}}
+
+"" Debugging {{{
 
 " Plug 'joonty/vdebug'
 
@@ -677,9 +672,9 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 " let g:dbgPavimKeyToggleBae = "<leader>de"
 
 
-"""
-""" Snippets
-"""
+"}}}
+
+"" Snippets {{{
 
 Plug 'mattn/emmet-vim'
 let g:emmet_html5 = 0
@@ -729,9 +724,9 @@ snoremap <silent> <s-tab> <Esc>:call UltiSnips#JumpBackwards()<CR>
 " Plug 'honza/vim-snippets'
 
 
-"""
-""" Text Objects
-"""
+"}}}
+
+"" Text Objects {{{
 
 Plug 'wellle/targets.vim'
 let g:targets_quotes = ""
@@ -756,9 +751,9 @@ Plug 'thinca/vim-textobj-function-javascript'
 
 " Plug 'coderifous/textobj-word-column.vim'
 
-"""
-""" Windows
-"""
+"}}}
+
+"" Windows {{{
 
 Plug 'wesQ3/vim-windowswap'
 let g:windowswap_map_keys = 0
@@ -778,9 +773,9 @@ Plug 'sjl/vitality.vim'
 Plug 'edkolev/tmuxline.vim'
 
 
-"""
-""" Operations
-"""
+"}}}
+
+"" Operations {{{
 
 Plug 'tommcdo/vim-exchange'
 
@@ -826,6 +821,8 @@ function! airline#extensions#tabline#title(n)
 endfunction
 
 "}}}
+
+" }}}
 
 " Colorscheme {{{
 
