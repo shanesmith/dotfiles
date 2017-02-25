@@ -574,12 +574,13 @@ Plug 'junegunn/vim-easy-align'
 vmap <Tab> <Plug>(LiveEasyAlign)
 
 Plug 'tomtom/tcomment_vim'
-let g:tcommentTextObjectInlineComment = ''
+let g:tcommentMaps = 0
 nnoremap <silent> \\ :TComment<CR>
 vnoremap <silent> \\ :TComment<CR>
-nnoremap <silent> \* :TCommentBlock<CR>
+nnoremap <silent> \** :TCommentBlock<CR>
 vnoremap <silent> \* :TCommentBlock<CR>
-nmap \ <Plug>TComment_gc
+nmap \ <Plug>TComment_Comment
+nmap \* <Plug>TComment_Commentb
 
 
 "}}}
