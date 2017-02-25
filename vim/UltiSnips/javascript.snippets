@@ -32,6 +32,16 @@ snippet rq "require" b
 const ${1} = require("$1");
 endsnippet
 
+snippet () "arrow function" w
+() => $0
+endsnippet
+
+snippet iife "IIFE" b
+(function() {
+	$0
+}());
+endsnippet
+
 ###
 ### Angular
 ###
