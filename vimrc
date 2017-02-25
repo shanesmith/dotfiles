@@ -1418,7 +1418,7 @@ nnoremap \q gqip
 nnoremap dc cc<esc>
 
 "Swap quotes
-nnoremap <leader>' :call <SID>SwapQuotes()<CR>
+nnoremap <silent> <leader>' :call <SID>SwapQuotes()<CR>
 function! s:SwapQuotes()
   let origline = line('.')
   let origcol = col('.')
