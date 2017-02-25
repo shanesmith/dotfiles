@@ -1343,8 +1343,8 @@ nnoremap QQ :quit<CR>
 nnoremap Q!! :quit!<CR>
 
 "You Paste
-nnoremap <silent><expr> yp ':let b:silly="' . v:register . '"<CR>:set opfunc=<SID>YouPaste<CR>g@'
-nnoremap <silent><expr> ypp 'V:<C-U>let b:silly="' . v:register . '"<CR>:<C-U>call <SID>YouPaste(visualmode(), 1)<CR>'
+nnoremap <silent><expr> _ ':let b:silly="' . v:register . '"<CR>:set opfunc=<SID>YouPaste<CR>g@'
+nnoremap <silent><expr> __ 'V:<C-U>let b:silly="' . v:register . '"<CR>:<C-U>call <SID>YouPaste(visualmode(), 1)<CR>'
 vnoremap <silent><expr> p ':<C-U>let b:silly="' . v:register . '"<CR>:<C-U>call <SID>YouPaste(visualmode(), 1)<CR>'
 function! s:YouPaste(type, ...)
   if a:0
@@ -1356,12 +1356,9 @@ function! s:YouPaste(type, ...)
 endfunction
 
 "Duplicate
-nnoremap <silent> [d :set opfunc=<SID>DuplicateUp<CR>g@
-nnoremap <silent> ]d :set opfunc=<SID>DuplicateDown<CR>g@
-nnoremap <silent> [dd V:<C-U>call <SID>DuplicateUp(visualmode())<CR>
-nnoremap <silent> ]dd V:<C-U>call <SID>DuplicateDown(visualmode())<CR>
-vnoremap <silent> [d :<C-U>call <SID>DuplicateUp(visualmode())<CR>
-vnoremap <silent> ]d :<C-U>call <SID>DuplicateDown(visualmode())<CR>
+nnoremap <silent> + :set opfunc=<SID>DuplicateDown<CR>g@
+nnoremap <silent> ++ V:<C-U>call <SID>DuplicateDown(visualmode())<CR>
+vnoremap <silent> + :<C-U>call <SID>DuplicateDown(visualmode())<CR>
 function! s:DuplicateUp(type)
   call <SID>Duplicate(a:type, 'up')
 endfunction
@@ -1390,9 +1387,9 @@ function! s:Duplicate(type, direction)
 endfunction
 
 "Duplicate and comment
-nnoremap <silent> \d :set opfunc=<SID>DuplicateAndComment<CR>g@
-nnoremap <silent> \dd V:<C-U>call <SID>DuplicateAndComment(visualmode())<CR>
-vnoremap <silent> \d :<C-U>call <SID>DuplicateAndComment(visualmode())<CR>
+nnoremap <silent> \+ :set opfunc=<SID>DuplicateAndComment<CR>g@
+nnoremap <silent> \++ V:<C-U>call <SID>DuplicateAndComment(visualmode())<CR>
+vnoremap <silent> \+ :<C-U>call <SID>DuplicateAndComment(visualmode())<CR>
 function! s:DuplicateAndComment(type)
   if a:type ==? 'v'
     let [mark1, mark2] = ['`<', '`>']
