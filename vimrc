@@ -1443,6 +1443,46 @@ function! s:SwapQuotes()
   endif
 endfunction
 
+"Factor out
+" vnoremap <silent> <leader>f :call inputsave()<CR>gvc<C-R>=input("variable name: ")<CR><ESC>:call inputrestore()<CR>Ovar <C-R>. = ;<ESC>PA<CR><ESC>kWVjj:MultipleCursorFind __factored__<CR>c
+vnoremap <silent> <C-X>v :call <SID>ExtractVariable(visualmode())<CR>
+function! s:ExtractVariable(mode) range
+
+  call inputsave()
+  let name = input("Name: ")
+  call inputrestore()
+
+  if name == ""
+    return
+  endif
+
+  exec "normal! `<v`>".(a:mode ==# 'V' ? "h" : "")."\"hd"
+
+  let @h = matchstr(@h, '^\v\_s*\zs.{-}\ze\_s*$')
+
+  exec "normal! i".name."\<ESC>Ovar ".name." = \<C-R>h;\<CR>\<ESC>k^W"
+
+endfunction
+
+vnoremap <silent> <C-X>f :call <SID>ExtractFunction(visualmode())<CR>
+function! s:ExtractFunction(mode) range
+
+  call inputsave()
+  let name = input("Name: ")
+  call inputrestore()
+
+  if name == ""
+    return
+  endif
+
+  exec "normal! `<v`>".(a:mode ==# 'V' ? "h" : "")."\"hd"
+
+  let @h = matchstr(@h, '^\v\_s*\zs.{-}\ze\_s*$')
+
+  exec "normal! i".name."()\<ESC>ofunction ".name."() {\<CR>\<C-R>h\<CR>}\<ESC>V%"
+
+endfunction
+
 "}}}
 
 " Commands {{{
