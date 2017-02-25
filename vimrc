@@ -357,19 +357,20 @@ let g:switch_custom_definitions =
       \   ['absolute', 'relative', 'fixed']
       \ ]
 
-autocmd FileType javascript let b:switch_custom_definitions =
-      \[
-      \   {
-      \     'function\((.*)\)': '\1 =>'
-      \   }
-      \]
+"" Included by default?
+" autocmd FileType javascript let b:switch_custom_definitions =
+"       \[
+"       \   {
+"       \     'function\((.*)\)': '\1 =>'
+"       \   }
+"       \]
 
 Plug 'fisadev/vim-ctrlp-cmdpalette'
 
 Plug 'lfilho/cosco.vim'
-autocmd FileType javascript,php,css,java,c,cpp nnoremap <buffer> <silent> ;; :call <SID>custom_cosco()<CR>
-autocmd FileType javascript,php,css,java,c,cpp vnoremap <buffer> <silent> ;; :call cosco#commaOrSemiColon()<CR>
-autocmd FileType javascript,php,css,java,c,cpp inoremap <buffer> <silent> ;; <C-o>:call <SID>custom_cosco()<CR>
+autocmd FileType javascript,php,css,scss,java,c,cpp nnoremap <buffer> <silent> ;; :call <SID>custom_cosco()<CR>
+autocmd FileType javascript,php,css,scss,java,c,cpp vnoremap <buffer> <silent> ;; :call cosco#commaOrSemiColon()<CR>
+autocmd FileType javascript,php,css,scss,java,c,cpp inoremap <buffer> <silent> ;; <C-o>:call <SID>custom_cosco()<CR>
 function! s:custom_cosco()
   let travel = 0
   if match(getline('.'), '^\s*$') != -1
