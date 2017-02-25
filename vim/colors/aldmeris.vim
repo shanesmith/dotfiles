@@ -387,9 +387,9 @@ highlight conflictBaseMarker   term=bold ctermfg=16 gui=bold guifg=#AAAAAA guibg
 highlight conflictTheirsMarker term=bold ctermfg=16 gui=bold guifg=#AAAAAA guibg=#000000 cterm=bold ctermbg=102
 highlight conflictSeparatorMarkerSymbol term=bold ctermfg=16 gui=bold guifg=#AAAAAA guibg=#000000 cterm=bold ctermbg=102
 
-highlight GitGutterAdd    cterm=bold ctermbg=237  ctermfg=119
-highlight GitGutterDelete cterm=bold ctermbg=237  ctermfg=167
-highlight GitGutterChange cterm=bold ctermbg=237  ctermfg=227
+highlight GitGutterAddDefault    cterm=bold ctermbg=237  ctermfg=119
+highlight GitGutterDeleteDefault cterm=bold ctermbg=237  ctermfg=167
+highlight GitGutterChangeDefault cterm=bold ctermbg=237  ctermfg=227
 
 hi ExtraWhitespace ctermbg=124 guibg=#af0000
 
