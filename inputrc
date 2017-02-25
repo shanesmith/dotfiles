@@ -1,28 +1,21 @@
-# these allow you to use ctrl+left/right arrow keys
-# to jump the cursor over words
-"\e[1;5C": forward-word
-"\e[1;5D": backward-word
+# ctrl + left/right
+"\e[1;5C": shell-forward-word
+"\e[1;5D": shell-backward-word
 
-"\e[1;6C": shell-forward-word
-"\e[1;6D": shell-backward-word
+# meta + left/right
+"\e[1;3C": forward-word
+"\e[1;3D": backward-word
 
-# these allow you to start typing a command and 
-# use the up/down arrow to auto complete from 
-# commands in your history
+# page up/down
 "\e[5~": history-search-backward
 "\e[6~": history-search-forward
-# Mac
-"\e[1;5A": history-search-backward
-"\e[1;5B": history-search-forward
 
-"\ed": kill-whole-line
-"\C-d": kill-whole-line
+# ctrl + up/down
+"\e[1;5A": menu-complete
+"\e[1;5B": menu-complete-backward
 
-# "\C-j": menu-complete
-# "\C-k": menu-complete-backward
+"\C-p": shell-expand-line
 
-# this lets you hit tab to auto-complete a file or 
-# directory name ignoring case
 set completion-ignore-case On
 
 # option completion-prefix-display-length disables colors...
