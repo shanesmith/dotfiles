@@ -113,6 +113,7 @@
 
 [merge]
   defaultToUpstream = true
+  conflictStyle = diff3
 
 [push]
   default = tracking  # deprecated, update to "upstream" when removed
