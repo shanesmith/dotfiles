@@ -705,6 +705,7 @@ let g:user_emmet_settings = {
       \ }
 
 Plug 'sirver/ultisnips'
+let g:UltiSnipsEditSplit = "context"
 let g:UltiSnipsExpandTrigger = '<C-y>'
 let g:UltiSnipsJumpForwardTrigger = "<nop>"
 let g:UltiSnipsJumpBackwardTrigger = "<nop>"
