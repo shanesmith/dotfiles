@@ -664,6 +664,12 @@ endfunction
 
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --tern-completer' }
 let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_key_list_select_completion = ['<Down>']
+let g:ycm_key_list_previous_completion = ['<Up>']
+function! s:MaybeClosePUM()
+  return pumvisible() ? "\<C-Y>" : "\<CR>"
+endfunction
+inoremap <CR> <C-R>=<SID>MaybeClosePUM()<CR>
 
 " Plug 'brookhong/DBGPavim'
 " let g:dbgPavimPort = 9009
@@ -704,25 +710,27 @@ let g:UltiSnipsJumpForwardTrigger = "<nop>"
 let g:UltiSnipsJumpBackwardTrigger = "<nop>"
 
 function! s:PumOrUltisnips(forward)
-    if pumvisible() == 1
-        return a:forward ? "\<C-n>" : "\<C-p>"
-    else if a:forward
-        call UltiSnips#JumpForwards()
-        if g:ulti_jump_forwards_res == 0
-            return "\<tab>"
-        endif
-    else
-        call UltiSnips#JumpBackwards()
-        if g:ulti_jump_backwards_res == 0
-            return "\<s-tab>"
-        endif
+  if pumvisible() == 1
+    return a:forward ? "\<C-n>" : "\<C-p>"
+  elseif a:forward
+    call UltiSnips#JumpForwards()
+    if g:ulti_jump_forwards_res == 0
+      return "\<tab>"
     endif
-    return ""
+  else
+    call UltiSnips#JumpBackwards()
+    if g:ulti_jump_backwards_res == 0
+      return "\<s-tab>"
+    endif
+  endif
+  return ""
 endfunction
-inoremap <silent> <tab> <C-R>=PumOrUltisnips(1)<CR>
-inoremap <silent> <s-tab> <C-R>=PumOrUltisnips(0)<CR>
+inoremap <silent> <tab> <C-R>=<SID>PumOrUltisnips(1)<CR>
+inoremap <silent> <s-tab> <C-R>=<SID>PumOrUltisnips(0)<CR>
 snoremap <silent> <tab> <Esc>:call UltiSnips#JumpForwards()<CR>
 snoremap <silent> <s-tab> <Esc>:call UltiSnips#JumpBackwards()<CR>
+nnoremap <silent> <tab> :call UltiSnips#JumpForwards()<CR>
+nnoremap <silent> <s-tab> :call UltiSnips#JumpBackwards()<CR>
 
 " Plug 'honza/vim-snippets'
 
