@@ -499,7 +499,7 @@ let g:gitgutter_map_keys = 0
 nmap ]- <plug>GitGutterNextHunk
 nmap [- <plug>GitGutterPrevHunk
 nmap <leader>-s <plug>GitGutterStageHunk
-nmap <leader>-r <plug>GitGutterRevertHunk
+nmap <leader>-r <plug>GitGutterUndoHunk
 nmap <leader>-p <plug>GitGutterPreviewHunk
 omap i- <Plug>GitGutterTextObjectInnerPending
 omap a- <Plug>GitGutterTextObjectOuterPending
