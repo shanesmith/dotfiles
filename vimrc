@@ -226,6 +226,7 @@ call plug#begin('~/.vim/bundle')
 "" File Navigation and Search {{{
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
+let g:NERDTreeShowIgnoredStatus = 0
 
 Plug 'thinca/vim-visualstar'
 
