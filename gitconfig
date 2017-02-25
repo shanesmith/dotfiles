@@ -101,6 +101,9 @@
   rmerge = "!f() { git rebase \"origin/$1\" && git checkout \"$1\" && git merge -; }; f"
   fixup = "!f() { if [[ -n \"$1\" && ! \"$1\" =~ ^-  ]]; then git commit --fixup=\"$1\" \"${@:2}\" ; else git commit --amend --reuse-message=HEAD \"$@\"; fi; }; f"
 
+# Github
+  pr = "!f() { git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+
 [color]
   ui = auto
 
