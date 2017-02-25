@@ -1036,6 +1036,7 @@ inoremap <silent> <C-Up>    <C-o>:call <SID>moveit('up',    'i')<cr>
 inoremap <silent> <C-Down>  <C-o>:call <SID>moveit('down',  'i')<cr>
 inoremap <silent> <C-Left>  <C-o>:call <SID>moveit('left',  'i')<CR>
 inoremap <silent> <C-Right> <C-o>:call <SID>moveit('right', 'i')<CR>
+
 nnoremap <silent> <S-Up>    :call      <SID>moveit('up',    'n')<CR>
 nnoremap <silent> <S-Down>  :call      <SID>moveit('down',  'n')<CR>
 nnoremap <silent> <S-Left>  :call      <SID>moveit('left',  'n')<CR>
@@ -1053,35 +1054,6 @@ function! s:moveit(where, mode) range
 
   let firstline = a:firstline
   let lastline = a:lastline
-
-  if a:mode ==? 'n'
-
-    let line1 = getline('.')
-    if match(line1, '^\s*-\s') != -1
-
-      let line2num = -1
-
-      if a:where ==? "up"
-        let line2num = line('.') - 2
-      elseif a:where ==? "down"
-        let line2num = line('.') + 2
-      endif
-
-      if line2num <= 1 || line2num >= line('$')
-        return
-      endif
-
-      let line2 = getline(line2num)
-      if match(line2, '^\s*-\s') != -1
-        call setline('.', line2)
-        call setline(line2num, line1)
-        call cursor(line2num, 0)
-        return
-      endif
-
-    endif
-
-  endif
 
   if a:mode !=? 'v' && match(getline('.'), '^\s*$') != -1
     call s:squash_blank_lines(0)
@@ -1116,13 +1088,30 @@ function! s:moveit(where, mode) range
   else
 
     if a:where ==? "left"
+
       if is_prev_line_blank
         let targetline = prevnonblank(firstline-1)
-      else
-        let targetline = line("'{")
+
+      else 
+        let match_end_brace = match(getline(firstline-1), '}\(.*}\)\@!')
+
+        if match_end_brace != -1 
+          call cursor(firstline-1, match_end_brace)
+          normal! %
+          let targetline = line('.') - 1
+
+        else
+          let targetline = line("'{")
+          if targetline == 1
+            let targetline = 0
+          endif
+
+        endif
       endif
+
       call s:do_moveit(firstline, lastline, targetline)
       call s:reindent_inner()
+
       if a:mode ==? 'v'
         normal! gv=
       else
@@ -1134,16 +1123,32 @@ function! s:moveit(where, mode) range
       if is_next_line_blank
         let targetline = nextnonblank(lastline+1) - 1
       else
-        call cursor(lastline, 1)
-        let targetline = line("'}") - 1
+        let match_start_brace = match(getline(lastline+1), '{')
+
+        if match_start_brace != -1 
+          call cursor(lastline+1, match_start_brace)
+          normal! %
+          let targetline = line('.')
+
+        else
+          call cursor(lastline, 1)
+          let targetline = line("'}")
+          if targetline != line('$')
+            let targetline = targetline - 1
+          endif
+
+        endif
       endif
+
       call s:do_moveit(firstline, lastline, targetline)
       exec "normal ={\<C-o>"
+
       if a:mode ==? 'v'
         normal! gv=
       else
         normal! ==
       endif
+
       call s:reindent_inner()
 
     elseif a:where ==? "up"
@@ -1158,13 +1163,15 @@ function! s:moveit(where, mode) range
 
     elseif a:where ==? "down"
       let targetline = (lastline+1)
-      call s:do_moveit(firstline, lastline, targetline)
-      if a:mode ==? 'v'
-        normal! gv=k==j^
-      else
-        normal! ==k==j^
+      if targetline <= line('$')
+        call s:do_moveit(firstline, lastline, targetline)
+        if a:mode ==? 'v'
+          normal! gv=k==j^
+        else
+          normal! ==k==j^
+        endif
+        call s:reindent_inner()
       endif
-      call s:reindent_inner()
 
     endif
 
