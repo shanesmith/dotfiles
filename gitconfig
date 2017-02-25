@@ -7,12 +7,15 @@
 [alias]
 # Abbreviations
   st = status
+  stuart = status
   shoe = show
   br = branch
   co = checkout
   pop = stash pop
   unstage = reset HEAD
+  df = diff
   staged = diff --staged
+  sg = diff --staged
   top = rev-parse --show-toplevel
   gerrit = !gerrit
   git = !git
@@ -25,9 +28,13 @@
   hardup = reset --hard @{u}
   pick = cherry-pick
   for = fetch origin
+  rb = rebase
+  irb = rebase -i
   continue = rebase --continue
   stat = show --name-status
   base = merge-base HEAD
+  pa = add -p
+  ua = add -u
 
 # Log
   lol = "!f() { local extra=\"\"; if git rev-parse -q --verify '@{u}' >/dev/null 2>&1; then extra=\"$extra @{u}\"; fi; git log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cd>%Creset %s' --color --graph --date=relative --branches --remotes=origin/[m]aster HEAD $extra $@; }; f"
@@ -39,6 +46,7 @@
   lallf = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --graph --all --name-status
   logf = log --name-status
   k = !gitk --all >/dev/null 2>&1 &
+  who= shortlog -s
 
 # Git-SVN
   slog = svn log --show-commit
