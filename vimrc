@@ -1483,6 +1483,9 @@ function! s:ExtractFunction(mode) range
 
 endfunction
 
+"Uppercase first letter and insert
+nnoremap gi gUli
+
 "}}}
 
 " Commands {{{
