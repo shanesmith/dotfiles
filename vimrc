@@ -510,6 +510,7 @@ Plug 'vim-scripts/SyntaxRange'
 
 Plug 'lfv89/vim-interestingwords'
 
+Plug 'shanesmith/matchtag'
 
 "}}}
 
