@@ -230,6 +230,25 @@ let g:NERDTreeShowIgnoredStatus = 0
 
 Plug 'thinca/vim-visualstar'
 
+Plug 'dyng/ctrlsf.vim'
+let g:ctrlsf_auto_close = 0
+let g:ctrlsf_default_view_mode = 'compact'
+let g:ctrlsf_populate_qflist = 1
+let g:ctrlsf_indent = 2
+let g:ctrlsf_mapping = {
+      \ "split": "s",
+      \ "vsplit": "v",
+      \ "next": "n",
+      \ "prev": "N"
+      \ }
+if executable('rg')
+  let g:ctrlsf_ackprg  = 'rg'
+elseif executable('ag')
+  let g:ctrlsf_ackprg  = 'ag'
+endif
+nmap <leader>c <Plug>CtrlSFPrompt
+vmap <leader>c <Plug>CtrlSFVwordPath
+
 Plug 'shanesmith/ack.vim'
 command! -nargs=* MyAck call <SID>MyAck(0, <f-args>)
 command! -nargs=* MyAckRegEx call <SID>MyAck(1, <f-args>)
@@ -320,6 +339,8 @@ Plug 'chrisbra/Recover.vim'
 "}}}
 
 "" Utilities {{{
+
+Plug 'tyru/restart.vim'
 
 Plug 'diepm/vim-rest-console'
 let g:vrc_trigger = '<F5>'
@@ -562,6 +583,7 @@ Plug 'editorconfig/editorconfig-vim'
 
 Plug 'ntpeters/vim-better-whitespace'
 let g:current_line_whitespace_disabled_soft = 1
+let g:better_whitespace_filetypes_blacklist = ["ctrlsf"]
 command! WhitespaceStrip StripWhitespace
 
 Plug 'Chiel92/vim-autoformat'
