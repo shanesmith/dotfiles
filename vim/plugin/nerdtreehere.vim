@@ -1,4 +1,4 @@
-nnoremap <silent> <Leader>t :call g:NERDTreeHere("e")<CR>
+nnoremap <silent> <C-t> :call g:NERDTreeHere("e")<CR>
 nnoremap <silent> <Leader>tt :call g:NERDTreeHere("e")<CR>
 nnoremap <silent> <Leader>ty :call g:NERDTreeHere("t")<CR>
 nnoremap <silent> <Leader>tv :call g:NERDTreeHere("v")<CR>

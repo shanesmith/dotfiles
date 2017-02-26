@@ -89,7 +89,7 @@ nnoremap <Leader>nt :call <SID>NotesTree()<CR>
 nnoremap <Leader>nw :call <SID>NotesSave()<CR>
 nnoremap <Leader>nn :call <SID>NotesNew()<CR>
 nnoremap <leader>np :exec "CtrlP" g:notes_folder<CR>
-nnoremap <leader>pn :exec "CtrlP" g:notes_folder<CR>
+" nnoremap <leader>pn :exec "CtrlP" g:notes_folder<CR>
 
 augroup notes
   au!

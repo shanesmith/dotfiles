@@ -287,10 +287,9 @@ let g:ack_mappings = {
       \ }
 
 Plug 'ctrlpvim/ctrlp.vim'
-let g:ctrlp_map = "<leader>pp"
+let g:ctrlp_map = "<c-p>"
 nnoremap <leader>p  :CtrlP<cr>
-vnoremap <leader>p  "hy:call <SID>CtrlPWithInput(@h)<CR>
-vnoremap <leader>pp "hy:call <SID>CtrlPWithInput(@h)<CR>
+vnoremap <c-p>  "hy:call <SID>CtrlPWithInput(@h)<CR>
 nnoremap <leader>pb :CtrlPBuffer<cr>
 nnoremap <leader>pc :CtrlPCmdPalette<cr>
 nnoremap <leader>pw :call <SID>CtrlPWithInput("<C-R><C-W>")<CR>
@@ -941,18 +940,6 @@ endfunction
 "Next/Previous result
 nnoremap <F3> n
 nnoremap <S-F3> N
-
-"Tab commands
-nnoremap [t :tabprev<CR>
-nnoremap ]t :tabnext<CR>
-nnoremap <C-t>n :tabnew<CR>
-nnoremap <C-t>t :tabnew<CR>
-nnoremap <C-t><C-t> :tabnew<CR>
-nnoremap <C-t>o :tabonly<CR>
-nnoremap <C-t>c :tabclose<CR>
-nnoremap <C-t>q :tabclose<CR>
-nnoremap <C-t>> :tabm +1<CR>
-nnoremap <C-t>< :tabm -1<CR>
 
 "Only works in GUI
 nnoremap <C-Tab> :tabnext<CR>
