@@ -49,6 +49,12 @@ export LESS="-SRi"
 $(which lesspipe >/dev/null) && eval "$(lesspipe)"
 $(which lesspipe.sh >/dev/null) && eval "$(lesspipe.sh)"
 
+if command -v rg >/dev/null; then
+  export FZF_DEFAULT_COMMAND='rg --files -g ""'
+elif command -v ag >/dev/null; then
+  export FZF_DEFAULT_COMMAND='ag -g ""'
+fi
+
 # needs to come before setting PS1 for __git_ps1 check
 if ! shopt -oq posix; then
 
