@@ -255,7 +255,7 @@ command! -nargs=* MyAckRegEx call <SID>MyAck(1, <f-args>)
 function! s:MyAck(regex, ...)
   let args = ""
   if !a:regex
-    let args .= " -Q"
+    let args .= " " . g:ack_literal_flag
   endif
   if a:0 == 0
     let what = expand("<cword>")
@@ -269,8 +269,12 @@ nnoremap <leader>aa :MyAck<space>
 nnoremap <leader>aq :MyAckRegEx<space>
 vnoremap <leader>aa "hy:<C-U>MyAck <C-R>h
 vnoremap <leader>aq "hy:<C-U>MyAckRegEx <C-R>h
-if executable('ag')
-  let g:ackprg = 'ag --nogroup --column -S $* \| grep -v -e "^.*\.min\.js:" -e "^.*\.min\.css:"'
+if executable('rg')
+  let g:ackprg = 'rg --vimgrep --no-heading'
+  let g:ack_literal_flag = "-F"
+elseif executable('ag')
+  let g:ackprg = 'ag --vimgrep $* \| grep -v -e "^.*\.min\.js:" -e "^.*\.min\.css:"'
+  let g:ack_literal_flag = "-Q"
 endif
 let g:ackhighlight = 1
 let g:ack_mappings = {
@@ -311,10 +315,11 @@ function! s:CtrlPWithInput(input)
   CtrlP
   let g:ctrlp_default_input = ""
 endfunction
-if executable('ag')
+if executable('rg')
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+  let g:ctrlp_use_caching = 0
+elseif executable('ag')
   let g:ctrlp_user_command = 'ag $(python -c "import os.path; print os.path.relpath(%s,''${PWD}'')") -l --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
 
