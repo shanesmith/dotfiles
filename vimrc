@@ -652,13 +652,35 @@ let g:syntastic_html_tidy_quiet_messages = {
       \     '"tabindex" has invalid value "-1"',
       \     '<div> proprietary attribute "tabindex"',
       \     '<img> lacks "alt" attribute',
-      \     'trimming empty <span>',
+      \     'trimming empty <span>'
       \   ],
       \ }
 let g:syntastic_html_tidy_ignore_errors = [
-      \   " proprietary attribute \"ng-",
-      \   " proprietary attribute \"translate",
-      \   " proprietary attribute \"ui-"
+      \   "> proprietary attribute \"",
+      \   "trimming empty <"
+      \ ]
+
+let g:syntastic_html_tidy_blocklevel_tags = [
+      \   "ion-view",
+      \   "ion-nav-view",
+      \   "ion-nav-bar",
+      \   "ion-nav-title",
+      \   "ion-nav-buttons",
+      \   "ion-nav-back-button",
+      \   "ion-content",
+      \   "ion-toggle",
+      \   "ion-spinner",
+      \   "ion-header-bar",
+      \   "ion-footer-bar",
+      \   "ion-side-menu",
+      \   "ion-side-menus",
+      \   "ion-side-menu-content",
+      \   "ion-list",
+      \   "ion-item",
+      \   "ion-popover-view",
+      \   "ion-tabs",
+      \   "ion-tab",
+      \   "ion-modal-view"
       \ ]
 
 augroup SyntasticJS
