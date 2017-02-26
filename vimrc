@@ -417,7 +417,7 @@ Plug 'KabbAmine/lazyList.vim'
 " Plug 'majutsushi/tagbar'
 " nnoremap <Leader>c :TagbarToggle<CR>
 
-Plug 'tpope/vim-surround'
+Plug 'shanesmith/vim-surround'
 nnoremap dsf :call <SID>SurroundingFunction('d')<CR>
 nnoremap csf :call <SID>SurroundingFunction('c')<CR>
 function! s:SurroundingFunction(op)
@@ -462,9 +462,7 @@ let g:yankstack_yank_keys = ['c', 'C', 'd', 'D', 'x', 'X', 'y', 'Y'] " remove s 
 
 Plug 'koron/nyancat-vim'
 
-" TODO start hackertyper in nofile buffer instead of editing file
-Plug 'mjbrownie/hackertyper.vim'
-command! StartHackerTyper w! %.hackertyper | exec "normal ggdG" | call hackertyper#startHackerTyper() | startinsert
+Plug 'shanesmith/hackertyper.vim'
 
 "}}}
 
