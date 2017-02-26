@@ -1004,18 +1004,6 @@ nnoremap gp `[v`]
 
 vnoremap gy ygv<ESC>
 
-"Inline mode paste
-inoremap <C-p> <C-\><C-o>:call <SID>InlinePaste()<CR><Right>
-function! s:InlinePaste()
-  let pasteop = 'P'
-  let linelength = strlen(getline('.'))
-  let colpos = col('.')
-  if colpos == linelength + 1
-    let pasteop = 'p'
-  endif
-  exec 'normal! "0' . pasteop
-endfunction
-
 "Smart indent pasting
 " nnoremap <silent> p :call <SID>smart_paste('p')<CR>
 " nnoremap <silent> P :call <SID>smart_paste('P')<CR>
