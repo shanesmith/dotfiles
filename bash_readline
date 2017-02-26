@@ -10,11 +10,26 @@ __readline_replace() {
   READLINE_POINT="${#1}"
 }
 
+__escape() {
+  while read -r item; do 
+    printf '%q ' "$item"
+  done
+}
+
 _fzf_git_lol() {
-  local sha="$(git lol | fzf --ansi --reverse --no-sort --tiebreak=index | grep -ow '[a-z0-9]\{7\}' | head -1)"
-  if [[ -n $sha ]]; then
-    __readline_insert "$sha"
-  fi
+  # TODO always describe?
+  local sha="$(git lol | fzf --ansi --reverse --no-sort --tiebreak=index | grep -ow '[a-z0-9]\{7\}' | head -1 | xargs git describe --all --contains)"
+  __readline_insert "$sha"
+}
+
+_fzf_git_status() {
+  local file="$(git status --short | fzf -m | cut -d' ' -f2- | __escape)"
+  __readline_insert "$file"
+}
+
+_fzf_git_history() {
+  local branch=$(git hs | fzf)
+  __readline_insert "$branch"
 }
 
 _fzf_history() { 
@@ -25,15 +40,44 @@ _fzf_history() {
 }
 
 _fzf_files() {
-  local file="$(fzf)"
+  local file="$(fzf -m | __escape)"
   if [[ -n $file ]]; then
     __readline_insert "$file"
   fi
 }
 
 _fzf_cd() {
+  # TODO extract current word to use as basis for find
   local dir=$(command find -L . \( -path '*/\.*' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \) -prune -o -type d -print 2> /dev/null | sed 1d | cut -b3- | fzf)
   __readline_replace "cd ${dir}"
+}
+
+_fzf_gerrit_patch() {
+  local id=$(gerrit patches | fzf --header-lines=1 --reverse | awk '{print $1}')
+  __readline_insert "$id"
+}
+
+_fzf_word() {
+  local cmd
+
+  local word=$(echo "${READLINE_LINE:0:$READLINE_POINT}" | awk '{print $NF}')
+
+  case "$word" in
+    gl)  cmd="_fzf_git_lol" ;;
+    gs)  cmd="_fzf_git_status" ;;
+    gh)  cmd="_fzf_git_history" ;;
+    grp) cmd="_fzf_gerrit_patch" ;;
+    *)   cmd="_fzf_${word}" ;;
+  esac
+
+  if ! type -t "$cmd" >/dev/null; then
+    return
+  fi
+
+  READLINE_LINE="${READLINE_LINE:0:(($READLINE_POINT - ${#word}))}${READLINE_LINE:$READLINE_POINT}"
+  READLINE_POINT="$(($READLINE_POINT - ${#word}))"
+
+  eval "$cmd"
 }
 
 if command -v fzf >/dev/null; then
@@ -42,5 +86,8 @@ if command -v fzf >/dev/null; then
   bind -x '"\C-f\C-f": _fzf_files'
   bind -x '"\C-fg": _fzf_git_lol'
   bind -x '"\C-fc": _fzf_cd'
+  bind -x '"\C-fp": _fzf_gerrit_patch'
+  bind -x '"\C-fs": _fzf_git_status'
+  bind -x '"\C-fw": _fzf_word'
 fi
 
