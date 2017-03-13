@@ -8,43 +8,48 @@ nnoremap <silent> <Leader>tb :only \| call g:NERDTreeHere("e") \| normal B<CR>
 " based on NERDTreeFind (lib/nerdtree/ui_glue.vim)
 function! g:NERDTreeHere(split, ...)
 
+  let base_path = get(a:, '1', "")
+  let reveal_path = get(a:, '2', "")
+
+  if base_path == ""
+    let base_path = getcwd()
+  endif
+
+  if reveal_path == ""
+    let reveal_path = expand("%:p")
+  endif
+
   if &modified == 1 && a:split ==? "e"
+    " TODO detect multiple open buffers?
     call nerdtree#echo("Buffer has been modified.")
     return
   endif
 
   try
-    let p = g:NERDTreePath.New(expand("%:p"))
-    if p.isUnixHiddenPath()
+    let reveal_path = g:NERDTreePath.New(reveal_path)
+    if reveal_path.isUnixHiddenPath()
       let showhidden = g:NERDTreeShowHidden
       let g:NERDTreeShowHidden = 1
     endif
   catch /^NERDTree.InvalidArgumentsError/
     call nerdtree#echo("Current file no longer exists.")
+    let reveal_path = {}
   endtry
 
-  if a:0 == 0
-
-    try
-      let cwd = g:NERDTreePath.New(getcwd())
-    catch /^NERDTree.InvalidArgumentsError/
-      call nerdtree#echo("Current directory no longers exist.")
-      if !exists("p")
-        call nerdtree#echo("Too many fails! Bailing out!")
-      endif
-      let cwd = p.getParent()
-    endtry
-
-    if !exists("p") || p.isUnder(cwd) || p.equals(cwd)
-      let where = cwd
-    else
-      let where = p.getParent()
+  try
+    let cwd = g:NERDTreePath.New(base_path)
+  catch /^NERDTree.InvalidArgumentsError/
+    call nerdtree#echo("Current directory no longers exist.")
+    if !reveal_path
+      call nerdtree#echo("Too many fails! Bailing out!")
     endif
+    let cwd = p.getParent()
+  endtry
 
+  if reveal_path == {} || reveal_path.isUnder(cwd) || reveal_path.equals(cwd)
+    let where = cwd
   else
-
-    let where = g:NERDTreePath.New(expand(a:1))
-
+    let where = reveal_path.getParent()
   endif
 
   if a:split ==? "v"
@@ -59,9 +64,9 @@ function! g:NERDTreeHere(split, ...)
 
   call g:NERDTreeCreator.CreateWindowTree(where.str())
 
-  if exists("p") && p.isUnder(where) && !p.equals(where)
+  if reveal_path != {} && reveal_path.isUnder(where) && !reveal_path.equals(where)
 
-    let node = b:NERDTree.root.reveal(p)
+    let node = b:NERDTree.root.reveal(reveal_path)
     call b:NERDTree.render()
     call node.putCursorHere(1,0)
 
