@@ -936,6 +936,10 @@ nnoremap <silent> <Leader>\ :let @/=""<CR>
 "Search history navigation
 nnoremap <silent> [/ :call <SID>search_hist('back')<CR>
 nnoremap <silent> ]/ :call <SID>search_hist('forward')<CR>
+nnoremap * /\<<C-R>=expand('<cword>')<CR>\><CR>
+nnoremap # ?\<<C-R>=expand('<cword>')<CR>\><CR>
+nnoremap g* /<C-R>=expand('<cword>')<CR><CR>
+nnoremap g# ?<C-R>=expand('<cword>')<CR><CR>
 
 let s:search_hist_index = 0
 let s:search_last_nr = 0
