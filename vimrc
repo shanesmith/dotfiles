@@ -239,8 +239,9 @@ let g:ctrlsf_default_view_mode = 'compact'
 let g:ctrlsf_populate_qflist = 1
 let g:ctrlsf_indent = 2
 let g:ctrlsf_mapping = {
-      \ "split": "s",
-      \ "vsplit": "v",
+      \ "split": [ "s", "<C-S>" ],
+      \ "vsplit": [ "v", "<C-V>" ],
+      \ "tab": [ "t", "<C-T>" ],
       \ "next": "n",
       \ "prev": "N"
       \ }
