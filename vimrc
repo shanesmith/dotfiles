@@ -1543,6 +1543,9 @@ endfunction
 "Uppercase first letter and insert
 nnoremap gi gUli
 
+nnoremap <silent> [[ :call searchpair('\[', '', '\]', 'bW')<CR>
+nnoremap <silent> ]] :call searchpair('\[', '', '\]', 'W')<CR>
+
 "}}}
 
 " Commands {{{
