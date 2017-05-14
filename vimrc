@@ -326,6 +326,9 @@ elseif executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
+Plug 'mattn/ctrlp-register'
+nnoremap <leader>pr :CtrlPRegister<CR>
+
 Plug 'scrooloose/nerdtree'
 let g:NERDTreeHijackNetrw = 0
 let NERDTreeMapActivateNode = 'l'
