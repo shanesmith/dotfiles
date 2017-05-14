@@ -810,8 +810,8 @@ inoremap <silent> <tab> <C-R>=<SID>PumOrUltisnips(1)<CR>
 inoremap <silent> <s-tab> <C-R>=<SID>PumOrUltisnips(0)<CR>
 snoremap <silent> <tab> <Esc>:call UltiSnips#JumpForwards()<CR>
 snoremap <silent> <s-tab> <Esc>:call UltiSnips#JumpBackwards()<CR>
-nnoremap <silent> <tab> :call UltiSnips#JumpForwards()<CR>
-nnoremap <silent> <s-tab> :call UltiSnips#JumpBackwards()<CR>
+nnoremap <expr> <silent> <tab> <SID>PumOrUltisnips(1)
+nnoremap <expr> <silent> <s-tab> <SID>PumOrUltisnips(0) 
 
 " Plug 'honza/vim-snippets'
 
