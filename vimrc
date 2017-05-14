@@ -150,6 +150,9 @@ set incsearch
 "Highlight matched search
 set hlsearch
 
+"Don't wrap to top/bottom of file when searching
+set nowrapscan
+
 "Default global substitute
 set gdefault
 
