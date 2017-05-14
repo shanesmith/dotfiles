@@ -1,4 +1,4 @@
-snippet strict "use strict" b
+snippet us "use strict" b
 "use strict";
 endsnippet
 
@@ -52,20 +52,24 @@ beforeEach(inject(function($1) {
 }));
 endsnippet
 
+snippet amod "angular module" i
+angular.module('$1')
+endsnippet
+
 snippet aconf "angular config" i
-config(function($1) {
+.config(function($1) {
 	$0
 });
 endsnippet
 
 snippet acont "angular controller" i
-controller('${1:name}', [${2}function(${2/('|")([A-Z_$]+)?\1?((, ?)$)?/$2(?3::$4)/ig}) {
+.controller('${1:name}', [${2}function(${2/('|")([A-Z_$]+)?\1?((, ?)$)?/$2(?3::$4)/ig}) {
 	$0
 }]);
 endsnippet
 
 snippet adir "angular directive" i
-directive('${1}', [${2}function(${2/('|")([A-Z_$]+)?\1?((, ?)$)?/$2(?3::$4)/ig}) {
+.directive('${1}', [${2}function(${2/('|")([A-Z_$]+)?\1?((, ?)$)?/$2(?3::$4)/ig}) {
 	return {
 		restrict: '${3:EA}',
 		link: function(scope, element, attrs) {
@@ -76,13 +80,13 @@ directive('${1}', [${2}function(${2/('|")([A-Z_$]+)?\1?((, ?)$)?/$2(?3::$4)/ig})
 endsnippet
 
 snippet afact "angular factory" i
-factory('${1:name}', [${2}function(${2/('|")([A-Z_$]+)?\1?((, ?)$)?/$2(?3::$4)/ig}) {
+.factory('${1:name}', [${2}function(${2/('|")([A-Z_$]+)?\1?((, ?)$)?/$2(?3::$4)/ig}) {
 	$0
 }]);
 endsnippet
 
 snippet aserv "angular service" i
-service('${1:name}', [${2}function(${2/('|")([A-Z_$]+)?\1?((, ?)$)?/$2(?3::$4)/ig}) {
+.service('${1:name}', [${2}function(${2/('|")([A-Z_$]+)?\1?((, ?)$)?/$2(?3::$4)/ig}) {
 	$0
 }]);
 endsnippet
