@@ -748,6 +748,9 @@ function! s:MaybeClosePUM()
 endfunction
 inoremap <CR> <C-R>=<SID>MaybeClosePUM()<CR>
 
+nnoremap <leader>yd :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>yr :YcmCompleter GoToReferences<CR>
+
 " Plug 'brookhong/DBGPavim'
 " let g:dbgPavimPort = 9009
 " let g:dbgPavimBreakAtEntry = 0
