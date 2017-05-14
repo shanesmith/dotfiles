@@ -387,13 +387,11 @@ let g:switch_custom_definitions =
       \   ['absolute', 'relative', 'fixed']
       \ ]
 
-"" Included by default?
-" autocmd FileType javascript let b:switch_custom_definitions =
-"       \[
-"       \   {
-"       \     'function\((.*)\)': '\1 =>'
-"       \   }
-"       \]
+autocmd FileType typescript let b:switch_custom_definitions =
+      \[
+      \   ['public', 'protected', 'private'],
+      \   ['var', 'let', 'const']
+      \]
 
 Plug 'fisadev/vim-ctrlp-cmdpalette'
 
@@ -663,6 +661,10 @@ let g:syntastic_php_checkers = ['php']
 let g:syntastic_javascript_checkers = []
 let g:syntastic_typescript_checkers = ['tslint']
 let g:syntastic_scss_checkers = ['scss_lint']
+
+" TODO wrapper script to use local is exists
+let g:syntastic_typescript_tslint_exe = "npm-run tslint"
+
 let g:syntastic_html_tidy_quiet_messages = {
       \   'regex': [
       \     '"tabindex" has invalid value "-1"',
@@ -892,6 +894,7 @@ let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascr
 
 call yankstack#setup()
 
+" TODO use t:title?
 function! airline#extensions#tabline#title(n)
 
   if a:n == tabpagenr()
@@ -1025,15 +1028,38 @@ function! s:StopRecordMacro()
   call <SID>MacroMap()
   normal! q
   let @q = substitute(@q, "!$", "", "")
-  if len(@q) > 0
-    normal! @q
-    undo
-  endif
 endfunction
+
+let s:regnames = "\"*+~-.:1234567890abcdefghijklmnopqrstuvwxyz"
+
+fun! s:Contains(str, char)
+  for c in split(a:str, '\zs')
+    if c ==# a:char
+      return 1
+    endif
+  endfor
+  return 0
+endfun
+
+fun! s:GetRegName()
+  let input = getchar()
+  if input == 27 || input == 3
+    return
+  endif
+  let char = nr2char(input)
+  if !s:Contains(s:regnames, char)
+    echo 'macrorepeat: Invalid register name!'
+    return ''
+  endif
+  return char
+endfun
 
 nnoremap q <nop>
 call <SID>MacroMap()
 
+vnoremap @@ :normal! @@<CR>
+" TODO complete this...
+" vnoremap @x  
 
 "Visual select last pasted
 "http://vim.wikia.com/wiki/Selecting_your_pasted_text
@@ -1597,11 +1623,11 @@ command! CountPlugins echo len(keys(g:plugs))
 
 " AutoCommands {{{
 
-" http://www.bestofvim.com/tip/auto-reload-your-vimrc/
-" augroup reload_vimrc " {
-"     autocmd!
-"     autocmd BufWritePost $MYVIMRC,~/Code/rc/vimrc,~/Code/rc/vim/* source $MYVIMRC | if (exists('g:loaded_airline') && g:loaded_airline) | call airline#load_theme() | endif
-" augroup END " }
+" " http://www.bestofvim.com/tip/auto-reload-your-vimrc/
+" augroup reload_vimrc
+"   autocmd!
+"   autocmd BufWritePost $MYVIMRC,~/Code/rc/vimrc,~/Code/rc/vim/* nested source $MYVIMRC
+" augroup END
 
 " Close vim if NERDTree is the last window
 augroup nerdtree_vimrc
