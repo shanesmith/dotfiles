@@ -885,7 +885,7 @@ function! airline#extensions#tabline#title(n)
 
   else
 
-    let cwd = g:TabDirs[a:n]
+    let cwd = gettabvar(a:n, 'wd')
 
   endif
 
