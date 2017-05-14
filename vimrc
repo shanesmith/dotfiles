@@ -218,7 +218,7 @@ endif
 
 "Set leader character
 let mapleader = "\<Space>"
-let maplocalleader = "|"
+let maplocalleader = "\\"
 
 "}}} Settings
 
