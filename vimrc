@@ -352,6 +352,7 @@ Plug 'tyru/restart.vim'
 
 Plug 'diepm/vim-rest-console'
 let g:vrc_trigger = '<F5>'
+let g:vrc_show_command = 1
 command! RestTab call <SID>rest_tab()
 command! RESTTab call <SID>rest_tab()
 function! s:rest_tab()
