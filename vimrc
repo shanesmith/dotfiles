@@ -632,6 +632,9 @@ Plug 'heavenshell/vim-jsdoc'
 Plug 'shanesmith/xmledit'
 let g:xmledit_enable_html = 1
 let g:xml_use_xhtml = 1
+let g:xml_no_tag_map = 1
+let g:xml_no_comment_map = 1
+let g:xml_no_jump_map = 1
 function! HtmlAttribCallback(xml_tag)
   "disable this sort of thing
   return 0
