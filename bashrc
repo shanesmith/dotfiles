@@ -88,8 +88,8 @@ if ! shopt -oq posix; then
 fi
 
 sources=(
-  "${HOME}/.bash_ps1"
   "${HOME}/.bash_aliases"
+  "${HOME}/.bash_ps1"
   "${HOME}/.bash_sshauth"
   "${HOME}/.bash_readline"
   "${HOME}/.bashrc.local"
