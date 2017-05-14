@@ -443,7 +443,7 @@ Plug 'tpope/vim-endwise'
 
 Plug 'vim-scripts/ingo-library'
 
-Plug 'vim-scripts/localvimrc'
+Plug 'embear/vim-localvimrc'
 let g:localvimrc_sandbox=0
 let g:localvimrc_persistent=1
 
