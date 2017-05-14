@@ -1,18 +1,30 @@
 
 name: mac
 
-root: ~/Code
+root: ~/Code/instantpot
 
 windows:
-  - apollo:
-      root: ~/Code/apollo
+  - instant-pot-app:
+      root: ~/Code/instantpot/instant-pot-app
       layout: '7fff,275x84,0,0{136x84,0,0,12,138x84,137,0[138x33,137,0,13,138x50,137,34,14]}'
       panes:
         - work:
           - clear
         - status:
           - clear
-          - git status
+          # - git status
         - lol:
           - clear
-          - git lol
+          # - git lol
+  - blescanner:
+      root: ~/Code/instantpot/blescanner
+      layout: '7fff,275x84,0,0{136x84,0,0,12,138x84,137,0[138x33,137,0,13,138x50,137,34,14]}'
+      panes:
+        - work:
+          - clear
+        - status:
+          - clear
+          # - git status
+        - lol:
+          - clear
+          # - git lol
