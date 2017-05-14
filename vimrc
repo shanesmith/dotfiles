@@ -1055,11 +1055,11 @@ vnoremap gy ygv<ESC>
 nnoremap Y y$
 
 "Save 30% keystrokes
-vnoremap w :<C-U>normal! viw<CR>
-omap w :normal vw<CR>
+vnoremap <silent> w :<C-U>normal! viw<CR>
+omap <silent> w :normal vw<CR>
 
-vnoremap W :<C-U>normal! vaW<CR>
-omap W :normal vW<CR>
+vnoremap <silent> W :<C-U>normal! vaW<CR>
+omap <silent> W :normal vW<CR>
 
 " vnoremap p :<C-U>normal! vip<CR>
 " omap p :normal vip<CR>
