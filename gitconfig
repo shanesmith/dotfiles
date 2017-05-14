@@ -126,6 +126,9 @@
 [rebase]
   autosquash = true
 
+[diff]
+  algorithm = histogram
+
 [tig "bind"]
   main = C <git checkout %(commit)
 
