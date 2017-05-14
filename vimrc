@@ -649,12 +649,18 @@ let g:instant_markdown_autostart = 0
 
 " Plug 'joonty/vdebug'
 
-Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
+let g:ale_linters = {
+      \ 'html': []
+      \ }
+
+" Plug 'scrooloose/syntastic'
 let g:syntastic_check_on_open = 1
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_objc_compiler = 'clang'
 let g:syntastic_php_checkers = ['php']
 let g:syntastic_javascript_checkers = []
+let g:syntastic_typescript_checkers = ['tslint']
 let g:syntastic_scss_checkers = ['scss_lint']
 let g:syntastic_html_tidy_quiet_messages = {
       \   'regex': [
@@ -666,7 +672,11 @@ let g:syntastic_html_tidy_quiet_messages = {
       \ }
 let g:syntastic_html_tidy_ignore_errors = [
       \   "> proprietary attribute \"",
-      \   "trimming empty <"
+      \   "trimming empty <",
+      \   "> attribute name \"(",
+      \   "> attribute name \"*",
+      \   "> attribute name \"[",
+      \   "> attribute name \"#"
       \ ]
 
 let g:syntastic_html_tidy_blocklevel_tags = [
@@ -689,8 +699,18 @@ let g:syntastic_html_tidy_blocklevel_tags = [
       \   "ion-popover-view",
       \   "ion-tabs",
       \   "ion-tab",
-      \   "ion-modal-view"
+      \   "ion-modal-view",
+      \
+      \   "ion-header",
+      \   "ion-navbar",
+      \   "ion-title",
+      \   "ion-buttons",
+      \   "ion-row",
+      \   "ion-label",
+      \   "ion-input"
       \ ]
+
+let g:ale_html_tidy_options = "-q -q -language en --new-blocklevel-tags '" . join(g:syntastic_html_tidy_blocklevel_tags, ",") . "'"
 
 augroup SyntasticJS
   au!
