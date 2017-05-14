@@ -222,7 +222,7 @@ let maplocalleader = "\\"
 
 "}}} Settings
 
-" Plugins {{
+" Plugins {{{
 
 call plug#begin('~/.vim/bundle')
 
