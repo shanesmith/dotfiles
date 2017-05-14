@@ -468,6 +468,8 @@ Plug 'koron/nyancat-vim'
 
 Plug 'shanesmith/hackertyper.vim'
 
+Plug 'uguu-org/vim-matrix-screensaver'
+
 "}}}
 
 "" Display {{{
