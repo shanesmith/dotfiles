@@ -27,8 +27,18 @@ _fzf_git_status() {
   __readline_insert "$file"
 }
 
+_fzf_git_status_untracked() {
+  local file="$(git status --short | grep -O '^??' | fzf -m | cut -d' ' -f2- | __escape)"
+  __readline_insert "$file"
+}
+
 _fzf_git_history() {
   local branch=$(git hs | fzf)
+  __readline_insert "$branch"
+}
+
+_fzf_git_branch() {
+  local branch=$(git for-each-ref --format="%(refname:short)" refs/heads/ | fzf -m | __escape)
   __readline_insert "$branch"
 }
 
@@ -63,10 +73,13 @@ _fzf_word() {
   local word=$(echo "${READLINE_LINE:0:$READLINE_POINT}" | awk '{print $NF}')
 
   case "$word" in
+    f) cmd="_fzf_files" ;;
     gl)  cmd="_fzf_git_lol" ;;
     gs)  cmd="_fzf_git_status" ;;
+    gsu)  cmd="_fzf_git_status_untracked" ;;
     gh)  cmd="_fzf_git_history" ;;
     grp) cmd="_fzf_gerrit_patch" ;;
+    gb) cmd="_fzf_git_branch" ;;
     *)   cmd="_fzf_${word}" ;;
   esac
 
@@ -83,7 +96,7 @@ _fzf_word() {
 if command -v fzf >/dev/null; then
   bind -x '"\C-r": _fzf_history'
   bind -x '"\C-ff": _fzf_files'
-  bind -x '"\C-f\C-f": _fzf_files'
+  bind -x '"\C-f\C-f": _fzf_word'
   bind -x '"\C-fg": _fzf_git_lol'
   bind -x '"\C-fc": _fzf_cd'
   bind -x '"\C-fp": _fzf_gerrit_patch'
