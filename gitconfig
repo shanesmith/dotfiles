@@ -102,6 +102,9 @@
   cash = "!f() { git stash && git checkout $1 && git stash pop; }; f"
   rmerge = "!f() { git rebase \"origin/$1\" && git checkout \"$1\" && git merge -; }; f"
   fixup = "!f() { if [[ -n \"$1\" && ! \"$1\" =~ ^-  ]]; then git commit --fixup=\"$1\" \"${@:2}\" ; else git commit --amend --reuse-message=HEAD \"$@\"; fi; }; f"
+  rb-current-commit = "!cat .git/rebase-apply/original-commit"
+  rb-diff-ours = "!git show $(git rb-current-commit)"
+  rb-diff-theirs = "!git diff $(git base $(git rb-current-commit)) HEAD"
 
 # Github
   pr = "!f() { git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
