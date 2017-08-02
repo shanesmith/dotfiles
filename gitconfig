@@ -6,6 +6,7 @@
 
 [alias]
 # Abbreviations
+  s = status
   st = status
   stuart = status
   shoe = show
@@ -24,6 +25,7 @@
   wshoe = !git wshow
   amend = commit --amend
   wip = commit -m 'wip'
+  unwip = reset HEAD^
   hardhead = reset --hard HEAD
   hardup = reset --hard @{u}
   pick = cherry-pick
@@ -35,8 +37,10 @@
   base = merge-base HEAD
   pa = add -p
   ua = add -u
+  AA = add -A
   por = push -u origin HEAD
   puf = push -f
+  rom = rebase origin/master
 
 # Log
   lol = "!f() { local extra=\"\"; if git rev-parse -q --verify '@{u}' >/dev/null 2>&1; then extra=\"$extra @{u}\"; fi; git log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cd>%Creset %s' --color --graph --date=relative --branches --remotes=origin/[m]aster HEAD $extra $@; }; f"
@@ -49,6 +53,8 @@
   logf = log --name-status
   k = !gitk --all >/dev/null 2>&1 &
   who= shortlog -s
+  whatdidido = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cd>%Creset %s' --graph --all --date=short --author=Shane
+  rescue = !git fsck --full --no-reflogs --unreachable --lost-found | grep commit | cut -d' ' -f3 | xargs git log --pretty=oneline
 
 # Git-SVN
   slog = svn log --show-commit
