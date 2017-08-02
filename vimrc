@@ -341,6 +341,7 @@ let g:NERDTreeMinimalUI = 1
 let g:NERDTreeShowLineNumbers = 1
 let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeChDirMode = 2
+let g:NERDTreeNaturalSort = 1
 let NERDTreeIgnore = [ '\.pyc$' ]
 
 Plug 'henrik/vim-qargs'
