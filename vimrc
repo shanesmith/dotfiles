@@ -1578,6 +1578,38 @@ nnoremap <silent> ]] :call searchpair('\[', '', '\]', 'W')<CR>
 
 " Commands {{{
 
+nnoremap <silent> <C-W>z :call <SID>CloseThing()<ESC>
+function! s:CloseThing()
+  let qfnum = 0
+  let ctrlsfnum = 0
+  let previewnum = 0
+
+  for winnum in range(1, winnr('$'))
+    let ft = getwinvar(winnum, "&filetype")
+    if ft == "qf"
+      let qfnum = winnum
+    elseif ft == "ctrlsf"
+      let ctrlsfnum = winnum
+    elseif getwinvar(winnum, "&previewwindow")
+      let previewnum = winnum
+    endif
+  endfor
+
+  let closenum = 0
+
+  if previewnum != 0
+    let closenum = previewnum
+  elseif qfnum != 0
+    let closenum = qfnum
+  elseif ctrlsfnum != 0
+    let closenum = ctrlsfnum
+  endif
+
+  if closenum != 0
+    exec closenum . "close"
+  endif
+endfunction
+
 command! CountMatches %s///rn
 
 " Big W also writes
