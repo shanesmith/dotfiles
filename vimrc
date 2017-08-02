@@ -750,10 +750,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --tern-co
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
-function! s:MaybeClosePUM()
-  return pumvisible() ? "\<C-Y>" : "\<CR>"
-endfunction
-inoremap <CR> <C-R>=<SID>MaybeClosePUM()<CR>
+let g:ycm_key_list_stop_completion = ["<CR>"]
 
 nnoremap <leader>yd :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>yr :YcmCompleter GoToReferences<CR>
