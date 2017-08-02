@@ -89,8 +89,10 @@
   hs = "!f(){ git log -g --oneline -n${1:-100} | awk '/checkout:/ { if (system(\"git show-ref --quiet --verify refs/heads/\"$NF) == 0) print substr($2, 7)\" \"$NF }' | sort -k2 -u | sort -k1 -n | tail +2 | cut -d' ' -f2; }; f"
   pup = "!f(){ [ $# -eq 1 ] && git checkout $1 && git pull && git co -; }; f"
   mup = "!f(){ [ $# -eq 1 ] && git checkout $1 && git merge && git co -; }; f"
-  sweep = "!f() { echo \"Would delete branches:\"; git branch --merged ${1:-HEAD} | grep -v '^\\*' | grep -v '^  *master$'; }; f"
-  sweepit = "!f() { git branch --merged ${1:-HEAD} | grep -v '^\\*' | grep -v '^  *master$' | xargs git branch -d; }; f"
+  sweep = "!f() { echo \"Would delete branches:\"; git branch --merged ${1:-HEAD} | grep -v -e '^\\*' -e '^  *master$'; }; f"
+  sweepit = "!f() { git branch --merged ${1:-HEAD} | grep -v -e '^\\*' -e '^  *master$' | xargs git branch -d; }; f"
+  sweep-remote = "!f() { echo \"Would delete branches:\"; git branch --remote --merged ${1:-HEAD} | grep -v -e '^ *origin/HEAD' -e '^  *origin/master$'; }; f"
+  sweep-remote-it = "!f() { git branch --remote --merged ${1:-HEAD} | grep -v -e '^ *origin/HEAD' -e '^  *origin/master$' | xargs git branch --remote -d; }; f"
   upstream = "!f() { git branch --set-upstream-to=\"$1\"; }; f"
   topic = "!gerrit topic"
 
