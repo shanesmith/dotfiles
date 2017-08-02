@@ -23,12 +23,12 @@ _fzf_git_lol() {
 }
 
 _fzf_git_status() {
-  local file="$(git status --short | fzf -m | cut -d' ' -f2- | __escape)"
+  local file="$(git status --short | fzf -m | awk '{print $2}' | __escape)"
   __readline_insert "$file"
 }
 
 _fzf_git_status_untracked() {
-  local file="$(git status --short | grep -O '^??' | fzf -m | cut -d' ' -f2- | __escape)"
+  local file="$(git status --short | grep -O '^??' | fzf -m | awk '{print $2}' | __escape)"
   __readline_insert "$file"
 }
 
