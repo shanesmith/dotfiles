@@ -308,12 +308,88 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_switch_buffer = 'et'
 let g:ctrlp_reuse_window = 'nerdtree'
 let g:ctrlp_prompt_mappings = {
-    \ 'ToggleType(1)':        ['<c-right>'],
-    \ 'ToggleType(-1)':       ['<c-left>']
+    \ 'ToggleType(1)':   ['<c-right>'],
+    \ 'ToggleType(-1)':  ['<c-left>'],
+    \ 'PrtHistory(1)':   [],
+    \ 'PrtHistory(-1)':  [],
+    \ 'CreateNewFile()': [],
     \ }
 let g:ctrlp_custom_ignore = {
       \ 'dir':  '\v[\/]\.(git|hg|svn)$',
       \ 'file': '\vtags|\.(exe|so|dll|DS_Store)$'
+      \ }
+
+function! s:CtrlPEnter()
+  nnoremap <buffer> <c-y> :call <SID>CtrlPYank()<CR>
+  nnoremap <buffer> <c-p> :call <SID>CtrlPPaste()<CR>
+endfunction
+
+function! s:CtrlPYank()
+  let lines = <SID>CtrlPGetLines()
+
+  if empty(lines)
+    return
+  endif
+
+  let @* = join(lines, "\n")
+endfunction
+
+function! s:CtrlPPaste()
+  let lines = <SID>CtrlPGetLines()
+
+  if empty(lines)
+    return
+  endif
+
+  exec "normal! a" . join(lines, "\n")
+endfunction
+
+function! s:CtrlPGetLines()
+  echo "What modifier? (a|r|i)"
+
+  let modify = nr2char(getchar())
+
+  if modify == nr2char(27) "escape
+    call feedkeys("\<c-e>") " redraw CtrlP prompt
+    return
+  endif
+
+  let lines = []
+  let marked = ctrlp#getmarkedlist()
+
+  if !empty(marked)
+    let lines = values(marked)
+  else
+    let lines = [ctrlp#getcline()]
+  en
+
+  cal ctrlp#exit()
+
+  call map(lines, {idx, val -> <SID>CtrlPYankFormat(val, modify)})
+
+  return lines
+endfunction
+
+function! s:CtrlPYankFormat(val, mod)
+  if a:mod == "a" || a:mod == "\<c-a>"
+    return fnamemodify(a:val, ':p')
+  elseif a:mod == "r" || a:mod == "\<c-r>"
+    let path = fnamemodify(a:val, ':p')
+    return pyeval("os.path.relpath(vim.eval('path'), os.path.dirname(vim.current.buffer.name))")
+  elseif a:mod == "i" || a:mod == "\<c-i>"
+    let path = fnamemodify(a:val, ':p')
+    let path = pyeval("os.path.relpath(vim.eval('path'), os.path.dirname(vim.current.buffer.name))")
+    if path !~ '^\.\.\/'
+      let path = "./" . path
+    endif
+    return fnamemodify(path, ':r')
+  endif
+
+  return a:val
+endfunction
+
+let g:ctrlp_buffer_func = {
+      \ 'enter': function("s:CtrlPEnter")
       \ }
 function! s:CtrlPWithInput(input)
   let g:ctrlp_default_input = a:input
