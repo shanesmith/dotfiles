@@ -433,8 +433,13 @@ Plug 'chrisbra/Recover.vim'
 Plug 'tyru/restart.vim'
 
 Plug 'diepm/vim-rest-console'
-let g:vrc_trigger = '<F5>'
+let g:vrc_trigger = '<C-R>'
 let g:vrc_show_command = 1
+let g:vrc_curl_opts = {
+      \ '--include': '',
+      \ '--silent': '',
+      \ '--show-error': ''
+      \ }
 command! RestTab call <SID>rest_tab()
 command! RESTTab call <SID>rest_tab()
 function! s:rest_tab()
