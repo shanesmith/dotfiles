@@ -291,9 +291,11 @@ let g:ack_mappings = {
       \ }
 
 Plug 'ctrlpvim/ctrlp.vim'
-let g:ctrlp_map = "<c-p>"
+let g:ctrlp_map = ""
+nnoremap <c-p> :CtrlP<cr>
+vnoremap <c-p> "hy:call <SID>CtrlPWithInput(@h)<CR>
+inoremap <c-p> <esc>:CtrlP<cr>
 nnoremap <leader>p  :CtrlP<cr>
-vnoremap <c-p>  "hy:call <SID>CtrlPWithInput(@h)<CR>
 nnoremap <leader>pb :CtrlPBuffer<cr>
 nnoremap <leader>pc :CtrlPCmdPalette<cr>
 nnoremap <leader>pw :call <SID>CtrlPWithInput("<C-R><C-W>")<CR>
