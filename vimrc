@@ -1718,6 +1718,9 @@ command! -range=% -nargs=0 Space2Tab execute '<line1>,<line2>s#^\( \{'.&ts.'\}\)
 "Source vimrc
 command! ReloadVimrc source $MYVIMRC
 
+"ONLY
+command! ONLY only | tabonly
+
 command! SyntaxGroup call <SID>SyntaxGroup()
 function! s:SyntaxGroup()
   let id = synID(line('.'), col('.'), 1)
@@ -1743,6 +1746,28 @@ endfunction
 
 command! CountPlugins echo len(keys(g:plugs))
 
+command! -range MakeRelative call <SID>MakeRelative()
+function! s:MakeRelative()
+  let [line1, col1] = getpos("'<")[1:2]
+  let [line2, col2] = getpos("'>")[1:2]
+
+  if line1 != line2
+    echoerr "This won't work over multiple lines...."
+    return
+  endif
+
+  let path = getline(line1)[col1 - 1 : col2 - 1]
+
+  if path == ""
+    let path = getcwd()
+  endif
+
+  python import vim
+  python import os.path
+  let relpath = pyeval("os.path.relpath(vim.eval('path'), os.path.dirname(vim.current.buffer.name))")
+
+  echo relpath
+endfunction
 "}}}
 
 " AutoCommands {{{
