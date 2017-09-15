@@ -18,7 +18,7 @@ __escape() {
 
 _fzf_git_lol() {
   # TODO always describe?
-  local sha="$(git lol | fzf --ansi --reverse --no-sort --tiebreak=index | grep -ow '[a-z0-9]\{7\}' | head -1 | xargs git describe --all --contains)"
+  local sha="$(git lol | fzf --ansi --reverse --no-sort --tiebreak=index --multi | grep -owE '^.*?[a-z0-9]{7}' | grep -oE '.{7}$' | xargs git describe --all --contains | tr '\n' ' ')"
   __readline_insert "$sha"
 }
 
