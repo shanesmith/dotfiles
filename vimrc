@@ -976,6 +976,9 @@ Plug 'AndrewRadev/splitjoin.vim'
 
 call plug#end()
 
+au! filetypedetect BufNewFile,BufRead *.ts
+au filetypedetect BufNewFile,BufRead *.ts set filetype=typescript
+
 "Markdown
 let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json', 'ruby', 'sass', 'xml', 'html']
 
