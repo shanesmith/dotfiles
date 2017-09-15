@@ -26,6 +26,13 @@ alias ag='ag -S --pager="less"'
 
 alias ion='ionic'
 
+qrm() {
+  emptydir=$(mktemp -d)
+  rsync -rd --delete "${emptydir}/" "${1}/"
+  # rmdir "${1}"
+  rmdir "${emptydir}"
+}
+
 os_is_mac() {
   [[ $(uname -s) == "Darwin" ]]
 }
