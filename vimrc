@@ -940,10 +940,6 @@ Plug 'kana/vim-textobj-function'
 
 Plug 'thinca/vim-textobj-function-javascript'
 
-Plug 'beloglazov/vim-textobj-quotes'
-xmap q iq
-omap q iq
-
 " Plug 'coderifous/textobj-word-column.vim'
 
 "}}}
