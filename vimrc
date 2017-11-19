@@ -1593,7 +1593,8 @@ function! s:DuplicateAndComment(type)
 endfunction
 
 "Quick formatting
-nnoremap \q gqip
+nnoremap \q gwip
+vnoremap \q gw
 
 "Clear a line
 nnoremap dc cc<esc>
