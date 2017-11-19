@@ -504,6 +504,8 @@ function! s:custom_cosco()
 endfunction
 
 Plug 'tpope/vim-unimpaired'
+nmap <silent> [p =P
+nmap <silent> ]p =p
 
 Plug 'KabbAmine/lazyList.vim'
 
