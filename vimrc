@@ -847,6 +847,8 @@ let g:ycm_key_list_stop_completion = ["<CR>"]
 
 nnoremap <leader>yd :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>yr :YcmCompleter GoToReferences<CR>
+nnoremap <leader>yt :YcmCompleter GetType<CR>
+nnoremap <leader>yc :YcmCompleter GetDoc<CR>
 
 " Plug 'brookhong/DBGPavim'
 " let g:dbgPavimPort = 9009
