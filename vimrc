@@ -548,8 +548,8 @@ nnoremap <leader>u :GundoToggle<CR>
 
 Plug 'dohsimpson/vim-macroeditor'
 
-Plug 'maxbrunsfeld/vim-yankstack'
-let g:yankstack_yank_keys = ['c', 'C', 'd', 'D', 'x', 'X', 'y', 'Y'] " remove s key (that's for sneak)
+Plug 'machakann/vim-highlightedyank'
+map y <Plug>(highlightedyank)
 
 "}}}
 
@@ -988,8 +988,6 @@ au filetypedetect BufNewFile,BufRead *.ts set filetype=typescript
 let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json', 'ruby', 'sass', 'xml', 'html']
 
 " Required to be after plug#end()
-
-call yankstack#setup()
 
 " TODO use t:title?
 function! airline#extensions#tabline#title(n)
