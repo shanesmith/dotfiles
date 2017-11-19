@@ -318,6 +318,7 @@ let g:ctrlp_custom_ignore = {
       \ 'dir':  '\v[\/]\.(git|hg|svn)$',
       \ 'file': '\vtags|\.(exe|so|dll|DS_Store)$'
       \ }
+let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
 
 function! s:CtrlPEnter()
   nnoremap <buffer> <c-y> :call <SID>CtrlPYank()<CR>
@@ -406,6 +407,8 @@ endif
 
 Plug 'mattn/ctrlp-register'
 nnoremap <leader>pr :CtrlPRegister<CR>
+
+Plug 'nixprime/cpsm', { 'do': 'brew install cmake boost && ./install.sh' }
 
 Plug 'scrooloose/nerdtree'
 let g:NERDTreeHijackNetrw = 0
