@@ -223,12 +223,22 @@ sshauth_reload() {
 alias cpsync="rsync -vahP"
 
 date2timestamp() {
-  date --date="$1" +%s
+  if os_is_mac; then
+    date -j "$1" +%s
+  else
+    date --date="$1" +%s
+  fi
 }
 
 timestamp2date() {
-  date --date="@$1"
+  if os_is_mac; then
+    date -j -r "$1"
+  else
+    date --date="@$1"
+  fi
 }
+
+alias now="date +%s"
 
 alias apro="apropos"
 
