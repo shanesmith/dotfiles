@@ -975,6 +975,11 @@ Plug 'sjl/vitality.vim'
 
 Plug 'edkolev/tmuxline.vim'
 
+Plug 't9md/vim-choosewin'
+let g:choosewin_overlay_enable = 1
+let g:choosewin_overlay_shade = 1
+map <c-w>- <Plug>(choosewin)
+
 
 "}}}
 
