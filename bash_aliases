@@ -115,11 +115,12 @@ mkcd() {
   mkdir -p "$1" && cd "$1"
 }
 cd() {
-  if echo "$1" | egrep -q "^-+$"; then
-    g ${#1}
-  else
-    pushd "$1" > /dev/null
-  fi
+  pushd "$1" > /dev/null
+  # if echo "$1" | egrep -q "^-+$"; then
+  #   g ${#1}
+  # else
+  #   pushd "$1" > /dev/null
+  # fi
 }
 d() {
   local num=10
