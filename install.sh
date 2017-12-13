@@ -23,7 +23,7 @@ DOTFILES="
   tmuxinator
   tern-config
   lftprc
-  config/karabiner/karabiner.json
+  config/karabiner
 "
 
 LINUX_DOTFILES="Xmodmap imwheelrc"
