@@ -1,18 +1,16 @@
 
-name: mac
+name: kandy
 
-root: ~/Code/instantpot
+root: ~/Code
 
 windows:
-  - instant-pot-app:
-      root: ~/Code/instantpot/instant-pot-app
+  - learn-u-some-react:
+      root: ~/Code/learn-u-some-react
       layout: '7fff,275x84,0,0{136x84,0,0,12,138x84,137,0[138x33,137,0,13,138x50,137,34,14]}'
       panes:
         - work:
           - clear
         - status:
           - clear
-          # - git status
         - lol:
           - clear
-          # - git lol
