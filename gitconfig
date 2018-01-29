@@ -95,6 +95,7 @@
   sweep-remote-it = "!f() { git branch --remote --merged ${1:-HEAD} | grep -v -e '^ *origin/HEAD' -e '^  *origin/master$' | xargs git branch --remote -d; }; f"
   upstream = "!f() { git branch --set-upstream-to=\"$1\"; }; f"
   topic = "!gerrit topic"
+  symlink = "!f() { git symbolic-ref refs/heads/$1 refs/heads/${2:-$(git symbolic-ref --quiet --short HEAD)}; }; f"
 
 # Commit
   cc = "!f() { if [ -n \"$1\" ]; then git commit -m \"$1\"; else git commit; fi; }; f"
