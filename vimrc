@@ -1069,6 +1069,9 @@ nnoremap <F12> :syntax sync fromstart<CR>
 "Write
 nnoremap <Leader>w :w<CR>
 
+"Close Tab
+nnoremap <C-w>C :tabclose<CR>
+
 "Search commands
 ""Consistent next/prev result
 nnoremap <expr> n 'Nn'[v:searchforward]
