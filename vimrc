@@ -1818,11 +1818,6 @@ augroup LoadLastKnownPosition
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 augroup END
 
-augroup JSONRC
-  au!
-  auto BufNewFile,BufRead .jscsrc,.jshintrc setf json
-augroup END
-
 augroup js
   au!
   au FileType javascript UltiSnipsAddFiletypes javascript.javascript-angular.javascript-jasmine
