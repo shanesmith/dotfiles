@@ -61,6 +61,9 @@ npm_list_license() {
     done
 }
 
+alias reyarn="rm -rf node_modules && yarn"
+alias renpm="rm -rf node_modules && npm install"
+
 bak() {
   local src=${1%/}
   local dest=$src.bak$2
