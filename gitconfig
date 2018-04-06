@@ -117,6 +117,8 @@
   rb-current-commit = "!cat .git/rebase-apply/original-commit 2>/dev/null || cat .git/rebase-merge/stopped-sha 2>/dev/null" # original-commit == rebase && stopped-sha == interactive rebase
   rb-diff-theirs = "!git show $(git rb-current-commit)"
   rb-diff-ours = "!git diff $(git base $(git rb-current-commit)) HEAD"
+  mg-diff-theirs = "!git diff $(git base MERGE_HEAD) MERGE_HEAD"
+  mg-diff-ours = "!git diff $(git base MERGE_HEAD) HEAD"
   is-index-clean = diff-index --no-ext-diff --quiet --exit-code HEAD
   is-staging-clean = diff-index --no-ext-diff --quiet --exit-code --cached HEAD
 
