@@ -251,7 +251,7 @@ alias svim="sudo vim"
 
 alias hs="history"
 
-alias jg="jobs"
+alias jg="jobs -l"
 alias kg="kill %1"
 
 alias dk="docker"
