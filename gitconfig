@@ -99,7 +99,7 @@
 
 # Commit
   cc = "!f() { if [ -n \"$1\" ]; then git commit -m \"$1\"; else git commit; fi; }; f"
-  cca = "!f() { if [ -n \"$1\" ]; then git commit -a -m \"$1\"; else git commit -a; fi; }; f"
+  cca = "!f() { if ! git is-staging-clean; then echo 'Stage is not clean!'; exit 1; fi; if [ -n \"$1\" ]; then git commit -a -m \"$1\"; else git commit -a; fi; }; f"
 
 # Stash
   force-stash-apply = "!f() { git stash show -p ${1} | git apply; }; f"
@@ -117,6 +117,8 @@
   rb-current-commit = "!cat .git/rebase-apply/original-commit 2>/dev/null || cat .git/rebase-merge/stopped-sha 2>/dev/null" # original-commit == rebase && stopped-sha == interactive rebase
   rb-diff-theirs = "!git show $(git rb-current-commit)"
   rb-diff-ours = "!git diff $(git base $(git rb-current-commit)) HEAD"
+  is-index-clean = diff-index --no-ext-diff --quiet --exit-code HEAD
+  is-staging-clean = diff-index --no-ext-diff --quiet --exit-code --cached HEAD
 
 # Github
   pr = "!f() { git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
