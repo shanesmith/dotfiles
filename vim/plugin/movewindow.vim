@@ -4,10 +4,17 @@ function! MoveWindow(where)
     return
   endif
 
-  " cast to int
-  let window = WindowSwap#GetMarkedWindowNum() + 0
+  let curWindow = win_getid()
 
-  let buffer = winbufnr(window)
+  let targetTuple = WindowSwap#GetMarkedWindowTuple()
+
+  let targetWindow = win_getid(targetTuple[1], targetTuple[0])
+
+  call win_gotoid(targetWindow)
+  let buffer = winbufnr(targetWindow)
+  hide
+
+  call win_gotoid(curWindow)
 
   let splitcmd = "split +buffer\\ " . buffer
 
@@ -21,7 +28,6 @@ function! MoveWindow(where)
     let splitcmd = "rightbelow " . splitcmd
   endif
 
-  exe window . "hide"
   exe splitcmd
 
   call WindowSwap#ClearMarkedWindowNum()
