@@ -19,14 +19,6 @@ fi
 # If not running interactively, stop here
 [ -z "$PS1" ] && return
 
-# start with tmux if we have it
-if [[ ! $TERM =~ screen ]]; then
-  export TERM="xterm-256color"
-  if command -v tmux >/dev/null; then
-    tmux has-session && exec tmux -2 attach || exec tmux -2
-  fi
-fi
-
 # set shell options
 shopt -s histappend cdspell checkwinsize dirspell direxpand autocd globstar no_empty_cmd_completion
 

@@ -306,6 +306,16 @@ suitup() {
   exit
 }
 
+muxit() {
+  if ! command -v tmux >/dev/null || [[ $TERM =~ screen ]]; then
+    return
+  fi
+
+  export TERM="xterm-256color"
+
+  tmux has-session && exec tmux -2 attach || exec tmux -2
+}
+
 alias kill-tmux="tmux kill-session -a && tmux kill-session"
 
 ] () {
