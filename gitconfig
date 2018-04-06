@@ -148,8 +148,3 @@
 
 [tig "bind"]
   main = C <git checkout %(commit)
-
-[gerrit "default"]
-	host = partners.macadamian.com
-	port = 29418
-	user = ssmith
