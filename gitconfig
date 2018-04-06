@@ -144,6 +144,7 @@
 
 [diff]
   algorithm = histogram
+  colormoved = default
 
 [tig "bind"]
   main = C <git checkout %(commit)
