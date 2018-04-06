@@ -443,7 +443,6 @@ let g:vrc_curl_opts = {
       \ '--silent': '',
       \ '--show-error': ''
       \ }
-command! RestTab call <SID>rest_tab()
 command! RESTTab call <SID>rest_tab()
 function! s:rest_tab()
   tabnew
