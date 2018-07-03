@@ -137,3 +137,30 @@ endsnippet
 snippet thb "to.have.been" b
 to.have.been
 endsnippet
+
+
+###
+### Project
+###
+
+snippet int "Interceptor" b
+[actionTypes.${1:FOO}]: (dispatch, action, getState) => {
+	const state = getState();
+	$0
+},
+endsnippet
+
+snippet red "Reducer" b
+[actionTypes.${1:FOO}]: (state, action) => ({
+	...state,
+	$0
+}),
+endsnippet
+
+snippet act "Action" b
+[actionTypes.${1:FOO}]: ${0:undefined},
+endsnippet
+
+snippet dp "dispatch()" b
+dispatch( $0 );
+endsnippet
