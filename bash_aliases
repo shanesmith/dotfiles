@@ -369,15 +369,19 @@ remove-old-kernels() {
 }
 
 
-xclip-copy() {
+xcopy() {
   if os_is_mac; then
-    pbcopy -pboard general
+    if [ $# -gt 0 ]; then
+      echo -n "$@" | pbcopy -pboard general
+    else
+      pbcopy -pboard general
+    fi
   else
     xclip -i -selection clip
   fi
 }
 
-xclip-paste() {
+xpaste() {
   if os_is_mac; then
     pbpaste -pboard general
   else
