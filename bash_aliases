@@ -294,6 +294,8 @@ lshs() {
 suitup() {
   local suitup_file="$HOME/.tmuxinator/suitup/${HOSTNAME%%.*}"
 
+  muxit
+
   if [[ ! -f "$suitup_file" ]]; then
     echo "Suitup file does not exist: $suitup_file"
     return 1
@@ -313,7 +315,7 @@ muxit() {
 
   export TERM="xterm-256color"
 
-  tmux has-session && exec tmux -2 attach || exec tmux -2
+  tmux has-session 2>/dev/null && exec tmux -2 attach || exec tmux -2
 }
 
 alias kill-tmux="tmux kill-session -a && tmux kill-session"
