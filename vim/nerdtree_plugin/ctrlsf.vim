@@ -1,17 +1,17 @@
 " don't load multiple times
-if exists("g:loaded_nerdtree_ack")
+if exists("g:loaded_nerdtree_ctrlsf")
     finish
 endif
 
-let g:loaded_nerdtree_ack = 1
+let g:loaded_nerdtree_ctrlsf = 1
 
 " add the new menu item via NERD_Tree's API
 call NERDTreeAddMenuItem({
     \ 'text': '(s)earch directory',
     \ 'shortcut': 's',
-    \ 'callback': 'NERDTreeAck' })
+    \ 'callbctrlsf': 'NERDTreeCtrlSF' })
 
-function! NERDTreeAck()
+function! NERDTreeCtrlSF()
     " get the current dir from NERDTree
     let cd = g:NERDTreeDirNode.GetSelected().path.str()
 
@@ -22,6 +22,6 @@ function! NERDTreeAck()
         return
     endif
 
-    " ack it!
-    exec "Ack! ".pattern." '".cd."'"
+    " CtrlSF it!
+    exec "CtrlSF ".pattern." '".cd."'"
 endfunction
