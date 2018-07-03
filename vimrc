@@ -1032,7 +1032,7 @@ let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascr
 " Required to be after plug#end()
 
 " TODO use t:title?
-function! airline#extensions#tabline#title(n)
+silent! function! airline#extensions#tabline#title(n)
 
   if a:n == tabpagenr()
 
