@@ -234,6 +234,8 @@ call plug#begin('~/.vim/bundle')
 Plug 'Xuyuanp/nerdtree-git-plugin'
 let g:NERDTreeShowIgnoredStatus = 0
 
+Plug 'markonm/traces.vim'
+
 Plug 'thinca/vim-visualstar'
 
 Plug 'dyng/ctrlsf.vim'
@@ -436,6 +438,14 @@ Plug 'chrisbra/Recover.vim'
 
 "" Utilities {{{
 
+Plug 'lambdalisue/gina.vim'
+
+Plug 'frioux/vim-lost'
+
+Plug 'vim-utils/vim-husk'
+cnoremap <expr> <M-Left> husk#left()
+cnoremap <expr> <M-Right> husk#right()
+
 Plug 'tyru/restart.vim'
 
 Plug 'diepm/vim-rest-console'
@@ -564,6 +574,7 @@ Plug 'dohsimpson/vim-macroeditor'
 Plug 'machakann/vim-highlightedyank'
 map y <Plug>(highlightedyank)
 
+Plug 'Konfekt/vim-alias'
 "}}}
 
 "" LOLz {{{
@@ -655,6 +666,8 @@ Plug 'vim-scripts/SyntaxRange'
 Plug 'lfv89/vim-interestingwords'
 
 Plug 'shanesmith/matchtag'
+
+:Plug 'Yggdroot/indentLine'  
 
 "}}}
 
@@ -1499,10 +1512,6 @@ function! s:delete_surrounding_lines(pair)
   delm z
 
 endfunction
-
-"Bash style command line
-cnoremap <C-a> <Home>
-cnoremap <C-e> <End>
 
 "Easier line start/end movement
 nnoremap H ^
