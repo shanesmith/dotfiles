@@ -1179,22 +1179,57 @@ nnoremap <Leader>w :w<CR>
 "Close Tab
 nnoremap <C-w>C :tabclose<CR>
 
-"Search commands
 ""Consistent next/prev result
 nnoremap <expr> n 'Nn'[v:searchforward]
 nnoremap <expr> N 'nN'[v:searchforward]
-""Highlight current word
-nnoremap <silent> <Leader>/ :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<CR>
-nnoremap <silent> <2-LeftMouse> :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<CR>
+
+""Show count of matches
+nnoremap <silent> <Leader>// :%s///rn<CR>
+
 ""Clear search (and Highlight)
-nnoremap <silent> <Leader>\ :let @/=""<CR>
+nnoremap <silent> <Leader>\ :call <SID>clear_search()<CR>
+
 "Search history navigation
 nnoremap <silent> [/ :call <SID>search_hist('back')<CR>
 nnoremap <silent> ]/ :call <SID>search_hist('forward')<CR>
-nnoremap * /\<<C-R>=expand('<cword>')<CR>\><CR>
-nnoremap # ?\<<C-R>=expand('<cword>')<CR>\><CR>
-nnoremap g* /<C-R>=expand('<cword>')<CR><CR>
-nnoremap g# ?<C-R>=expand('<cword>')<CR><CR>
+nnoremap <silent> *  :call <SID>search_cword(1, 1)<CR> 
+nnoremap <silent> #  :call <SID>search_cword(1, 0)<CR> 
+nnoremap <silent> g* :call <SID>search_cword(0, 1)<CR> 
+nnoremap <silent> g# :call <SID>search_cword(0, 0)<CR> 
+nnoremap <silent> <2-LeftMouse> :call <SID>search_cword(0, 1)<CR> 
+
+function! s:search_cword(word_bound, forwards)
+  let pre = ""
+  let post = ""
+
+  if a:word_bound
+    let pre = '\<'
+    let post = '\>'
+  endif
+
+  let search='\V' . pre . escape(expand('<cword>'), '\') . post
+
+  if search == @/
+    if a:forwards
+      normal! n
+    else
+      normal! N
+    endif
+    return
+  endif
+
+  let @/=search
+
+  " star for some reason star moves cursor ahead by one, sometimes....
+  normal! h
+
+  call histadd('search', @/)
+endfunction
+
+function! s:clear_search()
+  let @/="" 
+  let s:search_hist_index = 0
+endfunction
 
 let s:search_hist_index = 0
 let s:search_last_nr = 0
