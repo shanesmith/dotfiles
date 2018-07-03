@@ -545,3 +545,19 @@ __colorize() {
 __colorize_ps1() {
   echo -n "\[$(__ansi_color "$1")\]$2\[$(__ansi_color "[X]X")\]"
 }
+
+__webcam_files=(
+  "/System/Library/Frameworks/CoreMediaIO.framework/Versions/A/Resources/VDC.plugin/Contents/MacOS/VDC"
+  "/System/Library/PrivateFrameworks/CoreMediaIOServicesPrivate.framework/Versions/A/Resources/AVC.plugin/Contents/MacOS/AVC"
+  "/System/Library/QuickTime/QuickTimeUSBVDCDigitizer.component/Contents/MacOS/QuickTimeUSBVDCDigitizer"
+  "/Library/CoreMediaIO/Plug-Ins/DAL/AppleCamera.plugin/Contents/MacOS/AppleCamera"
+  "/Library/CoreMediaIO/Plug-Ins/FCP-DAL/AppleCamera.plugin/Contents/MacOS/AppleCamera"
+)
+
+macos_disable_webcam() {
+  sudo chmod a-r "${__webcam_files[@]}"
+}
+
+macos_enable_webcam() {
+  sudo chmod a+r "${__webcam_files[@]}"
+}
