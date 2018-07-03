@@ -1802,6 +1802,14 @@ nnoremap gi gUli
 nnoremap <silent> [[ :call searchpair('\[', '', '\]', 'bW')<CR>
 nnoremap <silent> ]] :call searchpair('\[', '', '\]', 'W')<CR>
 
+"Quick jump to window
+for i in [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  exec 'nnoremap <silent> <C-w>' . i . ' :' . i . 'wincmd w<CR>'
+endfor
+
+"Open file under cusror in split window
+nnoremap <C-w>gf :vsp<CR>gf
+
 "}}}
 
 " Commands {{{
