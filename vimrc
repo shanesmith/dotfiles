@@ -726,6 +726,7 @@ let g:better_whitespace_filetypes_blacklist = ["ctrlsf", "help", "diff"]
 command! WhitespaceStrip StripWhitespace
 
 Plug 'Chiel92/vim-autoformat'
+command! Format Autoformat
 
 Plug 'jiangmiao/auto-pairs'
 let g:AutoPairsShortcutToggle = ''
