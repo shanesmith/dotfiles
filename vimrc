@@ -749,7 +749,7 @@ nmap <leader>K <Plug>InterestingWordsClear
 
 Plug 'shanesmith/matchtag'
 
-:Plug 'Yggdroot/indentLine'  
+Plug 'Yggdroot/indentLine'
 
 "}}}
 
@@ -1028,7 +1028,7 @@ inoremap <silent> <s-tab> <C-R>=<SID>PumOrUltisnips(0)<CR>
 snoremap <silent> <tab> <Esc>:call UltiSnips#JumpForwards()<CR>
 snoremap <silent> <s-tab> <Esc>:call UltiSnips#JumpBackwards()<CR>
 nnoremap <expr> <silent> <tab> <SID>PumOrUltisnips(1)
-nnoremap <expr> <silent> <s-tab> <SID>PumOrUltisnips(0) 
+nnoremap <expr> <silent> <s-tab> <SID>PumOrUltisnips(0)
 
 " Plug 'honza/vim-snippets'
 
@@ -1192,11 +1192,11 @@ nnoremap <silent> <Leader>\ :call <SID>clear_search()<CR>
 "Search history navigation
 nnoremap <silent> [/ :call <SID>search_hist('back')<CR>
 nnoremap <silent> ]/ :call <SID>search_hist('forward')<CR>
-nnoremap <silent> *  :call <SID>search_cword(1, 1)<CR> 
-nnoremap <silent> #  :call <SID>search_cword(1, 0)<CR> 
-nnoremap <silent> g* :call <SID>search_cword(0, 1)<CR> 
-nnoremap <silent> g# :call <SID>search_cword(0, 0)<CR> 
-nnoremap <silent> <2-LeftMouse> :call <SID>search_cword(0, 1)<CR> 
+nnoremap <silent> *  :call <SID>search_cword(1, 1)<CR>
+nnoremap <silent> #  :call <SID>search_cword(1, 0)<CR>
+nnoremap <silent> g* :call <SID>search_cword(0, 1)<CR>
+nnoremap <silent> g# :call <SID>search_cword(0, 0)<CR>
+nnoremap <silent> <2-LeftMouse> :call <SID>search_cword(0, 1)<CR>
 
 function! s:search_cword(word_bound, forwards)
   let pre = ""
@@ -1227,7 +1227,7 @@ function! s:search_cword(word_bound, forwards)
 endfunction
 
 function! s:clear_search()
-  let @/="" 
+  let @/=""
   let s:search_hist_index = 0
 endfunction
 
@@ -1314,7 +1314,7 @@ call <SID>MacroMap()
 
 vnoremap @@ :normal! @@<CR>
 " TODO complete this...
-" vnoremap @x  
+" vnoremap @x
 
 "Visual select last pasted
 "http://vim.wikia.com/wiki/Selecting_your_pasted_text
@@ -1438,10 +1438,10 @@ function! s:moveit(where, mode) range
       if is_prev_line_blank
         let targetline = prevnonblank(firstline-1)
 
-      else 
+      else
         let match_end_brace = match(getline(firstline-1), '}\(.*}\)\@!')
 
-        if match_end_brace != -1 
+        if match_end_brace != -1
           call cursor(firstline-1, match_end_brace)
           normal! %
           let targetline = line('.') - 1
@@ -1471,7 +1471,7 @@ function! s:moveit(where, mode) range
       else
         let match_start_brace = match(getline(lastline+1), '{')
 
-        if match_start_brace != -1 
+        if match_start_brace != -1
           call cursor(lastline+1, match_start_brace)
           normal! %
           let targetline = line('.')
