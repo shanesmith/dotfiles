@@ -664,6 +664,9 @@ xmap a- <Plug>GitGutterTextObjectOuterVisual
 Plug 'vim-scripts/SyntaxRange'
 
 Plug 'lfv89/vim-interestingwords'
+nmap <leader>k <Plug>InterestingWords
+vmap <leader>k <Plug>InterestingWords
+nmap <leader>K <Plug>InterestingWordsClear
 
 Plug 'shanesmith/matchtag'
 
