@@ -246,7 +246,7 @@ let g:ctrlsf_indent = 2
 let g:ctrlsf_mapping = {
       \ "split": [ "<C-S>" ],
       \ "vsplit": [ "<C-V>" ],
-      \ "tab": [ "<C-T>" ],
+      \ "tab": { "key": [ "<C-T>" ], "suffix": ":CtrlSFOpen<CR>" },
       \ "next": "n",
       \ "prev": "N"
       \ }
