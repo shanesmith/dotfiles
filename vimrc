@@ -203,7 +203,10 @@ set splitright
 set synmaxcol=800
 
 "What to show in character list
-set listchars=tab:>-,trail:',eol:$
+set list
+set listchars=tab:▸\ ,extends:❯,precedes:❮
+set showbreak=↪
+
 
 "Paste from system clipboard
 set clipboard=unnamed,unnamedplus
