@@ -257,6 +257,85 @@ elseif executable('ag')
 endif
 nmap <leader>c <Plug>CtrlSFPrompt
 vmap <leader>c <Plug>CtrlSFVwordPath
+nnoremap <silent> <leader>/c :call <SID>CtrlSFSetSearch()<CR>
+
+function! s:CtrlSFSetSearch()
+  let  @/=ctrlsf#pat#Regex()
+  call histadd('search', @/)
+endfunction
+
+function! g:CtrlSFAfterMainWindowInit()
+  nnoremap <silent><buffer> <CR> :call <SID>CtrlSFOpenWithPreviousWindow()<CR>
+  nnoremap <silent><buffer> <C-CR> :call <SID>CtrlSFChooseWindowOpen()<CR>
+endfunction
+
+function! s:CtrlSFOpenWithPreviousWindow()
+    let [file, line, match] = ctrlsf#view#Locate(line('.'))
+
+    if empty(file) || empty(line)
+      return
+    endif
+
+    if g:ctrlsf_confirm_unsaving_quit && !ctrlsf#buf#WarnIfChanged()
+      return
+    endif
+
+    wincmd p
+
+    if bufname('%') !=# file
+      if &modified && !&hidden
+          exec 'silent vertical split ' . fnameescape(file)
+      else
+        exec 'silent edit ' . fnameescape(file)
+      endif
+    endif
+
+    let lnum = line.lnum
+    let col  = empty(match)? 0 : match.col
+
+    call ctrlsf#win#MoveCursorCentral(lnum, col)
+
+    if g:ctrlsf_selected_line_hl =~ 'o'
+      call ctrlsf#hl#HighlightSelectedLine()
+    endif
+endfunction
+
+function! s:CtrlSFChooseWindowOpen()
+    let [file, line, match] = ctrlsf#view#Locate(line('.'))
+
+    if empty(file) || empty(line)
+      return
+    endif
+
+    if g:ctrlsf_confirm_unsaving_quit && !ctrlsf#buf#WarnIfChanged()
+      return
+    endif
+
+    let winnr = input("Window: ")
+
+    if !winnr
+      return
+    endif
+
+    execute winnr . "wincmd w"
+
+    if bufname('%') !=# file
+      if &modified && !&hidden
+          exec 'silent vertical split ' . fnameescape(file)
+      else
+        exec 'silent edit ' . fnameescape(file)
+      endif
+    endif
+
+    let lnum = line.lnum
+    let col  = empty(match)? 0 : match.col
+
+    call ctrlsf#win#MoveCursorCentral(lnum, col)
+
+    if g:ctrlsf_selected_line_hl =~ 'o'
+      call ctrlsf#hl#HighlightSelectedLine()
+    endif
+endfunction
 
 Plug 'shanesmith/ack.vim'
 command! -nargs=* MyAck call <SID>MyAck(0, <f-args>)
