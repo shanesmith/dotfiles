@@ -19,8 +19,7 @@ function! g:NERDTreeHere(split, ...)
     let reveal_path = expand("%:p")
   endif
 
-  if &modified == 1 && a:split ==? "e"
-    " TODO detect multiple open buffers?
+  if &modified == 1 && a:split ==? "e" && len(win_findbuf(bufnr("%"))) < 2
     call nerdtree#echo("Buffer has been modified.")
     return
   endif
