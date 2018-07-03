@@ -1274,6 +1274,9 @@ fun! s:GetRegName()
 endfun
 
 nnoremap q <nop>
+nnoremap q; q:
+nnoremap q/ q/
+nnoremap q? q?
 call <SID>MacroMap()
 
 vnoremap @@ :normal! @@<CR>
