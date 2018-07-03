@@ -1554,16 +1554,22 @@ vnoremap < <gv
 vnoremap = =gv
 
 "Text-object for matching whole-line pairs
+" TODO delete only up until a closing bracket on top line or opening bracket
+" on last line in order to handle `} else {`
 vnoremap <silent> A{ :normal! [{V%<CR>
 vnoremap <silent> A} :normal! [{V%<CR>
+vnoremap <silent> AB :normal! [{V%<CR>
 vnoremap <silent> A( :normal! [(V%<CR>
 vnoremap <silent> A) :normal! [(V%<CR>
+vnoremap <silent> Ab :normal! [(V%<CR>
 vnoremap <silent> A[ :call searchpair('\[', '', '\]', 'bW') \| normal! V%<CR>
 vnoremap <silent> A] :call searchpair('\[', '', '\]', 'bW') \| normal! V%<CR>
 onoremap <silent> A{ :normal! [{V%<CR>
 onoremap <silent> A} :normal! [{V%<CR>
+onoremap <silent> AB :normal! [{V%<CR>
 onoremap <silent> A( :normal! [(V%<CR>
 onoremap <silent> A) :normal! [(V%<CR>
+onoremap <silent> Ab :normal! [(V%<CR>
 onoremap <silent> A[ :call searchpair('\[', '', '\]', 'bW') \| normal! V%<CR>
 onoremap <silent> A] :call searchpair('\[', '', '\]', 'bW') \| normal! V%<CR>
 nnoremap <silent> dS{ :call <SID>delete_surrounding_lines("{}")<CR>
