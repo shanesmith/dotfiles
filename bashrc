@@ -41,6 +41,9 @@ export LESS="-SRi"
 $(which lesspipe >/dev/null) && eval "$(lesspipe)"
 $(which lesspipe.sh >/dev/null) && eval "$(lesspipe.sh)"
 
+# thefuck
+$(which thefuck >/dev/null) && eval $(thefuck --alias)
+
 if command -v rg >/dev/null; then
   export FZF_DEFAULT_COMMAND='rg --files -g ""'
 elif command -v ag >/dev/null; then
