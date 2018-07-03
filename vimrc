@@ -1873,7 +1873,7 @@ function! s:SyntaxGroup()
   exec "verb hi" transName
 endfunction
 
-nnoremap <F10> :Scratch<CR>
+nnoremap <leader>s :Scratch<CR>
 command! -nargs=? -complete=syntax Scratch call <SID>NewScratch(<f-args>)
 function! s:NewScratch(...)
   let type = a:0 ? a:1 : 'markdown'
