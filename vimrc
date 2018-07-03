@@ -1301,7 +1301,7 @@ vnoremap gy ygv<ESC>
 " endfunction
 
 "Like it should be
-nnoremap Y y$
+nmap Y y$
 
 "Save 30% keystrokes
 vnoremap w iw
