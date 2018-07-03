@@ -89,6 +89,7 @@ sources=(
   "${HOME}/.bash_readline"
   "${HOME}/.bashrc.local"
   "${HOME}/.rvm/scripts/rvm"
+  "${HOME}/Code/bash-sneak/sneak.bash"
 )
 
 for file in "${sources[@]}"; do
