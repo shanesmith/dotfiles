@@ -1225,9 +1225,7 @@ nnoremap <C-Tab> :tabnext<CR>
 nnoremap <C-S-Tab> :tabprev<CR>
 inoremap <C-Tab> <ESC>:tabnext<CR>
 inoremap <C-S-Tab> <ESC>:tabprev<CR>
-
-"Show whitespace characters
-nnoremap <F7> :set list!<CR>
+nnoremap gr gT
 
 "Stop accidentaly recording
 function! s:MacroMap()
