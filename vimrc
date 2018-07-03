@@ -997,7 +997,7 @@ inoremap <silent> <c-j> <ESC>:TmuxNavigateDown<cr>
 inoremap <silent> <c-k> <ESC>:TmuxNavigateUp<cr>
 inoremap <silent> <c-l> <ESC>:TmuxNavigateRight<cr>
 
-Plug 'Keithbsmiley/tmux.vim'
+Plug 'ericpruitt/tmux.vim'
 
 Plug 'sjl/vitality.vim'
 
