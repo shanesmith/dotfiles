@@ -1846,8 +1846,6 @@ function! s:CloseThing()
   endif
 endfunction
 
-command! CountMatches %s///rn
-
 " Big W also writes
 command! W w
 command! Wq wq
