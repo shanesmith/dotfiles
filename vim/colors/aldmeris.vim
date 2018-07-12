@@ -1,6 +1,8 @@
 " Modified version of Aldmeris colorscheme
 let g:aldmeris_transparent = 1
 
+let s:is_gui = has("gui_running") || &termguicolors
+
 " Vim color scheme
 " Name:         aldmeris.vim
 " Maintainer:   Vincent Velociter <vincent.velociter@gmail.com>
@@ -92,7 +94,7 @@ let g:aldmeris_transparent = 1
 " }}}
 " Colorscheme initialization {{{
 " --------------------------
-if has("gui_running")
+if s:is_gui
     set background=dark
 endif
 hi clear
@@ -103,7 +105,7 @@ endif
 let g:colors_name = "aldmeris"
 " }}}
 " Custom highlight function {{{
-if has("gui_running")
+if s:is_gui
     let s:hi_args = ['guibg', 'guifg', 'gui', 'guisp']
 else
     let s:hi_args = ['ctermbg', 'ctermfg', 'cterm']
@@ -130,7 +132,7 @@ let s:terms_italic = ["rxvt", "rxvt-unicode", "rxvt-unicode-256color"]
 " }}}
 " Gui & term palettes definition {{{
 " ------------------------------
-if has("gui_running")
+if s:is_gui
     let s:butter1     = "#fce94f"
     let s:butter2     = "#edd400"
     let s:chameleon1  = "#8ae234"
@@ -219,7 +221,7 @@ else
     let s:black       = "Black"
     let s:cursorline  = "DarkGray"
 endif
-if (!has("gui_running") && g:aldmeris_transparent == 1)
+if (!s:is_gui && g:aldmeris_transparent == 1)
     let s:aluminium6 = "NONE"
 endif
 " }}}
@@ -240,7 +242,7 @@ call s:Hi( 'Error',        s:scarletred2,  s:aluminium1,   "bold" )
 call s:Hi( 'Todo',         s:butter1,      s:aluminium4,   "bold" )
 
 " italic is a special case
-if !has("gui_running")
+if !s:is_gui
     if (index(s:terms_italic, &term) < 0)
         hi Comment cterm=NONE
     endif
@@ -274,7 +276,7 @@ call s:Hi( 'PmenuThumb',    s:aluminium4,   s:aluminium4 )
 call s:Hi( 'Question',      s:aluminium6,   s:chameleon1,   "bold" )
 call s:Hi( 'Search',        s:chameleon3,   s:aluminium1 )
 call s:Hi( 'SpecialKey',    s:aluminium6,   s:aluminium5 )
-if has("gui_running")
+if s:is_gui
   call s:Hi( 'SpellBad',      s:aluminium6,   "NONE",         "undercurl",   s:scarletred1 )
   call s:Hi( 'SpellCap',      s:aluminium6,   "NONE",         "undercurl",   s:skyblue1 )
   call s:Hi( 'SpellLocal',    s:aluminium6,   "NONE",         "undercurl",   s:orange1 )
