@@ -26,10 +26,16 @@ fi
 # set shell options
 shopt -s histappend cdspell checkwinsize dirspell direxpand autocd globstar no_empty_cmd_completion
 
-# Some additional evironment variables
-export EDITOR=vim
-export CLICOLOR=1
+# set default editor
+if command_exists nvim; then
+  export EDITOR=nvim
+  export GIT_EDITOR=nvim # override git config core.editor
+else
+  export EDITOR=vim
+fi
 
+# Some additional evironment variables
+export CLICOLOR=1
 export MYSQL_PS1="mysql://\u@\h \d> "
 
 # don't put duplicate lines in the history. See bash(1) for more options
