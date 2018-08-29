@@ -2,17 +2,21 @@ export NODE_PATH=$NODE_PATH:$HOME/.node/lib/node_modules
 
 export PATH=$PATH:$HOME/.node/bin:$HOME/bin.local:$HOME/bin
 
+command_exists() {
+  command -v $1 >/dev/null
+}
+
 if [[ -n "$(ls -A /Library/Java/JavaVirtualMachines 2>/dev/null)" ]]; then
   # macOS only?
   export JAVA_HOME=$($(dirname $(readlink $(which javac)))/java_home)
 fi
 
-if command -v brew >/dev/null && [ -d $(brew --prefix)/opt/nvm ]; then
+if command_exists brew && [ -d $(brew --prefix)/opt/nvm ]; then
   export NVM_DIR=~/.nvm
   . $(brew --prefix)/opt/nvm/nvm.sh
 fi
 
-if command -v docker-machine >/dev/null; then
+if command_exists docker-machine; then
   eval "$(docker-machine env 2>/dev/null)"
 fi
 
@@ -44,9 +48,9 @@ $(which lesspipe.sh >/dev/null) && eval "$(lesspipe.sh)"
 # thefuck
 $(which thefuck >/dev/null) && eval $(thefuck --alias)
 
-if command -v rg >/dev/null; then
+if command_exists rg; then
   export FZF_DEFAULT_COMMAND='rg --files -g ""'
-elif command -v ag >/dev/null; then
+elif command_exists ag; then
   export FZF_DEFAULT_COMMAND='ag -g ""'
 fi
 
@@ -59,7 +63,7 @@ if ! shopt -oq posix; then
     . /usr/share/bash-completion/bash_completion
   elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
-  elif command -v brew >/dev/null && [ -f $(brew --prefix)/etc/bash_completion ]; then
+  elif command_exists brew && [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
   fi
 
@@ -72,11 +76,11 @@ if ! shopt -oq posix; then
     . /Applications/Docker.app/Contents/Resources/etc/docker-compose.bash-completion
   fi
 
-  if command -v grunt >/dev/null; then
+  if command_exists grunt; then
     . <(grunt --completion=bash)
   fi
 
-  if command -v gerrit >/dev/null; then
+  if command_exists gerrit; then
     . <(gerrit completion)
   fi
 
