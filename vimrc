@@ -1255,9 +1255,6 @@ function! s:search_cword(word_bound, forwards)
 
   let @/=search
 
-  " star for some reason star moves cursor ahead by one, sometimes....
-  normal! h
-
   call histadd('search', @/)
 endfunction
 
