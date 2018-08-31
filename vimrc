@@ -275,6 +275,15 @@ endfunction
 function! g:CtrlSFAfterMainWindowInit()
   nnoremap <silent><buffer> <CR> :call <SID>CtrlSFOpenWithPreviousWindow()<CR>
   nnoremap <silent><buffer> <C-CR> :call <SID>CtrlSFChooseWindowOpen()<CR>
+  nnoremap <silent><buffer> <C-E> :call <SID>CtrlSFNextFile('')<CR>
+  nnoremap <silent><buffer> <C-Y> :call <SID>CtrlSFNextFile('b')<CR>
+endfunction
+
+function! s:CtrlSFNextFile(flags)
+  let curline = getline('.')
+  let curfile = strpart(curline, 0, stridx(curline, '|'))
+
+  call search('^\%(' . curfile . '\)\@!', a:flags)
 endfunction
 
 function! s:CtrlSFOpenWithPreviousWindow()
