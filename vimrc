@@ -1231,7 +1231,7 @@ nnoremap <silent> *  :call <SID>search_cword(1, 1)<CR>
 nnoremap <silent> #  :call <SID>search_cword(1, 0)<CR>
 nnoremap <silent> g* :call <SID>search_cword(0, 1)<CR>
 nnoremap <silent> g# :call <SID>search_cword(0, 0)<CR>
-nnoremap <silent> <2-LeftMouse> :call <SID>search_cword(0, 1)<CR>
+nnoremap <silent> <2-LeftMouse> :call <SID>search_cword(1, 1)<CR>
 
 function! s:search_cword(word_bound, forwards)
   let pre = ""
