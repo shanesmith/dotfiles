@@ -354,43 +354,6 @@ function! s:CtrlSFChooseWindowOpen()
     endif
 endfunction
 
-Plug 'shanesmith/ack.vim'
-command! -nargs=* MyAck call <SID>MyAck(0, <f-args>)
-command! -nargs=* MyAckRegEx call <SID>MyAck(1, <f-args>)
-function! s:MyAck(regex, ...)
-  let args = ""
-  if !a:regex
-    let args .= " " . g:ack_literal_flag
-  endif
-  if a:0 == 0
-    let what = expand("<cword>")
-  else
-    let what = join(a:000, ' ')
-  endif
-  let args .= " -- \"" . what . "\""
-  call ack#Ack('grep!', args)
-endfunction
-nnoremap <leader>aa :MyAck<space>
-nnoremap <leader>aq :MyAckRegEx<space>
-vnoremap <leader>aa "hy:<C-U>MyAck <C-R>h
-vnoremap <leader>aq "hy:<C-U>MyAckRegEx <C-R>h
-if executable('rg')
-  let g:ackprg = 'rg --vimgrep --no-heading'
-  let g:ack_literal_flag = "-F"
-elseif executable('ag')
-  let g:ackprg = 'ag --vimgrep $* \| grep -v -e "^.*\.min\.js:" -e "^.*\.min\.css:"'
-  let g:ack_literal_flag = "-Q"
-endif
-let g:ackhighlight = 1
-let g:ack_mappings = {
-      \ "<C-t>": "<C-W><CR><C-W>T",
-      \ "<C-s>": "<C-W><CR>:exe 'wincmd ' (&splitbelow ? 'J' : 'K')<CR><C-W>p<C-W>J<C-W>p",
-      \ "s": "<C-W><CR>:exe 'wincmd ' (&splitbelow ? 'J' : 'K')<CR><C-W>p<C-W>J<C-W>p",
-      \ "<C-v>": "<C-W><CR>:exe 'wincmd ' (&splitright ? 'L' : 'H')<CR><C-W>p<C-W>J<C-W>p",
-      \ "v":     "<C-W><CR>:exe 'wincmd ' (&splitright ? 'L' : 'H')<CR><C-W>p<C-W>J<C-W>p",
-      \ "<CR>":  ":let ack_qf_line=line('.')<CR><C-w>p:exec ack_qf_line . 'cc'<CR>"
-      \ }
-
 Plug 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_map = ""
 nnoremap <c-p> :CtrlP<cr>
@@ -677,6 +640,7 @@ Plug 'machakann/vim-highlightedyank'
 map y <Plug>(highlightedyank)
 
 Plug 'Konfekt/vim-alias'
+
 "}}}
 
 "" LOLz {{{
@@ -852,11 +816,6 @@ Plug 'sheerun/vim-polyglot'
 let g:jsx_ext_required = 1
 let g:vim_json_syntax_conceal = 0
 let g:vim_markdown_conceal = 0
-
-Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
-nnoremap <leader>jf :TernDef<CR>
-nnoremap <leader>jd :TernDoc<CR>
-nnoremap <leader>jr :TernRefs<CR>
 
 Plug 'heavenshell/vim-jsdoc'
 
