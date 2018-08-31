@@ -805,6 +805,8 @@ let g:ConflictMotions_ConflictMapping = 'X'
 let g:ConflictMotions_SectionMapping = '='
 nnoremap <leader>x= :ConflictTake both<CR>
 nnoremap <leader>x+ :ConflictTake both<CR>
+" prevent accidental character deletion
+nnoremap <leader>x <nop>
 
 Plug 'vim-scripts/CountJump'
 
