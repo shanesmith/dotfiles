@@ -472,15 +472,17 @@ function! s:CtrlPGetLines()
   return lines
 endfunction
 
+let g:ctrlp_yank_path = ''
+
 function! s:CtrlPYankFormat(val, mod)
   if a:mod == "a" || a:mod == "\<c-a>"
     return fnamemodify(a:val, ':p')
   elseif a:mod == "r" || a:mod == "\<c-r>"
-    let path = fnamemodify(a:val, ':p')
-    return pyeval("os.path.relpath(vim.eval('path'), os.path.dirname(vim.current.buffer.name))")
+    let g:ctrlp_yank_path = fnamemodify(a:val, ':p')
+    return <SID>PyEval("os.path.relpath(vim.eval('g:ctrlp_yank_path'), os.path.dirname(vim.current.buffer.name))")
   elseif a:mod == "i" || a:mod == "\<c-i>"
-    let path = fnamemodify(a:val, ':p')
-    let path = pyeval("os.path.relpath(vim.eval('path'), os.path.dirname(vim.current.buffer.name))")
+    let g:ctrlp_yank_path = fnamemodify(a:val, ':p')
+    let path = <SID>PyEval("os.path.relpath(vim.eval('g:ctrlp_yank_path'), os.path.dirname(vim.current.buffer.name))")
     if path !~ '^\.\.\/'
       let path = "./" . path
     endif
@@ -488,6 +490,14 @@ function! s:CtrlPYankFormat(val, mod)
   endif
 
   return a:val
+endfunction
+
+function! s:PyEval(script)
+  if has('python3')
+    return py3eval(a:script)
+  endif
+
+  return pyeval(a:script)
 endfunction
 
 let g:ctrlp_buffer_func = {
