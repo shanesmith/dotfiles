@@ -1882,9 +1882,28 @@ nnoremap <C-w>gf :vsp<CR>gf
 
 " Commands {{{
 
-nnoremap <silent> <C-W>z :call <SID>CloseThing()<ESC>
+nnoremap <silent> <C-W>z :call <SID>GoToThing()<ESC>
+nnoremap <silent> <C-W>Z :call <SID>CloseThing()<ESC>
+
 function! s:CloseThing()
+  let thing = <SID>FindThing()
+
+  if thing != 0
+    exec thing . "close"
+  endif
+endfunction
+
+function! s:GoToThing()
+  let thing = <SID>FindThing()
+
+  if thing != 0
+    exec thing . 'wincmd w'
+  endif
+endfunction
+
+function! s:FindThing()
   let qfnum = 0
+  let helpnum = 0
   let ctrlsfnum = 0
   let previewnum = 0
 
@@ -1894,24 +1913,26 @@ function! s:CloseThing()
       let qfnum = winnum
     elseif ft == "ctrlsf"
       let ctrlsfnum = winnum
+    elseif ft == "help"
+      let helpnum = winnum
     elseif getwinvar(winnum, "&previewwindow")
       let previewnum = winnum
     endif
   endfor
 
-  let closenum = 0
+  let thing = 0
 
   if previewnum != 0
-    let closenum = previewnum
+    let thing = previewnum
+  elseif helpnum != 0
+    let thing = helpnum
   elseif qfnum != 0
-    let closenum = qfnum
+    let thing = qfnum
   elseif ctrlsfnum != 0
-    let closenum = ctrlsfnum
+    let thing = ctrlsfnum
   endif
 
-  if closenum != 0
-    exec closenum . "close"
-  endif
+  return thing
 endfunction
 
 " Big W also writes
