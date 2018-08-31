@@ -1182,7 +1182,12 @@ endfunction
 
 " Colorscheme {{{
 
-if &t_Co == 256 || has("gui_running")
+if has("nvim")
+  set termguicolors
+  colorscheme aldmeris
+endif
+
+if &t_Co == 256 || has("gui_running") || has("nvim")
   try
     colorscheme aldmeris
   catch
