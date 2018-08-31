@@ -519,7 +519,8 @@ endif
 Plug 'mattn/ctrlp-register'
 nnoremap <leader>pr :CtrlPRegister<CR>
 
-Plug 'nixprime/cpsm', { 'do': 'brew install cmake boost && ./install.sh' }
+" https://github.com/nixprime/cpsm/pull/49
+Plug 'ptzz/cpsm', { 'commit': 'c881adfcb254dd494d78f68681b12ef0eb558e10', 'do': 'brew install cmake boost && ./install.sh' }
 
 Plug 'scrooloose/nerdtree'
 let g:NERDTreeHijackNetrw = 0
