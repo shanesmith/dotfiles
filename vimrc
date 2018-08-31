@@ -1730,7 +1730,8 @@ function! s:YouPaste(type, ...)
   else
     let [mark1, mark2] = ['`[', '`]']
   endif
-  exec 'normal! ' . mark1 . 'v' . mark2 . '"_d"' . b:silly . 'P'
+  let pastecmd = (col("']") == col("$")-1) ? "p" : "P"
+  exec 'normal! ' . mark1 . 'v' . mark2 . '"_d"' . b:silly . pastecmd
 endfunction
 
 "Duplicate
