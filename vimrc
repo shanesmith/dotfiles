@@ -210,6 +210,10 @@ set list
 set listchars=tab:▸\ ,extends:❯,precedes:❮
 set showbreak=↪
 
+if has('nvim')
+  " preview of commands
+  set inccommand=split
+endif
 
 "Paste from system clipboard
 set clipboard=unnamed,unnamedplus
@@ -236,8 +240,6 @@ call plug#begin('~/.vim/bundle')
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
 let g:NERDTreeShowIgnoredStatus = 0
-
-Plug 'markonm/traces.vim'
 
 Plug 'thinca/vim-visualstar'
 
