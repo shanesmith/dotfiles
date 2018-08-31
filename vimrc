@@ -1131,7 +1131,11 @@ nnoremap <leader><right> :SidewaysRight<CR>
 
 Plug 'AndrewRadev/splitjoin.vim'
 
+"}}}
+
 call plug#end()
+
+"" post plug-end ops {{{
 
 au! filetypedetect BufNewFile,BufRead *.ts
 au filetypedetect BufNewFile,BufRead *.ts set filetype=typescript
@@ -1172,7 +1176,7 @@ silent! function! airline#extensions#tabline#title(n)
 
 endfunction
 
-"}}}
+"" }}}
 
 " }}}
 
