@@ -1202,11 +1202,6 @@ endif
 
 " Mappings {{{
 
-if has("nvim")
-  " quick fix for https://github.com/neovim/neovim/issues/2048
-  nnoremap <silent> <BS> :<C-U>TmuxNavigateLeft<CR>
-endif
-
 "Toggle spellchecker
 nnoremap <F11> :setlocal spell!<CR>
 
