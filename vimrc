@@ -639,9 +639,6 @@ nnoremap <silent> zP :<c-u>call ZeroPaste('P')<cr>
 
 Plug 'KabbAmine/lazyList.vim'
 
-" Plug 'majutsushi/tagbar'
-" nnoremap <Leader>c :TagbarToggle<CR>
-
 Plug 'shanesmith/vim-surround'
 nnoremap dsf :call <SID>SurroundingFunction('d')<CR>
 nnoremap csf :call <SID>SurroundingFunction('c')<CR>
@@ -670,8 +667,6 @@ let g:localvimrc_persistent=1
 
 Plug 'szw/vim-maximizer'
 let g:maximizer_default_mapping_key = '<F4>'
-
-" Plug 'tpope/vim-fugitive'
 
 Plug 'sjl/gundo.vim'
 nnoremap <leader>u :GundoToggle<CR>
@@ -785,12 +780,6 @@ Plug 'Yggdroot/indentLine'
 
 Plug 'rhysd/clever-f.vim'
 
-" Plug 'kana/vim-smartword'
-" map qw <Plug>(smartword-w)
-" map qb <Plug>(smartword-b)
-" map qe <Plug>(smartword-e)
-" map qge <Plug>(smartword-ge)
-
 Plug 'justinmk/vim-sneak'
 let g:sneak#use_ic_scs = 1
 let g:sneak#streak = 1
@@ -888,8 +877,6 @@ let g:instant_markdown_autostart = 0
 "}}}
 
 "" Debugging {{{
-
-" Plug 'joonty/vdebug'
 
 Plug 'w0rp/ale'
 let g:ale_open_list = 'nope'
@@ -999,16 +986,6 @@ nnoremap <leader>yr :YcmCompleter GoToReferences<CR>
 nnoremap <leader>yt :YcmCompleter GetType<CR>
 nnoremap <leader>yc :YcmCompleter GetDoc<CR>
 
-" Plug 'brookhong/DBGPavim'
-" let g:dbgPavimPort = 9009
-" let g:dbgPavimBreakAtEntry = 0
-" let g:dbgPavimKeyRun = "<leader>dr"
-" let g:dbgPavimKeyQuit = "<leader>dq"
-" let g:dbgPavimKeyToggleBp = "<leader>db"
-" let g:dbgPavimKeyHelp = "<leader>dh"
-" let g:dbgPavimKeyToggleBae = "<leader>de"
-
-
 "}}}
 
 "" Snippets {{{
@@ -1061,8 +1038,6 @@ snoremap <silent> <s-tab> <Esc>:call UltiSnips#JumpBackwards()<CR>
 nnoremap <expr> <silent> <tab> <SID>PumOrUltisnips(1)
 nnoremap <expr> <silent> <s-tab> <SID>PumOrUltisnips(0)
 
-" Plug 'honza/vim-snippets'
-
 
 "}}}
 
@@ -1088,8 +1063,6 @@ Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'kana/vim-textobj-function'
 
 Plug 'thinca/vim-textobj-function-javascript'
-
-" Plug 'coderifous/textobj-word-column.vim'
 
 "}}}
 
