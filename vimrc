@@ -6,6 +6,9 @@ set nocompatible
 "Faster ESC timeout
 set timeout ttimeoutlen=100
 
+"Faster CursorHold and swap file writes
+set updatetime=100
+
 set title
 if &term == "screen-256color"
   set t_ts=]2;
