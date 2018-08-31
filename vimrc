@@ -1275,11 +1275,11 @@ function! s:search_hist(direction)
       let s:search_hist_index = s:search_hist_index - 1
     endif
   else
-    if s:search_hist_index < 0
+    if s:search_hist_index < -1
       let s:search_hist_index = s:search_hist_index + 1
     endif
   endif
-  let @/ = histget('search', s:search_hist_index - 1)
+  let @/ = histget('search', s:search_hist_index)
   echo s:search_hist_index @/
 endfunction
 
