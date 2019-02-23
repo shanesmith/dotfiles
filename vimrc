@@ -486,18 +486,19 @@ Plug 'nixprime/cpsm', { 'do': 'brew install cmake boost && ./install.sh' }
 
 Plug 'scrooloose/nerdtree'
 let g:NERDTreeHijackNetrw = 0
-let NERDTreeMapActivateNode = 'l'
-let NERDTreeMapCloseDir = 'h'
-let NERDTreeMapOpenSplit = 's'
-let NERDTreeMapOpenVSplit = 'v'
-let NERDTreeMapJumpNextSibling = ''
-let NERDTreeMapJumpPrevSibling = ''
+let g:NERDTreeMapActivateNode = 'l'
+let g:NERDTreeMapCloseDir = 'h'
+let g:NERDTreeMapOpenSplit = 's'
+let g:NERDTreeMapOpenVSplit = 'v'
+let g:NERDTreeMapJumpNextSibling = ''
+let g:NERDTreeMapJumpPrevSibling = ''
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeShowLineNumbers = 1
 let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeChDirMode = 2
 let g:NERDTreeNaturalSort = 1
-let NERDTreeIgnore = [ '\.pyc$' ]
+let g:NERDTreeIgnore = [ '\.pyc$' ]
+let g:NERDTreeCreatePrefix = 'silent keepalt keepjumps'
 
 Plug 'henrik/vim-qargs'
 
