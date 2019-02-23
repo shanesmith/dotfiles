@@ -9,7 +9,7 @@ let g:loaded_nerdtree_ctrlsf = 1
 call NERDTreeAddMenuItem({
     \ 'text': '(s)earch directory',
     \ 'shortcut': 's',
-    \ 'callbctrlsf': 'NERDTreeCtrlSF' })
+    \ 'callback': 'NERDTreeCtrlSF' })
 
 function! NERDTreeCtrlSF()
     " get the current dir from NERDTree
