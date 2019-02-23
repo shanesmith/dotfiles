@@ -1220,7 +1220,7 @@ let s:search_hist_index = 0
 let s:search_last_nr = 0
 function! s:search_hist(direction)
   if s:search_last_nr != histnr('search')
-    let s:search_hist_index = 0
+    let s:search_hist_index = -1
     let s:search_last_nr = histnr('search')
   endif
   if a:direction == 'back'
