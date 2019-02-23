@@ -108,6 +108,11 @@ for file in "${sources[@]}"; do
   fi
 done
 
+if [[ -n $SUITUP ]]; then
+  unset SUITUP
+  tmux setenv -gu SUITUP
+  suitup
+fi
 
 # start with a happy :)
 true
