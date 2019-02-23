@@ -938,7 +938,7 @@ function! s:SetJavascriptCheckers(dir)
 endfunction
 
 
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --ts-completer' }
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_open_loclist_on_ycm_diags = 0
 let g:ycm_key_list_select_completion = ['<Down>']
