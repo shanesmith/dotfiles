@@ -1817,8 +1817,8 @@ function! s:ExtractFunction(mode) range
 
 endfunction
 
-"Uppercase first letter and insert
-nnoremap gi gUli
+"Switch case of first letter and insert
+nnoremap gi g~li
 
 nnoremap <silent> [[ :call searchpair('\[', '', '\]', 'bW')<CR>
 nnoremap <silent> ]] :call searchpair('\[', '', '\]', 'W')<CR>
