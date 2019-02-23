@@ -75,7 +75,7 @@
 
 # Edit conflicts
   vc = "!vim $(git status --porcelain | awk '/^(UU|AA)/ { print $2 }')"
-  mvc = "!mvim $(git status --porcelain | awk '/^(UU|AA)/ { print $2 }')"
+  mvc = "!vimr -n $(git status --porcelain | awk '/^(UU|AA)/ { print $2 }')"
 
 # Submodules
   remove-submodule = "!f() { if [ -d $1 ]; then echo "Removing from .gitmodule..."; git config -f .gitmodules --remove-section submodule.$1; echo "Removing from .git/config..."; git config -f .git/config --remove-section submodule.$1; echo "Removing from cache..."; git rm --cached $1; fi }; f"
