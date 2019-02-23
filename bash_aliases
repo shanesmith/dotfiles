@@ -88,9 +88,29 @@ mvbak() {
   mv -i "$src" "$dest"
 }
 
+swapbak() {
+  local src=${1%/}
+  local dest=$src.bak$2
+  local tmp=$(mktemp "_${src}.tmp.XXXX") || return 1
+
+  if [[ ! -e $dest ]]; then
+    echo "Does not exist: $dest"
+    return
+  fi
+
+  rm -rf "$tmp"
+
+  mv "$src"  "$tmp"  || return 1
+  mv "$dest" "$src"  || return 1
+  mv "$tmp"  "$dest" || return 1
+}
+
 alias h="cd ~"
 alias ..="cd .."
 alias ...="cd ../.."
+--() {
+  cd -
+}
 cs() {
   cd "$1" && ls
 }
@@ -445,6 +465,7 @@ rebash() {
 cask() {
   brew cask "$@"
 }
+alias upbrew="brew update && echo && brew outdated"
 
 icanhazip() {
   ifconfig | awk '
