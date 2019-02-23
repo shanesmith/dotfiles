@@ -819,7 +819,11 @@ let g:vim_json_syntax_conceal = 0
 let g:vim_markdown_conceal = 0
 
 Plug 'heavenshell/vim-jsdoc'
+let g:jsdoc_enable_es6 = 1
+let g:jsdoc_param_description_separator = '-'
+command! JSDoc JsDoc
 
+" TODO What do I really use here? Could we just replace with https://github.com/alvan/vim-closetag
 Plug 'shanesmith/xmledit'
 let g:xmledit_enable_html = 1
 let g:xml_use_xhtml = 1
@@ -844,6 +848,7 @@ let g:ale_linters = {
       \ 'html': []
       \ }
 
+" TODO delete me!
 " Plug 'scrooloose/syntastic'
 let g:syntastic_check_on_open = 1
 let g:syntastic_always_populate_loc_list = 1
