@@ -13,7 +13,7 @@
   br = branch
   co = checkout
   pop = stash pop
-  unstage = reset HEAD
+  unstage = reset HEAD --
   df = diff
   staged = diff --staged
   sg = diff --staged
