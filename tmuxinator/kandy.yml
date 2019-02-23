@@ -4,8 +4,8 @@ name: kandy
 root: ~/Code
 
 windows:
-  - microsoft-lync:
-      root: ~/Code/microsoft-lync
+  - rtc-soft-phone:
+      root: ~/Code/rtc-soft-phone
       layout: '7fff,275x84,0,0{136x84,0,0,12,138x84,137,0[138x33,137,0,13,138x50,137,34,14]}'
       panes:
         - work:
@@ -15,6 +15,17 @@ windows:
         - lol:
           - clear
           - git status
+  - Distant:
+    root: ~/Code/Distant
+    layout: '7fff,275x84,0,0{136x84,0,0,12,138x84,137,0[138x33,137,0,13,138x50,137,34,14]}'
+    panes:
+      - work:
+        - clear
+        - status:
+          - clear
+          - lol:
+            - clear
+            - git status
   - silk:
       root: ~/Code/fcs-spidr-silk
       layout: '7fff,275x84,0,0{136x84,0,0,12,138x84,137,0[138x33,137,0,13,138x50,137,34,14]}'
