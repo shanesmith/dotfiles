@@ -980,6 +980,21 @@ let g:UltiSnipsExpandTrigger = '<C-y>'
 let g:UltiSnipsJumpForwardTrigger = "<nop>"
 let g:UltiSnipsJumpBackwardTrigger = "<nop>"
 
+let g:snippet_prefs = {
+      \ "quote": '"',
+      \ "semicolon": ';',
+      \ }
+
+function! GetSnippetPref(name)
+  let buffer_snippet_prefs = get(b:, 'snippet_prefs', {})
+
+  if has_key(buffer_snippet_prefs, a:name)
+    return buffer_snippet_prefs[a:name]
+  endif
+
+  return g:snippet_prefs[a:name]
+endfunction
+
 function! s:PumOrUltisnips(forward)
   if pumvisible() == 1
     return a:forward ? "\<C-n>" : "\<C-p>"
