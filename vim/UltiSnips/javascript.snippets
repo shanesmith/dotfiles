@@ -1,5 +1,5 @@
 snippet us "use strict" b
-"use strict";
+"use strict"`!v GetSnippetPref("semicolon")`
 endsnippet
 
 snippet fn "function" w
@@ -17,23 +17,27 @@ endsnippet
 snippet fnv "Function assigned to var"
 var ${1:function_name} = function(${2}) {
 	${VISUAL}$0
-};
+}`!v GetSnippetPref("semicolon")`
 endsnippet
 
 snippet cl "console.log" w
-console.log(${1:"${2:value}"});
+console.log(${1:`!v GetSnippetPref("quote")`${2:value}`!v GetSnippetPref("quote")`})`!v GetSnippetPref("semicolon")`
 endsnippet
 
 snippet cle "console.error" w
-console.error(${1:"${2:value}"});
+console.error(${1:`!v GetSnippetPref("quote")`${2:value}`!v GetSnippetPref("quote")`})`!v GetSnippetPref("semicolon")`
+endsnippet
+
+snippet clw "console.warn" w
+console.warn(${1:`!v GetSnippetPref("quote")`${2:value}`!v GetSnippetPref("quote")`})`!v GetSnippetPref("semicolon")`
 endsnippet
 
 snippet rq "require" b
-const ${1} = require("$1");
+const ${1} = require(`!v GetSnippetPref("quote")`$1`!v GetSnippetPref("quote")`)`!v GetSnippetPref("semicolon")`
 endsnippet
 
 snippet ip "import" b
-import ${1} from "${2}";
+import ${1} from `!v GetSnippetPref("quote")`${2}`!v GetSnippetPref("quote")``!v GetSnippetPref("semicolon")`
 endsnippet
 
 snippet () "arrow function" w
@@ -43,7 +47,13 @@ endsnippet
 snippet iife "IIFE" b
 (function() {
 	$0
-}());
+}())`!v GetSnippetPref("semicolon")`
+endsnippet
+
+snippet /** "JSDOC" b
+/**
+ * $0
+ */
 endsnippet
 
 ###
@@ -53,7 +63,7 @@ endsnippet
 snippet befi "before each + inject" b
 beforeEach(inject(function($1) {
 	$0
-}));
+}))`!v GetSnippetPref("semicolon")`
 endsnippet
 
 snippet amod "angular module" i
@@ -63,13 +73,13 @@ endsnippet
 snippet aconf "angular config" i
 .config(function($1) {
 	$0
-});
+})`!v GetSnippetPref("semicolon")`
 endsnippet
 
 snippet acont "angular controller" i
 .controller('${1:name}', [${2}function(${2/('|")([A-Z_$]+)?\1?((, ?)$)?/$2(?3::$4)/ig}) {
 	$0
-}]);
+}])`!v GetSnippetPref("semicolon")`
 endsnippet
 
 snippet adir "angular directive" i
@@ -79,20 +89,20 @@ snippet adir "angular directive" i
 		link: function(scope, element, attrs) {
 			${0}
 		}
-	};
-}]);
+	}`!v GetSnippetPref("semicolon")`
+}])`!v GetSnippetPref("semicolon")`
 endsnippet
 
 snippet afact "angular factory" i
 .factory('${1:name}', [${2}function(${2/('|")([A-Z_$]+)?\1?((, ?)$)?/$2(?3::$4)/ig}) {
 	$0
-}]);
+}])`!v GetSnippetPref("semicolon")`
 endsnippet
 
 snippet aserv "angular service" i
 .service('${1:name}', [${2}function(${2/('|")([A-Z_$]+)?\1?((, ?)$)?/$2(?3::$4)/ig}) {
 	$0
-}]);
+}])`!v GetSnippetPref("semicolon")`
 endsnippet
 
 
@@ -103,35 +113,35 @@ endsnippet
 snippet bef "before each" b
 beforeEach(function() {
 	$0
-});
+})`!v GetSnippetPref("semicolon")`
 endsnippet
 
 snippet des "Describe (js)" b
 describe('${1:description}', function() {
 	$0
-});
+})`!v GetSnippetPref("semicolon")`
 endsnippet
 
 snippet it "it (js)" b
 it('${1:description}', function() {
 	$0
-});
+})`!v GetSnippetPref("semicolon")`
 endsnippet
 
 snippet ex "expect (js)" b
-expect(${1:target})$0;
+expect(${1:target})$0`!v GetSnippetPref("semicolon")`
 endsnippet
 
 snippet ee "expect to equal (js)" b
-expect(${1:target}).toEqual(${2:value});
+expect(${1:target}).toEqual(${2:value})`!v GetSnippetPref("semicolon")`
 endsnippet
 
 snippet ec "expect to have been called" b
-expect(${1:target}).toHaveBeenCalled();
+expect(${1:target}).toHaveBeenCalled()`!v GetSnippetPref("semicolon")`
 endsnippet
 
 snippet ecw "expect to have been called with" b
-expect(${1:target}).toHaveBeenCalledWith(${2:arguments});
+expect(${1:target}).toHaveBeenCalledWith(${2:arguments})`!v GetSnippetPref("semicolon")`
 endsnippet
 
 snippet thb "to.have.been" b
@@ -145,7 +155,7 @@ endsnippet
 
 snippet int "Interceptor" b
 [actionTypes.${1:FOO}]: (dispatch, action, getState) => {
-	const state = getState();
+	const state = getState()`!v GetSnippetPref("semicolon")`
 	$0
 },
 endsnippet
@@ -162,5 +172,5 @@ snippet act "Action" b
 endsnippet
 
 snippet dp "dispatch()" b
-dispatch( $0 );
+dispatch( $0 )`!v GetSnippetPref("semicolon")`
 endsnippet
