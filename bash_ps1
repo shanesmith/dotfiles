@@ -65,7 +65,7 @@ __vagrant_status() {
   done <<< "$proclist"
 
   for machinedir in $vagrantdir/machines/*; do
-    if [[ -d $machinedir ]]; then
+    if [[ -r "$machinedir/virtualbox/id" ]]; then
       local machinename=$(basename $machinedir)
       if [[ "${RunningUUIDs[@]}" =~ $(cat "$machinedir/virtualbox/id") ]]; then
         VMs+=($machinename)
@@ -78,20 +78,6 @@ __vagrant_status() {
   if [[ -n $output ]]; then
     echo " <$(echo $output | tr ' ' ',')>"
   fi
-}
-
-__nvm_status() {
-  if ! type -t nvm >/dev/null; then
-    return
-  fi
-
-  local current=$(nvm current)
-
-  if [[ $current == "system" ]]; then
-    return
-  fi
-
-  echo " <nvm-$current>"
 }
 
 __ssh_keys_status() {
@@ -163,7 +149,6 @@ ${CWD}\
 \$(__ssh_keys_status)\
 \$(__jobs_status)\
 \$(__vagrant_status)\
-\$(__nvm_status)\
 \$(__docker_compose_status)\
 \$(__git_ps1 ' (%s)')\
 \n\
