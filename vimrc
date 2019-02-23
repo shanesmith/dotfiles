@@ -1001,7 +1001,7 @@ function! s:PumOrUltisnips(forward)
   elseif a:forward
     call UltiSnips#JumpForwards()
     if g:ulti_jump_forwards_res == 0
-      return mode() == "n" ? "%" : "\<tab>"
+      return "\<tab>"
     endif
   else
     call UltiSnips#JumpBackwards()
