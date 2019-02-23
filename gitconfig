@@ -41,6 +41,7 @@
   por = push -u origin HEAD
   puf = push -f
   rom = rebase origin/master
+  coo = checkout -
 
 # Log
   lol = "!f() { local extra=\"\"; if git rev-parse -q --verify '@{u}' >/dev/null 2>&1; then extra=\"$extra @{u}\"; fi; git log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cd>%Creset %s' --color --graph --date=relative --branches --remotes=origin/[m]aster HEAD $extra $@; }; f"
@@ -52,7 +53,7 @@
   lallf = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --graph --all --name-status
   logf = log --name-status
   k = !gitk --all >/dev/null 2>&1 &
-  who= shortlog -s
+  who = shortlog -s
   whatdidido = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cd>%Creset %s' --graph --all --date=short --author=Shane
   rescue = !git fsck --full --no-reflogs --unreachable --lost-found | grep commit | cut -d' ' -f3 | xargs git log --pretty=oneline
 
@@ -96,9 +97,16 @@
   upstream = "!f() { git branch --set-upstream-to=\"$1\"; }; f"
   topic = "!gerrit topic"
   symlink = "!f() { git symbolic-ref refs/heads/$1 refs/heads/${2:-$(git symbolic-ref --quiet --short HEAD)}; }; f"
+  bkbr = !git branch "$(git symbolic-ref --quiet --short HEAD)-bk"
+  my-branches = !git branch --all --format '%(authoremail) %(refname:short)' | awk -v email=\"^<$(git config user.email)\" '$0 ~ email { print $2 }'
+  my-merged-branches = !git branch --all --format '%(authoremail) %(refname:short)' --merged | awk -v email=\"^<$(git config user.email)\" '$0 ~ email { print $2 }'
+  my-merged-remote-branches = !git branch --remote --format '%(authoremail) %(refname:short)' --merged | awk -v email=\"^<$(git config user.email)\" '$0 ~ email { print $2 }'
+  my-unmerged-branches = !git branch --all --format '%(authoremail) %(refname:short)' --no-merged | awk -v email=\"^<$(git config user.email)\" '$0 ~ email { print $2 }'
+  branches-with-gone-upstream = "!git for-each-ref  --format='%(refname:short) %(upstream:short)' refs/heads | awk '$2 { print $1 }' | while read branch; do if ! git rev-parse --verify -q \"${branch}@{u}\" >/dev/null; then echo $branch; fi; done"
 
 # Commit
   cc = "!f() { if [ -n \"$1\" ]; then git commit -m \"$1\"; else git commit; fi; }; f"
+  # TODO make cc default to cca if no staging?
   cca = "!f() { if ! git is-staging-clean; then echo 'Stage is not clean!'; exit 1; fi; if [ -n \"$1\" ]; then git commit -a -m \"$1\"; else git commit -a; fi; }; f"
 
 # Stash
@@ -124,6 +132,7 @@
 
 # Github
   pr = "!f() { git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+  ppr = "!/usr/bin/env bash -c \"git push -u origin HEAD 2>&1 | tee >(cat 1>&2) | awk '/github.com\\/.*\\/pull\\/new\\// {print \\$2}' | xargs open\""
 
 [color]
   ui = auto
