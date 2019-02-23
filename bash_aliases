@@ -312,28 +312,39 @@ lshs() {
 }
 
 suitup() {
-  local suitup_file="$HOME/.tmuxinator/suitup/${HOSTNAME%%.*}"
+  if ! command -v tmux >/dev/null; then
+    return
+  fi
 
-  muxit
+  if [[ -z $TMUX ]]; then
+    export SUITUP=1
+    muxit
+    return
+  fi
+
+  if [[ -n $SUITUP ]]; then
+    echo "Loop protections."
+    return
+  fi
+
+  local suitup_file="$HOME/.tmuxinator/suitup/${HOSTNAME%%.*}"
 
   if [[ ! -f "$suitup_file" ]]; then
     echo "Suitup file does not exist: $suitup_file"
     return 1
   fi
 
-  while read -r line; do
-    mux "$line"
-  done < "$suitup_file"
+  cat "$suitup_file" | while read -r line; do
+    tmuxinator "$line"
+  done
 
   exit
 }
 
 muxit() {
-  if ! command -v tmux >/dev/null || [[ $TERM =~ screen ]]; then
+  if ! command -v tmux >/dev/null || [[ -n $TMUX ]]; then
     return
   fi
-
-  export TERM="xterm-256color"
 
   tmux has-session 2>/dev/null && exec tmux -2 attach || exec tmux -2
 }
