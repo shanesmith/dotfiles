@@ -401,4 +401,30 @@ if exists('g:loaded_airline')
   AirlineTheme dark
 endif
 
+if has('nvim')
+  let g:terminal_color_0 = "#000000"
+  let g:terminal_color_8 = "#676965"
+
+  let g:terminal_color_1 = "#d71e00"
+  let g:terminal_color_9 = "#f44135"
+
+  let g:terminal_color_2  = "#5da602"
+  let g:terminal_color_10 = "#98e342"
+
+  let g:terminal_color_3  = "#cfad00"
+  let g:terminal_color_11 = "#fcea60"
+
+  let g:terminal_color_4  = "#417ab3"
+  let g:terminal_color_12 = "#83afd8"
+
+  let g:terminal_color_5  = "#88658d"
+  let g:terminal_color_13 = "#bc93b6"
+
+  let g:terminal_color_6  = "#00a7aa"
+  let g:terminal_color_14 = "#37e5e7"
+
+  let g:terminal_color_7 = "#dbded8"
+  let g:terminal_color_15 = "#f1f1ef"
+endif
+
 " vim: set fdm=marker:
