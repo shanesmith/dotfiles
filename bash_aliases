@@ -243,6 +243,8 @@ sshauth_reload() {
   . ~/.bash_sshauth
 }
 
+alias sad=ssh-add
+
 alias cpsync="rsync -vahP"
 
 date2timestamp() {
