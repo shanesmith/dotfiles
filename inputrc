@@ -7,14 +7,16 @@
 "\e[1;3D": backward-word
 
 # page up/down
-"\e[5~": history-search-backward
-"\e[6~": history-search-forward
+"\C-p": history-search-backward
+"\C-n": history-search-forward
 
 # ctrl + up/down
+Tab: menu-complete
+"\e[Z": menu-complete
 "\e[1;5A": menu-complete
 "\e[1;5B": menu-complete-backward
 
-"\C-p": shell-expand-line
+"\C-y": magic-space
 
 set completion-ignore-case On
 
@@ -24,3 +26,6 @@ set colored-completion-prefix On
 set menu-complete-display-prefix On
 
 set visible-stats On
+
+set show-all-if-ambiguous On
+# set show-all-if-unmodified On
