@@ -643,6 +643,8 @@ map y <Plug>(highlightedyank)
 
 Plug 'Konfekt/vim-alias'
 
+Plug 'meain/vim-package-info', { 'do': 'npm install' }
+
 "}}}
 
 "" LOLz {{{
