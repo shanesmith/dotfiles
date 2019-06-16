@@ -828,17 +828,9 @@ let g:jsdoc_enable_es6 = 1
 let g:jsdoc_param_description_separator = '-'
 command! JSDoc JsDoc
 
-" TODO What do I really use here? Could we just replace with https://github.com/alvan/vim-closetag
-Plug 'shanesmith/xmledit'
-let g:xmledit_enable_html = 1
-let g:xml_use_xhtml = 1
-let g:xml_no_tag_map = 1
-let g:xml_no_comment_map = 1
-let g:xml_no_jump_map = 1
-function! HtmlAttribCallback(xml_tag)
-  "disable this sort of thing
-  return 0
-endfunction
+Plug 'alvan/vim-closetag'
+let g:closetag_filetypes = 'html,xhtml,xml,javascript.jsx'
+let g:closetag_xhtml_filetypes = 'xhtml,xml,javascript.jsx'
 
 Plug 'suan/vim-instant-markdown', { 'do': 'npm install -g instant-markdown-d' }
 let g:instant_markdown_autostart = 0
