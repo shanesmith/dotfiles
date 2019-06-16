@@ -472,7 +472,7 @@ function! s:CtrlPWithInput(input)
   let g:ctrlp_default_input = ""
 endfunction
 if executable('rg')
-  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+  let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob ""'
   let g:ctrlp_use_caching = 0
 elseif executable('ag')
   let g:ctrlp_user_command = 'ag $(python -c "import os.path; print os.path.relpath(%s,''${PWD}'')") -l --nocolor -g ""'
