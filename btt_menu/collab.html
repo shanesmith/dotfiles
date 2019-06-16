@@ -1,0 +1,167 @@
+
+<html>
+  <head>
+    <!-- https://codepen.io/woodwoerk/pen/BoEGYZ -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
+    <style>
+      span {
+        display: inline-block;
+        vertical-align: middle;
+        color: white;
+      }
+
+      ul {
+        display: block;
+        list-style-type: none;
+        text-align: right;
+      }
+
+      .menu {
+        margin: 0 20px 0 0;
+        padding-left: 1.25em;
+        cursor: pointer;
+        position: relative;
+        width: 200px;
+        height: 200px;
+        text-align: right;
+      }
+
+      .menu-close {
+        font-size: 0em;
+        opacity: 0;
+        text-align: center;
+        font-weight: bold;
+        transition: 0.2s;
+      }
+
+      .menu-close-visible {
+        font-size: 2em;
+        opacity: 1;
+        transition: 0.2s 0.4s;
+      }
+
+      .menu-global {
+        z-index: -1;
+        /* position: absolute; */
+        left: 0;
+        height: 10px;
+        width: 100%;
+        background-color: #ffffff;
+
+        -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+        transition: 0.1s;
+      }
+
+      .menu-global:hover {
+        left: 10px;
+        transition: all 0.2s;
+      }
+
+      .menu-top {
+        top: 0;
+      }
+      .menu-middle {
+        top: 18px;
+      }
+      .menu-bottom {
+        top: 36px;
+      }
+
+      .menu-text{
+        opacity: 0;
+        font-size: 0em;
+        padding: 10px 0;
+        transition: 0.1s;
+      }
+
+      .expand {
+        box-shadow: rgba(0, 0, 0, 0.1) -2.5px 5px 7.5px, rgba(0, 0, 0, 0.1) 2.5px 5px 7.5px;
+        width: 200px;
+        height: 50px;
+
+        -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+      }
+
+      .menu-top-expand {
+        top: 50px;
+        background: #FFF8E1;
+        transition: all 0.2s 0.2s, left 0.1s;
+      }
+
+      .menu-middle-expand {
+        top: 100px;
+        background: #FFECB3;
+        transition: all 0.2s 0.1s, left 0.1s;
+      }
+
+      .menu-bottom-expand {
+        top: 150px;
+        /* height: 100px; */
+        background: #FFE082;
+        transition: all 0.2s, left 0.1s;
+      }
+
+      .menu-text-expand{
+        color: #000000;
+        opacity: 0.8;
+        padding: 10px;
+        font-size: 1.3em;
+        transition: all 0.1s 0.1s, font-size 0.1s;
+      }
+    </style>
+  </head>
+  <body>
+
+    <ul class="menu">
+      <li class="menu-global menu-top"    data-collab="Cahit"> <span class="menu-text">Cahit     </span></li>
+      <!-- <li class="menu&#45;global menu&#45;middle" data&#45;collab="Rob">   <span class="menu&#45;text">Rob       </span></li> -->
+      <li class="menu-global menu-middle" data-collab="Don">   <span class="menu-text">Don       </span></li>
+      <li class="menu-global menu-bottom" data-collab="JY">    <span class="menu-text">Jean-Yves </span></li>
+    </ul>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script>
+      var Menu = {
+        el: {
+          menu: $('.menu'),
+          menuTop: $('.menu-top'),
+          // menuClose: $('.menu-close'),
+          menuMiddle: $('.menu-middle'),
+          menuBottom: $('.menu-bottom'),
+          menuText: $('.menu-text')
+        },
+
+        activateMenu: function() {
+          Menu.el.menuTop.addClass('menu-top-expand expand');
+          Menu.el.menuMiddle.addClass('menu-middle-expand expand');
+          Menu.el.menuBottom.addClass('menu-bottom-expand expand'); 
+          Menu.el.menuText.addClass('menu-text-expand');
+          // Menu.el.menuClose.addClass('menu-close-visible');
+        }
+      };
+
+      $(".menu-global").on("click", (e) => BTT.callHandler("trigger_named", { trigger_name: $(e.currentTarget).data("collab") + "Collab", closeFloatingHTMLMenu: true}))
+
+      //Stop menu item click closing the menu
+      /*
+      $(".menu .menu-global").click(function(e) {
+        e.stopPropagation();
+      });
+      */
+
+      function BTTInitialize() {
+        Menu.activateMenu();
+      }
+
+      function BTTWillCloseWindow() {}
+    </script>
+
+  </body>
+</html>
+
