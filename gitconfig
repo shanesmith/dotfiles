@@ -143,6 +143,7 @@
 [core]
   editor = vim
   excludesfile = ~/.gitignore
+  commentChar = auto
 
 [merge]
   defaultToUpstream = true
@@ -160,3 +161,5 @@
 
 [tig "bind"]
   main = C <git checkout %(commit)
+[commit]
+  cleanup = scissors
