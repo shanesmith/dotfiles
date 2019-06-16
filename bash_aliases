@@ -61,8 +61,9 @@ npm_list_license() {
     done
 }
 
-alias reyarn="rm -rf node_modules && yarn"
-alias renpm="rm -rf node_modules && npm install"
+alias reyarn="unpm && yarn"
+alias renpm="unpm && npm install"
+alias unpm="find . -type d -name node_modules -prune -print0 | xargs -0 rm -rf --"
 
 bak() {
   local src=${1%/}
