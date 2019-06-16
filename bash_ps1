@@ -134,6 +134,8 @@ fi
 
 HISTORY_NUMBER="$(__colorize_ps1 LK '\!')"
 
+TIME="$(__colorize_ps1 LK '\A')"
+
 # HOST_COLOR=$([ -z "$SSH_CLIENT" ] && echo "${G}" || echo "${Y}" )
 HOST="$(__colorize_ps1 $([ -z "$SSH_CLIENT" ] && echo "G" || echo "Y" ]) '\u@\h')"
 
@@ -153,6 +155,8 @@ ${CWD}\
 \$(__git_ps1 ' (%s)')\
 \n\
 ${HISTORY_NUMBER}\
+ \
+${TIME}\
  \
 ${PROMPT}\
  \
