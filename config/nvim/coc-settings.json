@@ -1,0 +1,5 @@
+{
+  "suggest.timeout": 500,
+  "suggest.minTriggerInputLength": 1,
+  "diagnostic.checkCurrentLine": true
+}

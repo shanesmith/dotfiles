@@ -24,6 +24,9 @@ DOTFILES="
   tern-config
   lftprc
   config/karabiner
+  config/nvim
+  config/coc/extensions/package.json
+  config/coc/extensions/yarn.lock
 "
 
 LINUX_DOTFILES="Xmodmap imwheelrc"

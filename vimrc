@@ -839,116 +839,15 @@ let g:instant_markdown_autostart = 0
 
 "" Debugging {{{
 
-Plug 'w0rp/ale'
-let g:ale_open_list = 'nope'
-let g:ale_linters = {
-      \ 'html': []
-      \ }
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 
-" TODO delete me!
-" Plug 'scrooloose/syntastic'
-let g:syntastic_check_on_open = 1
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_objc_compiler = 'clang'
-let g:syntastic_php_checkers = ['php']
-let g:syntastic_javascript_checkers = []
-let g:syntastic_typescript_checkers = ['tslint']
-let g:syntastic_scss_checkers = ['scss_lint']
-
-" TODO wrapper script to use local is exists
-let g:syntastic_typescript_tslint_exe = "npm-run tslint"
-
-let g:syntastic_html_tidy_quiet_messages = {
-      \   'regex': [
-      \     '"tabindex" has invalid value "-1"',
-      \     '<div> proprietary attribute "tabindex"',
-      \     '<img> lacks "alt" attribute',
-      \     'trimming empty <span>'
-      \   ],
-      \ }
-let g:syntastic_html_tidy_ignore_errors = [
-      \   "> proprietary attribute \"",
-      \   "trimming empty <",
-      \   "> attribute name \"(",
-      \   "> attribute name \"*",
-      \   "> attribute name \"[",
-      \   "> attribute name \"#"
-      \ ]
-
-let g:syntastic_html_tidy_blocklevel_tags = [
-      \   "ion-view",
-      \   "ion-nav-view",
-      \   "ion-nav-bar",
-      \   "ion-nav-title",
-      \   "ion-nav-buttons",
-      \   "ion-nav-back-button",
-      \   "ion-content",
-      \   "ion-toggle",
-      \   "ion-spinner",
-      \   "ion-header-bar",
-      \   "ion-footer-bar",
-      \   "ion-side-menu",
-      \   "ion-side-menus",
-      \   "ion-side-menu-content",
-      \   "ion-list",
-      \   "ion-item",
-      \   "ion-popover-view",
-      \   "ion-tabs",
-      \   "ion-tab",
-      \   "ion-modal-view",
-      \
-      \   "ion-header",
-      \   "ion-navbar",
-      \   "ion-title",
-      \   "ion-buttons",
-      \   "ion-row",
-      \   "ion-label",
-      \   "ion-input"
-      \ ]
-
-let g:ale_html_tidy_options = "-q -q -language en --new-blocklevel-tags '" . join(g:syntastic_html_tidy_blocklevel_tags, ",") . "'"
-
-augroup SyntasticJS
-  au!
-  auto FileType javascript call <SID>SetJavascriptCheckers(expand("<afile>:p:h"))
-augroup END
-
-function! s:SetJavascriptCheckers(dir)
-  let checkers = []
-
-  let cfg = findfile(".eslintrc.json", escape(a:dir, ' ') . ';')
-  if cfg !=# ''
-    call add(checkers, "eslint")
-  endif
-
-  let cfg = findfile(".jscsrc", escape(a:dir, ' ') . ';')
-  if cfg !=# ''
-    call add(checkers, "jscs")
-  endif
-
-  let cfg = findfile(".jshintrc", escape(a:dir, ' ') . ';')
-  if cfg !=# ''
-    call add(checkers, "jshint")
-  endif
-
-  let b:syntastic_checkers = checkers
-endfunction
-
-
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --ts-completer' }
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_open_loclist_on_ycm_diags = 0
-let g:ycm_key_list_select_completion = ['<Down>']
-let g:ycm_key_list_previous_completion = ['<Up>']
-let g:ycm_key_list_stop_completion = ["<CR>"]
-
-nnoremap K :YcmCompleter GoTo<CR>
-nnoremap <leader>yd :YcmCompleter GoTo<CR>
-nnoremap <leader>yr :YcmCompleter GoToReferences<CR>
-nnoremap <leader>yt :YcmCompleter GetType<CR>
-nnoremap <leader>yc :YcmCompleter GetDoc<CR>
-
-"}}}
+inoremap <silent><expr> <CR> (pumvisible() ? "\<C-y>" : "\<CR>\<Plug>DiscretionaryEnd")
+inoremap <silent><expr> <c-space> coc#refresh()
+nmap <silent> <leader>yd <Plug>(coc-definition)
+nmap <silent> <leader>yy <Plug>(coc-type-definition)
+nmap <silent> <leader>yi <Plug>(coc-implementation)
+nmap <silent> <leader>yr <Plug>(coc-references)
+nnoremap <silent> K :call CocAction('doHover')<CR>
 
 "" Snippets {{{
 
