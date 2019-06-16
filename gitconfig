@@ -102,7 +102,10 @@
   my-merged-branches = !git branch --all --format '%(authoremail) %(refname:short)' --merged | awk -v email=\"^<$(git config user.email)\" '$0 ~ email { print $2 }'
   my-merged-remote-branches = !git branch --remote --format '%(authoremail) %(refname:short)' --merged | awk -v email=\"^<$(git config user.email)\" '$0 ~ email { print $2 }'
   my-unmerged-branches = !git branch --all --format '%(authoremail) %(refname:short)' --no-merged | awk -v email=\"^<$(git config user.email)\" '$0 ~ email { print $2 }'
+  # sweep-my-merged-remote-branches = !git my-merged-remote-branches | grep ^origin | sed 's|[^/]*/||' | xargs -p git push --delete origin
   branches-with-gone-upstream = "!git for-each-ref  --format='%(refname:short) %(upstream:short)' refs/heads | awk '$2 { print $1 }' | while read branch; do if ! git rev-parse --verify -q \"${branch}@{u}\" >/dev/null; then echo $branch; fi; done"
+  sweep-branches-with-gone-upstream = "!git branches-with-gone-upstream | xargs -p git branch -D"
+  bdiff = "!f() { git diff $(git merge-base HEAD ${1:-master}); }; f"
 
 # Commit
   cc = "!f() { if [ -n \"$1\" ]; then git commit -m \"$1\"; else git commit; fi; }; f"
