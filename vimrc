@@ -622,6 +622,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-abolish'
 
 Plug 'tpope/vim-endwise'
+let g:endwise_no_mappings = 1
 
 Plug 'vim-scripts/ingo-library'
 
