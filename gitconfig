@@ -135,7 +135,7 @@
 
 # Github
   pr = "!f() { git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
-  ppr = "!/usr/bin/env bash -c \"git push -u origin HEAD 2>&1 | tee >(cat 1>&2) | awk '/github.com\\/.*\\/pull\\/new\\// {print \\$2}' | xargs open\""
+  ppr = "!/usr/bin/env bash -c \"git push -u origin HEAD 2>&1 | tee >(cat 1>&2) | awk '/(github.com\\/.*\\/pull\\/new\\/|:\\/\\/bitbucket.*\\/compare\\/commits\\?)/ {print \\$2}' | xargs open\""
 
 [color]
   ui = auto
