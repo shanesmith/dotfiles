@@ -16,7 +16,7 @@ DOTFILES="
   inputrc
   colordiffrc
   npmrc
-  agignore
+  ignore
   tmux.conf
   tmux
   bin

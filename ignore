@@ -1,8 +1,11 @@
 *.min.js
 *.min.css
+*.js.map
 .git
 .DS_Store
 .svn
 node_modules
 *.swp
 *.swo
+*.js.map
+.vagrant
