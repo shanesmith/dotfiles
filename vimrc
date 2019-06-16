@@ -499,6 +499,7 @@ let g:NERDTreeChDirMode = 2
 let g:NERDTreeNaturalSort = 1
 let g:NERDTreeIgnore = [ '\.pyc$' ]
 let g:NERDTreeCreatePrefix = 'silent keepalt keepjumps'
+nnoremap <silent> <Leader>tr :tabe \| cd ~/Code/rc \| call g:NERDTreeHere("e")<CR>
 
 Plug 'henrik/vim-qargs'
 
