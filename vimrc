@@ -166,6 +166,7 @@ set smartcase
 
 "Line numbers
 set number
+set relativenumber
 
 "Add matching pairs for %
 set matchpairs+=<:>
@@ -1865,11 +1866,11 @@ augroup nerdtree_vimrc
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 augroup END
 
-" Show cursorline only on current window
-augroup CursorLine
+" Settings for currently focused window
+augroup FocusedWindow
   au!
-  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-  au WinLeave * setlocal nocursorline
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline relativenumber
+  au WinLeave * setlocal nocursorline norelativenumber
 augroup END
 
 "Load opend file on last known position
