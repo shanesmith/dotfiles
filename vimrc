@@ -768,7 +768,8 @@ nnoremap <leader>x <nop>
 
 Plug 'vim-scripts/CountJump'
 
-Plug 'vim-scripts/matchit.zip'
+Plug 'andymass/vim-matchup'
+let g:matchup_matchparen_status_offscreen = 0
 
 Plug 'machakann/vim-columnmove'
 let g:columnmove_no_default_key_mappings = 1
