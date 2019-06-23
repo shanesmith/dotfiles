@@ -562,11 +562,10 @@ let g:switch_custom_definitions =
       \   ['absolute', 'relative', 'fixed']
       \ ]
 
-autocmd FileType typescript let b:switch_custom_definitions =
-      \[
-      \   ['public', 'protected', 'private'],
-      \   ['var', 'let', 'const']
-      \]
+autocmd FileType javascript let b:switch_custom_definitions =
+      \ [
+      \   ['test.only(', 'test.skip(', 'test(']
+      \ ]
 
 Plug 'fisadev/vim-ctrlp-cmdpalette'
 
