@@ -1,5 +1,6 @@
 
 " Settings {{{
+
 " Let's make sure that all the annoying bugs in VI are not displayed in VIM.
 set nocompatible
 
@@ -849,6 +850,8 @@ nmap <silent> <leader>yi <Plug>(coc-implementation)
 nmap <silent> <leader>yr <Plug>(coc-references)
 nnoremap <silent> K :call CocAction('doHover')<CR>
 
+" }}}
+
 "" Snippets {{{
 
 Plug 'mattn/emmet-vim'
@@ -984,7 +987,9 @@ Plug 'AndrewRadev/splitjoin.vim'
 
 call plug#end()
 
-"" post plug-end ops {{{
+" }}}
+
+" Post plug-end ops {{{
 
 au! filetypedetect BufNewFile,BufRead *.ts
 au filetypedetect BufNewFile,BufRead *.ts set filetype=typescript
@@ -1025,12 +1030,7 @@ silent! function! airline#extensions#tabline#title(n)
 
 endfunction
 
-"" }}}
-
-" }}}
-
-" Colorscheme {{{
-
+" Colorscheme
 if has("nvim")
   set termguicolors
   colorscheme aldmeris
