@@ -50,14 +50,6 @@ atob@^2.1.1:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
-axios@^0.19.0:
-  version "0.19.0"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.19.0.tgz#8e09bff3d9122e133f7b8101c8fbdd00ed3d2ab8"
-  integrity sha512-1uvKqKQta3KBxIz14F2v06AEHZ/dIoeKfbTRkK1E5oqjDnuEerLmYTgJB5AiQZHJcljpg1TuRzdjDR06qNk0DQ==
-  dependencies:
-    follow-redirects "1.5.10"
-    is-buffer "^2.0.2"
-
 base@^0.11.1:
   version "0.11.2"
   resolved "https://registry.yarnpkg.com/base/-/base-0.11.2.tgz#7bde5ced145b6d551a90db87f83c558b4eb48a8f"
@@ -117,10 +109,10 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-coc-css@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/coc-css/-/coc-css-1.2.1.tgz#972647dfb2d7ec246154cf7add31772548cc63c8"
-  integrity sha512-QrETdc6wyvlAYe00L02fDRf+Cd5NjZBtkMUMD/9UPQ5EvL2R14wuRGR8Ni8wECAeM248iA8KxedB5/IEZwMA/w==
+coc-css@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/coc-css/-/coc-css-1.2.2.tgz#9b62ac96a9db8c687396ab4648c0c67dc3897a2f"
+  integrity sha512-JvZnKZZJZemS70o972OEjfnMGGO2sLpJA3iX1OT3CXmaymPb8CmufboyCVnzGMDMbFL/qHgfjbdw9kOg5ZtzzQ==
 
 coc-emmet@^1.1.3:
   version "1.1.3"
@@ -146,22 +138,20 @@ coc-json@^1.2.2:
   resolved "https://registry.yarnpkg.com/coc-json/-/coc-json-1.2.2.tgz#f499f583a4831e1a362d8c37e547245605ccd32e"
   integrity sha512-H3Xk1D4Y40VMkwM4UDjedFMelRZWGzEBuU4r2iYE07gepYPVGzqzTlqCSWqOLeH4CXY52gF/QkWrOn7AY6CFaw==
 
-coc-marketplace@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/coc-marketplace/-/coc-marketplace-0.1.2.tgz#6c5202979c8bf5a632fb5c058bee0acb2fbb4d9b"
-  integrity sha512-ynUE4xI9WG48Xl9Ism4gRllgc+EAIeaWL70DWGPaUfnl3bOTig3qyF0fgW8vmHT8IXyc/3qOvTrhg0x30Gac3A==
-  dependencies:
-    axios "^0.19.0"
+coc-marketplace@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/coc-marketplace/-/coc-marketplace-1.2.0.tgz#dcdd021ea7e88671ba30a106d85a5166942a5e01"
+  integrity sha512-tFDpOS6y4RTHY1r+ezdtazjMpzRGBCrDIeDuBK2xHJtGwCqe78J6phhnUUtBXGbDIqm0JaIrRqj5IZ+aiWsmng==
 
 coc-python@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/coc-python/-/coc-python-1.2.1.tgz#a88cf3805a984eb5c8903120f5190904f4ef2de7"
   integrity sha512-WQk1HzUSJnY0mPOie4L+4l1XQAIa0ooaiKAocKW22fkZ3qkxMxsSDUyj9C19iRlB05i0NmVobT/K2oFIZm2big==
 
-coc-tsserver@^1.3.9:
-  version "1.3.9"
-  resolved "https://registry.yarnpkg.com/coc-tsserver/-/coc-tsserver-1.3.9.tgz#1f1e8fb8a69c771a53df20ceee6d9cb335232efb"
-  integrity sha512-ALLK4fyqWX+3tEp6rgF9w8ie0XfnsqZufEOUvj1PiLAdNLF9q84TeQJu2A6Dwt9+DNORuvaw4aSQM9JZqTEsbA==
+coc-tsserver@^1.3.12:
+  version "1.3.12"
+  resolved "https://registry.yarnpkg.com/coc-tsserver/-/coc-tsserver-1.3.12.tgz#bdeef41d9811c5558ea58d8228313dacfadd7cdc"
+  integrity sha512-xYu2UVh6Gns2MN2s5AOdxJ2njuT8yB+RZrXlmBlws3JIP2HNSErQ/MjET0nRQ6sVm2cQjjCTwvIRh3MIiYUOTw==
   dependencies:
     typescript "3.5.1"
 
@@ -170,13 +160,13 @@ coc-ultisnips@^1.2.3:
   resolved "https://registry.yarnpkg.com/coc-ultisnips/-/coc-ultisnips-1.2.3.tgz#07dfc47a581111239867f7e27daf8d974f287ad6"
   integrity sha512-gefj80C24vZ9FTnFLWXhNC8aW9VBVQGELH0e80gAAZma/RY5FGOkzWVvtjO9vQqAVHt4TQUErybsf/en5ci82w==
 
-coc-vimlsp@^0.1.10:
-  version "0.1.10"
-  resolved "https://registry.yarnpkg.com/coc-vimlsp/-/coc-vimlsp-0.1.10.tgz#25e559c3a3f116ffeb447a3ac5e76b6d07fc92ee"
-  integrity sha512-i3YMsuwvb1qiFB+FVlzDv2wA5SqHGfqKZhD7heNGaJD5Eo+zSPSp8LPHxhl6HVj6GOYW163ss5MS+5Y+30HMmg==
+coc-vimlsp@^0.1.13:
+  version "0.1.13"
+  resolved "https://registry.yarnpkg.com/coc-vimlsp/-/coc-vimlsp-0.1.13.tgz#139203ed0a153b84ec27905a9301fe741e3092a0"
+  integrity sha512-FQMSxACrA9DM5ePFv1CEIyOKunomOTptGMxZf87VUVqGtHpcRCJseQJzeWfVGzDHwom1uscrdN25q/4W8xRU1w==
   dependencies:
     tslib "^1.9.3"
-    vim-language-server "^1.0.10"
+    vim-language-server "^1.0.13"
 
 collection-visit@^1.0.0:
   version "1.0.0"
@@ -205,13 +195,6 @@ copy-descriptor@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/copy-descriptor/-/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
   integrity sha1-Z29us8OZl8LuGsOpJP1hJHSPV40=
-
-debug@=3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
-  integrity sha512-OX8XqP7/1a9cqkxYw2yXss15f26NKWBpDXQd0/uK/KPqdQhxbPa994hnzjcE2VqQpDslf55723cKPUOGSmMY3g==
-  dependencies:
-    ms "2.0.0"
 
 debug@^2.2.0, debug@^2.3.3:
   version "2.6.9"
@@ -319,13 +302,6 @@ findup@^0.1.5:
     colors "~0.6.0-1"
     commander "~2.1.0"
 
-follow-redirects@1.5.10:
-  version "1.5.10"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.5.10.tgz#7b7a9f9aea2fdff36786a94ff643ed07f4ff5e2a"
-  integrity sha512-0V5l4Cizzvqt5D44aTXbFZz+FtyXV1vrDN6qrelxtfYQKW0KO0W2T/hkE8xvGa/540LkZlkaUjO4ailYTFtHVQ==
-  dependencies:
-    debug "=3.1.0"
-
 for-in@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/for-in/-/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"
@@ -405,11 +381,6 @@ is-buffer@^1.1.5:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/is-buffer/-/is-buffer-1.1.6.tgz#efaa2ea9daa0d7ab2ea13a97b2b8ad51fefbe8be"
   integrity sha512-NcdALwpXkTm5Zvvbk7owOUSvVvBKDgKP5/ewfXEznmQFfs4ZRmanOeKBTjRVjka3QFoN6XJ+9F3USqfHqTaU5w==
-
-is-buffer@^2.0.2:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/is-buffer/-/is-buffer-2.0.3.tgz#4ecf3fcf749cbd1e472689e109ac66261a25e725"
-  integrity sha512-U15Q7MXTuZlrbymiz95PJpZxu8IlipAp4dtS3wOdgPXx3mqBnslrWU14kxfHB+Py/+2PVKSr37dMAgM2A4uArw==
 
 is-data-descriptor@^0.1.4:
   version "0.1.4"
@@ -844,10 +815,10 @@ use@^3.1.0:
   resolved "https://registry.yarnpkg.com/use/-/use-3.1.1.tgz#d50c8cac79a19fbc20f2911f56eb973f4e10070f"
   integrity sha512-cwESVXlO3url9YWlFW/TA9cshCEhtu7IKJ/p5soJ/gGpj7vbvFrAY/eIioQ6Dw23KjZhYgiIo8HOs1nQ2vr/oQ==
 
-vim-language-server@^1.0.10:
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/vim-language-server/-/vim-language-server-1.0.10.tgz#dfa9dee6bf59204a653cd495d4fa458366a358ec"
-  integrity sha512-pHdrvGUSFUSYntDRaP7HaaIC9xyfXglrH/xZ9+YLTyfZFIsETTBSewjMgSD+FxD2JzYyE5aV/RN5E7P6+8AXoQ==
+vim-language-server@^1.0.13:
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/vim-language-server/-/vim-language-server-1.0.13.tgz#7d73008a67909cfe679471ed3c75ec1e62ceb3f6"
+  integrity sha512-b+fm+9k/KoQeHgLdyuodRk0TwL8362bz9IKzCdVt41/alzDfSAHzm3GzFPc5obFbJLOFSW0UFQYJ5S86MT6YRA==
   dependencies:
     fast-glob "^2.2.6"
     findup "^0.1.5"

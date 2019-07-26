@@ -397,6 +397,8 @@ hi ExtraWhitespace ctermbg=124 guibg=#af0000
 
 highlight MatchTag cterm=underline gui=underline
 
+highlight illuminatedWord guibg=#4F5454
+
 if exists('g:loaded_airline')
   AirlineTheme dark
 endif

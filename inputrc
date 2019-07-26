@@ -16,7 +16,9 @@ Tab: menu-complete
 "\e[1;5A": menu-complete
 "\e[1;5B": menu-complete-backward
 
-"\C-y": magic-space
+"\C-y": shell-expand-line
+
+"\C-o": accept-line
 
 set completion-ignore-case On
 

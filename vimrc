@@ -507,9 +507,28 @@ Plug 'henrik/vim-qargs'
 
 Plug 'chrisbra/Recover.vim'
 
+Plug 'francoiscabrol/ranger.vim'
+Plug 'rbgrouleff/bclose.vim'
+
 "}}}
 
 "" Utilities {{{
+
+Plug 'metakirby5/codi.vim'
+let g:codi#rightalign = 0
+
+command! REPL call <SID>repl_tab("javascript")
+function! s:repl_tab(type)
+  tabnew
+  exe 'setf' a:type
+  setlocal bt=nofile
+  exe 'Codi' a:type
+endfunction
+
+Plug 'roxma/python-support.nvim'
+let g:python_support_python3_venv = 0
+let g:python_support_python2_venv = 0
+" PythonSupportInitPython3
 
 Plug 'lambdalisue/gina.vim'
 
@@ -604,20 +623,21 @@ nnoremap <silent> zP :<c-u>call ZeroPaste('P')<cr>
 
 Plug 'KabbAmine/lazyList.vim'
 
-Plug 'shanesmith/vim-surround'
-nnoremap dsf :call <SID>SurroundingFunction('d')<CR>
-nnoremap csf :call <SID>SurroundingFunction('c')<CR>
-function! s:SurroundingFunction(op)
-  normal! [(
-  call search('\v%(%(\i|\.)@<!).', 'bW')
-  normal! "_dt(
-  if a:op ==? 'c'
-    startinsert
-  elseif a:op ==? 'd'
-    exec "normal \<Plug>Dsurround("
-  endif
-endfunction
-
+Plug 'machakann/vim-sandwich'
+" Plug 'shanesmith/vim-surround'
+" nnoremap dsf :call <SID>SurroundingFunction('d')<CR>
+" nnoremap csf :call <SID>SurroundingFunction('c')<CR>
+" function! s:SurroundingFunction(op)
+"   normal! [(
+"   call search('\v%(%(\i|\.)@<!).', 'bW')
+"   normal! "_dt(
+"   if a:op ==? 'c'
+"     startinsert
+"   elseif a:op ==? 'd'
+"     exec "normal \<Plug>Dsurround("
+"   endif
+" endfunction
+"
 Plug 'tpope/vim-repeat'
 
 Plug 'tpope/vim-abolish'
@@ -646,6 +666,15 @@ Plug 'Konfekt/vim-alias'
 
 Plug 'meain/vim-package-info', { 'do': 'npm install' }
 
+" Plug 'kamykn/spelunker.vim'
+" set nospell
+
+Plug 'kassio/neoterm'
+let g:neoterm_default_mod = 'vertical'
+nmap gx <Plug>(neoterm-repl-send)
+xmap gx <Plug>(neoterm-repl-send)
+nmap gxx <Plug>(neoterm-repl-send-line)
+
 "}}}
 
 "" LOLz {{{
@@ -661,6 +690,18 @@ Plug 'uguu-org/vim-matrix-screensaver'
 "" Display {{{
 
 Plug 'vim-scripts/molokai'
+
+Plug 'aonemd/kuroi.vim'
+
+Plug 'gosukiwi/vim-atom-dark'
+
+Plug 'dunstontc/vim-vscode-theme'
+
+Plug 'romainl/Apprentice'
+
+Plug 'RRethy/vim-illuminate'
+
+" Plug 'TaDaa/vimade'
 
 Plug 'vim-airline/vim-airline'
 let g:airline_inactive_collapse = 0
@@ -694,11 +735,13 @@ function! AirlineThemePatch(palette)
 endfunction
 
 Plug 'morhetz/gruvbox'
+let g:gruvbox_contrast_dark = 'hard'
 
 Plug 'chrisbra/Colorizer'
 let g:colorizer_auto_filetype='css,scss,sass'
 let g:colorizer_auto_color = 0
 let g:colorizer_colornames = 0
+let g:colorizer_use_virtual_text = 1
 
 Plug 'vim-scripts/ConflictDetection'
 let g:ConflictDetection_WarnEvents = ''
@@ -824,6 +867,7 @@ let g:jsx_ext_required = 1
 let g:vim_json_syntax_conceal = 0
 let g:vim_markdown_conceal = 0
 let g:vim_markdown_conceal_code_blocks = 0
+let g:javascript_plugin_jsdoc = 1
 
 Plug 'heavenshell/vim-jsdoc'
 let g:jsdoc_enable_es6 = 1
@@ -910,6 +954,12 @@ function! s:PumOrUltisnips(forward)
     endif
   endif
   return ""
+endfunction
+function! s:IsFoldable()
+  let curline = line('.')
+
+  " wrong......
+  return foldlevel(curline-1) < foldlevel(curline) || foldlevel(curline+1) < foldlevel(curline)
 endfunction
 inoremap <silent> <tab> <C-R>=<SID>PumOrUltisnips(1)<CR>
 inoremap <silent> <s-tab> <C-R>=<SID>PumOrUltisnips(0)<CR>
@@ -1034,7 +1084,6 @@ endfunction
 " Colorscheme
 if has("nvim")
   set termguicolors
-  colorscheme aldmeris
 endif
 
 if &t_Co == 256 || has("gui_running") || has("nvim")
@@ -1051,9 +1100,6 @@ endif
 "}}}
 
 " Mappings {{{
-
-"Toggle spellchecker
-nnoremap <F11> :setlocal spell!<CR>
 
 "Resync syntax
 nnoremap <F12> :syntax sync fromstart<CR>
@@ -1850,6 +1896,19 @@ function! s:MakeRelative()
 
   echo relpath
 endfunction
+
+command! TigBlame split +terminal\ tig\ blame\ %
+
+command! NewBash call <SID>NewBash()
+function! s:NewBash()
+  call setline(1, "#!/bin/bash")
+  Chmod +x
+endfunction
+
+command! Conflicted args `git status --porcelain \| awk '/^(UU\|AA)/ { print $2 }'`
+
+command! VimrcEdit tabe ~/.vimrc
+
 "}}}
 
 " AutoCommands {{{
@@ -1869,9 +1928,22 @@ augroup END
 " Settings for currently focused window
 augroup FocusedWindow
   au!
-  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline relativenumber
-  au WinLeave * setlocal nocursorline norelativenumber
+  au VimEnter,WinEnter,BufWinEnter * call FocusedWindow()
+  au WinLeave * call UnFocusedWindow() 
 augroup END
+
+function! FocusedWindow()
+  setlocal cursorline
+
+  if &number
+    setlocal relativenumber
+  endif
+endfunction
+
+function! UnFocusedWindow()
+  setlocal nocursorline
+  setlocal norelativenumber
+endfunction
 
 "Load opend file on last known position
 augroup LoadLastKnownPosition
@@ -1918,6 +1990,17 @@ fu! CheckFolds()
 
   let &foldcolumn = l:hasfolds
 endfu
+
+tnoremap <C-\><C-\> <C-\><C-N>
+augroup term
+  autocmd!
+  autocmd TermOpen * startinsert
+augroup END
+
+augroup checktime
+  autocmd!
+  autocmd CursorHold,CursorHoldI * checktime
+augroup END
 
 "}}}
 
