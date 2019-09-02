@@ -528,6 +528,8 @@ endfunction
 Plug 'roxma/python-support.nvim'
 let g:python_support_python3_venv = 0
 let g:python_support_python2_venv = 0
+let g:python_host_prog = "/usr/local/bin/python2"
+let g:python3_host_prog = "/usr/local/bin/python3"
 " PythonSupportInitPython3
 
 Plug 'lambdalisue/gina.vim'
