@@ -144,6 +144,7 @@
   editor = vim
   excludesfile = ~/.gitignore
   commentChar = auto
+  commitGraph = true
 
 [merge]
   defaultToUpstream = true
@@ -161,5 +162,9 @@
 
 [tig "bind"]
   main = C <git checkout %(commit)
+
 [commit]
   cleanup = scissors
+
+[gc]
+  writeCommitGraph = true
