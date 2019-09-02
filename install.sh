@@ -120,6 +120,12 @@ is_link_to() {
 
 }
 
+install_fonts() {
+  if [[ -n $is_mac ]]; then
+    cp "${RCPATH}/fonts/* /Library/Fonts"
+  fi
+}
+
 do_install() {
   local ret=0
   for file in $DOTFILES; do
@@ -150,6 +156,7 @@ install_file() {
     rm -rf "$dest"
     cp -r "$src" "$dest"
   else
+    mkdir -p $(dirname $dest)
     ln -ns $FORCE "$src" "$dest"
   fi
 }
@@ -170,6 +177,8 @@ if [[ -n $is_mac ]] && ! command_exists "greadlink"; then
 fi
 
 update_git_submodules
+
+install_fonts
 
 do_install
 
