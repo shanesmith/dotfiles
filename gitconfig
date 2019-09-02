@@ -166,5 +166,11 @@
 [commit]
   cleanup = scissors
 
+[credential]
+  helper = osxkeychain
+
+[protocol]
+  version = 2
+
 [gc]
   writeCommitGraph = true
