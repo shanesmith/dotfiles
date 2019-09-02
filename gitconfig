@@ -169,6 +169,9 @@
 [credential]
   helper = osxkeychain
 
+[include]
+  path = ~/.gitconfig.local
+
 [protocol]
   version = 2
 
