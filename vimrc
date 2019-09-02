@@ -1750,6 +1750,10 @@ endfor
 "Open file under cusror in split window
 nnoremap <C-w>gf :vsp<CR>gf
 
+"Previous command line but with prefix matching
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+
 "}}}
 
 " Commands {{{
