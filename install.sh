@@ -23,6 +23,7 @@ DOTFILES="
   tmuxinator
   tern-config
   lftprc
+  config/alacritty
   config/karabiner
   config/nvim
   config/coc/extensions/package.json
