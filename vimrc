@@ -1987,7 +1987,8 @@ augroup END
 
 augroup checktime
   autocmd!
-  autocmd CursorHold,CursorHoldI * checktime
+  " https://stackoverflow.com/a/26035664/1333402
+  autocmd FocusGained,CursorHold * if getcmdwintype() == '' | checktime | endif
 augroup END
 
 "}}}
