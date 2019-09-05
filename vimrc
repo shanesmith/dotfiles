@@ -662,7 +662,9 @@ nnoremap <leader>u :GundoToggle<CR>
 Plug 'dohsimpson/vim-macroeditor'
 
 Plug 'machakann/vim-highlightedyank'
-map y <Plug>(highlightedyank)
+if !exists('##TextYankPost')
+  map y <Plug>(highlightedyank)
+endif
 
 Plug 'Konfekt/vim-alias'
 
