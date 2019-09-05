@@ -596,3 +596,5 @@ macos_disable_webcam() {
 macos_enable_webcam() {
   sudo chmod a+r "${__webcam_files[@]}"
 }
+
+alias path="tr ':' '\n' <<<\$PATH"
