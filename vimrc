@@ -1893,6 +1893,8 @@ command! Conflicted args `git status --porcelain \| awk '/^(UU\|AA)/ { print $2 
 
 command! VimrcEdit tabe ~/.vimrc
 
+command FixClipboard set clipboard=unnamed,unnamedplus
+
 "}}}
 
 " AutoCommands {{{
