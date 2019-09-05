@@ -1980,7 +1980,9 @@ endfu
 tnoremap <C-\><C-\> <C-\><C-N>
 augroup term
   autocmd!
-  autocmd TermOpen * startinsert
+  if exists("##TermOpen")
+    autocmd TermOpen * startinsert
+  endif
 augroup END
 
 augroup checktime
