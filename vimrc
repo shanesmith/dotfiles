@@ -1705,9 +1705,9 @@ function! s:SwapQuotes()
   endif
   call cursor(origline, origcol)
   if singlecol > doublecol
-    norm cs'"
+    norm sr'"
   else
-    norm cs"'
+    norm sr"'
   endif
 endfunction
 
