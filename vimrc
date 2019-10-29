@@ -836,12 +836,18 @@ let g:matchup_matchparen_status_offscreen = 0
 Plug 'machakann/vim-columnmove'
 let g:columnmove_no_default_key_mappings = 1
 let g:columnmove_strict_wbege = 0
-nmap ]c <Plug>(columnmove-W)
-xmap ]c <Plug>(columnmove-W)
-omap ]c <Plug>(columnmove-W)
-nmap [c <Plug>(columnmove-gE)
-xmap [c <Plug>(columnmove-gE)
-omap [c <Plug>(columnmove-gE)
+nmap ]c <Plug>(columnmove-E)
+xmap ]c <Plug>(columnmove-E)
+omap ]c <Plug>(columnmove-E)
+nmap [c <Plug>(columnmove-B)
+xmap [c <Plug>(columnmove-B)
+omap [c <Plug>(columnmove-B)
+nmap ]C <Plug>(columnmove-W)
+xmap ]C <Plug>(columnmove-W)
+omap ]C <Plug>(columnmove-W)
+nmap [C <Plug>(columnmove-gE)
+xmap [C <Plug>(columnmove-gE)
+omap [C <Plug>(columnmove-gE)
 
 
 "}}}
