@@ -57,6 +57,9 @@ set whichwrap+=<,>,[,],h,l
 set foldmethod=manual
 set foldlevel=999
 
+"Allow up to 3 characters for the sign column
+set signcolumn=auto:3
+
 "Custom Fold Text
 set foldtext=CustomFoldText()
 fu! CustomFoldText()
