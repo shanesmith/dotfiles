@@ -1177,12 +1177,11 @@ endfunction
 nnoremap <F3> n
 nnoremap <S-F3> N
 
-"Only works in GUI
-nnoremap <C-Tab> :tabnext<CR>
-nnoremap <C-S-Tab> :tabprev<CR>
-inoremap <C-Tab> <ESC>:tabnext<CR>
-inoremap <C-S-Tab> <ESC>:tabprev<CR>
-nnoremap gr gT
+"Tab switching
+nnoremap gr :tabprev<CR>
+nnoremap gR :tabfirst<CR>
+nnoremap gt :tabnext<CR>
+nnoremap gT :tablast<CR>
 
 "Stop accidentaly recording
 function! s:MacroMap()
