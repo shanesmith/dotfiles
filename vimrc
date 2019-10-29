@@ -53,6 +53,10 @@ set mouse=a
 "Wrap at start/end of line
 set whichwrap+=<,>,[,],h,l
 
+"Disable folding by default
+set foldmethod=manual
+set foldlevel=999
+
 "Custom Fold Text
 set foldtext=CustomFoldText()
 fu! CustomFoldText()
