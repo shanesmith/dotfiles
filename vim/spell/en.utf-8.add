@@ -107,3 +107,9 @@ RTC
 app
 #olyfill
 DPI
+lifecycle
+Redux
+codebase
+JSX
+grep
+memoize
