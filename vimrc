@@ -783,15 +783,16 @@ let g:SignatureMap = {
 
 Plug 'airblade/vim-gitgutter'
 let g:gitgutter_map_keys = 0
-nmap ]- <plug>GitGutterNextHunk
-nmap [- <plug>GitGutterPrevHunk
-nmap <leader>-s <plug>GitGutterStageHunk
-nmap <leader>-r <plug>GitGutterUndoHunk
-nmap <leader>-p <plug>GitGutterPreviewHunk
-omap i- <Plug>GitGutterTextObjectInnerPending
-omap a- <Plug>GitGutterTextObjectOuterPending
-xmap i- <Plug>GitGutterTextObjectInnerVisual
-xmap a- <Plug>GitGutterTextObjectOuterVisual
+let g:gitgutter_preview_win_floating = 0
+nmap ]- <Plug>(GitGutterNextHunk)
+nmap [- <Plug>(GitGutterPrevHunk)
+nmap <leader>-s <Plug>(GitGutterStageHunk)
+nmap <leader>-r <Plug>(GitGutterUndoHunk)
+nmap <leader>-p <Plug>(GitGutterPreviewHunk)
+omap i- <Plug>(GitGutterTextObjectInnerPending)
+omap a- <Plug>(GitGutterTextObjectOuterPending)
+xmap i- <Plug>(GitGutterTextObjectInnerVisual)
+xmap a- <Plug>(GitGutterTextObjectOuterVisual)
 
 Plug 'vim-scripts/SyntaxRange'
 
