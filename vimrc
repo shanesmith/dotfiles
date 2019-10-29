@@ -153,7 +153,7 @@ set showtabline=2
 set cursorline
 
 "Command tab completion behaviour
-set wildmode=longest,list
+set wildmode=longest:full,full
 
 "Match words as we type a search string. We may be able to find the word we are looking for before being done typing.
 set incsearch
