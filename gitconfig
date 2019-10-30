@@ -39,7 +39,7 @@
   ua = add -u
   AA = add -A
   por = push -u origin HEAD
-  puf = push -f
+  puf = push --force-with-lease
   rom = rebase origin/master
   coo = checkout -
 
