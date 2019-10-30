@@ -109,6 +109,7 @@ swapbak() {
 alias h="cd ~"
 alias ..="cd .."
 alias ...="cd ../.."
+alias recd="cd .. && cd -"
 --() {
   cd -
 }
@@ -442,6 +443,8 @@ httpython() {
 # the space allows for aliases...
 # https://wiki.archlinux.org/index.php/Sudo#Passing_aliases
 alias sudo='sudo '
+alias plz='sudo '
+alias please='sudo '
 
 alias vimrc='cd ~/Code/rc && vim vimrc'
 alias bashrc='cd ~/Code/rc && vim bashrc'
@@ -598,3 +601,5 @@ macos_enable_webcam() {
 }
 
 alias path="tr ':' '\n' <<<\$PATH"
+
+alias be="bundle exec "
