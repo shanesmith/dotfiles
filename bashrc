@@ -60,6 +60,8 @@ elif command_exists ag; then
   export FZF_DEFAULT_COMMAND='ag -g ""'
 fi
 
+export FZF_DEFAULT_OPTS="--bind ctrl-j:down,ctrl-k:up"
+
 # needs to come before setting PS1 for __git_ps1 check
 if ! shopt -oq posix; then
 
