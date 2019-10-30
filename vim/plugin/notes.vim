@@ -84,7 +84,7 @@ function! s:DeleteFileIfEmpty(buffer)
 
 endfunction
 
-let g:notes_folder = "~/Dropbox/notes"
+let g:notes_folder = "~/Insync/shane.wm.smith@gmail.com/Notes"
 nnoremap <Leader>nt :call <SID>NotesTree()<CR>
 nnoremap <Leader>nw :call <SID>NotesSave()<CR>
 nnoremap <Leader>nn :call <SID>NotesNew()<CR>
@@ -93,6 +93,6 @@ nnoremap <leader>np :exec "CtrlP" g:notes_folder<CR>
 
 augroup notes
   au!
-  au BufUnload ~/Dropbox/notes/* call <SID>DeleteFileIfEmpty(str2nr(expand("<abuf>")))
+  au BufUnload ~/Insync/shane.wm.smith@gmail.com/Notes/* call <SID>DeleteFileIfEmpty(str2nr(expand("<abuf>")))
 augroup END
 
