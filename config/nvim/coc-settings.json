@@ -1,5 +1,14 @@
 {
   "suggest.timeout": 500,
   "suggest.minTriggerInputLength": 1,
-  "diagnostic.checkCurrentLine": true
+  "coc.preferences.jumpCommand": "drop",
+  "coc.preferences.hoverTarget": "echo",
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.messageTarget": "echo",
+  "diagnostic.virtualText": true,
+  "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "eslint.autoFixOnSave": true,
+  "stylelintplus.autoFixOnSave": true,
+  "typescript.updateImportsOnFileMove.enable": false,
+  "codeLens.enable": true
 }
