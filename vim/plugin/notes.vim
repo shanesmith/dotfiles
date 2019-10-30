@@ -34,7 +34,7 @@ function! s:NotesSave()
 
   exec "keepalt saveas" fnameescape(fname)
 
-  if orig !=# expand("%:p")
+  if orig && orig !=# expand("%:p")
     silent exe "bwipe!" fnameescape(orig)
     call delete(orig)
   endif
