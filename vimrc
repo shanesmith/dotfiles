@@ -225,7 +225,7 @@ if has('nvim')
 endif
 
 "Paste from system clipboard
-set clipboard=unnamed,unnamedplus
+set clipboard=unnamedplus
 
 if has("gui_gtk2")
   set lines=999 columns=999
