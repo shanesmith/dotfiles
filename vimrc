@@ -239,6 +239,8 @@ endif
 let mapleader = "\<Space>"
 let maplocalleader = "\\"
 
+set pumblend=10
+
 "}}} Settings
 
 " Plugins {{{
