@@ -1060,7 +1060,7 @@ Plug 'shanesmith/vim-textobj-entire'
 
 Plug 'kana/vim-textobj-user'
 
-Plug 'whatyouhide/vim-textobj-xmlattr'
+Plug 'inside/vim-textobj-jsxattr'
 
 Plug 'kana/vim-textobj-function'
 
