@@ -21,14 +21,15 @@ _fzf_git_lol_preview() {
 
   git show --color $hash
 }
-export -f _fzf_git_lol_preview
 
 _fzf_git_lol_get_hash() {
   sed -E -e "s/[[:cntrl:]]\[(([0-9]{1,3};)*[0-9]{1,3})?m//g" -e 's/^[^[:alnum:]]*//' | awk '{print $1}'
 }
-export -f _fzf_git_lol_get_hash
 
 _fzf_git_lol() {
+  export -f _fzf_git_lol_preview
+  export -f _fzf_git_lol_get_hash
+
   # TODO always describe?
   local log_command=${1:-lol}
   local preview="_fzf_git_lol_preview {}"
@@ -60,9 +61,10 @@ _fzf_git_status_preview() {
     fi
   fi
 }
-export -f _fzf_git_status_preview
 
 _fzf_git_status() {
+  export -f _fzf_git_status_preview
+
   # TODO preview probably won't work with a space in the path
   local preview="_fzf_git_status_preview {}"
   local file="$(git status --short | fzf -m --preview-window=down --preview="$preview" | awk '{print $2}' | __escape)"
