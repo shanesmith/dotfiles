@@ -1042,7 +1042,11 @@ nnoremap <expr> <silent> <s-tab> <SID>PumOrUltisnips(0)
 "" Text Objects {{{
 
 Plug 'wellle/targets.vim'
-let g:targets_quotes = ""
+" quote handled by plugin/textobj-quote.vim
+autocmd User targets#mappings#user call targets#mappings#extend({
+      \ 'b': {'pair': [{'o':'(', 'c':')'}]},
+      \ 'q': {}
+      \ })
 
 Plug 'gorkunov/smartpairs.vim'
 
