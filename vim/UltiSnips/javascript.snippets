@@ -14,8 +14,8 @@ function ${1:function_name}(${2:argument}) {
 }
 endsnippet
 
-snippet fnv "Function assigned to var"
-var ${1:function_name} = function(${2}) {
+snippet fnv "Function assigned to const"
+const ${1:function_name} = function(${2}) {
 	${VISUAL}$0
 }`!v GetSnippetPref("semicolon")`
 endsnippet
@@ -111,19 +111,19 @@ endsnippet
 ###
 
 snippet bef "before each" b
-beforeEach(function() {
+beforeEach(() => {
 	$0
 })`!v GetSnippetPref("semicolon")`
 endsnippet
 
 snippet des "Describe (js)" b
-describe('${1:description}', function() {
+describe('${1:description}', () => {
 	$0
 })`!v GetSnippetPref("semicolon")`
 endsnippet
 
 snippet it "it (js)" b
-it('${1:description}', function() {
+it('${1:description}', () => {
 	$0
 })`!v GetSnippetPref("semicolon")`
 endsnippet

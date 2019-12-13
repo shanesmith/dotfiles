@@ -1,36 +1,4 @@
-snippet ip "import" b
-import { $1 } from '$0'
-endsnippet
-
-snippet () "fat arrow"
-() => 
-endsnippet
-
-snippet cl "console.log" w
-console.log(${1:'${2:value}'})
-endsnippet
-
-snippet cle "console.error" w
-console.error(${1:'${2:value}'})
-endsnippet
-
-snippet bef "before each" b
-beforeEach(() => {
-	$0
-})
-endsnippet
-
-snippet des "Describe (js)" b
-describe('${1:description}', () => {
-	$0
-})
-endsnippet
-
-snippet it "it (js)" b
-it('${1:description}', () => {
-	$0
-})
-endsnippet
+extends javascript
 
 snippet react "import react" b
 import React from 'react';
