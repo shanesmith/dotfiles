@@ -11,9 +11,15 @@ if [[ -n "$(ls -A /Library/Java/JavaVirtualMachines 2>/dev/null)" ]]; then
   export JAVA_HOME=$($(dirname $(readlink $(which javac)))/java_home)
 fi
 
-if command_exists brew && [ -d $(brew --prefix)/opt/nvm ]; then
-  export NVM_DIR=~/.nvm
-  . $(brew --prefix)/opt/nvm/nvm.sh
+if command_exists brew; then
+  if brew list git >/dev/null 2>&1; then
+    export PATH=$PATH:"$(brew --prefix git)/share/git-core/contrib/git-jump"
+  fi
+
+  if [ -d $(brew --prefix)/opt/nvm ]; then
+    export NVM_DIR=~/.nvm
+    . $(brew --prefix)/opt/nvm/nvm.sh
+  fi
 fi
 
 if command_exists docker-machine; then
