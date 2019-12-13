@@ -9,6 +9,5 @@
   "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "eslint.autoFixOnSave": true,
   "stylelintplus.autoFixOnSave": true,
-  "typescript.updateImportsOnFileMove.enable": false,
-  "codeLens.enable": true
+  "typescript.updateImportsOnFileMove.enable": false
 }
