@@ -276,6 +276,7 @@ elseif executable('ag')
   let g:ctrlsf_ackprg  = 'ag'
 endif
 nmap <leader>c <Plug>CtrlSFPrompt
+nnoremap <expr> <leader>C ':CtrlSF ' . ctrlsf#opt#GetOpt("pattern")
 vmap <leader>c <Plug>CtrlSFVwordPath
 nnoremap <silent> <leader>/c :call <SID>CtrlSFSetSearch()<CR>
 
