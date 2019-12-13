@@ -57,9 +57,6 @@ set whichwrap+=<,>,[,],h,l
 set foldmethod=manual
 set foldlevel=999
 
-"Allow up to 3 characters for the sign column
-set signcolumn=auto:3
-
 "Custom Fold Text
 set foldtext=CustomFoldText()
 fu! CustomFoldText()
@@ -222,6 +219,12 @@ set showbreak=↪
 if has('nvim')
   " preview of commands
   set inccommand=split
+
+  " Alpha blending for pum
+  set pumblend=10
+
+  "Allow up to 3 characters for the sign column
+  set signcolumn=auto:3
 endif
 
 "Paste from system clipboard
@@ -238,8 +241,6 @@ endif
 "Set leader character
 let mapleader = "\<Space>"
 let maplocalleader = "\\"
-
-set pumblend=10
 
 "}}} Settings
 
