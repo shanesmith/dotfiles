@@ -804,6 +804,7 @@ let g:ConflictDetection_WarnEvents = ''
 
 Plug 'kshenoy/vim-signature'
 " GotoNext/PrevMarkerAny unmap due to conflict with conflictmotions
+nnoremap m <nop>
 let g:SignatureMap = {
       \ 'Leader': "<leader>m",
       \ "ListBufferMarks": "<leader>m/",
