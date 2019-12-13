@@ -1223,9 +1223,9 @@ nnoremap <F3> n
 nnoremap <S-F3> N
 
 "Tab switching
-nnoremap gr :tabprev<CR>
+nnoremap <expr> gr ':<C-U>' . (v:count ? v:count . 'tabnext' : 'tabprev') . '<CR>'
+nnoremap <expr> gt ':<C-U>' . (v:count ? v:count : '') . 'tabnext<CR>'
 nnoremap gR :tabfirst<CR>
-nnoremap gt :tabnext<CR>
 nnoremap gT :tablast<CR>
 
 "Stop accidentaly recording
