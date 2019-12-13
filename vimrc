@@ -953,11 +953,15 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 inoremap <silent><expr> <CR> (pumvisible() ? "\<C-y>" : "\<CR>\<Plug>DiscretionaryEnd")
 inoremap <silent><expr> <c-space> coc#refresh()
-nmap <silent> <leader>yd <Plug>(coc-definition)
+nmap <silent> <leader>yd <Plug>(coc-diagnostic-info)
 nmap <silent> <leader>yy <Plug>(coc-type-definition)
 nmap <silent> <leader>yi <Plug>(coc-implementation)
 nmap <silent> <leader>yr <Plug>(coc-references)
+noremap <silent> <leader>ya :CocAction<CR>
 nnoremap <silent> K :call CocAction('doHover')<CR>
+
+nnoremap <expr> <C-]> CocHasProvider('definition') ? ':call CocAction("jumpDefinition")<CR>' : '<C-]>'
+nnoremap <expr> <C-W><C-]> CocHasProvider('definition') ? ':call CocAction("jumpDefinition", "split")<CR>' : '<C-]>'
 
 " }}}
 
