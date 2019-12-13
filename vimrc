@@ -648,6 +648,29 @@ nnoremap <silent> zP :<c-u>call ZeroPaste('P')<cr>
 Plug 'KabbAmine/lazyList.vim'
 
 Plug 'machakann/vim-sandwich'
+" disables ib,ab, is and as object mappings so that the tagets plugin can handle them
+let g:textobj_sandwich_no_default_key_mappings = 1
+" disables sdb and srb, but also sd and sr so we need to redefine them
+let g:sandwich_no_default_key_mappings = 1
+let g:sandwich#recipes = [
+      \   {
+      \     'buns':         ['(', ')'],
+      \     'nesting':      1,
+      \     'match_syntax': 1,
+      \     'input':        ['(', ')', 'b'],
+      \   },
+      \   {
+      \     'buns':         ['{', '}'],
+      \     'nesting':      1,
+      \     'match_syntax': 1,
+      \     'skip_break':   1,
+      \     'input':        ['{', '}', 'B'],
+      \   },
+      \ ]
+
+silent! nmap <unique><silent> sd <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
+silent! nmap <unique><silent> sr <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
+
 " Plug 'shanesmith/vim-surround'
 " nnoremap dsf :call <SID>SurroundingFunction('d')<CR>
 " nnoremap csf :call <SID>SurroundingFunction('c')<CR>
