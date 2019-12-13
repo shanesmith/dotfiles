@@ -48,9 +48,11 @@
   lolb = "!f() {  local extra=\"\"; if git rev-parse -q --verify '@{u}' >/dev/null 2>&1; then extra=\"$extra @{u}\"; fi; git log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cd>%Creset %s' --color --graph --date=relative --branches HEAD $extra $@; }; f"
   lolf = "!f() {  local extra=\"\"; if git rev-parse -q --verify '@{u}' >/dev/null 2>&1; then extra=\"$extra @{u}\"; fi; git log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cd>%Creset %s' --color --graph --date=relative --name-status HEAD $extra $@; }; f"
   lolbf = "!f() { local extra=\"\"; if git rev-parse -q --verify '@{u}' >/dev/null 2>&1; then extra=\"$extra @{u}\"; fi; git log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cd>%Creset %s' --color --graph --date=relative --name-status --branches HEAD $extra $@; }; f"
-  lolnew = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --graph ORIG_HEAD..
-  lall = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --graph --all
-  lallf = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --graph --all --name-status
+  lonly = "!f() { git log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cd>%Creset %s' --color --graph --date=relative $@; }; f"
+  lolnew = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --color --graph ORIG_HEAD..
+  lall = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --color --graph --all
+  lallf = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cr>%Creset %s' --color --graph --all --name-status
+  head = !git --no-pager log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cd>%Creset %s' --color --graph --date=relative -n5 && echo
   logf = log --name-status
   k = !gitk --all >/dev/null 2>&1 &
   who = shortlog -s
