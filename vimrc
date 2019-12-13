@@ -1637,12 +1637,28 @@ inoremap <A-k> <Up>
 inoremap <A-l> <Right>
 
 "Easier substitute
+"TODO use https://stackoverflow.com/a/6271254/1333402
 nnoremap <leader>r :%s/\<<C-r><C-w>\>/<C-r><C-w>
 vnoremap <leader>r "hy:<C-\>e<SID>subsub()<CR>
 function! s:subsub()
+  let delimiters = "/#@+,"
   let numlines = strlen(substitute(@h, "[^\\n]", "", "g"))
   if numlines == 0
-    let cmd = "%s/" . @h . "/" . @h
+    let delim = ""
+
+    for c in split(delimiters, '\zs')
+      if match(@h, c) == -1
+        let delim = c
+        break
+      endif
+    endfor
+
+    if delim == ""
+      echo "Could not find a valid delimiter!"
+      return
+    endif
+
+    let cmd = "%s" . delim . @h . delim . @h
   else
     let cmd = "'<,'>s/"
   endif
@@ -1810,7 +1826,7 @@ for i in [1, 2, 3, 4, 5, 6, 7, 8, 9]
 endfor
 
 "Open file under cusror in split window
-nnoremap <C-w>gf :vsp<CR>gf
+nnoremap gF :vertical wincmd f<CR>
 
 "Previous command line but with prefix matching
 cnoremap <C-p> <Up>
