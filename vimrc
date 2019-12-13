@@ -290,6 +290,17 @@ function! g:CtrlSFAfterMainWindowInit()
   nnoremap <silent><buffer> <C-CR> :call <SID>CtrlSFChooseWindowOpen()<CR>
   nnoremap <silent><buffer> <C-E> :call <SID>CtrlSFNextFile('')<CR>
   nnoremap <silent><buffer> <C-Y> :call <SID>CtrlSFNextFile('b')<CR>
+  nnoremap <silent><buffer> n :call <SID>CtrlSFNextMatch(1)<CR>
+  nnoremap <silent><buffer> N :call <SID>CtrlSFNextMatch(0)<CR>
+endfunction
+
+function! s:CtrlSFNextMatch(forward)
+  if @/ == ""
+    call ctrlsf#NextMatch(a:forward)
+    return
+  endif
+
+  exec "normal! " . 'Nn'[a:forward]
 endfunction
 
 function! s:CtrlSFNextFile(flags)
