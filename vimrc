@@ -949,7 +949,7 @@ let g:instant_markdown_autostart = 0
 
 "" Debugging {{{
 
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 inoremap <silent><expr> <CR> (pumvisible() ? "\<C-y>" : "\<CR>\<Plug>DiscretionaryEnd")
 inoremap <silent><expr> <c-space> coc#refresh()
