@@ -1978,7 +1978,9 @@ command! Conflicted args `git status --porcelain \| awk '/^(UU\|AA)/ { print $2 
 
 command! VimrcEdit tabe ~/.vimrc
 
-command FixClipboard set clipboard=unnamed,unnamedplus
+command! FixClipboard set clipboard=unnamed,unnamedplus
+
+command! -nargs=1 NewPlug call append(line('.'), "Plug '" . <args> . "'") | exe "Plug '" . <args> . "'" | PlugInstall
 
 "}}}
 
