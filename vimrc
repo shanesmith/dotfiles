@@ -530,6 +530,7 @@ Plug 'henrik/vim-qargs'
 Plug 'chrisbra/Recover.vim'
 
 Plug 'francoiscabrol/ranger.vim'
+
 Plug 'rbgrouleff/bclose.vim'
 
 "}}}
@@ -795,6 +796,7 @@ endfunction
 Plug 'morhetz/gruvbox'
 let g:gruvbox_contrast_dark = 'hard'
 
+"TODO use https://github.com/RRethy/vim-hexokinase ?
 Plug 'chrisbra/Colorizer'
 let g:colorizer_auto_filetype='css,scss,sass'
 let g:colorizer_auto_color = 0
@@ -862,6 +864,7 @@ nmap [; <Plug>SneakPrevious
 vmap [; <Plug>VSneakPrevious
 
 Plug 'vim-scripts/ConflictMotions'
+" avoid conflict with vim-textobj-xmlattr
 let g:ConflictMotions_ConflictMapping = 'X'
 let g:ConflictMotions_SectionMapping = '='
 nnoremap <leader>x= :ConflictTake both<CR>
@@ -1166,9 +1169,11 @@ nnoremap <silent> <Leader>// :%s///rn<CR>
 nnoremap <silent> <Leader>\ :call <SID>clear_search()<CR>
 
 "Search history navigation
+" TODO add vmap *
 nnoremap <silent> [/ :call <SID>search_hist('back')<CR>
 nnoremap <silent> ]/ :call <SID>search_hist('forward')<CR>
 nnoremap <silent> *  :call <SID>search_cword(1, 1)<CR>
+" TODO repurpose #
 nnoremap <silent> #  :call <SID>search_cword(1, 0)<CR>
 nnoremap <silent> g* :call <SID>search_cword(0, 1)<CR>
 nnoremap <silent> g# :call <SID>search_cword(0, 0)<CR>
@@ -1700,6 +1705,7 @@ function! s:PasteOver(type, ...)
 endfunction
 
 "Duplicate
+" :copy only does lines, this is arbitrary selection
 nnoremap <silent> + :set opfunc=<SID>DuplicateDown<CR>g@
 nnoremap <silent> ++ V:<C-U>call <SID>DuplicateDown(visualmode())<CR>
 vnoremap <silent> + :<C-U>call <SID>DuplicateDown(visualmode())<CR>
