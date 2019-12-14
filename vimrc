@@ -941,8 +941,12 @@ let g:jsdoc_param_description_separator = '-'
 command! JSDoc JsDoc
 
 Plug 'alvan/vim-closetag'
-let g:closetag_filetypes = 'html,xhtml,xml,javascript.jsx,typescript.tsx'
-let g:closetag_xhtml_filetypes = 'xhtml,xml,javascript.jsx,typescript.tsx'
+let g:closetag_filetypes = 'html,xhtml,xml,javascript.jsx,typescript.tsx,typescriptreact'
+let g:closetag_xhtml_filetypes = 'xhtml,xml,javascript.jsx,typescript.tsx,typescriptreact'
+let g:closetag_regions =  {
+      \ 'typescriptreact': 'jsxRegion,tsxRegion',
+      \ 'javascriptreact': 'jsxRegion',
+      \ }
 
 Plug 'suan/vim-instant-markdown', { 'do': 'npm install -g instant-markdown-d' }
 let g:instant_markdown_autostart = 0
