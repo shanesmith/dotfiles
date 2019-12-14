@@ -634,16 +634,18 @@ Plug 'tpope/vim-unimpaired'
 nmap <silent> [p =P
 nmap <silent> ]p =p
 
-function! ZeroPaste(p)
-  let l:original_reg = getreg(v:register)
-  let l:original_reg_type = getregtype(v:register)
-  let l:stripped_reg = substitute(l:original_reg, '\v^%(\n|\s)*(.{-})%(\n|\s)*$', '\1 ', '')
-  call setreg(v:register, l:stripped_reg, 'c')
-  exe 'normal "' . v:register . a:p
-  call setreg(v:register, l:original_reg, l:original_reg_type)
+" UnconditionalPaste style characterwise forced paste
+function! s:ZeroPaste(p, ...)
+  let register = a:0 ? a:1 : v:register
+  let l:original_reg = getreg(register)
+  let l:original_reg_type = getregtype(register)
+  let l:stripped_reg = substitute(l:original_reg, '\v^%(\n|\s)*(.{-})%(\n|\s)*$', '\1', '')
+  call setreg(register, l:stripped_reg, 'c')
+  exe 'normal "' . register . a:p
+  call setreg(register, l:original_reg, l:original_reg_type)
 endfunction
-nnoremap <silent> zp :<c-u>call ZeroPaste('p')<cr>
-nnoremap <silent> zP :<c-u>call ZeroPaste('P')<cr>
+nnoremap <silent> zp :<c-u>call <SID>ZeroPaste('p')<cr>
+nnoremap <silent> zP :<c-u>call <SID>ZeroPaste('P')<cr>
 
 Plug 'KabbAmine/lazyList.vim'
 
@@ -1671,17 +1673,26 @@ nnoremap QQ :quit<CR>
 nnoremap Q!! :quit!<CR>
 
 "You Paste
-nnoremap <silent><expr> _ ':let b:silly="' . v:register . '"<CR>:set opfunc=<SID>YouPaste<CR>g@'
-nnoremap <silent><expr> __ 'V:<C-U>let b:silly="' . v:register . '"<CR>:<C-U>call <SID>YouPaste(visualmode(), 1)<CR>'
-vnoremap <silent><expr> p ':<C-U>let b:silly="' . v:register . '"<CR>:<C-U>call <SID>YouPaste(visualmode(), 1)<CR>'
-function! s:YouPaste(type, ...)
+nnoremap <silent> _ :let b:silly=v:register<CR>:set opfunc=<SID>PasteOver<CR>g@
+vnoremap <silent> _ :<C-U>let b:silly=v:register<CR>:<C-U>call <SID>PasteOver(visualmode(), 1)<CR>
+nnoremap <silent> __ :<C-U>let b:silly=v:register<CR>V:<C-U>call <SID>PasteOver(visualmode(), 1)<CR>
+function! s:PasteOver(type, ...)
   if a:0
     let [mark1, mark2] = ['`<', '`>']
   else
     let [mark1, mark2] = ['`[', '`]']
   endif
+
   let pastecmd = (col("']") == col("$")-1) ? "p" : "P"
-  exec 'normal! ' . mark1 . 'v' . mark2 . '"_d"' . b:silly . pastecmd
+
+  exec 'normal! ' . mark1 . 'v' . mark2 . '"_d'
+
+  if a:type == 'char'
+    call <SID>ZeroPaste(pastecmd, b:silly)
+    return
+  endif
+
+  exec 'normal! "' . b:silly . pastecmd
 endfunction
 
 "Duplicate
