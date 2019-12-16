@@ -635,6 +635,14 @@ Plug 'tpope/vim-unimpaired'
 nmap <silent> [p =P
 nmap <silent> ]p =p
 
+" TODO update unimpaired plugin?
+if exists(":cabove")
+  nnoremap ]l :<C-u>exec (v:count ? v:count : "")."lbelow"<CR>zv
+  nnoremap [l :<C-u>exec (v:count ? v:count : "")."labove"<CR>zv
+  nnoremap ]q :<C-u>exec (v:count ? v:count : "")."cbelow"<CR>zv
+  nnoremap [q :<C-u>exec (v:count ? v:count : "")."cabove"<CR>zv
+endif
+
 " UnconditionalPaste style characterwise forced paste
 function! s:ZeroPaste(p, ...)
   let register = a:0 ? a:1 : v:register
