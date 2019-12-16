@@ -597,7 +597,15 @@ let g:switch_custom_definitions =
       \   ['left', 'right'],
       \   ['top', 'bottom'],
       \   ['padding', 'margin'],
-      \   ['absolute', 'relative', 'fixed']
+      \   ['absolute', 'relative', 'fixed'],
+      \ ]
+
+"TODO PR for switch plugin
+autocmd FileType typescript,typescript.tsx,typescriptreact let b:switch_definitions =
+      \ [
+      \   g:switch_builtins.javascript_function,
+      \   g:switch_builtins.javascript_arrow_function,
+      \   g:switch_builtins.javascript_es6_declarations,
       \ ]
 
 autocmd FileType javascript let b:switch_custom_definitions =
