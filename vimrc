@@ -546,6 +546,10 @@ let g:python3_host_prog = "/usr/local/bin/python3"
 
 Plug 'lambdalisue/gina.vim'
 
+Plug 'tpope/vim-fugitive'
+
+Plug 'tpope/vim-rhubarb'
+
 Plug 'frioux/vim-lost'
 
 Plug 'vim-utils/vim-husk'
