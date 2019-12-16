@@ -588,6 +588,7 @@ let g:multi_cursor_exit_from_insert_mode = 0
 Plug 'tpope/vim-eunuch'
 
 Plug 'rhysd/committia.vim'
+let g:committia_open_only_vim_starting = 0
 
 Plug 'AndrewRadev/switch.vim'
 let g:switch_mapping = "-"
