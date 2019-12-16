@@ -730,9 +730,6 @@ Plug 'meain/vim-package-info', { 'do': 'npm install' }
 
 Plug 'kassio/neoterm'
 let g:neoterm_default_mod = 'vertical'
-nmap gx <Plug>(neoterm-repl-send)
-xmap gx <Plug>(neoterm-repl-send)
-nmap gxx <Plug>(neoterm-repl-send-line)
 
 "}}}
 
