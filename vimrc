@@ -379,135 +379,123 @@ function! s:CtrlSFChooseWindowOpen()
     endif
 endfunction
 
-Plug 'ctrlpvim/ctrlp.vim'
-let g:ctrlp_map = ""
-nnoremap <c-p> :CtrlP<cr>
-vnoremap <c-p> "hy:call <SID>CtrlPWithInput(@h)<CR>
-inoremap <c-p> <esc>:CtrlP<cr>
-nnoremap <leader>p  :CtrlP<cr>
-nnoremap <leader>pb :CtrlPBuffer<cr>
-nnoremap <leader>pc :CtrlPCmdPalette<cr>
-nnoremap <leader>pw :call <SID>CtrlPWithInput("<C-R><C-W>")<CR>
-let g:ctrlp_match_window_reversed = 0
-let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_use_caching = 1000
-let g:ctrlp_max_height = 101
-let g:ctrlp_tabpage_position = 'al'
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_switch_buffer = 'et'
-let g:ctrlp_reuse_window = 'nerdtree'
-let g:ctrlp_prompt_mappings = {
-    \ 'ToggleType(1)':   ['<c-right>'],
-    \ 'ToggleType(-1)':  ['<c-left>'],
-    \ 'PrtHistory(1)':   [],
-    \ 'PrtHistory(-1)':  [],
-    \ 'CreateNewFile()': [],
-    \ }
-let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-      \ 'file': '\vtags|\.(exe|so|dll|DS_Store)$'
+Plug '/usr/local/opt/fzf'
+nnoremap <C-p> :FZF<CR>
+
+let g:fzf_action = {
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-s': 'split',
+      \ 'ctrl-v': 'vsplit'
       \ }
-let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
 
-function! s:CtrlPEnter()
-  nnoremap <buffer> <c-y> :call <SID>CtrlPYank()<CR>
-  nnoremap <buffer> <c-p> :call <SID>CtrlPPaste()<CR>
-endfunction
-
-function! s:CtrlPYank()
-  let lines = <SID>CtrlPGetLines()
-
-  if empty(lines)
-    return
-  endif
-
-  let @* = join(lines, "\n")
-endfunction
-
-function! s:CtrlPPaste()
-  let lines = <SID>CtrlPGetLines()
-
-  if empty(lines)
-    return
-  endif
-
-  exec "normal! a" . join(lines, "\n")
-endfunction
-
-function! s:CtrlPGetLines()
-  echo "What modifier? (a|r|i)"
-
-  let modify = nr2char(getchar())
-
-  if modify == nr2char(27) "escape
-    call feedkeys("\<c-e>") " redraw CtrlP prompt
-    return
-  endif
-
-  let lines = []
-  let marked = ctrlp#getmarkedlist()
-
-  if !empty(marked)
-    let lines = values(marked)
-  else
-    let lines = [ctrlp#getcline()]
-  en
-
-  cal ctrlp#exit()
-
-  call map(lines, {idx, val -> <SID>CtrlPYankFormat(val, modify)})
-
-  return lines
-endfunction
-
-let g:ctrlp_yank_path = ''
-
-function! s:CtrlPYankFormat(val, mod)
-  if a:mod == "a" || a:mod == "\<c-a>"
-    return fnamemodify(a:val, ':p')
-  elseif a:mod == "r" || a:mod == "\<c-r>"
-    let g:ctrlp_yank_path = fnamemodify(a:val, ':p')
-    return <SID>PyEval("os.path.relpath(vim.eval('g:ctrlp_yank_path'), os.path.dirname(vim.current.buffer.name))")
-  elseif a:mod == "i" || a:mod == "\<c-i>"
-    let g:ctrlp_yank_path = fnamemodify(a:val, ':p')
-    let path = <SID>PyEval("os.path.relpath(vim.eval('g:ctrlp_yank_path'), os.path.dirname(vim.current.buffer.name))")
-    if path !~ '^\.\.\/'
-      let path = "./" . path
-    endif
-    return fnamemodify(path, ':r')
-  endif
-
-  return a:val
-endfunction
-
-function! s:PyEval(script)
-  if has('python3')
-    return py3eval(a:script)
-  endif
-
-  return pyeval(a:script)
-endfunction
-
-let g:ctrlp_buffer_func = {
-      \ 'enter': function("s:CtrlPEnter")
+let g:fzf_layout = { 
+      \ 'window': 'call FloatingFZF()'
       \ }
-function! s:CtrlPWithInput(input)
-  let g:ctrlp_default_input = a:input
-  CtrlP
-  let g:ctrlp_default_input = ""
-endfunction
-if executable('rg')
-  let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob ""'
-  let g:ctrlp_use_caching = 0
-elseif executable('ag')
-  let g:ctrlp_user_command = 'ag $(python -c "import os.path; print os.path.relpath(%s,''${PWD}'')") -l --nocolor -g ""'
-  let g:ctrlp_use_caching = 0
-endif
 
-Plug 'mattn/ctrlp-register'
-nnoremap <leader>pr :CtrlPRegister<CR>
+fun! FloatingFZF()
+  let width = float2nr(&columns * 0.5)
+  let height = float2nr(&lines * 0.4)
+  let opts = {
+        \     'relative': 'editor',
+        \     'row': (&lines - height) / 5,
+        \     'col': (&columns - width) / 2,
+        \     'width': width,
+        \     'height': height,
+        \     'style': 'minimal'
+        \ }
+  call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
+endf
 
-Plug 'nixprime/cpsm', { 'do': 'brew install cmake boost && ./install.sh' }
+" TODO port these over to FZF?
+
+" function! s:CtrlPEnter()
+"   nnoremap <buffer> <c-y> :call <SID>CtrlPYank()<CR>
+"   nnoremap <buffer> <c-p> :call <SID>CtrlPPaste()<CR>
+" endfunction
+"
+" function! s:CtrlPYank()
+"   let lines = <SID>CtrlPGetLines()
+"
+"   if empty(lines)
+"     return
+"   endif
+"
+"   let @* = join(lines, "\n")
+" endfunction
+"
+" function! s:CtrlPPaste()
+"   let lines = <SID>CtrlPGetLines()
+"
+"   if empty(lines)
+"     return
+"   endif
+"
+"   exec "normal! a" . join(lines, "\n")
+" endfunction
+"
+" function! s:CtrlPGetLines()
+"   echo "What modifier? (a|r|i)"
+"
+"   let modify = nr2char(getchar())
+"
+"   if modify == nr2char(27) "escape
+"     call feedkeys("\<c-e>") " redraw CtrlP prompt
+"     return
+"   endif
+"
+"   let lines = []
+"   let marked = ctrlp#getmarkedlist()
+"
+"   if !empty(marked)
+"     let lines = values(marked)
+"   else
+"     let lines = [ctrlp#getcline()]
+"   en
+"
+"   cal ctrlp#exit()
+"
+"   call map(lines, {idx, val -> <SID>CtrlPYankFormat(val, modify)})
+"
+"   return lines
+" endfunction
+"
+" let g:ctrlp_yank_path = ''
+"
+" function! s:CtrlPYankFormat(val, mod)
+"   if a:mod == "a" || a:mod == "\<c-a>"
+"     return fnamemodify(a:val, ':p')
+"   elseif a:mod == "r" || a:mod == "\<c-r>"
+"     let g:ctrlp_yank_path = fnamemodify(a:val, ':p')
+"     return <SID>PyEval("os.path.relpath(vim.eval('g:ctrlp_yank_path'), os.path.dirname(vim.current.buffer.name))")
+"   elseif a:mod == "i" || a:mod == "\<c-i>"
+"     let g:ctrlp_yank_path = fnamemodify(a:val, ':p')
+"     let path = <SID>PyEval("os.path.relpath(vim.eval('g:ctrlp_yank_path'), os.path.dirname(vim.current.buffer.name))")
+"     if path !~ '^\.\.\/'
+"       let path = "./" . path
+"     endif
+"     return fnamemodify(path, ':r')
+"   endif
+"
+"   return a:val
+" endfunction
+"
+" function! s:PyEval(script)
+"   if has('python3')
+"     return py3eval(a:script)
+"   endif
+"
+"   return pyeval(a:script)
+" endfunction
+
+" Plug 'mattn/ctrlp-register'
+" nnoremap <leader>pr :CtrlPRegister<CR>
+
+" Plug 'shanesmith/ctrlp-filetype'
+" nnoremap <leader>pf :CtrlPFiletype<CR>
+
+" Plug 'nixprime/cpsm', { 'do': 'brew install cmake boost && ./install.sh' }
+
+" Plug 'fisadev/vim-ctrlp-cmdpalette'
 
 Plug 'scrooloose/nerdtree'
 let g:NERDTreeHijackNetrw = 0
@@ -611,8 +599,6 @@ autocmd FileType javascript let b:switch_custom_definitions =
       \ [
       \   ['test.only(', 'test.skip(', 'test(']
       \ ]
-
-Plug 'fisadev/vim-ctrlp-cmdpalette'
 
 Plug 'lfilho/cosco.vim'
 autocmd FileType javascript,typescript.tsx,typescript,typescriptreact,php,css,scss,java,c,cpp nnoremap <buffer> <silent> ;; :call <SID>custom_cosco()<CR>
