@@ -220,8 +220,9 @@ if has('nvim')
   " preview of commands
   set inccommand=split
 
-  " Alpha blending for pum
-  set pumblend=10
+  " Alpha blending for pum and floating windows
+  set pumblend=20
+  set winblend=20
 
   "Allow up to 3 characters for the sign column
   set signcolumn=auto:3
