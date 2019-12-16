@@ -15,7 +15,6 @@ DOTFILES="
   ackrc
   inputrc
   colordiffrc
-  npmrc
   ignore
   tmux.conf
   tmux
