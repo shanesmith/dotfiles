@@ -830,6 +830,7 @@ let g:gitgutter_map_keys = 0
 let g:gitgutter_preview_win_floating = 0
 nmap ]- <Plug>(GitGutterNextHunk)
 nmap [- <Plug>(GitGutterPrevHunk)
+nnoremap <leader>- <nop>
 nmap <leader>-s <Plug>(GitGutterStageHunk)
 nmap <leader>-r <Plug>(GitGutterUndoHunk)
 nmap <leader>-p <Plug>(GitGutterPreviewHunk)
