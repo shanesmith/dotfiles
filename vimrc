@@ -713,7 +713,6 @@ Plug 'szw/vim-maximizer'
 let g:maximizer_default_mapping_key = '<F4>'
 
 Plug 'sjl/gundo.vim'
-nnoremap <leader>u :GundoToggle<CR>
 
 Plug 'dohsimpson/vim-macroeditor'
 
