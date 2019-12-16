@@ -2042,11 +2042,6 @@ augroup LoadLastKnownPosition
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 augroup END
 
-augroup js
-  au!
-  au FileType javascript UltiSnipsAddFiletypes javascript.javascript-angular.javascript-jasmine
-augroup END
-
 tnoremap <C-\><C-\> <C-\><C-N>
 augroup term
   autocmd!
