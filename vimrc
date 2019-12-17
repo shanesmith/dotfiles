@@ -1087,6 +1087,8 @@ Plug 'kana/vim-textobj-function'
 
 Plug 'thinca/vim-textobj-function-javascript'
 
+Plug 'vimtaku/vim-textobj-keyvalue'
+
 "}}}
 
 "" Windows {{{
