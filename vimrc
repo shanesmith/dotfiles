@@ -910,7 +910,7 @@ let g:current_line_whitespace_disabled_soft = 1
 let g:better_whitespace_filetypes_blacklist = ["ctrlsf", "help", "diff"]
 command! WhitespaceStrip StripWhitespace
 
-Plug 'Chiel92/vim-autoformat'
+Plug 'Chiel92/vim-autoformat', { 'do': 'npm install -g js-beautify' }
 command! Format Autoformat
 
 Plug 'jiangmiao/auto-pairs'
