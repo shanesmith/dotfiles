@@ -1204,7 +1204,7 @@ function! s:search_cword(word_bound, forwards)
 
   let search='\V' . pre . escape(expand('<cword>'), '\') . post
 
-  if search == @/
+  if search ==# @/
     if a:forwards
       normal! n
     else
