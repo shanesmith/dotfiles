@@ -1361,33 +1361,33 @@ function! s:squash_blank_lines(...)
 endfunction
 
 "Move lines up/down
-nnoremap <silent> <C-Up>    :call      <SID>moveit('up',    'n')<CR>
-nnoremap <silent> <C-Down>  :call      <SID>moveit('down',  'n')<CR>
-nnoremap <silent> <C-Left>  :call      <SID>moveit('left',  'n')<CR>
-nnoremap <silent> <C-Right> :call      <SID>moveit('right', 'n')<CR>
-vnoremap <silent> <C-Up>    :call      <SID>moveit('up',    visualmode())<CR>
-vnoremap <silent> <C-Down>  :call      <SID>moveit('down',  visualmode())<CR>
-vnoremap <silent> <C-Left>  :call      <SID>moveit('left',  visualmode())<CR>
-vnoremap <silent> <C-Right> :call      <SID>moveit('right', visualmode())<CR>
-inoremap <silent> <C-Up>    <C-o>:call <SID>moveit('up',    'i')<cr>
-inoremap <silent> <C-Down>  <C-o>:call <SID>moveit('down',  'i')<cr>
-inoremap <silent> <C-Left>  <C-o>:call <SID>moveit('left',  'i')<CR>
-inoremap <silent> <C-Right> <C-o>:call <SID>moveit('right', 'i')<CR>
+nnoremap <silent> <C-Up>    :<C-u>call <SID>moveit('up',    v:count1, 'n')<CR>
+nnoremap <silent> <C-Down>  :<C-u>call <SID>moveit('down',  v:count1, 'n')<CR>
+nnoremap <silent> <C-Left>  :<C-u>call <SID>moveit('left',  v:count1, 'n')<CR>
+nnoremap <silent> <C-Right> :<C-u>call <SID>moveit('right', v:count1, 'n')<CR>
+vnoremap <silent> <C-Up>    :call      <SID>moveit('up',    v:count1, visualmode())<CR>
+vnoremap <silent> <C-Down>  :call      <SID>moveit('down',  v:count1, visualmode())<CR>
+vnoremap <silent> <C-Left>  :call      <SID>moveit('left',  v:count1, visualmode())<CR>
+vnoremap <silent> <C-Right> :call      <SID>moveit('right', v:count1, visualmode())<CR>
+inoremap <silent> <C-Up>    <C-o>:call <SID>moveit('up',    1,        'i')<cr>
+inoremap <silent> <C-Down>  <C-o>:call <SID>moveit('down',  1,        'i')<cr>
+inoremap <silent> <C-Left>  <C-o>:call <SID>moveit('left',  1,        'i')<CR>
+inoremap <silent> <C-Right> <C-o>:call <SID>moveit('right', 1,        'i')<CR>
 
-nnoremap <silent> <S-Up>    :call      <SID>moveit('up',    'n')<CR>
-nnoremap <silent> <S-Down>  :call      <SID>moveit('down',  'n')<CR>
-nnoremap <silent> <S-Left>  :call      <SID>moveit('left',  'n')<CR>
-nnoremap <silent> <S-Right> :call      <SID>moveit('right', 'n')<CR>
-vnoremap <silent> <S-Up>    :call      <SID>moveit('up',    visualmode())<CR>
-vnoremap <silent> <S-Down>  :call      <SID>moveit('down',  visualmode())<CR>
-vnoremap <silent> <S-Left>  :call      <SID>moveit('left',  visualmode())<CR>
-vnoremap <silent> <S-Right> :call      <SID>moveit('right', visualmode())<CR>
-inoremap <silent> <S-Up>    <C-o>:call <SID>moveit('up',    'i')<cr>
-inoremap <silent> <S-Down>  <C-o>:call <SID>moveit('down',  'i')<cr>
-inoremap <silent> <S-Left>  <C-o>:call <SID>moveit('left',  'i')<CR>
-inoremap <silent> <S-Right> <C-o>:call <SID>moveit('right', 'i')<CR>
+nnoremap <silent> <S-Up>    :<C-u>call <SID>moveit('up',    v:count1, 'n')<CR>
+nnoremap <silent> <S-Down>  :<C-u>call <SID>moveit('down',  v:count1, 'n')<CR>
+nnoremap <silent> <S-Left>  :<C-u>call <SID>moveit('left',  v:count1, 'n')<CR>
+nnoremap <silent> <S-Right> :<C-u>call <SID>moveit('right', v:count1, 'n')<CR>
+vnoremap <silent> <S-Up>    :call      <SID>moveit('up',    v:count1, visualmode())<CR>
+vnoremap <silent> <S-Down>  :call      <SID>moveit('down',  v:count1, visualmode())<CR>
+vnoremap <silent> <S-Left>  :call      <SID>moveit('left',  v:count1, visualmode())<CR>
+vnoremap <silent> <S-Right> :call      <SID>moveit('right', v:count1, visualmode())<CR>
+inoremap <silent> <S-Up>    <C-o>:call <SID>moveit('up',    1,        'i')<cr>
+inoremap <silent> <S-Down>  <C-o>:call <SID>moveit('down',  1,        'i')<cr>
+inoremap <silent> <S-Left>  <C-o>:call <SID>moveit('left',  1,        'i')<CR>
+inoremap <silent> <S-Right> <C-o>:call <SID>moveit('right', 1,        'i')<CR>
 
-function! s:moveit(where, mode) range
+function! s:moveit(where, count, mode) range
 
   let firstline = a:firstline
   let lastline = a:lastline
@@ -1404,7 +1404,7 @@ function! s:moveit(where, mode) range
   let is_prev_line_blank = (match(getline(firstline-1), '^\s*$') != -1)
   let is_next_line_blank = (match(getline(lastline+1), '^\s*$') != -1)
 
-  if is_prev_line_blank && is_next_line_blank
+  if is_prev_line_blank && is_next_line_blank && a:count != 1 && a:where !=? "left" && a:where !=? "right"
 
     if a:where ==? "left"
       call s:squash_blank_lines(0, firstline-1)
@@ -1489,7 +1489,7 @@ function! s:moveit(where, mode) range
       call s:reindent_inner()
 
     elseif a:where ==? "up"
-      let targetline = (firstline-2)
+      let targetline = firstline - a:count - 1
       call s:do_moveit(firstline, lastline, targetline)
       call s:reindent_inner()
       if a:mode ==? 'v'
@@ -1499,7 +1499,7 @@ function! s:moveit(where, mode) range
       endif
 
     elseif a:where ==? "down"
-      let targetline = (lastline+1)
+      let targetline = lastline + a:count
       if targetline <= line('$')
         call s:do_moveit(firstline, lastline, targetline)
         if a:mode ==? 'v'
