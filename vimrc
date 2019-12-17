@@ -84,18 +84,6 @@ fu! CustomFoldText()
   return line . expansionString . foldSizeStr . foldPercentage . foldLevelStr
 endf
 
-function! NeatFoldText()
-  " http://dhruvasagar.com/2013/03/28/vim-better-foldtext
-  let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
-  let lines_count = v:foldend - v:foldstart + 1
-  let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
-  let foldchar = matchstr(&fillchars, 'fold:\zs.')
-  let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
-  let foldtextend = lines_count_text . repeat(foldchar, 8)
-  let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
-  return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
-endfunction
-
 "Remove toolbar from GUI vim
 set winaltkeys=no
 set guioptions-=T
@@ -115,6 +103,7 @@ set autoindent
 set copyindent
 
 "VIM will show the corresponding opening and closing curly brace, bracket or parentesis.
+set showmatch
 set matchtime=1
 
 "Show incomplete command
@@ -126,12 +115,8 @@ set completeopt-=preview
 "Display the status bar at the bottom
 set ruler
 
-if !exists('neovim_dot_app')
-  "Faster drawing... apparently...
-  set lazyredraw
-
-  set showmatch
-endif
+"Faster drawing... apparently...
+set lazyredraw
 
 "Mostly for a better maximizer
 set winminwidth=0
@@ -186,20 +171,13 @@ set undodir=~/.vim/undodir//
 "Persistent undo file
 set undofile
 
-if !has('nvim')
-  "Fix delete key
-  fixdel
-endif
-
 "Syntax highlighting
 syntax on
 
 "File type detection and plugin loading
 filetype plugin indent on
 
-"Past toggle <F8>
-nnoremap <F8> :set invpaste paste?<CR>
-set pastetoggle=<F8>
+"Mode is shown in status bar
 set noshowmode
 
 "Scroll offset
@@ -682,22 +660,6 @@ let g:sandwich#recipes = [
 silent! nmap <unique><silent> sd <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
 silent! nmap <unique><silent> sr <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
 
-" Plug 'shanesmith/vim-surround'
-" nnoremap dsf :call <SID>SurroundingFunction('d')<CR>
-" nnoremap csf :call <SID>SurroundingFunction('c')<CR>
-" function! s:SurroundingFunction(op)
-"   normal! [(
-"   call search('\v%(%(\i|\.)@<!).', 'bW')
-"   normal! "_dt(
-"   if a:op ==? 'c'
-"     startinsert
-"   elseif a:op ==? 'd'
-"     exec "normal \<Plug>Dsurround("
-"   endif
-" endfunction
-"
-Plug 'tpope/vim-repeat'
-
 Plug 'tpope/vim-abolish'
 
 Plug 'tpope/vim-endwise'
@@ -724,9 +686,6 @@ endif
 Plug 'Konfekt/vim-alias'
 
 Plug 'meain/vim-package-info', { 'do': 'npm install' }
-
-" Plug 'kamykn/spelunker.vim'
-" set nospell
 
 Plug 'kassio/neoterm'
 let g:neoterm_default_mod = 'vertical'
@@ -917,7 +876,6 @@ Plug 'jiangmiao/auto-pairs'
 let g:AutoPairsShortcutToggle = ''
 let g:AutoPairsShortcutJump = ''
 
-
 Plug 'junegunn/vim-easy-align'
 vmap <Tab> <Plug>(LiveEasyAlign)
 
@@ -998,14 +956,6 @@ augroup EmmetMappings
   au FileType php,html,html.handlebars,css vmap <buffer> <C-Y> <plug>(emmet-expand-abbr)
   au FileType php,html,html.handlebars,css nmap <buffer> <C-Y> <plug>(emmet-expand-abbr)
 augroup END
-function! s:emmet_expand_glyph(name)
-  return "<span class='glyphicon ".a:name."'></span>"
-endfunction
-let g:user_emmet_settings = {
-      \   'custom_expands': {
-      \     '^glyphicon-\S\+$': function("<SID>emmet_expand_glyph")
-      \   },
-      \ }
 
 Plug 'sirver/ultisnips'
 let g:UltiSnipsEditSplit = "context"
@@ -1243,10 +1193,6 @@ function! s:search_hist(direction)
   echo s:search_hist_index @/
 endfunction
 
-"Next/Previous result
-nnoremap <F3> n
-nnoremap <S-F3> N
-
 "Tab switching
 nnoremap <expr> gr ':<C-U>' . (v:count ? v:count . 'tabnext' : 'tabprev') . '<CR>'
 nnoremap <expr> gt ':<C-U>' . (v:count ? v:count : '') . 'tabnext<CR>'
@@ -1313,17 +1259,6 @@ nnoremap gp `[v`]
 
 vnoremap gy ygv<ESC>
 
-"Smart indent pasting
-" nnoremap <silent> p :call <SID>smart_paste('p')<CR>
-" nnoremap <silent> P :call <SID>smart_paste('P')<CR>
-"
-" function! s:smart_paste(cmd)
-"   exec 'normal! "' . v:register . a:cmd
-"   if getregtype(v:register) ==# 'V'
-"     normal! =']
-"   endif
-" endfunction
-
 "Like it should be
 nmap Y y$
 
@@ -1337,12 +1272,6 @@ vnoremap <silent> W aW
 vnoremap gW W
 onoremap gW W
 onoremap <silent> <expr> W ':<C-U>normal! v' . v:count1 . 'aW<CR>'
-
-" vnoremap p :<C-U>normal! vip<CR>
-" omap p :normal vip<CR>
-
-" vnoremap P :<C-U>normal! vap<CR>
-" omap P :normal vap<CR>
 
 "Map U to redo
 nnoremap U :redo<CR>
@@ -1639,13 +1568,6 @@ onoremap L g_
 inoremap <C-a> <C-o>^
 inoremap <C-e> <C-o>$
 
-"Toggle relative line numbers
-nnoremap <leader>l :set relativenumber!<CR>
-
-"Don't need help right now, thanks
-inoremap <F1> <Nop>
-nnoremap <F1> <Nop>
-
 nnoremap ; :
 nnoremap : ;
 vnoremap ; :
@@ -1867,10 +1789,6 @@ nnoremap gF :vertical wincmd f<CR>
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
-"}}}
-
-" Commands {{{
-
 nnoremap <silent> <C-W>z :call <SID>GoToThing()<ESC>
 nnoremap <silent> <C-W>Z :call <SID>CloseThing()<ESC>
 
@@ -1924,13 +1842,9 @@ function! s:FindThing()
   return thing
 endfunction
 
-" Big W also writes
-command! W w
-command! Wq wq
-command! WQ wq
-command! Q q
-command! Qa qa
-command! QA qa
+"}}}
+
+" Commands {{{
 
 "Super ReTab
 command! -range=% -nargs=0 Tab2Space execute '<line1>,<line2>s#^\t\+#\=repeat(" ", len(submatch(0))*' . &ts . ')'
