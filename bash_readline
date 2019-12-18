@@ -155,3 +155,6 @@ if command -v fzf >/dev/null; then
   bind -x '"\C-fw": _fzf_word'
 fi
 
+source scripts/bashelp.sh
+export BASHELP_TERMINAL=tmux
+bind -x '"\C-xm": _bash_help'
