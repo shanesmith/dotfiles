@@ -84,7 +84,7 @@ _bash_help () {
         "$terminal" $manpgm "$cmd_pref"
         ;;
       tmux)
-        "$terminal" new-window $manpgm "$cmd_pref"
+        "$terminal" split-window -bv $manpgm "$cmd_pref"
         ;;
       *)
         # execute without job control noise
