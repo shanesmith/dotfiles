@@ -818,6 +818,7 @@ vmap ]; <Plug>VSneakNext
 nmap [; <Plug>SneakPrevious
 vmap [; <Plug>VSneakPrevious
 
+"TODO replace this and ConflictDetection with https://github.com/rhysd/conflict-marker.vim ?
 Plug 'vim-scripts/ConflictMotions'
 " avoid conflict with vim-textobj-xmlattr
 let g:ConflictMotions_ConflictMapping = 'X'
@@ -1517,6 +1518,8 @@ onoremap <silent> A) :normal! [(V%<CR>
 onoremap <silent> Ab :normal! [(V%<CR>
 onoremap <silent> A[ :call searchpair('\[', '', '\]', 'bW') \| normal! V%<CR>
 onoremap <silent> A] :call searchpair('\[', '', '\]', 'bW') \| normal! V%<CR>
+
+"TODO sandwich recipes?
 nnoremap <silent> dS{ :call <SID>delete_surrounding_lines("{}")<CR>
 nnoremap <silent> dS} :call <SID>delete_surrounding_lines("{}")<CR>
 nnoremap <silent> dS[ :call <SID>delete_surrounding_lines("[]")<CR>
@@ -1800,6 +1803,14 @@ function! s:GoToThing()
   endif
 endfunction
 
+" TODO include floating windows
+" fun! s:close_floats() abort
+"   for win in nvim_tabpage_list_wins(tabpagenr())
+"     if !empty(get(nvim_win_get_config(win), 'relative', ''))
+"       call nvim_win_close(win, v:true)
+"     endif
+"   endfor
+" endf
 function! s:FindThing()
   let qfnum = 0
   let helpnum = 0
