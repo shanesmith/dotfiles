@@ -463,7 +463,7 @@ endf
 
 " Plug 'fisadev/vim-ctrlp-cmdpalette'
 
-Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdtree'
 let g:NERDTreeHijackNetrw = 0
 let g:NERDTreeMapActivateNode = 'l'
 let g:NERDTreeMapCloseDir = 'h'
