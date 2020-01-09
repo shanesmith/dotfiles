@@ -2,22 +2,16 @@ snippet us "use strict" b
 "use strict"`!v GetSnippetPref("semicolon")`
 endsnippet
 
-snippet fn "function" w
-function(${1}) {
+snippet fn "arrow function" w
+(${1}) => {
 	${VISUAL}$0
 }
 endsnippet
 
-snippet fnn "named function" w
+snippet fnn "old school function" w
 function ${1:function_name}(${2:argument}) {
 	${VISUAL}$0
 }
-endsnippet
-
-snippet fnv "Function assigned to const"
-const ${1:function_name} = function(${2}) {
-	${VISUAL}$0
-}`!v GetSnippetPref("semicolon")`
 endsnippet
 
 snippet cl "console.log" w
@@ -38,10 +32,6 @@ endsnippet
 
 snippet ip "import" b
 import ${1} from `!v GetSnippetPref("quote")`${2}`!v GetSnippetPref("quote")``!v GetSnippetPref("semicolon")`
-endsnippet
-
-snippet () "arrow function" w
-() => $0
 endsnippet
 
 snippet iife "IIFE" b
