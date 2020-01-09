@@ -576,9 +576,10 @@ autocmd FileType typescript,typescript.tsx,typescriptreact let b:switch_definiti
       \   g:switch_builtins.javascript_es6_declarations,
       \ ]
 
-autocmd FileType javascript let b:switch_custom_definitions =
+autocmd FileType javascript,typescript,javascriptreact,typescriptreact let b:switch_custom_definitions =
       \ [
-      \   ['test.only(', 'test.skip(', 'test(']
+      \   ['test.only(', 'test.skip(', 'test('],
+      \   ['it.only(', 'it.todo(', 'it('],
       \ ]
 
 Plug 'lfilho/cosco.vim'
