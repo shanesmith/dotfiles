@@ -127,10 +127,6 @@ set noerrorbells
 set visualbell
 set t_vb=
 
-"Always display tab and status bar
-set laststatus=2
-set showtabline=2
-
 "Show cursorline
 set cursorline
 
@@ -208,14 +204,6 @@ endif
 
 "Paste from system clipboard
 set clipboard=unnamedplus
-
-if has("gui_gtk2")
-  set lines=999 columns=999
-endif
-
-if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
-endif
 
 "Set leader character
 let mapleader = "\<Space>"
