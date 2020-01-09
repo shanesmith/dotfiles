@@ -542,6 +542,8 @@ function! s:rest_tab()
         \ "# Content-Type: application/json",
         \ "# POST /foo/bar",
         \ "# {\"key\": \"value\"}",
+        \ "#",
+        \ "# Ctrl-R to run the query",
         \ ""
         \ ])
 endfunction
