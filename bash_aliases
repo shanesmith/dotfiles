@@ -493,11 +493,10 @@ icanhazip() {
 }
 
 man() {
-  local what="$(type -t "$1")"
-  if [[ "$what" == "builtin" ]]; then
+  if [[ $# -eq 1 && $(type -t "$1") == "builtin" ]]; then
     help "$1"
   else
-    /usr/bin/man "$1"
+    /usr/bin/man "$@"
   fi
 }
 
