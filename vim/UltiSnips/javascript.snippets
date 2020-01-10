@@ -47,56 +47,6 @@ snippet /** "JSDOC" b
 endsnippet
 
 ###
-### Angular
-###
-
-snippet befi "before each + inject" b
-beforeEach(inject(function($1) {
-	$0
-}))`!v GetSnippetPref("semicolon")`
-endsnippet
-
-snippet amod "angular module" i
-angular.module('$1')
-endsnippet
-
-snippet aconf "angular config" i
-.config(function($1) {
-	$0
-})`!v GetSnippetPref("semicolon")`
-endsnippet
-
-snippet acont "angular controller" i
-.controller('${1:name}', [${2}function(${2/('|")([A-Z_$]+)?\1?((, ?)$)?/$2(?3::$4)/ig}) {
-	$0
-}])`!v GetSnippetPref("semicolon")`
-endsnippet
-
-snippet adir "angular directive" i
-.directive('${1}', [${2}function(${2/('|")([A-Z_$]+)?\1?((, ?)$)?/$2(?3::$4)/ig}) {
-	return {
-		restrict: '${3:EA}',
-		link: function(scope, element, attrs) {
-			${0}
-		}
-	}`!v GetSnippetPref("semicolon")`
-}])`!v GetSnippetPref("semicolon")`
-endsnippet
-
-snippet afact "angular factory" i
-.factory('${1:name}', [${2}function(${2/('|")([A-Z_$]+)?\1?((, ?)$)?/$2(?3::$4)/ig}) {
-	$0
-}])`!v GetSnippetPref("semicolon")`
-endsnippet
-
-snippet aserv "angular service" i
-.service('${1:name}', [${2}function(${2/('|")([A-Z_$]+)?\1?((, ?)$)?/$2(?3::$4)/ig}) {
-	$0
-}])`!v GetSnippetPref("semicolon")`
-endsnippet
-
-
-###
 ### Unit Test
 ###
 
@@ -106,7 +56,7 @@ beforeEach(() => {
 })`!v GetSnippetPref("semicolon")`
 endsnippet
 
-snippet des "Describe (js)" b
+snippet desc "Describe (js)" b
 describe('${1:description}', () => {
 	$0
 })`!v GetSnippetPref("semicolon")`
@@ -132,35 +82,4 @@ endsnippet
 
 snippet ecw "expect to have been called with" b
 expect(${1:target}).toHaveBeenCalledWith(${2:arguments})`!v GetSnippetPref("semicolon")`
-endsnippet
-
-snippet thb "to.have.been" b
-to.have.been
-endsnippet
-
-
-###
-### Project
-###
-
-snippet int "Interceptor" b
-[actionTypes.${1:FOO}]: (dispatch, action, getState) => {
-	const state = getState()`!v GetSnippetPref("semicolon")`
-	$0
-},
-endsnippet
-
-snippet red "Reducer" b
-[actionTypes.${1:FOO}]: (state, action) => ({
-	...state,
-	$0
-}),
-endsnippet
-
-snippet act "Action" b
-[actionTypes.${1:FOO}]: ${0:undefined},
-endsnippet
-
-snippet dp "dispatch()" b
-dispatch( $0 )`!v GetSnippetPref("semicolon")`
 endsnippet
