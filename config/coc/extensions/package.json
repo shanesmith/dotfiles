@@ -11,6 +11,6 @@
     "coc-stylelintplus": ">=1.0.3",
     "coc-tsserver": ">=1.4.9",
     "coc-ultisnips": ">=1.2.3",
-    "coc-vimlsp": ">=0.4.3"
+    "coc-vimlsp": ">=0.4.4"
   }
 }
