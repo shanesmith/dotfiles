@@ -488,6 +488,11 @@ Plug 'francoiscabrol/ranger.vim'
 
 Plug 'rbgrouleff/bclose.vim'
 
+Plug 'tpope/vim-projectionist'
+nnoremap <leader>aa :A<CR>
+nnoremap <leader>av :AV<CR>
+nnoremap <leader>as :AS<CR>
+
 "}}}
 
 "" Utilities {{{
