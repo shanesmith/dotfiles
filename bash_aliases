@@ -468,6 +468,7 @@ port_holder() {
 rebash() {
   exec bash -l
 }
+alias rbb=rebash
 
 cask() {
   brew cask "$@"
