@@ -4,6 +4,7 @@
 
 DOTFILES="
   bashrc
+  bash_help
   bash_ps1
   bash_aliases
   bash_sshauth

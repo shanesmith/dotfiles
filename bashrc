@@ -104,6 +104,7 @@ sources=(
   "${HOME}/.bash_aliases"
   "${HOME}/.bash_ps1"
   "${HOME}/.bash_sshauth"
+  "${HOME}/.bash_help"
   "${HOME}/.bash_readline"
   "${HOME}/.bashrc.local"
   "${HOME}/.rvm/scripts/rvm"
