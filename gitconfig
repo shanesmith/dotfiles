@@ -181,3 +181,6 @@
 
 [gc]
   writeCommitGraph = true
+
+[fetch]
+  prune = true
