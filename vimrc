@@ -1101,15 +1101,6 @@ endif
 
 let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes) + g:sandwich#recipes
 
-" While we wait for https://github.com/tomtom/tcomment_vim/pull/256
-call tcomment#type#Define('javascriptreact',       tcomment#GetLineC('// %s'))
-call tcomment#type#Define('javascriptreact_block', g:tcomment#block_fmt_c   )
-call tcomment#type#Define('javascriptreact_inline', g:tcomment#inline_fmt_c )
-call tcomment#type#Define('typescriptreact',       tcomment#GetLineC('// %s'))
-call tcomment#type#Define('typescriptreact_block', g:tcomment#block_fmt_c   )
-call tcomment#type#Define('typescriptreact_inline', g:tcomment#inline_fmt_c )
-
-
 "}}}
 
 " Mappings {{{
