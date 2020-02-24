@@ -172,10 +172,6 @@
 
 [commit]
   cleanup = scissors
-
-[credential]
-  helper = osxkeychain
-
 [include]
   path = ~/.gitconfig.local
 
