@@ -140,7 +140,8 @@
 
 # Github
   pr = "!f() { git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
-  ppr = "!/usr/bin/env bash -c \"git push -u origin HEAD 2>&1 | tee >(cat 1>&2) | awk '/(github.com\\/.*\\/pull\\/new\\/|:\\/\\/bitbucket.*\\/compare\\/commits\\?)/ {print \\$2}' | xargs open\""
+  ppr = !git push -u origin HEAD && git newpr
+  newpr = !open "https://github.com/Shopify/web/compare/$(git name-rev --name-only HEAD^)...$(git branch-name HEAD)?expand=1"
 
 [color]
   ui = auto
