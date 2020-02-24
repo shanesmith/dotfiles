@@ -158,7 +158,7 @@
   conflictStyle = diff3
 
 [push]
-  default = tracking  # deprecated, update to "upstream" when removed
+  default = upstream
 
 [rebase]
   autosquash = true
