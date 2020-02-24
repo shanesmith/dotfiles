@@ -8,8 +8,20 @@ snippet fn "arrow function" w
 }
 endsnippet
 
+snippet afn "async arrow function" w
+async (${1}) => {
+	${VISUAL}$0
+}
+endsnippet
+
 snippet fnn "old school function" w
 function ${1:function_name}(${2:argument}) {
+	${VISUAL}$0
+}
+endsnippet
+
+snippet afnn "old school async function" w
+async function ${1:function_name}(${2:argument}) {
 	${VISUAL}$0
 }
 endsnippet
@@ -64,6 +76,12 @@ endsnippet
 
 snippet it "it (js)" b
 it('${1:description}', () => {
+	$0
+})`!v GetSnippetPref("semicolon")`
+endsnippet
+
+snippet ait "async it (js)" b
+it('${1:description}', async () => {
 	$0
 })`!v GetSnippetPref("semicolon")`
 endsnippet
