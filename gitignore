@@ -1,9 +1,15 @@
+# cruft
 .DS_Store
-.lvimrc
 *.sw[op]
 .netrwhist
 tags
+
+# logs
 httpython.log
 httphp.log
 npm-debug.log
+
+# local project config
+.lvimrc
 .rgignore
+.projections.json
