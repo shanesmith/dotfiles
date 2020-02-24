@@ -42,6 +42,7 @@
   puf = push --force-with-lease
   rom = rebase origin/master
   coo = checkout -
+  intend-to-add = add --intent-to-add
 
 # Log
   lol = "!f() {   local extra=\"\"; if git rev-parse -q --verify '@{u}' >/dev/null 2>&1; then extra=\"$extra @{u}\"; fi; git log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cd>%Creset %s' --color --graph --date=relative HEAD $extra $@; }; f"
