@@ -95,14 +95,12 @@ function! s:VimEnterNERDTreeHere()
 
   call g:NERDTreeHere("e")
 
-  if has("gui_running")
-    normal B
-  endif
+  call b:NERDTree.ui.toggleShowBookmarks()
 
 endfunction
 
 augroup VimEnterNERDTreeHere
   au!
   au StdinReadPre * let s:std_in=1
-  au VimEnter * call <SID>VimEnterNERDTreeHere() | normal B " TODO profile me!
+  au VimEnter * call <SID>VimEnterNERDTreeHere() " TODO profile me!
 augroup END
