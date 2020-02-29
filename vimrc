@@ -886,6 +886,7 @@ command! Format Autoformat
 Plug 'jiangmiao/auto-pairs'
 let g:AutoPairsShortcutToggle = ''
 let g:AutoPairsShortcutJump = ''
+let g:AutoPairsMultilineClose = 0
 
 Plug 'junegunn/vim-easy-align'
 vmap <Tab> <Plug>(LiveEasyAlign)
