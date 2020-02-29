@@ -493,6 +493,17 @@ nnoremap <leader>aa :A<CR>
 nnoremap <leader>av :AV<CR>
 nnoremap <leader>as :AS<CR>
 
+function! s:alternates() abort
+  let alternates = projectionist#query_file('alternate', {})
+  let source = []
+  for path in alternates
+    call add(source, fnamemodify(path, ':~:.'))
+  endfor
+  let options = { 'source': source }
+  call fzf#run(fzf#wrap('Alternates', options))
+endfunction
+comm! Alternates :call s:alternates()
+
 "}}}
 
 "" Utilities {{{
