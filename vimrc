@@ -529,6 +529,7 @@ let g:python3_host_prog = "/usr/local/bin/python3"
 Plug 'lambdalisue/gina.vim'
 
 Plug 'tpope/vim-fugitive'
+nnoremap <leader>g :G
 
 Plug 'tpope/vim-rhubarb'
 
