@@ -1867,6 +1867,8 @@ function! s:FindThing()
   return thing
 endfunction
 
+noremap! <C-R><C-R>% <C-R>=expand('%:t')<CR>
+
 "}}}
 
 " Commands {{{
