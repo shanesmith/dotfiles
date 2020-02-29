@@ -68,6 +68,12 @@ beforeEach(() => {
 })`!v GetSnippetPref("semicolon")`
 endsnippet
 
+snippet aft "after each" b
+afterEach(() => {
+	$0
+})`!v GetSnippetPref("semicolon")`
+endsnippet
+
 snippet desc "Describe (js)" b
 describe('${1:description}', () => {
 	$0
