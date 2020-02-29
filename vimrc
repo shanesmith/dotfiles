@@ -708,6 +708,8 @@ Plug 'shanesmith/hackertyper.vim'
 
 Plug 'uguu-org/vim-matrix-screensaver'
 
+Plug 'mattn/vim-starwars'
+
 "}}}
 
 "" Display {{{
@@ -909,6 +911,8 @@ let g:vim_markdown_conceal = 0
 let g:vim_markdown_conceal_code_blocks = 0
 let g:javascript_plugin_jsdoc = 1
 
+Plug 'gisphm/vim-gitignore'
+
 Plug 'heavenshell/vim-jsdoc'
 let g:jsdoc_enable_es6 = 1
 let g:jsdoc_param_description_separator = '-'
@@ -1070,6 +1074,7 @@ let g:choosewin_overlay_enable = 1
 let g:choosewin_overlay_shade = 1
 map <c-w>- <Plug>(choosewin)
 
+Plug 'AndrewRadev/undoquit.vim'
 
 "}}}
 
