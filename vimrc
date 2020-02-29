@@ -359,7 +359,7 @@ let g:fzf_layout = {
       \ }
 
 fun! FloatingFZF()
-  let width = float2nr(&columns * 0.5)
+  let width = float2nr(&columns * 0.8)
   let height = float2nr(&lines * 0.4)
   let opts = {
         \     'relative': 'editor',
