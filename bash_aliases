@@ -100,6 +100,7 @@ swapbak() {
   mv "$tmp"  "$dest" || return 1
 }
 
+alias cd="pushd >/dev/null"
 alias h="cd ~"
 alias ..="cd .."
 alias ...="cd ../.."
@@ -132,14 +133,6 @@ up() {
 }
 mkcd() {
   mkdir -p "$1" && cd "$1"
-}
-cd() {
-  pushd "$@" > /dev/null
-  # if echo "$1" | egrep -q "^-+$"; then
-  #   g ${#1}
-  # else
-  #   pushd "$1" > /dev/null
-  # fi
 }
 d() {
   local num=10
