@@ -1537,12 +1537,12 @@ onoremap <silent> A[ :call searchpair('\[', '', '\]', 'bW') \| normal! V%<CR>
 onoremap <silent> A] :call searchpair('\[', '', '\]', 'bW') \| normal! V%<CR>
 
 "TODO sandwich recipes?
-nnoremap <silent> dS{ :call <SID>delete_surrounding_lines("{}")<CR>
-nnoremap <silent> dS} :call <SID>delete_surrounding_lines("{}")<CR>
-nnoremap <silent> dS[ :call <SID>delete_surrounding_lines("[]")<CR>
-nnoremap <silent> dS] :call <SID>delete_surrounding_lines("[]")<CR>
-nnoremap <silent> dS( :call <SID>delete_surrounding_lines("()")<CR>
-nnoremap <silent> dS) :call <SID>delete_surrounding_lines("()")<CR>
+nnoremap <silent> sD{ :call <SID>delete_surrounding_lines("{}")<CR>
+nnoremap <silent> sD} :call <SID>delete_surrounding_lines("{}")<CR>
+nnoremap <silent> sD[ :call <SID>delete_surrounding_lines("[]")<CR>
+nnoremap <silent> sD] :call <SID>delete_surrounding_lines("[]")<CR>
+nnoremap <silent> sD( :call <SID>delete_surrounding_lines("()")<CR>
+nnoremap <silent> sD) :call <SID>delete_surrounding_lines("()")<CR>
 
 function! s:delete_surrounding_lines(pair)
   let syng_strcom = 'string\|regex\|comment\c'
