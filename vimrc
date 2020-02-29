@@ -1832,6 +1832,7 @@ function! s:FindThing()
   let helpnum = 0
   let ctrlsfnum = 0
   let previewnum = 0
+  let fugitive = 0
 
   for winnum in range(1, winnr('$'))
     let ft = getwinvar(winnum, "&filetype")
@@ -1841,6 +1842,8 @@ function! s:FindThing()
       let ctrlsfnum = winnum
     elseif ft == "help"
       let helpnum = winnum
+    elseif ft == "fugitive"
+      let fugitive = winnum
     elseif getwinvar(winnum, "&previewwindow")
       let previewnum = winnum
     endif
@@ -1852,6 +1855,8 @@ function! s:FindThing()
     let thing = previewnum
   elseif helpnum != 0
     let thing = helpnum
+  elseif fugitive != 0
+    let thing = fugitive
   elseif qfnum != 0
     let thing = qfnum
   elseif ctrlsfnum != 0
