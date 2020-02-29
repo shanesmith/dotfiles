@@ -1879,7 +1879,7 @@ command! -range=% -nargs=0 Space2Tab execute '<line1>,<line2>s#^\( \{'.&ts.'\}\)
 command! ReloadVimrc source $MYVIMRC
 
 "ONLY
-command! ONLY only | tabonly
+command! ONLY silent only | silent tabonly
 
 command! SyntaxGroup call <SID>SyntaxGroup()
 function! s:SyntaxGroup()
