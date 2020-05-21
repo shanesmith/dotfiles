@@ -2007,6 +2007,12 @@ augroup checktime
   autocmd FocusGained,CursorHold * if getcmdwintype() == '' | checktime | endif
 augroup END
 
+augroup syntax_sync
+  autocmd!
+  " large files sometimes loose syntax colouring
+  autocmd WinEnter * syntax sync fromstart
+augroup END
+
 "}}}
 
 " vim: set fdm=marker fdl=999:
