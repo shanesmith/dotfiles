@@ -264,7 +264,7 @@ call s:Hi( 'ErrorMsg',      s:scarletred2,  s:aluminium1 )
 call s:Hi( 'VertSplit',     s:aluminium4,   s:aluminium6,   "bold" )
 call s:Hi( 'Folded',        s:aluminium6,   s:aluminium3,   "bold" )
 call s:Hi( 'FoldColumn',    s:aluminium3,   s:aluminium5 )
-call s:Hi( 'SignColumn',    s:aluminium3,   s:aluminium5 )
+call s:Hi( 'SignColumn',    s:aluminium6,   s:aluminium4 )
 call s:Hi( 'LineNr',        s:aluminium6,   s:aluminium4 )
 call s:Hi( 'MatchParen',    s:plum1,        s:aluminium1 )
 call s:Hi( 'MoreMsg',       s:aluminium6,   s:chameleon1,   "bold" )
@@ -388,10 +388,6 @@ highlight conflictOursMarker   term=bold ctermfg=16 gui=bold guifg=#AAAAAA guibg
 highlight conflictBaseMarker   term=bold ctermfg=16 gui=bold guifg=#AAAAAA guibg=#000000 cterm=bold ctermbg=102
 highlight conflictTheirsMarker term=bold ctermfg=16 gui=bold guifg=#AAAAAA guibg=#000000 cterm=bold ctermbg=102
 highlight conflictSeparatorMarkerSymbol term=bold ctermfg=16 gui=bold guifg=#AAAAAA guibg=#000000 cterm=bold ctermbg=102
-
-highlight GitGutterAddDefault    cterm=bold ctermbg=237  ctermfg=119
-highlight GitGutterDeleteDefault cterm=bold ctermbg=237  ctermfg=167
-highlight GitGutterChangeDefault cterm=bold ctermbg=237  ctermfg=227
 
 hi ExtraWhitespace ctermbg=124 guibg=#af0000
 
