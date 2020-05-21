@@ -828,8 +828,6 @@ Plug 'Yggdroot/indentLine'
 
 "" Motions {{{
 
-Plug 'rhysd/clever-f.vim'
-
 Plug 'justinmk/vim-sneak'
 let g:sneak#use_ic_scs = 1
 let g:sneak#streak = 1
