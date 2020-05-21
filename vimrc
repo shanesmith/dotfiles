@@ -1939,7 +1939,7 @@ function! s:NewBash()
   Chmod +x
 endfunction
 
-command! Conflicted args `git status --porcelain \| awk '/^(UU\|AA)/ { print $2 }'`
+command! DealWithIt args `git status --porcelain=v2 \| awk '/^(UU\|AA)/ { print $2 }'`
 
 command! VimrcEdit tabe ~/.vimrc
 
