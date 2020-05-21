@@ -698,6 +698,8 @@ Plug 'meain/vim-package-info', { 'do': 'npm install' }
 Plug 'kassio/neoterm'
 let g:neoterm_default_mod = 'vertical'
 
+Plug 'Shopify/shadowenv.vim'
+
 "}}}
 
 "" LOLz {{{
