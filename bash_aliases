@@ -484,6 +484,9 @@ man() {
   fi
 }
 
+alias devdev='dev cd dev && dev use dev --backend && cd -'
+alias undevdev='dev use system --backend'
+
 __ansi_color() {
   local code
 
