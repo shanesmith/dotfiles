@@ -124,6 +124,15 @@ __smiley() {
   fi
 }
 
+__dev_dev() {
+  if [[ $__dev_source_dir == "/opt/dev" ]]; then
+    return
+  fi
+
+  echo -n " "
+  __colorize U_ "🔧"
+}
+
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
   debian_chroot=$(cat /etc/debian_chroot)
@@ -153,6 +162,7 @@ ${CWD}\
 \$(__vagrant_status)\
 \$(__docker_compose_status)\
 \$(__git_ps1 ' (%s)')\
+\$(__dev_dev)\
 \n\
 ${HISTORY_NUMBER}\
  \
