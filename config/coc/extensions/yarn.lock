@@ -541,10 +541,10 @@ clone-regexp@^2.1.0:
   dependencies:
     is-regexp "^2.0.0"
 
-coc-css@>=1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/coc-css/-/coc-css-1.2.2.tgz#9b62ac96a9db8c687396ab4648c0c67dc3897a2f"
-  integrity sha512-JvZnKZZJZemS70o972OEjfnMGGO2sLpJA3iX1OT3CXmaymPb8CmufboyCVnzGMDMbFL/qHgfjbdw9kOg5ZtzzQ==
+coc-css@>=1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/coc-css/-/coc-css-1.2.3.tgz#4e115bd64c09f2e4d36418693a5155408f22de07"
+  integrity sha512-6/JhWv31agvUvcUVKewpJ0z+A8ZMrRXPNNy+YohNausiw7nqKnBSnLIO0II0hXgjdAryoSGnBC/NjH7Q5P0IDw==
 
 coc-cssmodules@>=1.0.0:
   version "1.0.0"
@@ -575,20 +575,20 @@ coc-jest@>=1.0.3:
   resolved "https://registry.yarnpkg.com/coc-jest/-/coc-jest-1.0.3.tgz#d002f31a5f0abe0ba1599cab352811fc78644daa"
   integrity sha512-ZxgOP00URYcmIUnl1yjxonxbwb4QHEk2JJxxcYyCHo2wJPCVQWB+WYVYzHb0pzrZdDcsj5hk6wXWnLXM5EkRjA==
 
-coc-json@>=1.2.5:
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/coc-json/-/coc-json-1.2.5.tgz#c49b38991d52edb8d792a6e47b219a4d69119df2"
-  integrity sha512-j8EAdxXxKxc5zHwCzdGAcnXzDXjtfbL6fNb9QIlBi2CkMIoARFyU4uZsIkMoROTMPaffHDFyzyAW2UJpbIJ0WQ==
+coc-json@>=1.2.6:
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/coc-json/-/coc-json-1.2.6.tgz#58d3f3763757e2239241b29d3e641fb9e8e65e8f"
+  integrity sha512-PAytSZ30TWoEHOfi2V3Y944u5q1WHNVhjsKyNnggm8CcgYAulWJiCzxSsmKBLw+DbRLqygGUdO3cOIbQeJCm5A==
 
 coc-marketplace@>=1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/coc-marketplace/-/coc-marketplace-1.7.0.tgz#0578fd305e113aacb056a109e961fb3082b413f3"
   integrity sha512-HH18Tt3Q5l56j3m5b5ed1DwCoHO//WB0sSvZgSNqY+l9wr0+02hOcOJ2Y23pL4SVACV5LDqTSGK/jvzxJz/ioQ==
 
-coc-python@>=1.2.9:
-  version "1.2.9"
-  resolved "https://registry.yarnpkg.com/coc-python/-/coc-python-1.2.9.tgz#c115e36230be5f7dd96dcb8cab95507b8eb0c20d"
-  integrity sha512-ouwZI3MZnCsO/sa5O1rQYzBgPjZ8h3OkJbBYm3DzaX+x49Gp3ARHpvSF4BMphOE16HUD/bHt+RnE+HSSweGFlg==
+coc-python@>=1.2.12:
+  version "1.2.12"
+  resolved "https://registry.yarnpkg.com/coc-python/-/coc-python-1.2.12.tgz#648956db93681876dbe89fd1af6352a5f327dbce"
+  integrity sha512-cwZ/uIJT5id6zwBE6RWC/HcGy7uw2hLjC0OyvcjFzidazH73e3fQBBoEMJNtLKgPuAJfNjo4BPu+cDsCSAkCAw==
 
 coc-solargraph@>=1.1.6:
   version "1.1.6"
@@ -603,10 +603,10 @@ coc-stylelintplus@>=1.0.4:
     coc.nvim "~0.0.74"
     stylelint-lsp "~1.0.5"
 
-coc-tsserver@>=1.4.13:
-  version "1.4.13"
-  resolved "https://registry.yarnpkg.com/coc-tsserver/-/coc-tsserver-1.4.13.tgz#2972db2a73f4ca2285bbc7ef4aa42a4323503ca5"
-  integrity sha512-/aaZO76VB3kYjJq7YQO97MFSE3GSEMETZtyTGKaIKcCtvzN9Bsq1PVUg3aARoDnUL+gnO+5CTy4cBUBv7LGgdQ==
+coc-tsserver@>=1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/coc-tsserver/-/coc-tsserver-1.5.1.tgz#a22e040c455fc4b57c01baef8e66253f36631be0"
+  integrity sha512-33mkWOHgvB7hS/mfhCt4PfHAepnLQaTMvvsCWN3daks7yYnOdeMFplD5UORRRvvcJoOEdQBtXXu960I/Xe4MCg==
   dependencies:
     typescript "3.8.3"
 
@@ -615,10 +615,10 @@ coc-ultisnips@>=1.2.3:
   resolved "https://registry.yarnpkg.com/coc-ultisnips/-/coc-ultisnips-1.2.3.tgz#07dfc47a581111239867f7e27daf8d974f287ad6"
   integrity sha512-gefj80C24vZ9FTnFLWXhNC8aW9VBVQGELH0e80gAAZma/RY5FGOkzWVvtjO9vQqAVHt4TQUErybsf/en5ci82w==
 
-coc-vimlsp@>=0.5.1:
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/coc-vimlsp/-/coc-vimlsp-0.5.1.tgz#826529270b6586f16746f4fc18d03bb912bda53c"
-  integrity sha512-g3HY01Cw5FuOfIkxhbq45FtYFtd+/HPZ+8gBf9Upf4aif0QbMA0VYhFz0edOxcmOG9ijZWTPbddASX0RWuWVWg==
+coc-vimlsp@>=0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/coc-vimlsp/-/coc-vimlsp-0.8.0.tgz#cffa73b272f94323cad874f237f4f8691550c3be"
+  integrity sha512-ty/AMtQyWFzlZ5a5FCmbQSmmI+StPWPgslYZjdzuD1t7uO2AMY4EzycUfFQlDew0SRGeiHbprCLu8ebvY7bvMw==
 
 coc.nvim@~0.0.74:
   version "0.0.77"
@@ -1772,9 +1772,9 @@ minizlib@^1.2.1:
     minipass "^2.9.0"
 
 mixin-deep@^1.2.0:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/mixin-deep/-/mixin-deep-1.3.1.tgz#a49e7268dce1a0d9698e45326c5626df3543d0fe"
-  integrity sha512-8ZItLHeEgaqEvd5lYBXfm4EZSFCX29Jb9K+lAHhDKzReKBQKj3R+7NOF6tjqYi9t4oI8VUfaWITJQm86wnXGNQ==
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/mixin-deep/-/mixin-deep-1.3.2.tgz#1120b43dc359a785dce65b55b82e257ccf479566"
+  integrity sha512-WRoDn//mXBiJ1H40rqa3vH0toePwSsGb45iInWlTySa+Uu4k3tYUSxa2v1KqAiLtvlrSzaExqS1gtk96A9zvEA==
   dependencies:
     for-in "^1.0.2"
     is-extendable "^1.0.1"
