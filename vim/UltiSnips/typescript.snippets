@@ -3,3 +3,15 @@ extends javascript
 snippet react "import react" b
 import React from 'react';
 endsnippet
+
+snippet pvf "private function" b
+private ${1:functionName}(${2}): ${3:void} {
+	${VISUAL}$0
+}
+endsnippet
+
+snippet pbf "private function" b
+public ${1:functionName}(${2}): ${3:void} {
+	${VISUAL}$0
+}
+endsnippet
