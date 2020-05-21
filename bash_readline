@@ -53,11 +53,13 @@ _fzf_git_status_preview() {
   if [[ -d $path ]]; then
     tree -C "$path"
   else
+    if [[ $flags = "??" ]]; then
+      bat --color=always -pp "$path"
     # TODO and if it's both? (eg: "MM")
-    if [[ $flags = "M " || $flags = "A " ]]; then
-      git diff --color --staged "$path"
+    elif [[ $flags = "M " || $flags = "A " ]]; then
+      git diff --color --staged -- "$path"
     else
-      git diff --color "$path"
+      git diff --color -- "$path"
     fi
   fi
 }
