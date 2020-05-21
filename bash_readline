@@ -146,13 +146,7 @@ _fzf_word() {
 
 if command -v fzf >/dev/null; then
   bind -x '"\C-r": _fzf_history'
-  bind -x '"\C-ff": _fzf_files'
-  bind -x '"\C-f\C-f": _fzf_word'
-  bind -x '"\C-fg": _fzf_git_lol'
-  bind -x '"\C-fc": _fzf_cd'
-  bind -x '"\C-fp": _fzf_gerrit_patch'
-  bind -x '"\C-fs": _fzf_git_status'
-  bind -x '"\C-fw": _fzf_word'
+  bind -x '"\C-f": _fzf_word'
 fi
 
 export BASHELP_TERMINAL=tmux
