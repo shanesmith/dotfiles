@@ -73,6 +73,12 @@ if ! shopt -oq posix; then
 
   export DOCKER_COMPLETION_SHOW_IMAGE_IDS="non-intermediate"
 
+  if [ -e /nix ]; then
+    # needs to be before sourcing bash_completion since tig uses __git_complete
+    . /nix/var/nix/gcroots/dev-profiles/user-extra-profile/share/git/contrib/completion/git-completion.bash
+    . /nix/var/nix/gcroots/dev-profiles/user-extra-profile/share/git/contrib/completion/git-prompt.sh
+  fi
+
   if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
   elif [ -f /etc/bash_completion ]; then
@@ -101,6 +107,8 @@ if ! shopt -oq posix; then
 fi
 
 sources=(
+  "/opt/dev/dev.sh"
+  "${HOME}/.nix-profile/etc/profile.d/nix.sh"
   "${HOME}/.bash_aliases"
   "${HOME}/.bash_ps1"
   "${HOME}/.bash_sshauth"
