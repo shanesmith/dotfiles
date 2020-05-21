@@ -1947,6 +1947,10 @@ command! FixClipboard set clipboard=unnamed,unnamedplus
 
 command! -nargs=1 NewPlug call append(line('.'), "Plug '" . <args> . "'") | exe "Plug '" . <args> . "'" | PlugInstall
 
+command! CopyFilePathToClipboard let @+ = expand("%")
+command! CopyFileAbsoluePathToClipboard let @+ = expand("%:p")
+command! CopyFileNameToClipboard let @+ = expand("%:t")
+
 "}}}
 
 " AutoCommands {{{
