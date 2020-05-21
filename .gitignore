@@ -6,3 +6,5 @@ vim/autoload/plug.vim.old
 tmux/plugins/*
 !tmux/plugins/tpm
 tmux/resurrect/*
+
+config/karabiner/automatic_backups/*
