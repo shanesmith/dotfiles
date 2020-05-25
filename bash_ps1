@@ -125,7 +125,7 @@ __smiley() {
 }
 
 __dev_dev() {
-  if [[ $__dev_source_dir == "/opt/dev" ]]; then
+  if [[ $__dev_source_dir == "/opt/dev" || -z $__dev_source_dir ]]; then
     return
   fi
 
