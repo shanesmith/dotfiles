@@ -237,11 +237,6 @@ let g:ctrlsf_mapping = {
       \ "next": "n",
       \ "prev": "N"
       \ }
-if executable('rg')
-  let g:ctrlsf_ackprg  = 'rg'
-elseif executable('ag')
-  let g:ctrlsf_ackprg  = 'ag'
-endif
 nmap <leader>c <Plug>CtrlSFPrompt
 nnoremap <expr> <leader>C ':CtrlSF ' . ctrlsf#opt#GetOpt("pattern")
 vmap <leader>c <Plug>CtrlSFVwordPath
