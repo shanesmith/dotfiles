@@ -1,4 +1,3 @@
-
 " Settings {{{
 
 " Let's make sure that all the annoying bugs in VI are not displayed in VIM.
@@ -203,7 +202,10 @@ if has('nvim')
 endif
 
 "Paste from system clipboard
-set clipboard=unnamedplus
+set clipboard=unnamed,unnamedplus
+
+"Auto read file changes
+set autoread
 
 "Set leader character
 let mapleader = "\<Space>"
