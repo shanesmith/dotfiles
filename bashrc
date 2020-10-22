@@ -1,5 +1,24 @@
 #!/bin/bash
 
+# https://mdjnewman.me/2017/10/debugging-slow-bash-startup-files/
+# exec 5> >(ts -i "%.s" >> /tmp/timestamps)
+#
+# # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
+# export BASH_XTRACEFD="5"
+#
+# # Enable tracing
+# set -x
+
+start=$(gdate +%s%3N)
+mark=$start
+stamp() {
+  return
+  local now=$(gdate +%s%3N)
+  local elapsed=$(( $now - $mark ))
+  echo $elapsed $1
+  mark=$now
+}
+
 export NODE_PATH=$NODE_PATH:$HOME/.node/lib/node_modules
 
 export PATH=$PATH:$HOME/.node/bin:$HOME/bin.local:$HOME/bin
@@ -132,6 +151,8 @@ if [[ -n $SUITUP ]]; then
   tmux setenv -gu SUITUP
   suitup
 fi
+
+echo "startup: " $(( $(gdate +%s%3N) - $start ))
 
 # start with a happy :)
 true
