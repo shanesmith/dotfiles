@@ -11,7 +11,7 @@
   stuart = status
   shoe = show
   br = branch
-  co = checkout
+  co = "!f() { git checkout ${@:--}; }; f" # default to `checkout -`
   pop = stash pop
   unstage = reset HEAD --
   df = diff
@@ -92,7 +92,7 @@
   bracoa = "!f() { git checkout -b \"$1\" && git commit -a -m \"${2:-wip}\" && git checkout -; }; f"
   bracop = "!f() { git checkout -b \"$1\" && git add -p && git commit -m \"${2:-wip}\" && git checkout -; }; f"
   bb = "!f() { git checkout $(git show-ref --verify --quiet refs/heads/\"$1\" || echo '-b') \"$1\" $2; }; f"
-  newb = "!f(){ upbranch=${2:-$(git rev-parse --symbolic-full-name --abbrev-ref '@{u}')}; git checkout -b \"$1\"; git branch -u \"$upbranch\"; }; f"
+  BB = "!f() { git checkout $(git show-ref --verify --quiet refs/heads/\"$1\" || echo '-B') \"$1\" $2; }; f"
   #TODO replace with https://github.com/paulirish/git-recent/blob/master/git-recent? 
   hs = "!f(){ git log -g --oneline -n${1:-100} | awk '/checkout:/ { if (system(\"git show-ref --quiet --verify refs/heads/\"$NF) == 0) print substr($2, 7)\" \"$NF }' | sort -k2 -u | sort -k1 -n | tail +2 | cut -d' ' -f2; }; f"
   pup = "!f(){ [ $# -eq 1 ] && git checkout $1 && git pull && git co -; }; f"
@@ -113,6 +113,8 @@
   branches-with-gone-upstream = "!git for-each-ref  --format='%(refname:short) %(upstream:short)' refs/heads | awk '$2 { print $1 }' | while read branch; do if ! git rev-parse --verify -q \"${branch}@{u}\" >/dev/null; then echo $branch; fi; done"
   sweep-branches-with-gone-upstream = "!git branches-with-gone-upstream | xargs -p git branch -D"
   bdiff = "!f() { git diff $(git merge-base HEAD ${1:-master}); }; f"
+  branch-name = symbolic-ref --quiet --short
+  cup = "!f() { git checkout -B $1 \"${1}@{u}\"; }; f"
 
 # Commit
   cc = "!f() { if [ -n \"$1\" ]; then git commit -m \"$1\"; else git commit; fi; }; f"
@@ -120,6 +122,8 @@
   cca = "!f() { if ! git is-staging-clean; then echo 'Stage is not clean!'; exit 1; fi; if [ -n \"$1\" ]; then git commit -a -m \"$1\"; else git commit -a; fi; }; f"
 
 # Stash
+  #TODO doesn't work...?
+  #stash-staged = !git stash --keep-index && git stash && git stash apply stash@{1} && (git stash show -p | git apply -R) && git stash drop stash@{1}
   force-stash-apply = "!f() { git stash show -p ${1} | git apply; }; f"
   mash = "!f() { git stash && git merge $1 && git stash pop; }; f"
   rash = "!f() { git stash && git rebase $1 && git stash pop; }; f"
