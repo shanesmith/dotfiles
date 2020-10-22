@@ -2131,6 +2131,22 @@ command! CopyFilePathToClipboard let @+ = expand("%")
 command! CopyFileAbsoluePathToClipboard let @+ = expand("%:p")
 command! CopyFileNameToClipboard let @+ = expand("%:t")
 
+" TODO steal completion from https://github.com/Shopify/vim-devilish/blob/master/plugin/devilish.vim#L57
+command! -nargs=1 P call <SID>Proj(<f-args>)
+command! -nargs=1 TP tabnew | call <SID>Proj(<f-args>)
+function! s:Proj(dir)
+  let save_cdpath = &cdpath
+
+  set cdpath=~/Code/,~/src/github.com/Shopify/
+
+  exe 'cd' a:dir
+
+  call g:NERDTreeHere("e")
+  call nerdtree#ui_glue#chRootCwd()
+
+  let &cdpath = save_cdpath
+endfunction
+
 "}}}
 
 " AutoCommands {{{
