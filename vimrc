@@ -1318,6 +1318,8 @@ nnoremap <expr> gr ':<C-U>' . (v:count ? v:count . 'tabnext' : 'tabprev') . '<CR
 nnoremap <expr> gt ':<C-U>' . (v:count ? v:count : '') . 'tabnext<CR>'
 nnoremap gR :tabfirst<CR>
 nnoremap gT :tablast<CR>
+nmap <C-q> gr
+nmap <C-e> gt
 
 "Stop accidentaly recording
 function! s:MacroMap()
