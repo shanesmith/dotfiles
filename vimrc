@@ -578,8 +578,6 @@ command! GResolve Gwrite | Git mergetool
 
 Plug 'tpope/vim-rhubarb'
 
-Plug 'frioux/vim-lost'
-
 Plug 'vim-utils/vim-husk'
 cnoremap <expr> <M-Left> husk#left()
 cnoremap <expr> <M-Right> husk#right()
