@@ -3,7 +3,7 @@
 export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWSTASHSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
-export GIT_PS1_SHOWUPSTREAM=true
+export GIT_PS1_SHOWUPSTREAM="name"
 export GIT_PS1_DESCRIBE_STYLE=branch
 
 save_function() {
@@ -19,13 +19,21 @@ fi
 __git_ps1_show_upstream() { 
   __orig_git_ps1_show_upstream
 
+  local branch="$(git rev-parse --symbolic-full-name --abbrev-ref @)"
   local upstream="$(git rev-parse --symbolic-full-name --abbrev-ref '@{upstream}' 2>/dev/null)"
 
+  local remote="$(sed 's#/.*##' <<<"$upstream")"
+  local remote_branch="$(sed 's#[^/]*/##' <<<"$upstream")"
+
   if [[ -n $upstream ]]; then
-    b="$b $p$upstream"
+    if [[ $branch == $remote_branch ]]; then
+      p="$p${remote}"
+    else
+      p="$p${upstream}"
+    fi
+    b="$b $p"
     p=""
   fi
-
 }
 
 __vagrant_status() {
