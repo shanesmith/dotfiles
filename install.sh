@@ -32,7 +32,7 @@ DOTFILES="
   config/gh/config.yml
 "
 
-LINUX_DOTFILES="Xmodmap imwheelrc"
+LINUX_DOTFILES="Xmodmap"
 
 is_linux=
 is_mac=
