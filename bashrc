@@ -144,6 +144,10 @@ sources=(
   "${HOME}/Code/bash-sneak/sneak.bash"
 )
 
+if [[ -n $brew_prefix ]]; then
+  sources+=("${brew_prefix}/etc/profile.d/z.sh")
+fi
+
 for file in "${sources[@]}"; do
   if [ -f "$file" ]; then
     . "$file"
