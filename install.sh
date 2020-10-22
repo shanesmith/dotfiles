@@ -28,6 +28,7 @@ DOTFILES="
   config/nvim
   config/coc/extensions/package.json
   config/coc/extensions/yarn.lock
+  config/gh/config.yml
 "
 
 LINUX_DOTFILES="Xmodmap imwheelrc"
