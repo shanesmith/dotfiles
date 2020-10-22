@@ -219,6 +219,8 @@ call plug#begin('~/.vim/bundle')
 
 "" File Navigation and Search {{{
 
+Plug 'kkoomen/gfi.vim'
+
 Plug 'Xuyuanp/nerdtree-git-plugin'
 let g:NERDTreeGitStatusShowIgnored = 0
 
@@ -462,6 +464,35 @@ endf
 
 " Plug 'fisadev/vim-ctrlp-cmdpalette'
 
+Plug 'lambdalisue/fern.vim'
+Plug 'lambdalisue/fern-git-status.vim'
+let g:fern#renderer#default#leaf_symbol = "  "
+let g:fern#renderer#default#collapsed_symbol = "▸ "
+let g:fern#renderer#default#expanded_symbol = "▾ "
+let g:fern#disable_default_mappings = 1
+highlight link FernGitStained  Special
+highlight link FernGitModified Special
+highlight link FernGitUnmerged Special
+highlight link FernGitStaged   Type
+highlight link FernGitCleaned  Type
+
+function! s:init_fern() abort
+  nmap <buffer> <C-c> <Plug>(fern-action-cancel)
+  nmap <buffer> h <Plug>(fern-action-collapse)
+  nmap <buffer> l <Plug>(fern-action-open-or-expand)
+  nmap <buffer> I <Plug>(fern-action-hidden-toggle)
+  nmap <buffer> u <Plug>(fern-action-leave)
+  nmap <buffer> r <Plug>(fern-action-reload)
+  nmap <buffer> s <Plug>(fern-action-open:split)
+  nmap <buffer> v <Plug>(fern-action-open:vsplit)
+  nmap <buffer> t <Plug>(fern-action-open:tabedit)
+endfunction
+
+augroup my-fern
+  autocmd! *
+  autocmd FileType fern call s:init_fern()
+augroup END
+
 Plug 'preservim/nerdtree'
 let g:NERDTreeHijackNetrw = 0
 let g:NERDTreeMapActivateNode = 'l'
@@ -484,6 +515,7 @@ Plug 'henrik/vim-qargs'
 Plug 'chrisbra/Recover.vim'
 
 Plug 'francoiscabrol/ranger.vim'
+nnoremap <C-f> :Ranger<CR>
 
 Plug 'rbgrouleff/bclose.vim'
 
@@ -506,6 +538,18 @@ comm! Alternates :call s:alternates()
 "}}}
 
 "" Utilities {{{
+
+Plug 'axvr/zepl.vim'
+augroup zepl
+  autocmd!
+  autocmd FileType python     let b:repl_config = { 'cmd': 'python3' }
+  autocmd FileType javascript let b:repl_config = { 'cmd': 'node' }
+  autocmd FileType clojure    let b:repl_config = { 'cmd': 'clj' }
+  autocmd FileType scheme     let b:repl_config = { 'cmd': 'rlwrap csi' }
+  autocmd FileType lisp       let b:repl_config = { 'cmd': 'sbcl' }
+  autocmd FileType julia      let b:repl_config = { 'cmd': 'julia' }
+  autocmd FileType ruby       let b:repl_config = { 'cmd': 'pry' }
+augroup END
 
 Plug 'metakirby5/codi.vim'
 let g:codi#rightalign = 0
@@ -721,6 +765,14 @@ Plug 'mattn/vim-starwars'
 "}}}
 
 "" Display {{{
+
+Plug 'arcticicestudio/nord-vim'
+
+Plug 'dracula/vim', { 'as': 'dracula' }
+
+Plug 'gf3/molotov'
+
+Plug 'jeffkreeftmeijer/vim-dim'
 
 Plug 'vim-scripts/molokai'
 
@@ -1054,6 +1106,8 @@ Plug 'kana/vim-textobj-function'
 Plug 'thinca/vim-textobj-function-javascript'
 
 Plug 'vimtaku/vim-textobj-keyvalue'
+
+Plug 'nelstrom/vim-textobj-rubyblock'
 
 "}}}
 
