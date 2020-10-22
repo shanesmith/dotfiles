@@ -1371,6 +1371,7 @@ nnoremap q/ q/
 nnoremap q? q?
 call <SID>MacroMap()
 
+nnoremap @@ @q
 vnoremap @@ :normal! @@<CR>
 " TODO complete this...
 " vnoremap @x
