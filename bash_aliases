@@ -459,6 +459,11 @@ port_holder() {
 }
 
 rebash() {
+  if [[ $__dev_source_dir != "/opt/dev" && -n $__dev_source_dir ]]; then
+    # keep the space in front of devdev!
+    exec bash -li <<<' devdev; exec</dev/tty'
+  fi
+
   exec bash -l
 }
 alias rbb=rebash
