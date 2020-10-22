@@ -1740,9 +1740,34 @@ nnoremap : ;
 vnoremap ; :
 vnoremap : ;
 
-"Better wrap navigation
-nmap <expr> j (v:count == 0 ? 'gj' : 'j')
-nmap <expr> k (v:count == 0 ? 'gk' : 'k')
+nnoremap <silent> j :<C-u>call <SID>tiptap('j')<CR>
+nnoremap <silent> k :<C-u>call <SID>tiptap('k')<CR>
+
+let s:tiptap_count = 0
+let s:tiptap_reltime = reltime()
+let s:tiptap_last_key = ''
+function! s:tiptap(key)
+  let diff = str2float(split(reltimestr(reltime(s:tiptap_reltime)))[0])
+
+  let s:tiptap_reltime = reltime()
+  let s:tiptap_count += 1
+
+  if diff > 1 || a:key == s:tiptap_last_key
+    let s:tiptap_count = 0
+    let s:tiptap_last_key = ''
+  elseif s:tiptap_count == 10
+    split +Nyancat2
+    let s:tiptap_count = 0
+    return
+  endif
+
+  let s:tiptap_last_key = a:key
+
+  " Better wrap navigation
+  let exe_key = v:count == 0 ? 'g'.a:key : v:count.a:key
+
+  exe 'normal!' exe_key
+endfunction
 
 "Insert mode hjkl
 inoremap <A-h> <Left>
