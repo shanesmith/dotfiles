@@ -1657,13 +1657,16 @@ nnoremap <silent> sD] :call <SID>delete_surrounding_lines("[]")<CR>
 nnoremap <silent> sD( :call <SID>delete_surrounding_lines("()")<CR>
 nnoremap <silent> sD) :call <SID>delete_surrounding_lines("()")<CR>
 
+nnoremap <silent> sDr :call <SID>delete_surrounding_object("ar")<CR>
+
 function! s:delete_surrounding_lines(pair)
   let syng_strcom = 'string\|regex\|comment\c'
   let skip_expr = "synIDattr(synID(line('.'),col('.'),1),'name') =~ '".syng_strcom."'"
 
   let char = map(split(a:pair, '\zs'), '"\\V" . v:val')
 
-  normal! mz
+  let win = winsaveview()
+  let ind = indent('.')
 
   let startline = searchpair(char[0], '', char[1], 'bW', skip_expr)
 
@@ -1673,15 +1676,54 @@ function! s:delete_surrounding_lines(pair)
 
   delete _
 
-  let numlines = endline - startline
+  exec startline . "," . (endline-1) . "normal! =="
 
-  exec startline . "," . endline . "normal! =="
+  let win.lnum -= 1
+  let win.col -= ind - indent(win.lnum)
 
-  normal! `z
-
-  delm z
-
+  call winrestview(win)
 endfunction
+
+function! s:delete_surrounding_object(object)
+  let win = winsaveview()
+  let ind = indent('.')
+
+  exe "normal v" . a:object . "\<ESC>"
+
+  " mark '> could have invalid line number if at end of buffer
+  let lastline = getpos("'>")[1]
+
+  '>delete _
+  '<delete _
+
+  exe "'<," . (lastline-2) . "normal! =="
+
+  let win.lnum -= 1
+  let win.col -= ind - indent(win.lnum)
+
+  call winrestview(win)
+endfunction
+
+" nnoremap <silent> sDr :call <SID>delete_surrounding_object("ar")<CR>
+" function! s:delete_surrounding_object(object)
+"   let win = winsaveview()
+"   let ind = indent('.')
+"
+"   exe "normal v" . a:object . "\<ESC>"
+"
+"   let startline = line("'<")
+"   let endline = line("'>")
+"
+"   '>delete _
+"   '<delete _
+"
+"   exec startline . "," . (endline-2) . "normal! =="
+"
+"   let win.lnum -= 1
+"   let win.col -= ind - indent(win.lnum)
+"
+"   call winrestview(win)
+" endfunction
 
 "Easier line start/end movement
 nnoremap H ^
