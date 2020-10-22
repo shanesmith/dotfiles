@@ -24,6 +24,8 @@ DOTFILES="
   tmuxinator
   tern-config
   lftprc
+  pryrc
+  irbrc
   config/alacritty
   config/karabiner
   config/nvim
