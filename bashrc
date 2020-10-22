@@ -33,14 +33,17 @@ if [[ -n "$(ls -A /Library/Java/JavaVirtualMachines 2>/dev/null)" ]]; then
 fi
 
 if command_exists brew; then
-  if brew list git >/dev/null 2>&1; then
-    export PATH=$PATH:"$(brew --prefix git)/share/git-core/contrib/git-jump"
-  fi
+  brew_prefix=$(brew --prefix)
 
-  if [ -d $(brew --prefix)/opt/nvm ]; then
-    export NVM_DIR=~/.nvm
-    . $(brew --prefix)/opt/nvm/nvm.sh
-  fi
+  ## 0.8s
+  # if brew list git >/dev/null 2>&1; then
+  #   export PATH=$PATH:"$(brew --prefix git)/share/git-core/contrib/git-jump"
+  # fi
+fi
+
+if [[ -n $brew_prefix && -d $brew_prefix/opt/nvm ]]; then
+  export NVM_DIR=~/.nvm
+  . $brew_prefix/opt/nvm/nvm.sh
 fi
 
 if command_exists docker-machine; then
@@ -78,8 +81,9 @@ export LESS="-SRi"
 $(which lesspipe >/dev/null) && eval "$(lesspipe)"
 $(which lesspipe.sh >/dev/null) && eval "$(lesspipe.sh)"
 
-# thefuck
-$(which thefuck >/dev/null) && eval $(thefuck --alias)
+## thefuck
+## 0.11s
+# $(which thefuck >/dev/null) && eval $(thefuck --alias)
 
 if command_exists rg; then
   export FZF_DEFAULT_COMMAND='rg --files -g ""'
@@ -104,8 +108,8 @@ if ! shopt -oq posix; then
     . /usr/share/bash-completion/bash_completion
   elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
-  elif command_exists brew && [ -f $(brew --prefix)/etc/bash_completion ]; then
-    . $(brew --prefix)/etc/bash_completion
+  elif [[ -n $brew_prefix && -f $brew_prefix/etc/bash_completion ]]; then
+    . $brew_prefix/etc/bash_completion
   fi
 
   for file in "${HOME}"/Code/rc/completion/*; do
