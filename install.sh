@@ -11,6 +11,7 @@ DOTFILES="
   bash_readline
   gitconfig
   gitignore
+  gitmessage
   vimrc
   vim
   ackrc

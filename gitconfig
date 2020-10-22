@@ -147,8 +147,8 @@
 
 # Github
   pr = "!f() { git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
-  ppr = !git push -u origin HEAD && git newpr
-  newpr = !open "https://github.com/Shopify/web/compare/$(git name-rev --name-only HEAD^)...$(git branch-name HEAD)?expand=1"
+  ppr = !git por && git newpr
+  newpr = !/opt/dev/bin/dev open pr --base "$(git name-rev --name-only --refs='refs/heads/*' HEAD^)"
 
 [color]
   ui = auto
@@ -179,6 +179,8 @@
 
 [commit]
   cleanup = scissors
+  template = ~/.gitmessage # adds empty line before comments
+
 [include]
   path = ~/.gitconfig.local
 
