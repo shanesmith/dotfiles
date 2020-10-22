@@ -104,3 +104,8 @@ augroup VimEnterNERDTreeHere
   au StdinReadPre * let s:std_in=1
   au VimEnter * call <SID>VimEnterNERDTreeHere() " TODO profile me!
 augroup END
+
+augroup Netrw2Nerdtree
+  au!
+  au Filetype netrw call g:NERDTreeHere("e", "", b:netrw_curdir)
+augroup END
