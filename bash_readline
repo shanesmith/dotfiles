@@ -118,6 +118,37 @@ _fzf_gerrit_patch() {
   __readline_insert "$id"
 }
 
+_fzf_brew_install() {
+  local package=$(HOMEBREW_COLOR=1 brew search ${1} | fzf --ansi --tac --no-sort --preview "HOMEBREW_COLOR=1 brew info {}")
+  if [[ ! $package =~ ^[a-z] ]]; then
+    return
+  fi
+
+  __readline_insert "${package}"
+}
+
+_fzf_hub_chain_get_branch() {
+  awk '{print $NF}'
+}
+
+_fzf_hub_chain_preview() {
+  local branch=$(_fzf_hub_chain_get_branch <<<$1)
+  git lonly -n 100 "$branch"
+}
+
+_fzf_hub_chain() {
+  export -f _fzf_hub_chain_get_branch
+  export -f _fzf_hub_chain_preview
+
+  local branch=$(hub-chain \
+    | fzf --no-sort --tac --multi --preview-window=down --preview='_fzf_hub_chain_preview {}' \
+    | _fzf_hub_chain_get_branch \
+    | __escape \
+  )
+
+  __readline_insert "$branch"
+}
+
 _fzf_word() {
   local cmd
 
@@ -133,6 +164,7 @@ _fzf_word() {
     grp) cmd="_fzf_gerrit_patch" ;;
     gb)  cmd="_fzf_git_branch" ;;
     gr)  cmd="_fzf_git_reflog" ;;
+    hc)  cmd="_fzf_hub_chain" ;;
     *)   cmd="_fzf_${word}" ;;
   esac
 
