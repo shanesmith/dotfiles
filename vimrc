@@ -229,6 +229,8 @@ let g:ctrlsf_auto_close = 0
 let g:ctrlsf_default_view_mode = 'compact'
 let g:ctrlsf_populate_qflist = 1
 let g:ctrlsf_indent = 2
+let g:ctrlsf_winsize = "30%"
+let g:ctrlsf_compact_winsize = "20%"
 let g:ctrlsf_auto_focus = {
       \ "at": "start",
       \ }
@@ -526,7 +528,9 @@ let g:python3_host_prog = "/usr/local/bin/python3"
 Plug 'lambdalisue/gina.vim'
 
 Plug 'tpope/vim-fugitive'
-nnoremap <leader>g :G
+nnoremap <leader>g :vert G
+nnoremap <leader>gg :vert G<CR>
+command! GResolve Gwrite | Git mergetool
 
 Plug 'tpope/vim-rhubarb'
 
@@ -563,6 +567,7 @@ function! s:rest_tab()
 endfunction
 
 
+"TODO deprecated, check out https://github.com/mg979/vim-visual-multi
 Plug 'terryma/vim-multiple-cursors'
 let g:multi_cursor_exit_from_visual_mode = 0
 let g:multi_cursor_exit_from_insert_mode = 0
@@ -574,6 +579,10 @@ let g:committia_open_only_vim_starting = 0
 
 Plug 'AndrewRadev/switch.vim'
 let g:switch_mapping = "-"
+
+" TODO handle generics
+"          const xyzzy = <T>(foo: T): baz => qq
+"          function xyzzy<T>(foo: T): baz => qq
 let g:switch_custom_definitions =
       \ [
       \   ['left', 'right'],
@@ -829,6 +838,7 @@ Plug 'justinmk/vim-sneak'
 let g:sneak#use_ic_scs = 1
 let g:sneak#streak = 1
 let g:sneak#s_next = 1
+let g:sneak#label = 1
 nmap ]; <Plug>SneakNext
 vmap ]; <Plug>VSneakNext
 nmap [; <Plug>SneakPrevious
@@ -1085,6 +1095,9 @@ nnoremap <leader><left> :SidewaysLeft<CR>
 nnoremap <leader><right> :SidewaysRight<CR>
 
 Plug 'AndrewRadev/splitjoin.vim'
+let g:splitjoin_trailing_comma = 1
+let g:splitjoin_ruby_hanging_args = 0
+let g:splitjoin_ruby_curly_braces = 0
 
 "}}}
 
