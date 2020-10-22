@@ -493,6 +493,10 @@ alias devdev='dev cd dev && dev use dev --backend && cd - && . ~/.bash_ps1'
 alias undevdev='dev use system --backend && . ~/.bash_ps1'
 alias isdevdev='[[ $__dev_source_dir != "/opt/dev" && -n $__dev_source_dir ]]'
 
+p() {
+  CDPATH=~/Code:~/src/github.com/Shopify cd $@
+}
+
 __ansi_color() {
   local code
 
