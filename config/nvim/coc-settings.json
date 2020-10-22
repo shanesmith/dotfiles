@@ -9,5 +9,9 @@
   "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "eslint.autoFixOnSave": true,
   "stylelintplus.autoFixOnSave": true,
-  "typescript.updateImportsOnFileMove.enable": false
+  "typescript.updateImportsOnFileMove.enable": false,
+  "solargraph.diagnostics": true,
+  "solargraph.completion": true,
+  "solargraph.autoformat": true,
+  "solargraph.formatting": true
 }
