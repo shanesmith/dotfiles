@@ -631,6 +631,11 @@ let g:switch_custom_definitions =
       \   ['top', 'bottom'],
       \   ['padding', 'margin'],
       \   ['absolute', 'relative', 'fixed'],
+      \   ['public', 'private', 'protected'],
+      \   {
+      \     '\(async \)\?function\s*\(\k\+\)\s*(\([^()]\{-}\))\s*:\s*\([^{]\{-1,}\)\s*{':                        'const \2 = \1(\3): \4 => {',
+      \     '\%(var \|let \|const \)\?\(\k\+\)\s*=\s*\(async \)\?(\([^()]\{-}\))\s*:\s*\([^}]\{-1,}\)\s*=>\s*{': '\2function \1(\3): \4 {',
+      \   },
       \ ]
 
 "TODO PR for switch plugin
@@ -639,6 +644,23 @@ autocmd FileType typescript,typescript.tsx,typescriptreact let b:switch_definiti
       \   g:switch_builtins.javascript_function,
       \   g:switch_builtins.javascript_arrow_function,
       \   g:switch_builtins.javascript_es6_declarations,
+      \ ]
+
+autocmd FileType ruby let b:switch_definitions =
+      \ [
+      \   g:switch_builtins.ruby_hash_style,
+      \   g:switch_builtins.ruby_oneline_hash,
+      \   g:switch_builtins.ruby_lambda,
+      \   g:switch_builtins.rspec_should,
+      \   g:switch_builtins.rspec_expect,
+      \   g:switch_builtins.rspec_to,
+      \   g:switch_builtins.rspec_be_truthy_falsey,
+      \   g:switch_builtins.ruby_string,
+      \   g:switch_builtins.ruby_short_blocks,
+      \   g:switch_builtins.ruby_array_shorthand,
+      \   g:switch_builtins.ruby_fetch,
+      \   g:switch_builtins.ruby_assert_nil,
+      \   ['if', 'unless'],
       \ ]
 
 autocmd FileType javascript,typescript,javascriptreact,typescriptreact let b:switch_custom_definitions =
