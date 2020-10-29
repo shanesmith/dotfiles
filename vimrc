@@ -211,6 +211,9 @@ set autoread
 let mapleader = "\<Space>"
 let maplocalleader = "\\"
 
+"Default filetype=sh to bash syntax
+let is_bash=1
+
 "}}} Settings
 
 " Plugins {{{
