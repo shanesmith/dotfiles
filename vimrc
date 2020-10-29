@@ -702,8 +702,8 @@ if exists(":cabove")
   nnoremap [q :<C-u>exec (v:count ? v:count : "")."cabove"<CR>zv
 endif
 
-" UnconditionalPaste style characterwise forced paste
-function! s:ZeroPaste(p, ...)
+" UnconditionalPaste style character or line wise forced paste
+function! s:CharPaste(p, ...)
   let register = a:0 ? a:1 : v:register
   let l:original_reg = getreg(register)
   let l:original_reg_type = getregtype(register)
@@ -712,8 +712,18 @@ function! s:ZeroPaste(p, ...)
   exe 'normal "' . register . a:p
   call setreg(register, l:original_reg, l:original_reg_type)
 endfunction
-nnoremap <silent> zp :<c-u>call <SID>ZeroPaste('p')<cr>
-nnoremap <silent> zP :<c-u>call <SID>ZeroPaste('P')<cr>
+function! s:LinePaste(p, ...)
+  let register = a:0 ? a:1 : v:register
+  let l:original_reg = getreg(register)
+  let l:original_reg_type = getregtype(register)
+  call setreg(register, l:original_reg, 'l')
+  exe 'normal "' . register . a:p
+  call setreg(register, l:original_reg, l:original_reg_type)
+endfunction
+nnoremap <silent> zp :<c-u>call <SID>CharPaste('p')<cr>
+nnoremap <silent> zP :<c-u>call <SID>CharPaste('P')<cr>
+nnoremap <silent> Zp :<c-u>call <SID>LinePaste('p')<cr>
+nnoremap <silent> ZP :<c-u>call <SID>LinePaste('P')<cr>
 
 Plug 'KabbAmine/lazyList.vim'
 
@@ -1827,12 +1837,13 @@ function! s:PasteOver(type, ...)
 
   exec 'normal! ' . mark1 . 'v' . mark2 . '"_d'
 
-  if a:type == 'char'
-    call <SID>ZeroPaste(pastecmd, b:silly)
-    return
+  if a:type == 'char' || a:type ==# 'v'
+    call <SID>CharPaste(pastecmd, b:silly)
+  else
+    call <SID>LinePaste(pastecmd, b:silly)
   endif
 
-  exec 'normal! "' . b:silly . pastecmd
+  normal! =']
 endfunction
 
 "Duplicate
