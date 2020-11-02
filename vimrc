@@ -641,14 +641,6 @@ let g:switch_custom_definitions =
       \   },
       \ ]
 
-"TODO PR for switch plugin
-autocmd FileType typescript,typescript.tsx,typescriptreact let b:switch_definitions =
-      \ [
-      \   g:switch_builtins.javascript_function,
-      \   g:switch_builtins.javascript_arrow_function,
-      \   g:switch_builtins.javascript_es6_declarations,
-      \ ]
-
 autocmd FileType ruby let b:switch_definitions =
       \ [
       \   g:switch_builtins.ruby_hash_style,
