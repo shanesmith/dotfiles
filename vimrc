@@ -738,26 +738,26 @@ let g:sandwich#recipes = [
       \     'skip_break':   1,
       \     'input':        ['{', 'B'],
       \   },
-      \   {
-      \     'buns':         ['{', '}'],
-      \     'nesting':      1,
-      \     'match_syntax': 1,
-      \     'skip_break':   1,
-      \     'input':        ['}'],
-      \   },
-      \   {
-      \     'buns':         ['[', ']'],
-      \     'nesting':      1,
-      \     'match_syntax': 1,
-      \     'input':        [']'],
-      \   },
-      \   {
-      \     'buns':         ['(', ')'],
-      \     'nesting':      1,
-      \     'match_syntax': 1,
-      \     'input':        [')'],
-      \   },
       \ ]
+    " \   {
+    " \     'buns':         ['{\', '\}'],
+    " \     'nesting':      1,
+    " \     'match_syntax': 1,
+    " \     'skip_break':   1,
+    " \     'input':        ['}'],
+    " \   },
+    " \   {
+    " \     'buns':         ['[\', '\]'],
+    " \     'nesting':      1,
+    " \     'match_syntax': 1,
+    " \     'input':        [']'],
+    " \   },
+    " \   {
+    " \     'buns':         ['(\', '\)'],
+    " \     'nesting':      1,
+    " \     'match_syntax': 1,
+    " \     'input':        [')'],
+    " \   },
 
 silent! nmap <unique><silent> sd <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
 silent! nmap <unique><silent> sr <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
