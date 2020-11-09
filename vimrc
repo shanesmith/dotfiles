@@ -224,7 +224,7 @@ call plug#begin('~/.vim/bundle')
 
 Plug 'kkoomen/gfi.vim'
 
-Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'commit': '85c4bed898d2d755a2a2ffbfc2433084ce107cdd' }
 let g:NERDTreeGitStatusShowIgnored = 0
 
 Plug 'thinca/vim-visualstar'
