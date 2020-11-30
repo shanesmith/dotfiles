@@ -2185,19 +2185,31 @@ command! CopyFileAbsoluePathToClipboard let @+ = expand("%:p")
 command! CopyFileNameToClipboard let @+ = expand("%:t")
 
 " TODO steal completion from https://github.com/Shopify/vim-devilish/blob/master/plugin/devilish.vim#L57
-command! -nargs=1 P call <SID>Proj(<f-args>)
-command! -nargs=1 TP tabnew | call <SID>Proj(<f-args>)
+command! -nargs=1 -complete=custom,<SID>ProjComp P call <SID>Proj(<f-args>)
+command! -nargs=1 -complete=custom,<SID>ProjComp TP tabnew | call <SID>Proj(<f-args>)
+
+let g:proj_dirs="~/Code/,~/src/github.com/Shopify/"
+
 function! s:Proj(dir)
   let save_cdpath = &cdpath
 
-  set cdpath=~/Code/,~/src/github.com/Shopify/
+  let &cdpath = join(map(split(g:proj_dirs), "expand(v:val)"), ",")
 
   exe 'cd' a:dir
 
-  call g:NERDTreeHere("e")
-  call nerdtree#ui_glue#chRootCwd()
+  Fern .
 
   let &cdpath = save_cdpath
+endfunction
+
+function! s:ProjComp(ArgLead, CmdLine, CursorPos)
+  let dirs = split(globpath(g:proj_dirs, '*'), '\n') 
+
+  let dirs = filter(dirs, {_, val -> isdirectory(val) })
+
+  let dirs = map(dirs, {_, val -> fnamemodify(val, ':t') })
+  
+  return join(dirs, "\n")
 endfunction
 
 "}}}
