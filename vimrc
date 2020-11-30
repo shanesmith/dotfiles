@@ -469,6 +469,8 @@ endf
 
 Plug 'lambdalisue/fern.vim'
 Plug 'lambdalisue/fern-git-status.vim'
+Plug 'lambdalisue/fern-hijack.vim'
+Plug 'lambdalisue/fern-mapping-git.vim'
 let g:fern#renderer#default#leaf_symbol = "  "
 let g:fern#renderer#default#collapsed_symbol = "▸ "
 let g:fern#renderer#default#expanded_symbol = "▾ "
@@ -478,22 +480,68 @@ highlight link FernGitModified Special
 highlight link FernGitUnmerged Special
 highlight link FernGitStaged   Type
 highlight link FernGitCleaned  Type
+nnoremap <silent> <C-t> :Fern . -reveal=%<CR>
+nnoremap <silent> <leader>tf :Fern . -reveal=%<CR>
+nnoremap <silent> <leader>tv :Fern . -reveal=% -opener=vsplit<CR>
+nnoremap <silent> <leader>ts :Fern . -reveal=% -opener=split<CR>
+nnoremap <silent> <leader>ty :Fern . -reveal=% -opener=tabedit<CR>
+nnoremap <silent> <Leader>tr :Fern ~/Code/rc -opener=tabedit<CR>
 
 function! s:init_fern() abort
-  nmap <buffer> <C-c> <Plug>(fern-action-cancel)
   nmap <buffer> h <Plug>(fern-action-collapse)
   nmap <buffer> l <Plug>(fern-action-open-or-expand)
   nmap <buffer> I <Plug>(fern-action-hidden-toggle)
   nmap <buffer> u <Plug>(fern-action-leave)
+  nmap <buffer> C <Plug>(fern-action-enter)
   nmap <buffer> r <Plug>(fern-action-reload)
   nmap <buffer> s <Plug>(fern-action-open:split)
   nmap <buffer> v <Plug>(fern-action-open:vsplit)
   nmap <buffer> t <Plug>(fern-action-open:tabedit)
+  nmap <buffer> dd <Plug>(fern-action-remove)
+  nmap <buffer> yy <Plug>(fern-action-clipboard-copy)
+  nmap <buffer> xx <Plug>(fern-action-clipboard-move)
+  nmap <buffer> p <Plug>(fern-action-clipboard-paste)
+  nmap <buffer> m <Plug>(fern-action-mark)j
+  nmap <buffer> M <Plug>(fern-action-mark)k
+  nmap <buffer> << <Plug>(fern-action-git-stage)
+  nmap <buffer> >> <Plug>(fern-action-git-unstage)
+
+  nmap <buffer> <C-c> <Plug>(fern-action-cancel)
+  nmap <buffer> <C-g> <Plug>(fern-action-reveal)
+
+  vmap <buffer> m <Plug>(fern-action-mark)
+  vmap <buffer> dd <Plug>(fern-action-mark)<Plug>(fern-action-remove)
+  vmap <buffer> yy <Plug>(fern-action-mark)<Plug>(fern-action-clipboard-copy)
+  vmap <buffer> xx <Plug>(fern-action-mark)<Plug>(fern-action-clipboard-move)
+endfunction
+
+function! s:VimEnterFern()
+
+  if exists("s:std_in")
+    return
+  endif
+
+  if argc() != 0
+    if isdirectory(argv(0))
+      exec "cd" argv(0)
+    else
+      return
+    endif
+  endif
+
+  Fern . -wait
+
 endfunction
 
 augroup my-fern
   autocmd! *
   autocmd FileType fern call s:init_fern()
+augroup END
+
+augroup VimEnterFern
+  au!
+  au StdinReadPre * let s:std_in=1
+  au VimEnter * ++nested call <SID>VimEnterFern()
 augroup END
 
 Plug 'preservim/nerdtree'
@@ -511,7 +559,6 @@ let g:NERDTreeChDirMode = 2
 let g:NERDTreeNaturalSort = 1
 let g:NERDTreeIgnore = [ '\.pyc$' ]
 let g:NERDTreeCreatePrefix = 'silent keepalt keepjumps'
-nnoremap <silent> <Leader>tr :tabe \| cd ~/Code/rc \| call g:NERDTreeHere("e")<CR>
 
 Plug 'henrik/vim-qargs'
 
@@ -2162,12 +2209,6 @@ endfunction
 "   autocmd!
 "   autocmd BufWritePost $MYVIMRC,~/Code/rc/vimrc,~/Code/rc/vim/* nested source $MYVIMRC
 " augroup END
-
-" Close vim if NERDTree is the last window
-augroup nerdtree_vimrc
-  autocmd!
-  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-augroup END
 
 " Settings for currently focused window
 augroup FocusedWindow
