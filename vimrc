@@ -349,7 +349,7 @@ function! s:CtrlSFChooseWindowOpen()
     endif
 endfunction
 
-Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf'
 nnoremap <C-p> :FZF<CR>
 
 let g:fzf_action = {
