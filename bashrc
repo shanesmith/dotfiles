@@ -27,9 +27,9 @@ command_exists() {
   command -v $1 >/dev/null
 }
 
-if [[ -n "$(ls -A /Library/Java/JavaVirtualMachines 2>/dev/null)" ]]; then
+if [[ -x /usr/libexec/java_home ]]; then
   # macOS only?
-  export JAVA_HOME=$($(dirname $(readlink $(which javac)))/java_home)
+  export JAVA_HOME=$(/usr/libexec/java_home)
 fi
 
 if command_exists brew; then
