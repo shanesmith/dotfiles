@@ -1146,12 +1146,12 @@ function! s:PumOrUltisnips(forward)
     return a:forward ? "\<C-n>" : "\<C-p>"
   elseif a:forward
     call UltiSnips#JumpForwards()
-    if g:ulti_jump_forwards_res == 0
+    if get(g:, 'ulti_jump_forwards_res', 0) == 0
       return "\<tab>"
     endif
   else
     call UltiSnips#JumpBackwards()
-    if g:ulti_jump_backwards_res == 0
+    if get(g:, 'ulti_jump_backwards_res', 0) == 0
       return "\<s-tab>"
     endif
   endif
