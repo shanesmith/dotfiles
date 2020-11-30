@@ -1,47 +1,34 @@
 #!/bin/bash
 
-railgun=$(railgun status --all)
+railgun=$(railgun status --all | tail -1 | awk '{ print $1 }')
 server=$(/opt/dev/bin/dev sv status)
-
-nothing_running=1
 
 get_status() {
   local name=$1
 
-  local color="#AAAAAA"
-
-  if is_machine_running "$name"; then
-    if is_server_running "$name"; then
-      color="#7CAC8F"
-    else
-      color="#B6B785"
-    fi
+  if is_server_running "$name"; then
+    color="#7CAC8F"
   else
-    return
+    color="#B6B785"
   fi
 
-  nothing_running=0
   echo -n "#[fg=${color},bg=#202020,nobold,nounderscore,noitalics]${name} "
-}
-
-is_machine_running() {
-  local name=$1
-  grep "^${name}" -q <<<"$railgun"
 }
 
 is_server_running() {
   local name=$1
-  grep "shopify/${name}" -q <<<"$server"
+  grep "^shopify/${name} " -q <<<"$server"
 }
 
-all_railguns() {
-  defaults read com.shopify.railgun registered-project-paths | awk -F'"' '/^ / {print $2}' | xargs basename
-}
+# all_railguns() {
+#   defaults read com.shopify.railgun registered-project-paths | awk -F'"' '/^ / {print $2}' | xargs basename
+# }
 
-for project in $(all_railguns); do
+if [[ -z $railgun  ]]; then
+  echo -n "#[fg=#AAAAAA,bg=#202020,nobold,nounderscore,noitalics]∅ "
+  exit
+fi
+
+for project in $railgun; do
   get_status $project
 done
-
-if [[ $nothing_running == "1" ]]; then
-  echo -n "#[fg=#AAAAAA,bg=#202020,nobold,nounderscore,noitalics]∅ "
-fi
