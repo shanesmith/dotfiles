@@ -8,3 +8,8 @@ tmux/plugins/*
 tmux/resurrect/*
 
 config/karabiner/automatic_backups/*
+
+bin/errcheck
+bin/goimports
+bin/golangci-lint
+bin/golint
