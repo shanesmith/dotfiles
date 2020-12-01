@@ -224,9 +224,6 @@ call plug#begin('~/.vim/bundle')
 
 Plug 'kkoomen/gfi.vim'
 
-Plug 'Xuyuanp/nerdtree-git-plugin', { 'commit': '85c4bed898d2d755a2a2ffbfc2433084ce107cdd' }
-let g:NERDTreeGitStatusShowIgnored = 0
-
 Plug 'thinca/vim-visualstar'
 
 Plug 'dyng/ctrlsf.vim'
@@ -350,7 +347,8 @@ function! s:CtrlSFChooseWindowOpen()
 endfunction
 
 Plug 'junegunn/fzf'
-nnoremap <C-p> :FZF<CR>
+Plug 'junegunn/fzf.vim'
+nnoremap <C-p> :Files<CR>
 
 let g:fzf_action = {
       \ 'ctrl-t': 'tab split',
@@ -471,6 +469,7 @@ Plug 'lambdalisue/fern.vim'
 Plug 'lambdalisue/fern-git-status.vim'
 Plug 'lambdalisue/fern-hijack.vim'
 Plug 'lambdalisue/fern-mapping-git.vim'
+Plug 'LumaKernel/fern-mapping-fzf.vim'
 let g:fern#renderer#default#leaf_symbol = "  "
 let g:fern#renderer#default#collapsed_symbol = "▸ "
 let g:fern#renderer#default#expanded_symbol = "▾ "
@@ -513,6 +512,10 @@ function! s:init_fern() abort
   vmap <buffer> dd <Plug>(fern-action-mark)<Plug>(fern-action-remove)
   vmap <buffer> yy <Plug>(fern-action-mark)<Plug>(fern-action-clipboard-copy)
   vmap <buffer> xx <Plug>(fern-action-mark)<Plug>(fern-action-clipboard-move)
+
+  nmap <buffer> ff <Plug>(fern-action-fzf-files)
+  nmap <buffer> fd <Plug>(fern-action-fzf-dirs)
+  nmap <buffer> fa <Plug>(fern-action-fzf-both)
 endfunction
 
 function! s:VimEnterFern()
@@ -543,22 +546,6 @@ augroup VimEnterFern
   au StdinReadPre * let s:std_in=1
   au VimEnter * ++nested call <SID>VimEnterFern()
 augroup END
-
-Plug 'preservim/nerdtree'
-let g:NERDTreeHijackNetrw = 0
-let g:NERDTreeMapActivateNode = 'l'
-let g:NERDTreeMapCloseDir = 'h'
-let g:NERDTreeMapOpenSplit = 's'
-let g:NERDTreeMapOpenVSplit = 'v'
-let g:NERDTreeMapJumpNextSibling = ''
-let g:NERDTreeMapJumpPrevSibling = ''
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeShowLineNumbers = 1
-let g:NERDTreeAutoDeleteBuffer = 1
-let g:NERDTreeChDirMode = 2
-let g:NERDTreeNaturalSort = 1
-let g:NERDTreeIgnore = [ '\.pyc$' ]
-let g:NERDTreeCreatePrefix = 'silent keepalt keepjumps'
 
 Plug 'henrik/vim-qargs'
 
@@ -626,6 +613,8 @@ nnoremap <leader>g :vert G
 nnoremap <leader>gg :vert G<CR>
 command! GResolve Gwrite | Git mergetool
 
+Plug 'rhysd/git-messenger.vim'
+
 Plug 'tpope/vim-rhubarb'
 
 Plug 'vim-utils/vim-husk'
@@ -660,9 +649,11 @@ endfunction
 
 
 "TODO deprecated, check out https://github.com/mg979/vim-visual-multi
-Plug 'terryma/vim-multiple-cursors'
+" Plug 'terryma/vim-multiple-cursors'
 let g:multi_cursor_exit_from_visual_mode = 0
 let g:multi_cursor_exit_from_insert_mode = 0
+
+Plug 'mg979/vim-visual-multi'
 
 Plug 'tpope/vim-eunuch'
 
@@ -1371,7 +1362,11 @@ nnoremap <expr> gt ':<C-U>' . (v:count ? v:count : '') . 'tabnext<CR>'
 nnoremap gR :tabfirst<CR>
 nnoremap gT :tablast<CR>
 nmap <C-q> gr
+nmap <S-C-q> gR
+nmap <S-C-e> gT
 nmap <C-e> gt
+nmap <C-Tab> gt
+nmap <S-C-Tab> gr
 
 "Stop accidentaly recording
 function! s:MacroMap()
@@ -1885,6 +1880,28 @@ function! s:PasteOver(type, ...)
   normal! =']
 endfunction
 
+" This supports "rp that permits to replace the visual selection with the contents of @r
+" https://github.com/LucHermitte/lh-misc/blob/master/plugin/repl-visual-no-reg-overwrite.vim
+" xnoremap <silent> <expr> _ <sid>Replace()
+"
+" function! s:Replace()
+"   let s:restore_reg = @"
+"   return "p@=RestoreRegister()\<cr>"
+" endfunction
+"
+" function! RestoreRegister()
+"   if &clipboard =~ 'unnamed'
+"     let @* = s:restore_reg
+"   elseif &clipboard == 'unnamedplus'
+"     let @+ = s:restore_reg
+"   elseif &clipboard == 'unnamed,unnamedplus' || &clipboard == 'unnamedplus,unnamed'
+"     let @* = s:restore_reg
+"     let @+ = s:restore_reg
+"   endif
+"   let @" = s:restore_reg
+"   return ''
+" endfunction
+
 "Duplicate
 " :copy only does lines, this is arbitrary selection
 nnoremap <silent> + :set opfunc=<SID>DuplicateDown<CR>g@
@@ -1944,6 +1961,35 @@ endfunction
 "Quick formatting
 nnoremap \q gwip
 vnoremap \q gw
+
+nnoremap <silent> \Q :<C-U>call <SID>QuickWrap(v:count)<CR>
+function! s:QuickWrap(count)
+  " if a:type ==? 'v'
+  "   let [mark1, mark2] = ['`<', '`>']
+  " else
+  "   let [mark1, mark2] = ['`[', '`]']
+  " endif
+
+  let save_textwidth = &textwidth
+
+  if v:count != 0
+    let &textwidth = a:count
+  endif
+
+  " let vselect = a:type
+  " if vselect == 'char'
+  "   let vselect = 'v'
+  " elseif vselect == 'line' || vselect == 'block'
+  "   let vselect = 'V'
+  " endif
+  " let vselect = mark1 . vselect . mark2
+
+  normal! gwip
+
+  let &textwidth = save_textwidth
+endfunction
+
+vnoremap <silent> \Q :<C-U>echo "v:count " . v:count<CR>
 
 "Clear a line
 nnoremap dc cc<esc>
@@ -2130,7 +2176,7 @@ command! -nargs=? -complete=syntax Scratch call <SID>NewScratch(<f-args>)
 function! s:NewScratch(...)
   let type = a:0 ? a:1 : 'markdown'
 
-  if &ft == 'nerdtree'
+  if &ft == 'fern'
     enew
   else
     vnew
@@ -2193,7 +2239,7 @@ let g:proj_dirs="~/Code/,~/src/github.com/Shopify/"
 function! s:Proj(dir)
   let save_cdpath = &cdpath
 
-  let &cdpath = join(map(split(g:proj_dirs), "expand(v:val)"), ",")
+  let &cdpath = join(map(split(g:proj_dirs, ","), "expand(v:val)"), ",")
 
   exe 'cd' a:dir
 

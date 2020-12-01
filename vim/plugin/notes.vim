@@ -57,13 +57,13 @@ endfunction
 
 function! s:NotesTree()
 
-  let where = "v"
+  let opener = "vsplit"
 
-  if stridx(expand('%:p'), expand(g:notes_folder)) == 0 || (bufname('%') == '' && line('$') == 1 && getline(1) == '') || &ft == "nerdtree"
-    let where = "e"
+  if stridx(expand('%:p'), expand(g:notes_folder)) == 0 || (bufname('%') == '' && line('$') == 1 && getline(1) == '') || &ft == "fern"
+    let opener = "edit"
   endif
 
-  call g:NERDTreeHere(where, g:notes_folder)
+  exec printf("Fern %s -opener=%s", g:notes_folder, opener)
 
 endfunction
 
