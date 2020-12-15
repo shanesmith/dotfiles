@@ -127,7 +127,7 @@ is_link_to() {
 
 install_fonts() {
   if [[ -n $is_mac ]]; then
-    cp "${RCPATH}/fonts/* /Library/Fonts"
+    cp "${RCPATH}"/fonts/* /Library/Fonts
   fi
 }
 
