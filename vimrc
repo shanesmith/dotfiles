@@ -232,7 +232,7 @@ let g:ctrlsf_default_view_mode = 'compact'
 let g:ctrlsf_populate_qflist = 1
 let g:ctrlsf_indent = 2
 let g:ctrlsf_winsize = "30%"
-let g:ctrlsf_compact_winsize = "20%"
+let g:ctrlsf_compact_winsize = "30%"
 let g:ctrlsf_auto_focus = {
       \ "at": "start",
       \ }
@@ -474,6 +474,7 @@ let g:fern#renderer#default#leaf_symbol = "  "
 let g:fern#renderer#default#collapsed_symbol = "▸ "
 let g:fern#renderer#default#expanded_symbol = "▾ "
 let g:fern#disable_default_mappings = 1
+let g:fern#scheme#file#show_absolute_path_on_root_label = 1
 highlight link FernGitStained  Special
 highlight link FernGitModified Special
 highlight link FernGitUnmerged Special
@@ -2161,6 +2162,7 @@ command! ReloadVimrc source $MYVIMRC
 
 "ONLY
 command! ONLY silent only | silent tabonly
+nnoremap <C-w>O :ONLY<CR>
 
 command! SyntaxGroup call <SID>SyntaxGroup()
 function! s:SyntaxGroup()
