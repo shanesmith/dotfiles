@@ -490,19 +490,25 @@ nnoremap <silent> <Leader>tr :Fern ~/Code/rc -opener=tabedit<CR>
 function! s:init_fern() abort
   nmap <buffer> h <Plug>(fern-action-collapse)
   nmap <buffer> l <Plug>(fern-action-open-or-expand)
-  nmap <buffer> I <Plug>(fern-action-hidden-toggle)
+  nmap <buffer> I <Plug>(fern-action-hidden:toggle)
   nmap <buffer> u <Plug>(fern-action-leave)
   nmap <buffer> C <Plug>(fern-action-enter)
+  nmap <buffer> c <Plug>(fern-action-cd)
   nmap <buffer> r <Plug>(fern-action-reload)
   nmap <buffer> s <Plug>(fern-action-open:split)
   nmap <buffer> v <Plug>(fern-action-open:vsplit)
   nmap <buffer> t <Plug>(fern-action-open:tabedit)
+
+  nmap <buffer> A <Plug>(fern-action-new-path)
+
   nmap <buffer> dd <Plug>(fern-action-remove)
   nmap <buffer> yy <Plug>(fern-action-clipboard-copy)
   nmap <buffer> xx <Plug>(fern-action-clipboard-move)
   nmap <buffer> p <Plug>(fern-action-clipboard-paste)
+
   nmap <buffer> m <Plug>(fern-action-mark)j
   nmap <buffer> M <Plug>(fern-action-mark)k
+
   nmap <buffer> << <Plug>(fern-action-git-stage)
   nmap <buffer> >> <Plug>(fern-action-git-unstage)
 
