@@ -1,7 +1,7 @@
 #!/bin/bash
 
 railgun=$(railgun status --all | tail -1 | awk '{ print $1 }')
-server=$(/opt/dev/bin/dev sv status)
+server=$(DEV_REAL_EVENTS=0 /opt/dev/bin/dev sv status)
 
 get_status() {
   local name=$1
