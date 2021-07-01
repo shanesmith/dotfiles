@@ -1456,6 +1456,8 @@ vnoremap @@ :normal! @@<CR>
 " TODO complete this...
 " vnoremap @x
 
+xnoremap <C-n> :norm<Space>
+
 "Visual select last pasted
 "http://vim.wikia.com/wiki/Selecting_your_pasted_text
 nnoremap gp `[v`]
