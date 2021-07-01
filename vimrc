@@ -514,17 +514,24 @@ function! s:init_fern() abort
   nmap <buffer> >> <Plug>(fern-action-git-unstage)
 
   nmap <buffer> <C-c> <Plug>(fern-action-cancel)
-  nmap <buffer> <C-g> <Plug>(fern-action-reveal)
 
   vmap <buffer> m <Plug>(fern-action-mark)
   vmap <buffer> dd <Plug>(fern-action-mark)<Plug>(fern-action-remove)
   vmap <buffer> yy <Plug>(fern-action-mark)<Plug>(fern-action-clipboard-copy)
   vmap <buffer> xx <Plug>(fern-action-mark)<Plug>(fern-action-clipboard-move)
 
-  nmap <buffer> ff <Plug>(fern-action-fzf-files)
-  nmap <buffer> fd <Plug>(fern-action-fzf-dirs)
-  nmap <buffer> fa <Plug>(fern-action-fzf-both)
+  nmap <buffer> <C-d> gg<Plug>(fern-action-fzf-dirs)
+  nmap <buffer> <C-f> gg<Plug>(fern-action-fzf-files)
+  nmap <buffer> <C-g> gg<Plug>(fern-action-fzf-both)
+
+  nmap <buffer> P <Plug>(fern-action-custom-parent)
 endfunction
+
+function! s:FernFZFReveal(dict) abort
+  execute "FernReveal" a:dict.relative_path
+endfunction
+let g:Fern_mapping_fzf_file_sink = function('s:FernFZFReveal')
+let g:Fern_mapping_fzf_dir_sink = function('s:FernFZFReveal')
 
 function! s:VimEnterFern()
 
