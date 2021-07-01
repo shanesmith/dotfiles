@@ -758,10 +758,10 @@ function! s:LinePaste(p, ...)
   exe 'normal "' . register . a:p
   call setreg(register, l:original_reg, l:original_reg_type)
 endfunction
-nnoremap <silent> zp :<c-u>call <SID>CharPaste('p')<cr>
-nnoremap <silent> zP :<c-u>call <SID>CharPaste('P')<cr>
-nnoremap <silent> Zp :<c-u>call <SID>LinePaste('p')<cr>
-nnoremap <silent> ZP :<c-u>call <SID>LinePaste('P')<cr>
+nnoremap <silent> gcp :<c-u>call <SID>CharPaste('p')<cr>
+nnoremap <silent> gcP :<c-u>call <SID>CharPaste('P')<cr>
+nnoremap <silent> glp :<c-u>call <SID>LinePaste('p')<cr>
+nnoremap <silent> glP :<c-u>call <SID>LinePaste('P')<cr>
 
 Plug 'KabbAmine/lazyList.vim'
 
@@ -992,6 +992,9 @@ nmap ]; <Plug>SneakNext
 vmap ]; <Plug>VSneakNext
 nmap [; <Plug>SneakPrevious
 vmap [; <Plug>VSneakPrevious
+nmap z <Plug>Sneak_s
+nmap Z <Plug>Sneak_S
+nnoremap ZZ ZZ
 
 "TODO replace this and ConflictDetection with https://github.com/rhysd/conflict-marker.vim ?
 Plug 'vim-scripts/ConflictMotions'
