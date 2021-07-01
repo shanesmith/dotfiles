@@ -592,6 +592,9 @@ comm! Alternates :call s:alternates()
 "" Utilities {{{
 
 Plug 'axvr/zepl.vim'
+nmap <silent> gZ gziE
+
+" TODO update to use g:repl_config
 augroup zepl
   autocmd!
   autocmd FileType python     let b:repl_config = { 'cmd': 'python3' }
@@ -600,18 +603,20 @@ augroup zepl
   autocmd FileType scheme     let b:repl_config = { 'cmd': 'rlwrap csi' }
   autocmd FileType lisp       let b:repl_config = { 'cmd': 'sbcl' }
   autocmd FileType julia      let b:repl_config = { 'cmd': 'julia' }
-  autocmd FileType ruby       let b:repl_config = { 'cmd': 'pry' }
+  autocmd FileType ruby       let b:repl_config = { 'cmd': 'irb' }
 augroup END
 
-Plug 'metakirby5/codi.vim'
-let g:codi#rightalign = 0
+command! -nargs=? -complete=syntax REPL call <SID>NewRepl(<f-args>)
+function! s:NewRepl(...)
+  let type = a:0 ? a:1 : &ft
 
-command! REPL call <SID>repl_tab("javascript")
-function! s:repl_tab(type)
-  tabnew
-  exe 'setf' a:type
-  setlocal bt=nofile
-  exe 'Codi' a:type
+  exe 'tab Scratch' type
+
+  call zepl#start('', 'vert')
+
+  stopinsert
+
+  wincmd p
 endfunction
 
 Plug 'roxma/python-support.nvim'
