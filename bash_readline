@@ -107,10 +107,25 @@ _fzf_files() {
   fi
 }
 
+__fzf_get_dir() {
+  fd --type d | fzf -m --preview='tree -C {} | head -200' | __escape
+}
+
+_fzf_directories() {
+  local dir="$(__fzf_get_dir)"
+  if [[ -n $dir ]]; then
+    __readline_insert "$dir"
+  fi
+}
+
 _fzf_cd() {
-  # TODO extract current word to use as basis for find
-  local dir=$(command find -L . \( -path '*/\.*' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \) -prune -o -type d -print 2> /dev/null | sed 1d | cut -b3- | fzf)
+  local dir=$(__fzf_get_dir)
   __readline_replace "cd ${dir}"
+}
+
+_fzf_ps() {
+  local proc=$(command ps -ef | sed 1d | fzf -m --preview 'echo {}' --preview-window down:3:wrap --min-height 15 | awk '{print $2}')
+  __readline_insert "$proc"
 }
 
 _fzf_gerrit_patch() {
@@ -156,6 +171,7 @@ _fzf_word() {
 
   case "$word" in
     f)   cmd="_fzf_files" ;;
+    d)   cmd="_fzf_directories" ;;
     gl)  cmd="_fzf_git_lol" ;;
     gla) cmd="_fzf_git_lall" ;;
     gs)  cmd="_fzf_git_status" ;;
