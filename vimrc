@@ -647,8 +647,6 @@ Plug 'vim-utils/vim-husk'
 cnoremap <expr> <M-Left> husk#left()
 cnoremap <expr> <M-Right> husk#right()
 
-Plug 'tyru/restart.vim'
-
 Plug 'diepm/vim-rest-console'
 let g:vrc_trigger = '<C-R>'
 let g:vrc_show_command = 1
@@ -828,9 +826,6 @@ silent! nmap <unique><silent> sr <Plug>(operator-sandwich-replace)<Plug>(operato
 
 Plug 'tpope/vim-abolish'
 
-Plug 'tpope/vim-endwise'
-let g:endwise_no_mappings = 1
-
 Plug 'vim-scripts/ingo-library'
 
 Plug 'embear/vim-localvimrc'
@@ -893,8 +888,6 @@ Plug 'dunstontc/vim-vscode-theme'
 Plug 'romainl/Apprentice'
 
 Plug 'RRethy/vim-illuminate'
-
-" Plug 'TaDaa/vimade'
 
 Plug 'gcmt/taboo.vim'
 let g:taboo_tab_format = "%P%m"
@@ -1060,10 +1053,15 @@ command! WhitespaceStrip StripWhitespace
 Plug 'Chiel92/vim-autoformat', { 'do': 'npm install -g js-beautify' }
 command! Format Autoformat
 
-Plug 'jiangmiao/auto-pairs'
-let g:AutoPairsShortcutToggle = ''
-let g:AutoPairsShortcutJump = ''
-let g:AutoPairsMultilineClose = 0
+Plug 'cohama/lexima.vim'
+let s:lexima_rules = [
+      \   {'char': '<CR>', 'at': '```\%#```', 'input_after': '<CR>'},
+      \   {'char': '<CR>', 'at': '"""\%#"""', 'input_after': '<CR>'},
+      \   {'char': '<BS>', 'at': '(\n\%#\n)', 'input': '<BS>', 'delete': 1},
+      \   {'char': '<BS>', 'at': '{\n\%#\n}', 'input': '<BS>', 'delete': 1},
+      \   {'char': '<BS>', 'at': '\[\n\%#\n\]', 'input': '<BS>', 'delete': 1},
+      \   {'char': '<BS>', 'at': '`\n\%#\n`', 'input': '<BS>', 'delete': 1},
+      \ ]
 
 Plug 'junegunn/vim-easy-align'
 vmap <Tab> <Plug>(LiveEasyAlign)
@@ -1227,6 +1225,8 @@ Plug 'vimtaku/vim-textobj-keyvalue'
 
 Plug 'nelstrom/vim-textobj-rubyblock'
 
+Plug 'fourjay/vim-textobj-heredoc'
+
 "}}}
 
 "" Windows {{{
@@ -1282,7 +1282,9 @@ call plug#end()
 "Markdown
 let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json', 'ruby', 'sass', 'xml', 'html']
 
-" Required to be after plug#end()
+for rule in s:lexima_rules
+  call lexima#add_rule(rule)
+endfor
 
 " Colorscheme
 if has("nvim")
