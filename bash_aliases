@@ -203,20 +203,6 @@ g() {
   cd "$dir"
 }
 
-ff() {
-  local name="$1"
-  shift
-  local args="$@"
-  find . -type f -iname "*${name}*" $@
-}
-
-fd() {
-  local name="$1"
-  shift
-  local args="$@"
-  find . -type d -iname "*${name}*" $@
-}
-
 scp-tar() {
   local args=("$@")
   local len=${#args[@]}
