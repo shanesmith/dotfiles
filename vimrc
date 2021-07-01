@@ -2265,6 +2265,8 @@ command! CopyFileNameToClipboard let @+ = expand("%:t")
 " TODO steal completion from https://github.com/Shopify/vim-devilish/blob/master/plugin/devilish.vim#L57
 command! -nargs=1 -complete=custom,<SID>ProjComp P call <SID>Proj(<f-args>)
 command! -nargs=1 -complete=custom,<SID>ProjComp TP tabnew | call <SID>Proj(<f-args>)
+nnoremap <leader>p :P<Space>
+nnoremap <leader>tp :TP<Space>
 
 let g:proj_dirs="~/Code/,~/src/github.com/Shopify/"
 
