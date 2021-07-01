@@ -349,6 +349,7 @@ endfunction
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 nnoremap <C-p> :Files<CR>
+nnoremap <leader>g<C-p> :GFiles?<CR>
 
 let g:fzf_action = {
       \ 'ctrl-t': 'tab split',
