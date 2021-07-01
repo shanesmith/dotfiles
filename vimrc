@@ -634,6 +634,12 @@ nnoremap <leader>gg :vert G<CR>
 command! GResolve Gwrite | Git mergetool
 
 Plug 'rhysd/git-messenger.vim'
+let g:git_messenger_always_into_popup = 1
+function! s:setup_gitmessengerpopup() abort
+  nmap <buffer><C-o> o
+  nmap <buffer><C-i> O
+endfunction
+autocmd FileType gitmessengerpopup call <SID>setup_gitmessengerpopup()
 
 Plug 'tpope/vim-rhubarb'
 
