@@ -678,6 +678,10 @@ let g:multi_cursor_exit_from_visual_mode = 0
 let g:multi_cursor_exit_from_insert_mode = 0
 
 Plug 'mg979/vim-visual-multi'
+function! VM_Start()
+  nnoremap <silent> <Plug>(VM-Exit) :if g:Vm.extend_mode \| call b:VM_Selection.Global.cursor_mode() \| else \| noh \| call vm#reset() \| endif<CR>
+endfunction
+
 
 Plug 'tpope/vim-eunuch'
 
