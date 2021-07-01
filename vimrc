@@ -2208,14 +2208,14 @@ function! s:SyntaxGroup()
 endfunction
 
 nnoremap <leader>s :Scratch<CR>
-command! -nargs=? -complete=syntax Scratch call <SID>NewScratch(<f-args>)
-function! s:NewScratch(...)
+command! -nargs=? -complete=syntax Scratch call <SID>NewScratch(<q-mods>, <f-args>)
+function! s:NewScratch(mods, ...)
   let type = a:0 ? a:1 : 'markdown'
 
   if &ft == 'fern'
     enew
   else
-    vnew
+    exe a:mods 'new'
   endif
 
   exec "setf" type
