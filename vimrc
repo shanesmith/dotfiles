@@ -1397,8 +1397,6 @@ nnoremap <expr> gt ':<C-U>' . (v:count ? v:count : '') . 'tabnext<CR>'
 nnoremap gR :tabfirst<CR>
 nnoremap gT :tablast<CR>
 nmap <C-q> gr
-nmap <S-C-q> gR
-nmap <S-C-e> gT
 nmap <C-e> gt
 nmap <C-Tab> gt
 nmap <S-C-Tab> gr
