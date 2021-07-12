@@ -139,6 +139,12 @@ __dev_dev() {
   __colorize U_ "🔧"
 }
 
+__rosetta() {
+  if command -v sysctl >/dev/null && [[ $(sysctl -in sysctl.proc_translated) == "1" ]]; then
+    echo " 🌹"
+  fi
+}
+
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
   debian_chroot=$(cat /etc/debian_chroot)
@@ -147,7 +153,7 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
   fi
 fi
 
-HISTORY_NUMBER="$(__colorize_ps1 LK '\!')"
+HISTORY_NUMBER="$(__colorize_ps1 DW '\!')"
 
 TIME="$(__colorize_ps1 LK '\A')"
 
@@ -168,11 +174,12 @@ ${CWD}\
 \$(__vagrant_status)\
 \$(__docker_compose_status)\
 \$(__git_ps1 ' (%s)')\
+\$(__rosetta)\
 \$(__dev_dev)\
 \n\
-${HISTORY_NUMBER}\
- \
 ${TIME}\
+ \
+${HISTORY_NUMBER}\
  \
 ${PROMPT}\
  \
