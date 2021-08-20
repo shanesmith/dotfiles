@@ -476,18 +476,25 @@ alias devdev='dev use dev --backend && . ~/.bash_ps1'
 alias undevdev='dev use system --backend && . ~/.bash_ps1'
 alias isdevdev='[[ $__dev_source_dir != "/opt/dev" && -n $__dev_source_dir ]]'
 
-p_dirs=~/Code:~/src/github.com/Shopify
+P_PATH=~/Code:~/src/github.com/Shopify
 p() {
-  CDPATH="$p_dirs" cd $@
+  CDPATH="$P_PATH" cd $@
+}
+p_dirs() {
+  readarray -td ':' paths < <(echo -n "$P_PATH")
+
+  for p in "${paths[@]}"; do 
+    fd --type d -d1 . "$p"
+  done
 }
 _p_comp() {
   local cur="${COMP_WORDS[COMP_CWORD]}"
 
   COMPREPLY=()
 
-  IFS=':' read -ra dirs <<<"$p_dirs"
+  readarray -td ':' paths < <(echo -n "$P_PATH")
 
-  for dir in "${dirs[@]}"; do
+  for dir in "${paths[@]}"; do
     COMPREPLY=( "${COMPREPLY[@]}" $(cd "$dir" && compgen -d -- "$cur") )
   done
 }
