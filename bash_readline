@@ -101,25 +101,27 @@ _fzf_history() {
 }
 
 _fzf_files() {
-  local file="$(fzf -m --preview='bat --color=always -pp {}' | __escape)"
+  local dir="${1:-.}"
+  local file="$(fd --type f . "$dir" | fzf -m --preview='bat --color=always -pp {}' | __escape)"
   if [[ -n $file ]]; then
     __readline_insert "$file"
   fi
 }
 
 __fzf_get_dir() {
-  fd --type d | fzf -m --preview='tree -C {} | head -200' | __escape
+  local dir="${1:-.}"
+  fd ---type d . "$dir" | fzf -m --preview='tree -C {} | head -200' | __escape
 }
 
 _fzf_directories() {
-  local dir="$(__fzf_get_dir)"
+  local dir="$(__fzf_get_dir "$1")"
   if [[ -n $dir ]]; then
     __readline_insert "$dir"
   fi
 }
 
 _fzf_cd() {
-  local dir=$(__fzf_get_dir)
+  local dir="$(__fzf_get_dir "$1")"
   __readline_replace "cd ${dir}"
 }
 
@@ -164,14 +166,31 @@ _fzf_hub_chain() {
   __readline_insert "$branch"
 }
 
+_fzf_p_dirs() {
+  local dirs=$(p_dirs | fzf -m --preview='tree -C {} | head -200' | __escape)
+  if [[ -n $dirs ]]; then
+    __readline_insert "$dirs"
+  fi
+}
+
 _fzf_word() {
   local cmd
+  local args
 
-  local word=$(echo "${READLINE_LINE:0:$READLINE_POINT}" | awk '{print $NF}')
+  local mod
+  local orig_word=$(echo "${READLINE_LINE:0:$READLINE_POINT}" | awk '{print $NF}')
+
+  local word="$orig_word"
+
+  if [[ $word =~ : ]]; then
+    mod=${word##*:}
+    word=${word%%:*}
+  fi
 
   case "$word" in
     f)   cmd="_fzf_files" ;;
     d)   cmd="_fzf_directories" ;;
+    p)   cmd="_fzf_p_dirs" ;;
     gl)  cmd="_fzf_git_lol" ;;
     gla) cmd="_fzf_git_lall" ;;
     gs)  cmd="_fzf_git_status" ;;
@@ -185,13 +204,23 @@ _fzf_word() {
   esac
 
   if ! type -t "$cmd" >/dev/null; then
-    return
+    dir="${word/#\~/$HOME}"
+    if [[ -d $dir ]]; then
+      if [[ $mod == "d" ]]; then
+        cmd="_fzf_directories"
+      else
+        cmd="_fzf_files"
+      fi
+      args="'$dir'"
+    else
+      return
+    fi
   fi
 
-  READLINE_LINE="${READLINE_LINE:0:(($READLINE_POINT - ${#word}))}${READLINE_LINE:$READLINE_POINT}"
-  READLINE_POINT="$(($READLINE_POINT - ${#word}))"
+  READLINE_LINE="${READLINE_LINE:0:(($READLINE_POINT - ${#orig_word}))}${READLINE_LINE:$READLINE_POINT}"
+  READLINE_POINT="$(($READLINE_POINT - ${#orig_word}))"
 
-  eval "$cmd"
+  eval "$cmd $args"
 }
 
 if command -v fzf >/dev/null; then
