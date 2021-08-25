@@ -486,7 +486,6 @@ nnoremap <silent> <leader>tf :Fern . -reveal=%<CR>
 nnoremap <silent> <leader>tv :Fern . -reveal=% -opener=vsplit<CR>
 nnoremap <silent> <leader>ts :Fern . -reveal=% -opener=split<CR>
 nnoremap <silent> <leader>ty :Fern . -reveal=% -opener=tabedit<CR>
-nnoremap <silent> <Leader>tr :Fern ~/Code/rc -opener=tabedit<CR>
 
 function! s:init_fern() abort
   nmap <buffer> h <Plug>(fern-action-collapse)
@@ -2271,6 +2270,7 @@ command! -nargs=1 -complete=custom,<SID>ProjComp P call <SID>Proj(<f-args>)
 command! -nargs=1 -complete=custom,<SID>ProjComp TP tabnew | call <SID>Proj(<f-args>)
 nnoremap <leader>p :P<Space>
 nnoremap <leader>tp :TP<Space>
+nnoremap <silent> <Leader>tr :TP rc<CR>
 
 let g:proj_dirs="~/Code/,~/src/github.com/Shopify/"
 
