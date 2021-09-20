@@ -454,9 +454,6 @@ rebash() {
 }
 alias rbb=rebash
 
-cask() {
-  brew cask "$@"
-}
 alias upbrew="brew update && echo && brew outdated"
 
 icanhazip() {
@@ -598,6 +595,20 @@ macos_enable_webcam() {
 alias path="tr ':' '\n' <<<\$PATH"
 
 alias be="bundle exec "
+
+alias ibrew="arch -x86_64 /usr/local/bin/brew"
+alias abrew="arch -arm64 /opt/homebrew/bin/brew"
+
+i2abrew() {
+  local pkgs="$@"
+  ibrew uninstall $pkgs && abrew install $pkgs
+}
+
+
+a2ibrew() {
+  local pkgs="$@"
+  abrew uninstall $pkgs && ibrew install $pkgs
+}
 
 
 ####################

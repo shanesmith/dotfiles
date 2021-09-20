@@ -32,8 +32,11 @@ if [[ -x /usr/libexec/java_home ]]; then
   export JAVA_HOME=$(/usr/libexec/java_home)
 fi
 
-if command_exists brew; then
-  brew_prefix=$(brew --prefix)
+if [[ $(uname -m) == 'arm64' && -e /opt/homebrew/bin/brew ]]; then
+  brew_prefix=/opt/homebrew
+  export PATH=/opt/homebrew/bin:$PATH
+elif [[ -e /usr/local/bin/brew ]]; then
+  brew_prefix=/usr/local
 
   ## 0.8s
   # if brew list git >/dev/null 2>&1; then
