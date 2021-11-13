@@ -42,6 +42,7 @@
   por = push -u origin HEAD
   puf = push --force-with-lease
   rom = rebase origin/HEAD
+  roh = rebase origin/HEAD
   coo = checkout -
   intend-to-add = add --intent-to-add
   bmv = branch -m
