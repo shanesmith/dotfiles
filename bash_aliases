@@ -83,6 +83,18 @@ mvbak() {
   mv -i "$src" "$dest"
 }
 
+unmvbak() {
+  local src=${1%/}
+  local dest=${src%.bak}
+
+  if [[ -e $dest ]]; then
+    echo "Already exists: $dest"
+    return
+  fi
+
+  mv -i "$src" "$dest"
+}
+
 swapbak() {
   local src=${1%/}
   local dest=$src.bak$2
@@ -609,6 +621,9 @@ alias be="bundle exec "
 
 alias ibrew="arch -x86_64 /usr/local/bin/brew"
 alias abrew="arch -arm64 /opt/homebrew/bin/brew"
+
+alias ibash="arch -x86_64 /opt/homebrew/bin/bash"
+alias abash="arch -arm64 /opt/homebrew/bin/bash"
 
 i2abrew() {
   local pkgs="$@"
