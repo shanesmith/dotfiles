@@ -271,23 +271,10 @@ docker_bash() {
   docker run --rm -it "$1" bash
 }
 
-docker_clean_images() {
-  docker rmi $(docker images -q -f dangling=true)
-}
-
-docker_clean_containers() {
-  docker rm $(docker ps -f status=dead -f status=exited -aq)
-}
-
-docker_clean_all() {
-  docker_clean_containers
-  docker_clean_images
-}
-
-docker_launch_machine() {
-  docker-machine start
-  eval "$(docker-machine env)"
-  echo "Environment set."
+docker-desktop-logs() {
+  # https://docs.docker.com/desktop/mac/troubleshoot/#check-the-logs
+  pred='process matches ".*(ocker|vpnkit).*" || (process in {"taskgated-helper", "launchservicesd", "kernel"} && eventMessage contains[c] "docker")'
+  /usr/bin/log stream --style syslog --level=debug --color=always --predicate "$pred"
 }
 
 lsps() {
