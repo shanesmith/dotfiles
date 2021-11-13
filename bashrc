@@ -29,7 +29,7 @@ command_exists() {
 
 if [[ -x /usr/libexec/java_home ]]; then
   # macOS only?
-  export JAVA_HOME=$(/usr/libexec/java_home)
+  export JAVA_HOME=$(/usr/libexec/java_home 2>/dev/null)
 fi
 
 if [[ $(uname -m) == 'arm64' && -e /opt/homebrew/bin/brew ]]; then
@@ -144,6 +144,7 @@ sources=(
   "${HOME}/.bash_readline"
   "${HOME}/.bashrc.local"
   "${HOME}/.rvm/scripts/rvm"
+  "${HOME}/.cargo/env"
   "${HOME}/Code/bash-sneak/sneak.bash"
 )
 
@@ -156,6 +157,10 @@ for file in "${sources[@]}"; do
     . "$file"
   fi
 done
+
+# Enforced by dev
+[[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
+[[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
 
 if [[ -n $SUITUP ]]; then
   unset SUITUP
