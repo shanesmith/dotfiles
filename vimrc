@@ -506,15 +506,15 @@ function! s:init_fern() abort
   nmap <buffer> xx <Plug>(fern-action-clipboard-move)
   nmap <buffer> p <Plug>(fern-action-clipboard-paste)
 
-  nmap <buffer> m <Plug>(fern-action-mark)j
-  nmap <buffer> M <Plug>(fern-action-mark)k
+  nmap <buffer> <Tab> <Plug>(fern-action-mark)j
+  nmap <buffer> <S-Tab> <Plug>(fern-action-mark)k
 
   nmap <buffer> << <Plug>(fern-action-git-stage)
   nmap <buffer> >> <Plug>(fern-action-git-unstage)
 
   nmap <buffer> <C-c> <Plug>(fern-action-cancel)
 
-  vmap <buffer> m <Plug>(fern-action-mark)
+  vmap <buffer> <Tab> <Plug>(fern-action-mark)
   vmap <buffer> dd <Plug>(fern-action-mark)<Plug>(fern-action-remove)
   vmap <buffer> yy <Plug>(fern-action-mark)<Plug>(fern-action-clipboard-copy)
   vmap <buffer> xx <Plug>(fern-action-mark)<Plug>(fern-action-clipboard-move)
@@ -952,7 +952,6 @@ let g:ConflictDetection_WarnEvents = ''
 
 Plug 'kshenoy/vim-signature'
 " GotoNext/PrevMarkerAny unmap due to conflict with conflictmotions
-nnoremap m <nop>
 let g:SignatureMap = {
       \ 'Leader': "<leader>m",
       \ "ListBufferMarks": "<leader>m/",
@@ -1325,6 +1324,7 @@ nnoremap <expr> N 'nN'[v:searchforward]
 
 ""Show count of matches
 nnoremap <silent> <Leader>// :%s///rn<CR>
+command! CountMatches %s///rn
 
 ""Clear search (and Highlight)
 nnoremap <silent> <Leader>\ :call <SID>clear_search()<CR>
