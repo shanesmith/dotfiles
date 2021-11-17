@@ -31,3 +31,6 @@ set visible-stats On
 
 set show-all-if-ambiguous On
 # set show-all-if-unmodified On
+
+# Revert all history modification on enter
+set revert-all-at-newline On
