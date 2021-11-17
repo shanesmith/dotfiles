@@ -441,7 +441,11 @@ relative_path() {
 }
 
 port_holder() {
-  sudo lsof -nP -sTCP:LISTEN -i"TCP:$1"
+  if os_is_mac; then
+    sudo lsof -nP -sTCP:LISTEN -i"TCP${1:+:$1}"
+  else
+    sudo netstat -tnlp | grep ":${1:-.*} "
+  fi
 }
 
 rebash() {
@@ -483,7 +487,7 @@ p() {
 p_dirs() {
   readarray -td ':' paths < <(echo -n "$P_PATH")
 
-  for p in "${paths[@]}"; do 
+  for p in "${paths[@]}"; do
     fd --type d -d1 . "$p"
   done
 }
@@ -615,6 +619,32 @@ i2abrew() {
 a2ibrew() {
   local pkgs="$@"
   abrew uninstall $pkgs && ibrew install $pkgs
+}
+
+alias lctl='launchctl'
+
+podman-fw-list() {
+  curl http://localhost:7777/services/forwarder/all
+}
+
+podman-fw-expose() {
+  curl http://localhost:7777/services/forwarder/expose -X POST -d "$(cat <<EOS
+{
+  "local": "$1",
+  "remote": "$2"
+}
+EOS
+)"
+}
+
+
+podman-fw-unexpose() {
+  curl http://localhost:7777/services/forwarder/unexpose -X POST -d "$(cat <<EOS
+{
+  "local": "$1"
+}
+EOS
+)"
 }
 
 
