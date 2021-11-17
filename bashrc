@@ -163,6 +163,10 @@ if [[ -n $SUITUP ]]; then
   suitup
 fi
 
+# Required by dev
+[[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
+[[ -x /usr/local/bin/brew ]] && eval $(/usr/local/bin/brew shellenv)
+
 echo "startup: " $(( $(gdate +%s%3N) - $start ))
 
 # start with a happy :)
