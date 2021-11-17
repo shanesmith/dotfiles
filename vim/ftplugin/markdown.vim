@@ -3,6 +3,9 @@ setlocal colorcolumn=80 spell
 nnoremap <buffer> <silent> \= :call <SID>Underline("=")<CR>
 nnoremap <buffer> <silent> \- :call <SID>Underline("-")<CR>
 
+inoremap <buffer> <silent> <Tab> <Esc>>>A
+inoremap <buffer> <silent> <S-Tab> <Esc><<A
+
 function! s:Underline(char)
 
   let posline = line(".")
