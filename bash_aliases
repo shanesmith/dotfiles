@@ -226,10 +226,6 @@ scp-tar() {
   tar czf - --dereference -- "${files[@]}" | ssh "$dest_host" "tar xzvf - -C '${dest_path}'"
 }
 
-sshauth_reload() {
-  . ~/.bash_sshauth
-}
-
 alias sad=ssh-add
 
 alias cpsync="rsync -vahP"
