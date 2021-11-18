@@ -160,17 +160,17 @@ done
 
 # Enforced by dev
 [[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
-[[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
+[[ -x $brew_prefix/bin/brew ]] && eval $($brew_prefix/bin/brew shellenv)
+
+## Satisfy dev checks
+# [[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
+# [[ -x /usr/local/bin/brew ]] && eval $(/usr/local/bin/brew shellenv)
 
 if [[ -n $SUITUP ]]; then
   unset SUITUP
   tmux setenv -gu SUITUP
   suitup
 fi
-
-# Required by dev
-[[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
-[[ -x /usr/local/bin/brew ]] && eval $(/usr/local/bin/brew shellenv)
 
 echo "startup: " $(( $(gdate +%s%3N) - $start ))
 
