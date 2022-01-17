@@ -842,11 +842,6 @@ Plug 'sjl/gundo.vim'
 
 Plug 'dohsimpson/vim-macroeditor'
 
-Plug 'machakann/vim-highlightedyank'
-if !exists('##TextYankPost')
-  map y <Plug>(highlightedyank)
-endif
-
 Plug 'Konfekt/vim-alias'
 
 Plug 'meain/vim-package-info', { 'do': 'npm install' }
@@ -2299,6 +2294,9 @@ endfunction
 "}}}
 
 " AutoCommands {{{
+
+" Highlight on yank like machakann/vim-highlightedyank
+au TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=300}
 
 " " http://www.bestofvim.com/tip/auto-reload-your-vimrc/
 " augroup reload_vimrc
