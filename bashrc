@@ -76,6 +76,7 @@ export MYSQL_PS1="mysql://\u@\h \d> "
 export HISTCONTROL=ignoredups:ignorespace
 export HISTSIZE=1000
 export HISTFILESIZE=2000
+export HISTTIMEFORMAT="%F %T> "
 
 # default options for less
 export LESS="-SRi"
