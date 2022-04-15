@@ -397,11 +397,8 @@ gittop() {
   cd $(git top)
 }
 
-httphp() {
-  php -S 0.0.0.0:${1:-8080} >> httphp.log 2>&1 &
-}
 httpython() {
-  python -m SimpleHTTPServer ${1:-8080} >> httpython.log 2>&1 &
+  python3 -m http.server ${1:-8080} >> httpython.log 2>&1 &
 }
 
 # the space allows for aliases...
