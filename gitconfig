@@ -204,5 +204,6 @@
 
 [rerere]
   enabled = true
+
 [pull]
-	ff = only
+  ff = only
