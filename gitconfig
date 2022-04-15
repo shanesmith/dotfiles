@@ -139,7 +139,7 @@
   er-done = "!f() { git commit -m \"$1\" && git push; }; f"
   rmerge = "!f() { git rebase \"origin/$1\" && git checkout \"$1\" && git merge -; }; f"
   fixup = "!f() { if [[ -n \"$1\" && ! \"$1\" =~ ^-  ]]; then git commit --fixup=\"$1\" \"${@:2}\" ; else git commit --amend --reuse-message=HEAD \"$@\"; fi; }; f"
-  rb-current-commit = "!cat .git/rebase-apply/original-commit 2>/dev/null || cat .git/rebase-merge/stopped-sha 2>/dev/null" # original-commit == rebase && stopped-sha == interactive rebase
+  rb-current-commit = "!cat .git/rebase-apply/original-commit 2>/dev/null || cat .git/rebase-merge/stopped-sha 2>/dev/null || cat .git/rebase-merge/orig-head 2>/dev/null" # original-commit == rebase && stopped-sha == interactive rebase
   rb-diff-theirs = "!git show $(git rb-current-commit)"
   rb-diff-ours = "!git diff $(git base $(git rb-current-commit)) HEAD"
   mg-diff-theirs = "!git diff $(git base MERGE_HEAD) MERGE_HEAD"
