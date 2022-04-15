@@ -34,9 +34,19 @@ function! s:markdown_script_number()
   return snr
 endfunction
 
+function! s:get_url(snr)
+  let fname = '<SNR>'.a:snr.'_Markdown_GetUrlForPosition'
+
+  if !exists("*".fname)
+    return ""
+  endif
+
+  return call(fname, [line('.'), col('.')])
+endfunction
+
 function! s:open_or_create_link()
   let snr = s:markdown_script_number()
-  let l:url = call('<SNR>'.snr.'_Markdown_GetUrlForPosition', [line('.'), col('.')])
+  let l:url = s:get_url(snr)
   if l:url != ''
     call call('<SNR>'.snr.'_VersionAwareNetrwBrowseX', [l:url])
   else
