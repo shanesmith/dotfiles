@@ -89,13 +89,16 @@ $(which lesspipe.sh >/dev/null) && eval "$(lesspipe.sh)"
 ## 0.11s
 # $(which thefuck >/dev/null) && eval $(thefuck --alias)
 
-if command_exists rg; then
+if command_exists fd; then
+  export FZF_DEFAULT_COMMAND='fd --type f --follow --strip-cwd-prefix'
+  export FZF_DEFAULT_COMMAND_HIDDEN="${FZF_DEFAULT_COMMAND} --hidden"
+elif command_exists rg; then
   export FZF_DEFAULT_COMMAND='rg --files -g ""'
 elif command_exists ag; then
   export FZF_DEFAULT_COMMAND='ag -g ""'
 fi
 
-export FZF_DEFAULT_OPTS="--bind ctrl-j:down,ctrl-k:up"
+export FZF_DEFAULT_OPTS="--bind 'ctrl-j:down,ctrl-k:up,alt-a:toggle-all,ctrl-h:reload:$FZF_DEFAULT_COMMAND_HIDDEN {q} || true'"
 
 # needs to come before setting PS1 for __git_ps1 check
 if ! shopt -oq posix; then
