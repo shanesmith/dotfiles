@@ -174,7 +174,7 @@
   autosquash = true
 
 [diff]
-  algorithm = histogram
+  algorithm = patience
   colormoved = default
 
 [tig "bind"]
@@ -192,6 +192,12 @@
 
 [gc]
   writeCommitGraph = true
+
+[includeIf "gitdir:~/src/github.com/Shopify/"]
+  path = ~/.gitconfig.shopify
+
+[includeIf "gitdir:~/src/github.com/ShopifyUS/"]
+  path = ~/.gitconfig.shopify
 
 [fetch]
   prune = true

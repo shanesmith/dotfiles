@@ -10,6 +10,7 @@ DOTFILES="
   bash_sshauth
   bash_readline
   gitconfig
+  gitconfig.shopify
   gitignore
   gitmessage
   vimrc

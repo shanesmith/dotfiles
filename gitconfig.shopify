@@ -1,0 +1,4 @@
+# vim: ft=gitconfig
+
+[user]
+  email = shane.smith@shopify.com
