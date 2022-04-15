@@ -124,7 +124,7 @@ cs() {
   cd "$1" && ls
 }
 cddir() {
-  cd $(dirname "$1")
+  cd "$(dirname "$1")"
 }
 alias cdir="cddir"
 up() {
@@ -140,8 +140,8 @@ up() {
       x=$(pwd | perl -pe 's|(.*'$1'[^/]*)/.*|\1|i')
       ;;
   esac
-  echo $x
-  cd $x
+  echo "$x"
+  cd "$x"
 }
 mkcd() {
   mkdir -p "$1" && cd "$1"
