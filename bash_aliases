@@ -618,6 +618,12 @@ a2ibrew() {
 
 alias lctl='launchctl'
 
+alias pd=podman
+complete -o default -F __start_podman pd
+
+alias pdc=podman-compose
+alias pdm="podman machine "
+
 podman-fw-list() {
   curl http://localhost:7777/services/forwarder/all
 }
