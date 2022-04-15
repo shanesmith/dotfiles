@@ -47,6 +47,8 @@
   intend-to-add = add --intent-to-add
   bmv = branch -m
   BMV = branch -M
+  default-branch = !git symbolic-ref refs/remotes/origin/HEAD | cut -f4 -d/
+  com = !git checkout $(git default-branch)
 
 # Log
   lol = "!f() {   local extra=\"\"; if git rev-parse -q --verify '@{u}' >/dev/null 2>&1; then extra=\"$extra @{u}\"; fi; git log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cd>%Creset %s' --color --graph --date=relative HEAD $extra $@; }; f"
