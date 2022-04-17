@@ -1130,7 +1130,8 @@ nnoremap <silent> \** :TCommentBlock<CR>
 vnoremap <silent> \* :TCommentBlock<CR>
 nmap \ <Plug>TComment_gc
 nmap \* <Plug>TComment_Commentb
-nnoremap <silent> \p :exe "normal \<Plug>unimpairedPutAbove"<CR>=`]`[v`]:TCommentMaybeInline<CR>
+nnoremap <silent> \P :exe "normal \<Plug>unimpairedPutAbove"<CR>=`]`[v`]:TCommentMaybeInline<CR>
+nnoremap <silent> \p :exe "normal \<Plug>unimpairedPutBelow"<CR>=`]`[v`]:TCommentMaybeInline<CR>
 
 "}}}
 
