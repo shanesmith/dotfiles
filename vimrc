@@ -801,6 +801,26 @@ let g:sandwich#recipes = [
       \     'skip_break':   1,
       \     'input':        ['{', 'B'],
       \   },
+      \   {
+      \     'buns':         ['#{', '}'],
+      \     'nesting':      1,
+      \     'match_syntax': 1,
+      \     'skip_break':   1,
+      \     'input':        ['#{'],
+      \   },
+      \   {
+      \     'buns':         ['${', '}'],
+      \     'nesting':      1,
+      \     'match_syntax': 1,
+      \     'skip_break':   1,
+      \     'input':        ['${'],
+      \   },
+      \   {
+      \     'external':     ['iq', 'aq'],
+      \     'noremap':      0,
+      \     'action':       ['delete'],
+      \     'input':        ['q']
+      \   },
       \ ]
     " \   {
     " \     'buns':         ['{\', '\}'],
@@ -822,8 +842,33 @@ let g:sandwich#recipes = [
     " \     'input':        [')'],
     " \   },
 
+" Include preceding objects in function (ie: foo.bar())
+let g:sandwich#magicchar#f#patterns = [
+      \   {
+      \     'header' : '\<\%(\h\k*\.\)*\h\k*',
+      \     'bra'    : '(',
+      \     'ket'    : ')',
+      \     'footer' : '',
+      \   },
+      \ ]
+
+silent! nmap <unique><silent> S <Plug>(operator-sandwich-add)
+silent! xmap <unique><silent> S <Plug>(operator-sandwich-add)
 silent! nmap <unique><silent> sd <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
+silent! nmap <unique><silent> sda <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
 silent! nmap <unique><silent> sr <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
+silent! nmap <unique><silent> sra <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
+
+omap S <Plug>(textobj-sandwich-query-a)
+xmap is <Plug>(textobj-sandwich-query-i)
+xmap as <Plug>(textobj-sandwich-query-a)
+omap is <Plug>(textobj-sandwich-query-i)
+omap as <Plug>(textobj-sandwich-query-a)
+
+xmap iS <Plug>(textobj-sandwich-auto-i)
+xmap aS <Plug>(textobj-sandwich-auto-a)
+omap iS <Plug>(textobj-sandwich-auto-i)
+omap aS <Plug>(textobj-sandwich-auto-a)
 
 Plug 'tpope/vim-abolish'
 
