@@ -1102,6 +1102,23 @@ let s:lexima_rules = [
       \   {'char': '<BS>', 'at': '`\n\%#\n`', 'input': '<BS>', 'delete': 1},
       \ ]
 
+xnoremap sw :call <SID>SurroundWrap()<CR>
+xnoremap <C-s> :call <SID>SurroundWrap()<CR>
+inoremap <C-s> <C-o>veoho
+function! s:SurroundWrap()
+  let [line1, col1] = getpos("'<")[1:2]
+  let [line2, col2] = getpos("'>")[1:2]
+
+  " col1 is actually the 2nd character
+  let wrap_end = getline(line1)[col1]
+
+  call cursor(line2, col2)
+  exec "normal! a" . wrap_end
+
+  call cursor(line1, col1 + 1)
+  exec "normal! x"
+endfunction
+
 Plug 'junegunn/vim-easy-align'
 vmap <Tab> <Plug>(LiveEasyAlign)
 
