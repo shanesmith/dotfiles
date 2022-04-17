@@ -2111,10 +2111,11 @@ endfunction
 
 "Factor out
 " vnoremap <silent> <leader>f :call inputsave()<CR>gvc<C-R>=input("variable name: ")<CR><ESC>:call inputrestore()<CR>Ovar <C-R>. = ;<ESC>PA<CR><ESC>kWVjj:MultipleCursorFind __factored__<CR>c
-vnoremap <silent> <C-X>vv :call <SID>ExtractVariable(visualmode(), "var")<CR>
+vnoremap <silent> <C-X>vv :call <SID>ExtractVariable(visualmode())<CR>
 vnoremap <silent> <C-X>vl :call <SID>ExtractVariable(visualmode(), "let")<CR>
 vnoremap <silent> <C-X>vc :call <SID>ExtractVariable(visualmode(), "const")<CR>
-function! s:ExtractVariable(mode, decl) range
+function! s:ExtractVariable(mode, ...) range
+  let decl = a:0 ? " ".a:1 : ""
 
   call inputsave()
   let name = input("Name: ")
@@ -2128,13 +2129,11 @@ function! s:ExtractVariable(mode, decl) range
 
   let @h = matchstr(@h, '^\v\_s*\zs.{-}\ze\_s*$')
 
-  exec "normal! i".name."\<ESC>O".a:decl." ".name." = \<C-R>h;\<CR>\<ESC>k^W"
-
+  exec "normal! i".name."\<ESC>O".decl.name." = \<C-R>h;\<CR>\<ESC>k^W"
 endfunction
 
 vnoremap <silent> <C-X>f :call <SID>ExtractFunction(visualmode())<CR>
 function! s:ExtractFunction(mode) range
-
   call inputsave()
   let name = input("Name: ")
   call inputrestore()
@@ -2148,7 +2147,6 @@ function! s:ExtractFunction(mode) range
   let @h = matchstr(@h, '^\v\_s*\zs.{-}\ze\_s*$')
 
   exec "normal! i".name."()\<ESC>ofunction ".name."() {\<CR>\<C-R>h\<CR>}\<ESC>V%"
-
 endfunction
 
 "Switch case of first letter and insert
