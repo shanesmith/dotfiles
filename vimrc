@@ -1166,19 +1166,30 @@ let g:instant_markdown_autostart = 0
 
 "" Debugging {{{
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'onsails/lspkind-nvim'
+Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+Plug 'williamboman/nvim-lsp-installer'
+Plug 'ray-x/lsp_signature.nvim'
 
-inoremap <silent><expr> <CR> (pumvisible() ? "\<C-y>" : "\<CR>\<Plug>DiscretionaryEnd")
-inoremap <silent><expr> <c-space> coc#refresh()
-nmap <silent> <leader>yd <Plug>(coc-diagnostic-info)
-nmap <silent> <leader>yy <Plug>(coc-type-definition)
-nmap <silent> <leader>yi <Plug>(coc-implementation)
-nmap <silent> <leader>yr <Plug>(coc-references)
-noremap <silent> <leader>ya :CocAction<CR>
-nnoremap <silent> K :call CocAction('doHover')<CR>
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-nnoremap <expr> <C-]> CocHasProvider('definition') ? ':call CocAction("jumpDefinition")<CR>' : '<C-]>'
-nnoremap <expr> <C-W><C-]> CocHasProvider('definition') ? ':call CocAction("jumpDefinition", "split")<CR>' : '<C-]>'
+" inoremap <silent><expr> <CR> (pumvisible() ? "\<C-y>" : "\<CR>\<Plug>DiscretionaryEnd")
+" inoremap <silent><expr> <c-space> coc#refresh()
+" nmap <silent> <leader>yd <Plug>(coc-diagnostic-info)
+" nmap <silent> <leader>yy <Plug>(coc-type-definition)
+" nmap <silent> <leader>yi <Plug>(coc-implementation)
+" nmap <silent> <leader>yr <Plug>(coc-references)
+" noremap <silent> <leader>ya :CocAction<CR>
+" nnoremap <silent> K :call CocAction('doHover')<CR>
+"
+" nnoremap <expr> <C-]> CocHasProvider('definition') ? ':call CocAction("jumpDefinition")<CR>' : '<C-]>'
+" nnoremap <expr> <C-W><C-]> CocHasProvider('definition') ? ':call CocAction("jumpDefinition", "split")<CR>' : '<C-]>'
 
 " }}}
 
@@ -2421,5 +2432,109 @@ augroup syntax_sync
 augroup END
 
 "}}}
+
+lua <<EOF
+  local lspkind = require('lspkind')
+  local cmp = require('cmp')
+
+  cmp.setup({
+    snippet = {
+      expand = function(args)
+        vim.fn["UltiSnips#Anon"](args.body)
+      end,
+    },
+    mapping = {
+      ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+      ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+      ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }), { 'i', 's' }),
+      ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }), { 'i', 's' }),
+      ['<C-y>'] = cmp.config.disable,
+      ['<C-e>'] = cmp.mapping({
+        i = cmp.mapping.abort(),
+        c = cmp.mapping.close(),
+      }),
+      ['<CR>'] = cmp.mapping.confirm(),
+    },
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'ultisnips' },
+      { name = 'path' },
+    }, {
+      { name = 'buffer', keyword_length = 3 },
+    }),
+    formatting = {
+      format = lspkind.cmp_format({with_text = false, maxwidth = 50})
+    }
+  })
+
+  cmp.setup.cmdline('/', {
+    sources = {
+      { name = 'buffer', keyword_length = 3 }
+    }
+  })
+
+  -- cmp.setup.cmdline(':', {
+  --   sources = cmp.config.sources({
+  --     { name = 'path' }
+  --   }, {
+  --     { name = 'cmdline' }
+  --   })
+  -- })
+
+  local lspconfig = require('lspconfig')
+
+  local on_attach = function(client, bufnr)
+    require "lsp_signature".on_attach({
+      debug = true,  
+      log_path = "/Users/shane/lsp_sig.log"
+    })
+
+    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+    local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+    -- Enable completion triggered by <c-x><c-o>
+    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+    -- Mappings.
+    local opts = { noremap=true, silent=true }
+
+    buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+    buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+    buf_set_keymap('n', 'gK', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+    buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+    buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+    buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+    buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+    buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+    buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+    buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+    buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+    buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+    buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+    buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  end
+
+  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+  -- Use a loop to conveniently call 'setup' on multiple servers and
+  -- map buffer local keybindings when the language server attaches
+  local servers = { 'solargraph', 'bashls', 'dockerls', 'sorbet', 'vimls' }
+  for _, lsp in ipairs(servers) do
+    lspconfig[lsp].setup {
+      on_attach = on_attach,
+      capabilities = capabilities,
+      flags = {
+        debounce_text_changes = 150,
+      }
+    }
+  end
+
+  local lsp_installer = require("nvim-lsp-installer")
+  lsp_installer.on_server_ready(function(server) server:setup {} end)
+EOF
 
 " vim: set fdm=marker fdl=999:
