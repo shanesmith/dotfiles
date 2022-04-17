@@ -593,6 +593,8 @@ comm! Alternates :call s:alternates()
 
 "" Utilities {{{
 
+Plug 'inkarkat/vim-ingo-library'
+
 Plug 'axvr/zepl.vim'
 nmap <silent> gZ gziE
 
@@ -945,7 +947,7 @@ let g:colorizer_auto_color = 0
 let g:colorizer_colornames = 0
 let g:colorizer_use_virtual_text = 1
 
-Plug 'vim-scripts/ConflictDetection'
+Plug 'inkarkat/vim-ConflictDetection'
 let g:ConflictDetection_WarnEvents = ''
 
 Plug 'kshenoy/vim-signature'
@@ -1007,8 +1009,7 @@ nmap z <Plug>Sneak_s
 nmap Z <Plug>Sneak_S
 nnoremap ZZ ZZ
 
-"TODO replace this and ConflictDetection with https://github.com/rhysd/conflict-marker.vim ?
-Plug 'vim-scripts/ConflictMotions'
+Plug 'inkarkat/vim-ConflictMotions'
 " avoid conflict with vim-textobj-xmlattr
 let g:ConflictMotions_ConflictMapping = 'X'
 let g:ConflictMotions_SectionMapping = '='
@@ -1017,7 +1018,7 @@ nnoremap <leader>x+ :ConflictTake both<CR>
 " prevent accidental character deletion
 nnoremap <leader>x <nop>
 
-Plug 'vim-scripts/CountJump'
+Plug 'inkarkat/vim-CountJump'
 
 Plug 'andymass/vim-matchup'
 let g:matchup_matchparen_status_offscreen = 0
