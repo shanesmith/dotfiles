@@ -237,11 +237,12 @@ let g:ctrlsf_auto_focus = {
       \ "at": "start",
       \ }
 let g:ctrlsf_mapping = {
-      \ "split": [ "<C-S>" ],
-      \ "vsplit": [ "<C-V>" ],
+      \ "split": "<C-S>" ,
+      \ "vsplit": "<C-V>" ,
       \ "tab": { "key": [ "<C-T>" ], "suffix": ":CtrlSFOpen<CR>" },
       \ "next": "n",
-      \ "prev": "N"
+      \ "prev": "N",
+      \ "fzf" : "<C-f>",
       \ }
 nmap <leader>c <Plug>CtrlSFPrompt
 nnoremap <expr> <leader>C ':CtrlSF ' . ctrlsf#opt#GetOpt("pattern")
