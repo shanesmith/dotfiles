@@ -2320,23 +2320,35 @@ command! CopyFileNameToClipboard let @+ = expand("%:t")
 
 " TODO steal completion from https://github.com/Shopify/vim-devilish/blob/master/plugin/devilish.vim#L57
 command! -nargs=1 -complete=custom,<SID>ProjComp P call <SID>Proj(<f-args>)
-command! -nargs=1 -complete=custom,<SID>ProjComp TP tabnew | call <SID>Proj(<f-args>)
+command! -nargs=1 -complete=custom,<SID>ProjComp TP call <SID>Proj(<f-args>, 1)
 nnoremap <leader>p :P<Space>
 nnoremap <leader>tp :TP<Space>
 nnoremap <silent> <Leader>tr :TP rc<CR>
 
-let g:proj_dirs="~/Code/,~/src/github.com/Shopify/"
+let g:proj_dirs="~/Code/,~/src/github.com/Shopify/,~/src/github.com/ShopifyUS/,~/src/github.com/Shopify/spin/containers"
 
-function! s:Proj(dir)
+function! s:Proj(dir, tab = 0)
   let save_cdpath = &cdpath
 
   let &cdpath = join(map(split(g:proj_dirs, ","), "expand(v:val)"), ",")
 
-  exe 'cd' a:dir
+  if a:tab == 1
+    tabnew
+  endif
+
+  try
+    exe 'cd' a:dir
+  catch
+    echoerr "Could not find" a:dir
+    if a:tab == 1
+      tabclose
+    endif
+    return
+  finally
+    let &cdpath = save_cdpath
+  endtry
 
   Fern .
-
-  let &cdpath = save_cdpath
 endfunction
 
 function! s:ProjComp(ArgLead, CmdLine, CursorPos)
