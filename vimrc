@@ -108,8 +108,8 @@ set matchtime=1
 "Show incomplete command
 set showcmd
 
-"No preview window
-set completeopt-=preview
+"Needed by nvim-cmp
+set completeopt=menu,menuone,noselect
 
 "Display the status bar at the bottom
 set ruler
