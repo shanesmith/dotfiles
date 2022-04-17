@@ -498,7 +498,7 @@ function! s:init_fern() abort
   nmap <buffer> r <Plug>(fern-action-reload)
   nmap <buffer> s <Plug>(fern-action-open:split)
   nmap <buffer> v <Plug>(fern-action-open:vsplit)
-  nmap <buffer> t <Plug>(fern-action-open:tabedit)
+  nmap <buffer> t <Plug>(fern-action-open:tabedit)<Plug>(fern-action-cd)
 
   nmap <buffer> A <Plug>(fern-action-new-path)
 
@@ -524,7 +524,9 @@ function! s:init_fern() abort
   nmap <buffer> <C-f> gg<Plug>(fern-action-fzf-files)
   nmap <buffer> <C-g> gg<Plug>(fern-action-fzf-both)
 
-  nmap <buffer> P <Plug>(fern-action-custom-parent)
+  nmap <buffer> P <Plug>(fern-action-focus:parent)
+
+  nmap <buffer> yp <Plug>(fern-action-yank:path)
 endfunction
 
 function! s:FernFZFReveal(dict) abort
