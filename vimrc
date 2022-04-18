@@ -489,44 +489,44 @@ nnoremap <silent> <leader>ts :Fern . -reveal=% -opener=split<CR>
 nnoremap <silent> <leader>ty :Fern . -reveal=% -opener=tabedit<CR>
 
 function! s:init_fern() abort
-  nmap <buffer> h <Plug>(fern-action-collapse)
-  nmap <buffer> l <Plug>(fern-action-open-or-expand)
-  nmap <buffer> I <Plug>(fern-action-hidden:toggle)
-  nmap <buffer> u <Plug>(fern-action-leave)
-  nmap <buffer> c <Plug>(fern-action-enter)
-  nmap <buffer> C <Plug>(fern-action-tcd:root)
-  nmap <buffer> r <Plug>(fern-action-reload)
-  nmap <buffer> s <Plug>(fern-action-open:split)
-  nmap <buffer> v <Plug>(fern-action-open:vsplit)
-  nmap <buffer> t <Plug>(fern-action-open:tabedit)<Plug>(fern-action-tcd)
+  nmap <buffer><nowait> h <Plug>(fern-action-collapse)
+  nmap <buffer><nowait> l <Plug>(fern-action-open-or-expand)
+  nmap <buffer><nowait> I <Plug>(fern-action-hidden:toggle)
+  nmap <buffer><nowait> u <Plug>(fern-action-leave)
+  nmap <buffer><nowait> c <Plug>(fern-action-enter)
+  nmap <buffer><nowait> C <Plug>(fern-action-tcd:root)
+  nmap <buffer><nowait> r <Plug>(fern-action-reload)
+  nmap <buffer><nowait> s <Plug>(fern-action-open:split)
+  nmap <buffer><nowait> v <Plug>(fern-action-open:vsplit)
+  nmap <buffer><nowait> t <Plug>(fern-action-open:tabedit)<Plug>(fern-action-tcd)
 
-  nmap <buffer> A <Plug>(fern-action-new-path)
+  nmap <buffer><nowait> A <Plug>(fern-action-new-path)
 
-  nmap <buffer> dd <Plug>(fern-action-remove)
-  nmap <buffer> yy <Plug>(fern-action-clipboard-copy)
-  nmap <buffer> xx <Plug>(fern-action-clipboard-move)
-  nmap <buffer> p <Plug>(fern-action-clipboard-paste)
+  nmap <buffer><nowait> dd <Plug>(fern-action-remove)
+  nmap <buffer><nowait> yy <Plug>(fern-action-clipboard-copy)
+  nmap <buffer><nowait> xx <Plug>(fern-action-clipboard-move)
+  nmap <buffer><nowait> p <Plug>(fern-action-clipboard-paste)
 
-  nmap <buffer> <Tab> <Plug>(fern-action-mark)j
-  nmap <buffer> <S-Tab> <Plug>(fern-action-mark)k
+  nmap <buffer><nowait> <Tab> <Plug>(fern-action-mark)j
+  nmap <buffer><nowait> <S-Tab> <Plug>(fern-action-mark)k
 
-  nmap <buffer> << <Plug>(fern-action-git-stage)
-  nmap <buffer> >> <Plug>(fern-action-git-unstage)
+  nmap <buffer><nowait> << <Plug>(fern-action-git-stage)
+  nmap <buffer><nowait> >> <Plug>(fern-action-git-unstage)
 
-  nmap <buffer> <C-c> <Plug>(fern-action-cancel)
+  nmap <buffer><nowait> <C-c> <Plug>(fern-action-cancel)
 
-  vmap <buffer> <Tab> <Plug>(fern-action-mark)
-  vmap <buffer> dd <Plug>(fern-action-mark)<Plug>(fern-action-remove)
-  vmap <buffer> yy <Plug>(fern-action-mark)<Plug>(fern-action-clipboard-copy)
-  vmap <buffer> xx <Plug>(fern-action-mark)<Plug>(fern-action-clipboard-move)
+  vmap <buffer><nowait> <Tab> <Plug>(fern-action-mark)
+  vmap <buffer><nowait> dd <Plug>(fern-action-mark)<Plug>(fern-action-remove)
+  vmap <buffer><nowait> yy <Plug>(fern-action-mark)<Plug>(fern-action-clipboard-copy)
+  vmap <buffer><nowait> xx <Plug>(fern-action-mark)<Plug>(fern-action-clipboard-move)
 
-  nmap <buffer> <C-d> gg<Plug>(fern-action-fzf-dirs)
-  nmap <buffer> <C-f> gg<Plug>(fern-action-fzf-files)
-  nmap <buffer> <C-g> gg<Plug>(fern-action-fzf-both)
+  nmap <buffer><nowait> <C-d> gg<Plug>(fern-action-fzf-dirs)
+  nmap <buffer><nowait> <C-f> gg<Plug>(fern-action-fzf-files)
+  nmap <buffer><nowait> <C-g> gg<Plug>(fern-action-fzf-both)
 
-  nmap <buffer> P <Plug>(fern-action-focus:parent)
+  nmap <buffer><nowait> P <Plug>(fern-action-focus:parent)
 
-  nmap <buffer> yp <Plug>(fern-action-yank:path)
+  nmap <buffer><nowait> yp <Plug>(fern-action-yank:path)
 endfunction
 
 function! s:FernFZFReveal(dict) abort
