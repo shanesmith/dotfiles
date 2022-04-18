@@ -493,12 +493,12 @@ function! s:init_fern() abort
   nmap <buffer> l <Plug>(fern-action-open-or-expand)
   nmap <buffer> I <Plug>(fern-action-hidden:toggle)
   nmap <buffer> u <Plug>(fern-action-leave)
-  nmap <buffer> C <Plug>(fern-action-enter)
-  nmap <buffer> c <Plug>(fern-action-cd)
+  nmap <buffer> c <Plug>(fern-action-enter)
+  nmap <buffer> C <Plug>(fern-action-tcd:root)
   nmap <buffer> r <Plug>(fern-action-reload)
   nmap <buffer> s <Plug>(fern-action-open:split)
   nmap <buffer> v <Plug>(fern-action-open:vsplit)
-  nmap <buffer> t <Plug>(fern-action-open:tabedit)<Plug>(fern-action-cd)
+  nmap <buffer> t <Plug>(fern-action-open:tabedit)<Plug>(fern-action-tcd)
 
   nmap <buffer> A <Plug>(fern-action-new-path)
 
@@ -536,7 +536,6 @@ let g:Fern_mapping_fzf_file_sink = function('s:FernFZFReveal')
 let g:Fern_mapping_fzf_dir_sink = function('s:FernFZFReveal')
 
 function! s:VimEnterFern()
-
   if exists("s:std_in")
     return
   endif
@@ -544,13 +543,13 @@ function! s:VimEnterFern()
   if argc() != 0
     if isdirectory(argv(0))
       exec "cd" argv(0)
+      exec "tcd" argv(0)
     else
       return
     endif
   endif
 
   Fern . -wait
-
 endfunction
 
 augroup my-fern
@@ -2348,7 +2347,7 @@ function! s:Proj(dir, tab = 0)
   endif
 
   try
-    exe 'cd' a:dir
+    exe 'tcd' a:dir
   catch
     echoerr "Could not find" a:dir
     if a:tab == 1
@@ -2371,6 +2370,8 @@ function! s:ProjComp(ArgLead, CmdLine, CursorPos)
   
   return join(dirs, "\n")
 endfunction
+
+command! CDME tcd %:h
 
 "}}}
 
