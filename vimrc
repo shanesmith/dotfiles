@@ -527,13 +527,29 @@ function! s:init_fern() abort
   nmap <buffer><nowait> P <Plug>(fern-action-focus:parent)
 
   nmap <buffer><nowait> yp <Plug>(fern-action-yank:path)
+
+  " nmap <buffer><silent> <Plug>(fern-action-search) <Plug>(fern-action-ex=)CtrlSF<Space>
+  nnoremap <buffer><silent> <Plug>(fern-action-search) :<C-u>call <SID>FernSearch()<CR>
+  nmap <buffer><nowait> S <Plug>(fern-action-search)
 endfunction
 
-function! s:FernFZFReveal(dict) abort
-  execute "FernReveal" a:dict.relative_path
+let g:Fern_mapping_fzf_file_sink = { dict -> execute(printf("FernReveal %s", dict.relative_path)) }
+let g:Fern_mapping_fzf_dir_sink = { dict -> execute(printf("FernReveal %s", dict.relative_path)) }
+
+function! s:FernSearch() abort
+  let helper = fern#helper#new()
+
+  if helper.sync.get_scheme() !=# 'file'
+    throw printf("can only search in 'file' scheme")
+  endif
+
+  let path = helper.sync.get_cursor_node()._path
+
+  " when search is initiated through an action choice ('a' keymap) it ends up
+  " being run with `normal`, in which case feedkeys() won't work, so we break
+  " it out with an async call.... seems hacky, but it works!
+  call timer_start(0, { -> feedkeys(":CtrlSF  '" . path . "'\<Home>\<C-Right>\<Right>", 'n') })
 endfunction
-let g:Fern_mapping_fzf_file_sink = function('s:FernFZFReveal')
-let g:Fern_mapping_fzf_dir_sink = function('s:FernFZFReveal')
 
 function! s:VimEnterFern()
   if exists("s:std_in")
@@ -555,12 +571,9 @@ endfunction
 augroup my-fern
   autocmd! *
   autocmd FileType fern call s:init_fern()
-augroup END
 
-augroup VimEnterFern
-  au!
-  au StdinReadPre * let s:std_in=1
-  au VimEnter * ++nested call <SID>VimEnterFern()
+  autocmd StdinReadPre * let s:std_in=1
+  autocmd VimEnter * ++nested call <SID>VimEnterFern()
 augroup END
 
 Plug 'henrik/vim-qargs'
