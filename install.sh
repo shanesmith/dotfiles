@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# TODO install .bash_profile on macOS (others?) with `. ~/.bashrc`
-
 DOTFILES="
   bashrc
   bash_help
@@ -9,6 +7,7 @@ DOTFILES="
   bash_aliases
   bash_sshauth
   bash_readline
+  bash_profile
   gitconfig
   gitconfig.shopify
   gitignore
