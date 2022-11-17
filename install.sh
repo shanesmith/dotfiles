@@ -132,7 +132,7 @@ install_fonts() {
   fi
 }
 
-do_install() {
+link_dotfiles() {
   local ret=0
   for file in $DOTFILES; do
     local src=$(get_src "$file")
@@ -171,6 +171,12 @@ update_git_submodules() {
   git submodule update --init --recursive
 }
 
+install_vim_plugins() {
+  if command_exists "nvim"; then
+    nvim +PlugInstall +qall
+  fi
+}
+
 while [[ $# > 0 ]]; do
   case $1 in
     -f) set_force;;
@@ -186,20 +192,6 @@ update_git_submodules
 
 install_fonts
 
-do_install
+link_dotfiles
 
-SUCCESS=$?
-
-if [[ ! $FORCE  ]] && [[ $SUCCESS != 0 ]]; then
-
-  read -p "Some installations have failed since files already exist. Force? "
-
-  if [[ $REPLY == "y" ]] || [[ $REPLY == "yes" ]]; then
-    echo "Force installing..."
-    set_force
-    do_install
-  else
-    echo "Install canceled"
-  fi
-
-fi
+install_vim_plugins
