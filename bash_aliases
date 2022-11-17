@@ -251,6 +251,7 @@ alias now="date +%s"
 alias whoareyou="uname -a"
 
 alias svim="sudo vim"
+alias vim="nvim"
 
 alias hs="history"
 
