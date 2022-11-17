@@ -172,7 +172,7 @@ update_git_submodules() {
 
 install_vim_plugins() {
   if command_exists "nvim"; then
-    nvim +PlugInstall +qall
+    nvim +PlugInstall +qall | tee /tmp/plug_install.log
   fi
 }
 
