@@ -552,7 +552,7 @@ function! s:FernSearch() abort
 endfunction
 
 function! s:VimEnterFern()
-  if exists("s:std_in")
+  if exists("s:std_in") || !exists(":Fern")
     return
   endif
 
@@ -1362,9 +1362,11 @@ call plug#end()
 "Markdown
 let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json', 'ruby', 'sass', 'xml', 'html']
 
-for rule in s:lexima_rules
-  call lexima#add_rule(rule)
-endfor
+if exists("*lexima#add_rule")
+  for rule in s:lexima_rules
+    call lexima#add_rule(rule)
+  endfor
+endif
 
 " Colorscheme
 if has("nvim")
@@ -1381,7 +1383,9 @@ else
   colorscheme desert
 endif
 
-let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes) + g:sandwich#recipes
+if exists("g:sandwich#default_recipes")
+  let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes) + g:sandwich#recipes
+endif
 
 "}}}
 
@@ -2448,7 +2452,9 @@ augroup END
 "}}}
 
 lua <<EOF
-  local lspkind = require('lspkind')
+  local ok, lspkind = pcall(require, 'lspkind')
+  if not ok then return end
+
   local cmp = require('cmp')
 
   cmp.setup({
