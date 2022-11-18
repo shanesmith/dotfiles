@@ -487,6 +487,8 @@ nnoremap <silent> <leader>tf :Fern . -reveal=%<CR>
 nnoremap <silent> <leader>tv :Fern . -reveal=% -opener=vsplit<CR>
 nnoremap <silent> <leader>ts :Fern . -reveal=% -opener=split<CR>
 nnoremap <silent> <leader>ty :Fern . -reveal=% -opener=tabedit<CR>
+command! -nargs=* VFern Fern -opener=vsplit <args>
+command! -nargs=* SFern Fern -opener=split <args>
 
 function! s:init_fern() abort
   nmap <buffer><nowait> h <Plug>(fern-action-collapse)
@@ -638,9 +640,11 @@ endfunction
 Plug 'lambdalisue/gina.vim'
 
 Plug 'tpope/vim-fugitive'
-nnoremap <leader>g :vert G
-nnoremap <leader>gg :vert G<CR>
+nnoremap <leader>g :leftabove vert G
+nnoremap <leader>gg :leftabove vert G<CR>
+nnoremap <leader>G :leftabove vert G<CR>
 command! GResolve Gwrite | Git mergetool
+command! GB execute line('.') . "GBrowse %"
 
 Plug 'rhysd/git-messenger.vim'
 let g:git_messenger_always_into_popup = 1
