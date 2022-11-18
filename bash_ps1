@@ -140,7 +140,7 @@ __dev_dev() {
 }
 
 __rosetta() {
-  if command -v sysctl >/dev/null && [[ $(sysctl -in sysctl.proc_translated) == "1" ]]; then
+  if os_is_mac && [[ $(sysctl -in sysctl.proc_translated) == "1" ]]; then
     echo " 🌹"
   fi
 }
@@ -157,8 +157,9 @@ HISTORY_NUMBER="$(__colorize_ps1 DW '\!')"
 
 TIME="$(__colorize_ps1 LK '\A')"
 
-# HOST_COLOR=$([ -z "$SSH_CLIENT" ] && echo "${G}" || echo "${Y}" )
-HOST="$(__colorize_ps1 $([ -z "$SSH_CLIENT" ] && echo "G" || echo "Y" ]) '\u@\h')"
+HOST=$([[ -n $SPIN ]] && sed "s/\\..*//" < /etc/spin/machine/fqdn || echo '\h')
+USER_HOST_COLOR=$([ -n "$SSH_CLIENT" ] && echo "Y" || echo "G" )
+USER_HOST="$(__colorize_ps1 $USER_HOST_COLOR "\\u@$HOST")"
 
 CWD="$(__colorize_ps1 C '\w')"
 
@@ -166,7 +167,7 @@ PROMPT="\$"
 
 PS1="\
 ${debian_chroot}\
-${HOST}\
+${USER_HOST}\
 \$(__smiley)\
 ${CWD}\
 \$(__ssh_keys_status)\
@@ -185,4 +186,4 @@ ${PROMPT}\
  \
 "
 
-unset HISTORY_NUMBER TIME HOST CWD PROMPT
+unset HISTORY_NUMBER TIME HOST USER_HOST_COLOR USER_HOST CWD PROMPT

@@ -177,6 +177,12 @@ install_vim_plugins() {
   fi
 }
 
+chsh_bash() {
+  if [[ -n $SPIN ]]; then
+    sudo chsh -s /usr/bin/bash spin
+  fi
+}
+
 while [[ $# > 0 ]]; do
   case $1 in
     -f) set_force;;
@@ -195,3 +201,5 @@ install_fonts
 link_dotfiles
 
 install_vim_plugins
+
+chsh_bash

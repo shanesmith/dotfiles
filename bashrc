@@ -9,20 +9,22 @@
 # # Enable tracing
 # set -x
 
-start=$(gdate +%s%3N)
-mark=$start
-stamp() {
-  return
-  local now=$(gdate +%s%3N)
-  local elapsed=$(( $now - $mark ))
-  echo $elapsed $1
-  mark=$now
+now_ms() {
+  if command -v gdate >/dev/null; then
+    gdate +%s%3N
+  else
+    date +%s%3N
+  fi
 }
+
+_start=$(now_ms)
 
 export GOPATH=$HOME/go
 export NODE_PATH=$NODE_PATH:$HOME/.node/lib/node_modules
 
 export PATH=$PATH:$HOME/.node/bin:$HOME/bin.local:$HOME/bin:$GOPATH/bin
+
+export RC_INSTALL_DIR=$(cd "$(dirname "$(readlink ~/.bashrc)")" && pwd)
 
 command_exists() {
   command -v $1 >/dev/null
@@ -108,7 +110,7 @@ if ! shopt -oq posix; then
     . $brew_prefix/etc/bash_completion
   fi
 
-  for file in "${HOME}"/Code/rc/completion/*; do
+  for file in "${RC_INSTALL_DIR}"/completion/*; do
     . "$file"
   done
 
@@ -155,7 +157,10 @@ if [[ -n $SUITUP ]]; then
   suitup
 fi
 
-echo "startup: " $(( $(gdate +%s%3N) - $start ))
+echo "startup: " $(( $(now_ms) - $_start ))
+
+unset -f stamp now_ms
+unset _start
 
 # start with a happy :)
 true

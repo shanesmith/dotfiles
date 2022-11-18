@@ -24,6 +24,8 @@ sshauth_reload() {
     fi
   fi
 
+  mkdir -p $(dirname "$SSH_ENV")
+
   # Start authenticating daemon
   # No authentications set up yet, just starting daemon!
   ssh-agent -t 1d | head -2 > ${SSH_ENV}
