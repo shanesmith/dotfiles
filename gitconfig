@@ -40,7 +40,7 @@
   AA = add -A
   ad = add
   por = push -u origin HEAD
-  puf = push --force-with-lease
+  puf = push --force-with-lease --force-if-includes
   rom = rebase origin/HEAD
   roh = rebase origin/HEAD
   coo = checkout -
