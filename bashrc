@@ -19,9 +19,10 @@ stamp() {
   mark=$now
 }
 
+export GOPATH=$HOME/go
 export NODE_PATH=$NODE_PATH:$HOME/.node/lib/node_modules
 
-export PATH=$PATH:$HOME/.node/bin:$HOME/bin.local:$HOME/bin
+export PATH=$PATH:$HOME/.node/bin:$HOME/bin.local:$HOME/bin:$GOPATH/bin
 
 command_exists() {
   command -v $1 >/dev/null
