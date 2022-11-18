@@ -244,7 +244,13 @@ _fzf_word() {
       fi
       args="'$dir'"
     else
-      return
+      orig_word=
+      case "$readline_up_to_point" in
+        git\ @(ad?(d)|rm|remove)) cmd="_fzf_git_status_unstaged" ;;
+        git\ @(co|checkout)) cmd="_fzf_git_history" ;;
+        kill) cmd="_fzf_ps" ;;
+        *) return ;;
+      esac
     fi
   fi
 
