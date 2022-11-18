@@ -626,27 +626,20 @@ alias pdc=podman-compose
 alias pdm="podman machine "
 
 podman-fw-list() {
-  curl http://localhost:7777/services/forwarder/all
+  podman machine ssh curl --silent --fail-with-body http://gateway.containers.internal/services/forwarder/all | jq
 }
 
 podman-fw-expose() {
-  curl http://localhost:7777/services/forwarder/expose -X POST -d "$(cat <<EOS
-{
-  "local": "$1",
-  "remote": "$2"
-}
-EOS
-)"
+  podman machine ssh curl --silent --fail-with-body http://gateway.containers.internal/services/forwarder/expose -X POST -d "'{\"local\":\"$1\", \"remote\":\"$2\"}'"
 }
 
 
 podman-fw-unexpose() {
-  curl http://localhost:7777/services/forwarder/unexpose -X POST -d "$(cat <<EOS
-{
-  "local": "$1"
+  podman machine ssh curl --silent --fail-with-body http://gateway.containers.internal/services/forwarder/unexpose -X POST -d "'{\"local\":\"$1\"}'"
 }
-EOS
-)"
+
+pd-history() {
+  podman history --no-trunc --format "{{.ID}}\t{{.Size}}\t{{.CreatedBy}}" "$@" | less
 }
 
 
