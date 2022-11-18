@@ -637,7 +637,7 @@ function! s:NewRepl(...)
   wincmd p
 endfunction
 
-Plug 'lambdalisue/gina.vim'
+" Plug 'lambdalisue/gin.vim'
 
 Plug 'tpope/vim-fugitive'
 nnoremap <leader>g :leftabove vert G
