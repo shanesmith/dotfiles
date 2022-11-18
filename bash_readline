@@ -1,8 +1,12 @@
 #!/bin/bash
 
 __readline_insert() {
-  READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}$1${READLINE_LINE:$READLINE_POINT}"
-  READLINE_POINT=$(( $READLINE_POINT + ${#1} ))
+  local text=$1
+  if [[ ${READLINE_POINT} -ne 0 && ${READLINE_LINE:((${READLINE_POINT} - 1)):1} != " " ]]; then
+    text=" $text"
+  fi
+  READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}${text}${READLINE_LINE:$READLINE_POINT}"
+  READLINE_POINT=$(( $READLINE_POINT + ${#text} - 1 ))
 }
 
 __readline_replace() {
@@ -178,7 +182,10 @@ _fzf_word() {
   local args
 
   local mod
-  local orig_word=$(echo "${READLINE_LINE:0:$READLINE_POINT}" | awk '{print $NF}')
+  local readline_up_to_point=${READLINE_LINE:0:$READLINE_POINT}
+  readline_up_to_point=${readline_up_to_point%%*( )}
+  READLINE_POINT=${#readline_up_to_point}
+  local orig_word=$(awk '{print $NF}' <<<"$readline_up_to_point")
 
   local word="$orig_word"
 
@@ -217,7 +224,7 @@ _fzf_word() {
     fi
   fi
 
-  READLINE_LINE="${READLINE_LINE:0:(($READLINE_POINT - ${#orig_word}))}${READLINE_LINE:$READLINE_POINT}"
+  READLINE_LINE="${readline_up_to_point:0:(($READLINE_POINT - ${#orig_word}))}${READLINE_LINE:$READLINE_POINT}"
   READLINE_POINT="$(($READLINE_POINT - ${#orig_word}))"
 
   eval "$cmd $args"
