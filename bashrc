@@ -50,10 +50,6 @@ if [[ -n $brew_prefix && -d $brew_prefix/opt/nvm ]]; then
   . $brew_prefix/opt/nvm/nvm.sh
 fi
 
-if command_exists docker-machine; then
-  eval "$(docker-machine env 2>/dev/null)"
-fi
-
 # If not running interactively, stop here
 [ -z "$PS1" ] && return
 
@@ -104,8 +100,6 @@ export FZF_DEFAULT_OPTS="--bind 'ctrl-j:down,ctrl-k:up,alt-a:toggle-all,ctrl-h:r
 # needs to come before setting PS1 for __git_ps1 check
 if ! shopt -oq posix; then
 
-  export DOCKER_COMPLETION_SHOW_IMAGE_IDS="non-intermediate"
-
   if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
   elif [ -f /etc/bash_completion ]; then
@@ -117,15 +111,6 @@ if ! shopt -oq posix; then
   for file in "${HOME}"/Code/rc/completion/*; do
     . "$file"
   done
-
-  if [ -d /Applications/Docker.app ]; then
-    . /Applications/Docker.app/Contents/Resources/etc/docker.bash-completion
-    . /Applications/Docker.app/Contents/Resources/etc/docker-compose.bash-completion
-  fi
-
-  if command_exists grunt; then
-    . <(grunt --completion=bash)
-  fi
 
   if command_exists gerrit; then
     . <(gerrit completion)
