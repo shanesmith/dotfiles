@@ -160,7 +160,6 @@
   editor = nvim
   excludesfile = ~/.gitignore
   commentChar = auto
-  commitGraph = true
   pager = diff-so-fancy | less --tabs=4 -RF
 
 [merge]
@@ -174,7 +173,6 @@
   autosquash = true
 
 [diff]
-  algorithm = patience
   colormoved = default
 
 [tig "bind"]
@@ -186,12 +184,6 @@
 
 [include]
   path = ~/.gitconfig.local
-
-[protocol]
-  version = 2
-
-[gc]
-  writeCommitGraph = true
 
 [includeIf "gitdir:~/src/github.com/Shopify/"]
   path = ~/.gitconfig.shopify
