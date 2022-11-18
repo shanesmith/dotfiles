@@ -1309,7 +1309,7 @@ Plug 'vimtaku/vim-textobj-keyvalue'
 
 Plug 'nelstrom/vim-textobj-rubyblock'
 
-Plug 'fourjay/vim-textobj-heredoc'
+Plug 'shanesmith/vim-textobj-heredoc'
 
 "}}}
 
