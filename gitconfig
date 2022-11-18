@@ -160,7 +160,7 @@
   editor = nvim
   excludesfile = ~/.gitignore
   commentChar = auto
-  pager = diff-so-fancy | less --tabs=4 -RF
+  pager = diff-maybe-fancy | less --tabs=4 -RF
 
 [merge]
   defaultToUpstream = true
@@ -206,4 +206,4 @@
   useBuiltin = false
 
 [interactive]
-  diffFilter = diff-so-fancy --patch
+  diffFilter = diff-maybe-fancy --patch
