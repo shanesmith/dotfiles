@@ -199,3 +199,11 @@
 
 [pull]
   ff = only
+
+[add "interactive"]
+  # fix for diff-so-fancy
+  # https://github.com/so-fancy/diff-so-fancy/issues/437
+  useBuiltin = false
+
+[interactive]
+  diffFilter = diff-so-fancy --patch
