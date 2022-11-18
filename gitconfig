@@ -184,12 +184,16 @@
 
 [include]
   path = ~/.gitconfig.local
+  path = ~/.config/dev/gitconfig
 
 [includeIf "gitdir:~/src/github.com/Shopify/"]
   path = ~/.gitconfig.shopify
 
 [includeIf "gitdir:~/src/github.com/ShopifyUS/"]
   path = ~/.gitconfig.shopify
+
+[includeIf "gitdir:~/Code/podman/"]
+  path = ~/.gitconfig.podman
 
 [fetch]
   prune = true

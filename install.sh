@@ -10,6 +10,7 @@ DOTFILES="
   bash_profile
   gitconfig
   gitconfig.shopify
+  gitconfig.podman
   gitignore
   gitmessage
   vimrc
