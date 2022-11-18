@@ -275,7 +275,7 @@ docker-desktop-logs() {
 }
 
 lsps() {
-  ps aux | grep -i "$1" | grep -v grep
+  ps -e -o 'user,pid,stat,%cpu,%mem,command' | awk "NR==1 || /$1/ && \$6 != \"awk\""
 }
 
 lshs() {
