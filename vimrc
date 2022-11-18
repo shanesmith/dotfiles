@@ -1558,10 +1558,10 @@ vnoremap gw w
 onoremap gw w
 onoremap <silent> <expr> w ':<C-U>normal! v' . v:count1 . 'iw<CR>'
 
-vnoremap <silent> W aW
+vnoremap <silent> W iW
 vnoremap gW W
 onoremap gW W
-onoremap <silent> <expr> W ':<C-U>normal! v' . v:count1 . 'aW<CR>'
+onoremap <silent> <expr> W ':<C-U>normal! v' . v:count1 . 'iW<CR>'
 
 "Map U to redo
 nnoremap U :redo<CR>
@@ -1945,8 +1945,10 @@ inoremap <A-l> <Right>
 "Easier substitute
 "TODO use https://stackoverflow.com/a/6271254/1333402
 nnoremap <leader>r :%s/\<<C-r><C-w>\>/<C-r><C-w>
-vnoremap <leader>r "hy:<C-\>e<SID>subsub()<CR>
-function! s:subsub()
+nnoremap <leader>R :%s/\<<C-r><C-w>\>/
+vnoremap <leader>r "hy:<C-\>e<SID>subsub(1)<CR>
+vnoremap <leader>R "hy:<C-\>e<SID>subsub(0)<CR>
+function! s:subsub(repeat)
   let delimiters = "/#@+,"
   let numlines = strlen(substitute(@h, "[^\\n]", "", "g"))
   if numlines == 0
@@ -1964,7 +1966,9 @@ function! s:subsub()
       return
     endif
 
-    let cmd = "%s" . delim . @h . delim . @h
+    let replace = a:repeat ? @h : ""
+
+    let cmd = "%s" . delim . @h . delim . replace
   else
     let cmd = "'<,'>s/"
   endif
