@@ -73,12 +73,34 @@ _fzf_git_status() {
 
   # TODO preview probably won't work with a space in the path
   local preview="_fzf_git_status_preview {}"
-  local file="$(git status --short | fzf -m --preview-window=down --preview="$preview" | awk '{print $2}' | __escape)"
+  local file="$(git -c color.status=always status --short | fzf --ansi -m --preview-window=down --preview="$preview" | awk '{print $2}' | __escape)"
+  __readline_insert "$file"
+}
+
+_fzf_git_status_unstaged() {
+  export -f _fzf_git_status_preview
+
+  # TODO preview probably won't work with a space in the path
+  local preview="_fzf_git_status_preview {}"
+  local file="$(git -c color.status=always status --short | grep '^.[^ ]*\s[^ ]' | fzf --ansi -m --preview-window=down --preview="$preview" | awk '{print $2}' | __escape)"
+  __readline_insert "$file"
+}
+
+_fzf_git_status_staged() {
+  export -f _fzf_git_status_preview
+
+  # TODO preview probably won't work with a space in the path
+  local preview="_fzf_git_status_preview {}"
+  local file="$(git -c color.status=always status --short | grep '^[^ ]' | fzf --ansi -m --preview-window=down --preview="$preview" | awk '{print $2}' | __escape)"
   __readline_insert "$file"
 }
 
 _fzf_git_status_untracked() {
-  local file="$(git status --short | grep -O '^??' | fzf -m | awk '{print $2}' | __escape)"
+  export -f _fzf_git_status_preview
+
+  # TODO preview probably won't work with a space in the path
+  local preview="_fzf_git_status_preview {}"
+  local file="$(git -c color.status=always status --short | grep -O '^[^ ]*??[^ ]*\s' | fzf --ansi -m --preview-window=down --preview="$preview" | awk '{print $2}' | __escape)"
   __readline_insert "$file"
 }
 
@@ -201,7 +223,9 @@ _fzf_word() {
     gl)  cmd="_fzf_git_lol" ;;
     gla) cmd="_fzf_git_lall" ;;
     gs)  cmd="_fzf_git_status" ;;
-    gsu) cmd="_fzf_git_status_untracked" ;;
+    gsut)cmd="_fzf_git_status_untracked" ;;
+    gsus)cmd="_fzf_git_status_unstaged" ;;
+    gssg)cmd="_fzf_git_status_staged" ;;
     gh)  cmd="_fzf_git_history" ;;
     grp) cmd="_fzf_gerrit_patch" ;;
     gb)  cmd="_fzf_git_branch" ;;
