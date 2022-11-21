@@ -643,6 +643,10 @@ pd-history() {
 }
 
 
+alias journalctl="/usr/bin/journalctl --no-hostname"
+alias sc=systemctl
+alias jc=journalctl
+
 ####################
 ## Hub Chain
 ####################
