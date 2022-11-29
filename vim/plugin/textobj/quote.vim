@@ -1,4 +1,4 @@
-if !exists("*textobj#user#plugin")
+if exists('g:loaded_textobj_quote')
   finish
 endif
 
@@ -70,4 +70,4 @@ function! s:getQuotePos(q)
   return pos
 endfunction
 
-
+let g:loaded_textobj_entire = 1
