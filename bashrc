@@ -26,6 +26,8 @@ export PATH=$PATH:$HOME/.node/bin:$HOME/bin.local:$HOME/bin:$GOPATH/bin
 
 export RC_INSTALL_DIR=$(cd "$(dirname "$(readlink ~/.bashrc)")" && pwd)
 
+export DEV_SPIN_ALLOW_UP=1
+
 command_exists() {
   command -v $1 >/dev/null
 }
