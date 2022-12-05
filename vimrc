@@ -247,7 +247,7 @@ let g:ctrlsf_mapping = {
 nmap <leader>c <Plug>CtrlSFPrompt
 nnoremap <expr> <leader>C ':CtrlSF ' . ctrlsf#opt#GetOpt("pattern")
 vmap <leader>c <Plug>CtrlSFVwordPath
-nnoremap <silent> <leader>/c :call <SID>CtrlSFSetSearch()<CR>
+nnoremap <silent> <leader>/c <Cmd>call <SID>CtrlSFSetSearch()<CR>
 
 function! s:CtrlSFSetSearch()
   let  @/=ctrlsf#pat#Regex()
@@ -255,12 +255,12 @@ function! s:CtrlSFSetSearch()
 endfunction
 
 function! g:CtrlSFAfterMainWindowInit()
-  nnoremap <silent><buffer> <CR> :call <SID>CtrlSFOpenWithPreviousWindow()<CR>
-  nnoremap <silent><buffer> <C-CR> :call <SID>CtrlSFChooseWindowOpen()<CR>
-  nnoremap <silent><buffer> <C-E> :call <SID>CtrlSFNextFile('')<CR>
-  nnoremap <silent><buffer> <C-Y> :call <SID>CtrlSFNextFile('b')<CR>
-  nnoremap <silent><buffer> n :call <SID>CtrlSFNextMatch(1)<CR>
-  nnoremap <silent><buffer> N :call <SID>CtrlSFNextMatch(0)<CR>
+  nnoremap <silent><buffer> <CR>   <Cmd>call <SID>CtrlSFOpenWithPreviousWindow()<CR>
+  nnoremap <silent><buffer> <C-CR> <Cmd>call <SID>CtrlSFChooseWindowOpen()<CR>
+  nnoremap <silent><buffer> <C-E>  <Cmd>call <SID>CtrlSFNextFile('')<CR>
+  nnoremap <silent><buffer> <C-Y>  <Cmd>call <SID>CtrlSFNextFile('b')<CR>
+  nnoremap <silent><buffer> n      <Cmd>call <SID>CtrlSFNextMatch(1)<CR>
+  nnoremap <silent><buffer> N      <Cmd>call <SID>CtrlSFNextMatch(0)<CR>
 endfunction
 
 function! s:CtrlSFNextMatch(forward)
@@ -349,8 +349,8 @@ endfunction
 
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-nnoremap <C-p> :Files<CR>
-nnoremap <leader>g<C-p> :GFiles?<CR>
+nnoremap <C-p> <Cmd>Files<CR>
+nnoremap <leader>g<C-p> <Cmd>GFiles?<CR>
 
 let g:fzf_action = {
       \ 'ctrl-t': 'tab split',
@@ -482,11 +482,11 @@ highlight link FernGitModified Special
 highlight link FernGitUnmerged Special
 highlight link FernGitStaged   Type
 highlight link FernGitCleaned  Type
-nnoremap <silent> <C-t> :Fern . -reveal=%<CR>
-nnoremap <silent> <leader>tf :Fern . -reveal=%<CR>
-nnoremap <silent> <leader>tv :Fern . -reveal=% -opener=vsplit<CR>
-nnoremap <silent> <leader>ts :Fern . -reveal=% -opener=split<CR>
-nnoremap <silent> <leader>ty :Fern . -reveal=% -opener=tabedit<CR>
+nnoremap <silent> <C-t> <Cmd>Fern . -reveal=%<CR>
+nnoremap <silent> <leader>tf <Cmd>Fern . -reveal=%<CR>
+nnoremap <silent> <leader>tv <Cmd>Fern . -reveal=% -opener=vsplit<CR>
+nnoremap <silent> <leader>ts <Cmd>Fern . -reveal=% -opener=split<CR>
+nnoremap <silent> <leader>ty <Cmd>Fern . -reveal=% -opener=tabedit<CR>
 command! -nargs=* VFern Fern -opener=vsplit <args>
 command! -nargs=* SFern Fern -opener=split <args>
 
@@ -531,7 +531,7 @@ function! s:init_fern() abort
   nmap <buffer><nowait> yp <Plug>(fern-action-yank:path)
 
   " nmap <buffer><silent> <Plug>(fern-action-search) <Plug>(fern-action-ex=)CtrlSF<Space>
-  nnoremap <buffer><silent> <Plug>(fern-action-search) :<C-u>call <SID>FernSearch()<CR>
+  nnoremap <buffer><silent> <Plug>(fern-action-search) <Cmd>call <SID>FernSearch()<CR>
   nmap <buffer><nowait> S <Plug>(fern-action-search)
 endfunction
 
@@ -583,14 +583,14 @@ Plug 'henrik/vim-qargs'
 Plug 'chrisbra/Recover.vim'
 
 Plug 'francoiscabrol/ranger.vim'
-nnoremap <C-f> :Ranger<CR>
+nnoremap <C-f> <Cmd>Ranger<CR>
 
 Plug 'rbgrouleff/bclose.vim'
 
 Plug 'tpope/vim-projectionist'
-nnoremap <leader>aa :A<CR>
-nnoremap <leader>av :AV<CR>
-nnoremap <leader>as :AS<CR>
+nnoremap <leader>aa <Cmd>A<CR>
+nnoremap <leader>av <Cmd>AV<CR>
+nnoremap <leader>as <Cmd>AS<CR>
 
 function! s:alternates() abort
   let alternates = projectionist#query_file('alternate', {})
@@ -601,7 +601,7 @@ function! s:alternates() abort
   let options = { 'source': source }
   call fzf#run(fzf#wrap('Alternates', options))
 endfunction
-comm! Alternates :call s:alternates()
+comm! Alternates <Cmd>call s:alternates()
 
 "}}}
 
@@ -640,9 +640,9 @@ endfunction
 " Plug 'lambdalisue/gin.vim'
 
 Plug 'tpope/vim-fugitive'
-nnoremap <leader>g :leftabove vert G
-nnoremap <leader>gg :leftabove vert G<CR>
-nnoremap <leader>G :leftabove vert G<CR>
+nnoremap <leader>g  :leftabove vert G
+nnoremap <leader>gg <Cmd>leftabove vert G<CR>
+nnoremap <leader>G  <Cmd>leftabove vert G<CR>
 command! GResolve Gwrite | Git mergetool
 command! GB execute line('.') . "GBrowse %"
 
@@ -744,9 +744,9 @@ autocmd FileType javascript,typescript,javascriptreact,typescriptreact let b:swi
       \ ]
 
 Plug 'lfilho/cosco.vim'
-autocmd FileType javascript,typescript.tsx,typescript,typescriptreact,php,css,scss,java,c,cpp nnoremap <buffer> <silent> ;; :call <SID>custom_cosco()<CR>
-autocmd FileType javascript,typescript.tsx,typescript,typescriptreact,php,css,scss,java,c,cpp vnoremap <buffer> <silent> ;; :call cosco#commaOrSemiColon()<CR>
-autocmd FileType javascript,typescript.tsx,typescript,typescriptreact,php,css,scss,java,c,cpp inoremap <buffer> <silent> ;; <C-o>:call <SID>custom_cosco()<CR>
+autocmd FileType javascript,typescript.tsx,typescript,typescriptreact,php,css,scss,java,c,cpp nnoremap <buffer> <silent> ;; <Cmd>call <SID>custom_cosco()<CR>
+autocmd FileType javascript,typescript.tsx,typescript,typescriptreact,php,css,scss,java,c,cpp vnoremap <buffer> <silent> ;; <Cmd>call cosco#commaOrSemiColon()<CR>
+autocmd FileType javascript,typescript.tsx,typescript,typescriptreact,php,css,scss,java,c,cpp inoremap <buffer> <silent> ;; <Cmd>call <SID>custom_cosco()<CR>
 function! s:custom_cosco()
   let travel = 0
   if match(getline('.'), '^\s*$') != -1
@@ -767,10 +767,10 @@ nmap <silent> ]p =p
 
 " TODO update unimpaired plugin?
 if exists(":cabove")
-  nnoremap ]l :<C-u>exec (v:count ? v:count : "")."lbelow"<CR>zv
-  nnoremap [l :<C-u>exec (v:count ? v:count : "")."labove"<CR>zv
-  nnoremap ]q :<C-u>exec (v:count ? v:count : "")."cbelow"<CR>zv
-  nnoremap [q :<C-u>exec (v:count ? v:count : "")."cabove"<CR>zv
+  nnoremap ]l <Cmd>exec (v:count ? v:count : "")."lbelow"<CR>zv
+  nnoremap [l <Cmd>exec (v:count ? v:count : "")."labove"<CR>zv
+  nnoremap ]q <Cmd>exec (v:count ? v:count : "")."cbelow"<CR>zv
+  nnoremap [q <Cmd>exec (v:count ? v:count : "")."cabove"<CR>zv
 endif
 
 " UnconditionalPaste style character or line wise forced paste
@@ -791,10 +791,10 @@ function! s:LinePaste(p, ...)
   exe 'normal "' . register . a:p
   call setreg(register, l:original_reg, l:original_reg_type)
 endfunction
-nnoremap <silent> gcp :<c-u>call <SID>CharPaste('p')<cr>
-nnoremap <silent> gcP :<c-u>call <SID>CharPaste('P')<cr>
-nnoremap <silent> glp :<c-u>call <SID>LinePaste('p')<cr>
-nnoremap <silent> glP :<c-u>call <SID>LinePaste('P')<cr>
+nnoremap <silent> gcp <Cmd>call <SID>CharPaste('p')<cr>
+nnoremap <silent> gcP <Cmd>call <SID>CharPaste('P')<cr>
+nnoremap <silent> glp <Cmd>call <SID>LinePaste('p')<cr>
+nnoremap <silent> glP <Cmd>call <SID>LinePaste('P')<cr>
 
 Plug 'KabbAmine/lazyList.vim'
 
@@ -1067,8 +1067,8 @@ Plug 'inkarkat/vim-ConflictMotions'
 " avoid conflict with vim-textobj-xmlattr
 let g:ConflictMotions_ConflictMapping = 'X'
 let g:ConflictMotions_SectionMapping = '='
-nnoremap <leader>x= :ConflictTake both<CR>
-nnoremap <leader>x+ :ConflictTake both<CR>
+nnoremap <leader>x= <Cmd>ConflictTake both<CR>
+nnoremap <leader>x+ <Cmd>ConflictTake both<CR>
 " prevent accidental character deletion
 nnoremap <leader>x <nop>
 
@@ -1118,8 +1118,8 @@ let s:lexima_rules = [
       \   {'char': '<BS>', 'at': '`\n\%#\n`', 'input': '<BS>', 'delete': 1},
       \ ]
 
-xnoremap sw :call <SID>SurroundWrap()<CR>
-xnoremap <C-s> :call <SID>SurroundWrap()<CR>
+xnoremap sw <Cmd>call <SID>SurroundWrap()<CR>
+xnoremap <C-s> <Cmd>call <SID>SurroundWrap()<CR>
 inoremap <C-s> <C-o>veoho
 function! s:SurroundWrap()
   let [line1, col1] = getpos("'<")[1:2]
@@ -1140,14 +1140,14 @@ vmap <Tab> <Plug>(LiveEasyAlign)
 
 Plug 'tomtom/tcomment_vim'
 let g:tcomment_maps = 0
-nnoremap <silent> \\ :TComment<CR>
-vnoremap <silent> \\ :TCommentMaybeInline<CR>
-nnoremap <silent> \** :TCommentBlock<CR>
-vnoremap <silent> \* :TCommentBlock<CR>
-nmap \ <Plug>TComment_gc
+nnoremap <silent> \\  <Cmd>TComment<CR>
+vnoremap <silent> \\  <Cmd>TCommentMaybeInline<CR>
+nnoremap <silent> \** <Cmd>TCommentBlock<CR>
+vnoremap <silent> \*  <Cmd>TCommentBlock<CR>
+nmap \  <Plug>TComment_gc
 nmap \* <Plug>TComment_Commentb
-nnoremap <silent> \P :exe "normal \<Plug>unimpairedPutAbove"<CR>=`]`[v`]:TCommentMaybeInline<CR>
-nnoremap <silent> \p :exe "normal \<Plug>unimpairedPutBelow"<CR>=`]`[v`]:TCommentMaybeInline<CR>
+nnoremap <silent> \P <Cmd>exe "normal \<Plug>unimpairedPutAbove"<CR>=`]`[v`]:TCommentMaybeInline<CR>
+nnoremap <silent> \p <Cmd>exe "normal \<Plug>unimpairedPutBelow"<CR>=`]`[v`]:TCommentMaybeInline<CR>
 
 "}}}
 
@@ -1317,15 +1317,15 @@ Plug 'shanesmith/vim-textobj-heredoc'
 
 Plug 'wesQ3/vim-windowswap'
 let g:windowswap_map_keys = 0
-nnoremap <silent> <C-w>w :call WindowSwap#EasyWindowSwap()<CR>
-nnoremap <silent> <C-w><C-w> :call WindowSwap#EasyWindowSwap()<CR>
+nnoremap <silent> <C-w>w     <Cmd>call WindowSwap#EasyWindowSwap()<CR>
+nnoremap <silent> <C-w><C-w> <Cmd>call WindowSwap#EasyWindowSwap()<CR>
 
 Plug 'christoomey/vim-tmux-navigator'
 let g:tmux_navigator_disable_when_zoomed = 1
-inoremap <silent> <c-h> <ESC>:TmuxNavigateLeft<cr>
-inoremap <silent> <c-j> <ESC>:TmuxNavigateDown<cr>
-inoremap <silent> <c-k> <ESC>:TmuxNavigateUp<cr>
-inoremap <silent> <c-l> <ESC>:TmuxNavigateRight<cr>
+inoremap <silent> <c-h> <Cmd>TmuxNavigateLeft<cr>
+inoremap <silent> <c-j> <Cmd>TmuxNavigateDown<cr>
+inoremap <silent> <c-k> <Cmd>TmuxNavigateUp<cr>
+inoremap <silent> <c-l> <Cmd>TmuxNavigateRight<cr>
 
 Plug 'ericpruitt/tmux.vim'
 
@@ -1347,8 +1347,8 @@ Plug 'AndrewRadev/undoquit.vim'
 Plug 'tommcdo/vim-exchange'
 
 Plug 'AndrewRadev/sideways.vim', { 'branch': 'main' }
-nnoremap <leader><left> :SidewaysLeft<CR>
-nnoremap <leader><right> :SidewaysRight<CR>
+nnoremap <leader><left>  <Cmd>SidewaysLeft<CR>
+nnoremap <leader><right> <Cmd>SidewaysRight<CR>
 
 Plug 'AndrewRadev/splitjoin.vim', { 'branch': 'main' }
 let g:splitjoin_trailing_comma = 1
@@ -1396,13 +1396,13 @@ endif
 " Mappings {{{
 
 "Resync syntax
-nnoremap <F12> :syntax sync fromstart<CR>
+nnoremap <F12> <Cmd>syntax sync fromstart<CR>
 
 "Write
-nnoremap <Leader>w :w<CR>
+nnoremap <Leader>w <Cmd>w<CR>
 
 "Close Tab
-nnoremap <C-w>X :tabclose<CR>
+nnoremap <C-w>X <Cmd>tabclose<CR>
 
 ""Consistent next/prev result
 nnoremap <expr> n 'Nn'[v:searchforward]
@@ -1413,18 +1413,18 @@ nnoremap <silent> <Leader>// :%s///rn<CR>
 command! CountMatches %s///rn
 
 ""Clear search (and Highlight)
-nnoremap <silent> <Leader>\ :call <SID>clear_search()<CR>
+nnoremap <silent> <Leader>\ <Cmd>call <SID>clear_search()<CR>
 
 "Search history navigation
 " TODO add vmap *
-nnoremap <silent> [/ :call <SID>search_hist('back')<CR>
-nnoremap <silent> ]/ :call <SID>search_hist('forward')<CR>
-nnoremap <silent> *  :call <SID>search_cword(1, 1)<CR>
+nnoremap <silent> [/ <Cmd>call <SID>search_hist('back')<CR>
+nnoremap <silent> ]/ <Cmd>call <SID>search_hist('forward')<CR>
+nnoremap <silent> *  <Cmd>call <SID>search_cword(1, 1)<CR>
 " TODO repurpose #
-nnoremap <silent> #  :call <SID>search_cword(1, 0)<CR>
-nnoremap <silent> g* :call <SID>search_cword(0, 1)<CR>
-nnoremap <silent> g# :call <SID>search_cword(0, 0)<CR>
-nnoremap <silent> <2-LeftMouse> :call <SID>search_cword(1, 1)<CR>
+nnoremap <silent> #  <Cmd>call <SID>search_cword(1, 0)<CR>
+nnoremap <silent> g* <Cmd>call <SID>search_cword(0, 1)<CR>
+nnoremap <silent> g# <Cmd>call <SID>search_cword(0, 0)<CR>
+nnoremap <silent> <2-LeftMouse> <Cmd>call <SID>search_cword(1, 1)<CR>
 
 function! s:search_cword(word_bound, forwards)
   let pre = ""
@@ -1479,8 +1479,8 @@ endfunction
 "Tab switching
 nnoremap <expr> gr ':<C-U>' . (v:count ? v:count . 'tabnext' : 'tabprev') . '<CR>'
 nnoremap <expr> gt ':<C-U>' . (v:count ? v:count : '') . 'tabnext<CR>'
-nnoremap gR :tabfirst<CR>
-nnoremap gT :tablast<CR>
+nnoremap gR <Cmd>tabfirst<CR>
+nnoremap gT <Cmd>tablast<CR>
 nmap <C-q> gr
 nmap <C-e> gt
 nmap <C-Tab> gt
@@ -1489,7 +1489,7 @@ nmap <S-C-Tab> gr
 "Stop accidentaly recording
 function! s:MacroMap()
   nnoremap ! q
-  nnoremap !! :call <SID>RecordMacro()<cr>
+  nnoremap !! <Cmd>call <SID>RecordMacro()<cr>
 endfunction
 function! s:MacroUnmap()
   nunmap !
@@ -1497,7 +1497,7 @@ function! s:MacroUnmap()
 endfunction
 function! s:RecordMacro()
   call <SID>MacroUnmap()
-  nnoremap ! :call <SID>StopRecordMacro()<cr>
+  nnoremap ! <Cmd>call <SID>StopRecordMacro()<cr>
   normal! qq
 endfunction
 function! s:StopRecordMacro()
@@ -1537,11 +1537,11 @@ nnoremap q? q?
 call <SID>MacroMap()
 
 nnoremap @@ @q
-vnoremap @@ :normal! @@<CR>
+vnoremap @@ <Cmd>normal! @@<CR>
 " TODO complete this...
 " vnoremap @x
 
-xnoremap <C-n> :norm<Space>
+xnoremap <C-n> <Cmd>norm<Space>
 
 "Visual select last pasted
 "http://vim.wikia.com/wiki/Selecting_your_pasted_text
@@ -1564,10 +1564,10 @@ onoremap gW W
 onoremap <silent> <expr> W ':<C-U>normal! v' . v:count1 . 'iW<CR>'
 
 "Map U to redo
-nnoremap U :redo<CR>
+nnoremap U <Cmd>redo<CR>
 
 "Squash blank lines
-nnoremap <silent> <leader><BS> :call <SID>squash_blank_lines()<CR>
+nnoremap <silent> <leader><BS> <Cmd>call <SID>squash_blank_lines()<CR>
 
 function! s:squash_blank_lines(...)
   let leaveblanklines = a:0 ? a:1 : 1
@@ -1580,31 +1580,31 @@ function! s:squash_blank_lines(...)
 endfunction
 
 "Move lines up/down
-nnoremap <silent> <C-Up>    :<C-u>call <SID>moveit('up',    v:count1, 'n')<CR>
-nnoremap <silent> <C-Down>  :<C-u>call <SID>moveit('down',  v:count1, 'n')<CR>
-nnoremap <silent> <C-Left>  :<C-u>call <SID>moveit('left',  v:count1, 'n')<CR>
-nnoremap <silent> <C-Right> :<C-u>call <SID>moveit('right', v:count1, 'n')<CR>
-vnoremap <silent> <C-Up>    :call      <SID>moveit('up',    v:count1, visualmode())<CR>
-vnoremap <silent> <C-Down>  :call      <SID>moveit('down',  v:count1, visualmode())<CR>
-vnoremap <silent> <C-Left>  :call      <SID>moveit('left',  v:count1, visualmode())<CR>
-vnoremap <silent> <C-Right> :call      <SID>moveit('right', v:count1, visualmode())<CR>
-inoremap <silent> <C-Up>    <C-o>:call <SID>moveit('up',    1,        'i')<cr>
-inoremap <silent> <C-Down>  <C-o>:call <SID>moveit('down',  1,        'i')<cr>
-inoremap <silent> <C-Left>  <C-o>:call <SID>moveit('left',  1,        'i')<CR>
-inoremap <silent> <C-Right> <C-o>:call <SID>moveit('right', 1,        'i')<CR>
+nnoremap <silent> <C-Up>    <Cmd>call <SID>moveit('up',    v:count1, 'n')<CR>
+nnoremap <silent> <C-Down>  <Cmd>call <SID>moveit('down',  v:count1, 'n')<CR>
+nnoremap <silent> <C-Left>  <Cmd>call <SID>moveit('left',  v:count1, 'n')<CR>
+nnoremap <silent> <C-Right> <Cmd>call <SID>moveit('right', v:count1, 'n')<CR>
+vnoremap <silent> <C-Up>    <Cmd>call <SID>moveit('up',    v:count1, visualmode())<CR>
+vnoremap <silent> <C-Down>  <Cmd>call <SID>moveit('down',  v:count1, visualmode())<CR>
+vnoremap <silent> <C-Left>  <Cmd>call <SID>moveit('left',  v:count1, visualmode())<CR>
+vnoremap <silent> <C-Right> <Cmd>call <SID>moveit('right', v:count1, visualmode())<CR>
+inoremap <silent> <C-Up>    <Cmd>call <SID>moveit('up',    1,        'i')<cr>
+inoremap <silent> <C-Down>  <Cmd>call <SID>moveit('down',  1,        'i')<cr>
+inoremap <silent> <C-Left>  <Cmd>call <SID>moveit('left',  1,        'i')<CR>
+inoremap <silent> <C-Right> <Cmd>call <SID>moveit('right', 1,        'i')<CR>
 
-nnoremap <silent> <S-Up>    :<C-u>call <SID>moveit('up',    v:count1, 'n')<CR>
-nnoremap <silent> <S-Down>  :<C-u>call <SID>moveit('down',  v:count1, 'n')<CR>
-nnoremap <silent> <S-Left>  :<C-u>call <SID>moveit('left',  v:count1, 'n')<CR>
-nnoremap <silent> <S-Right> :<C-u>call <SID>moveit('right', v:count1, 'n')<CR>
-vnoremap <silent> <S-Up>    :call      <SID>moveit('up',    v:count1, visualmode())<CR>
-vnoremap <silent> <S-Down>  :call      <SID>moveit('down',  v:count1, visualmode())<CR>
-vnoremap <silent> <S-Left>  :call      <SID>moveit('left',  v:count1, visualmode())<CR>
-vnoremap <silent> <S-Right> :call      <SID>moveit('right', v:count1, visualmode())<CR>
-inoremap <silent> <S-Up>    <C-o>:call <SID>moveit('up',    1,        'i')<cr>
-inoremap <silent> <S-Down>  <C-o>:call <SID>moveit('down',  1,        'i')<cr>
-inoremap <silent> <S-Left>  <C-o>:call <SID>moveit('left',  1,        'i')<CR>
-inoremap <silent> <S-Right> <C-o>:call <SID>moveit('right', 1,        'i')<CR>
+nnoremap <silent> <S-Up>    <Cmd>call <SID>moveit('up',    v:count1, 'n')<CR>
+nnoremap <silent> <S-Down>  <Cmd>call <SID>moveit('down',  v:count1, 'n')<CR>
+nnoremap <silent> <S-Left>  <Cmd>call <SID>moveit('left',  v:count1, 'n')<CR>
+nnoremap <silent> <S-Right> <Cmd>call <SID>moveit('right', v:count1, 'n')<CR>
+vnoremap <silent> <S-Up>    <Cmd>call <SID>moveit('up',    v:count1, visualmode())<CR>
+vnoremap <silent> <S-Down>  <Cmd>call <SID>moveit('down',  v:count1, visualmode())<CR>
+vnoremap <silent> <S-Left>  <Cmd>call <SID>moveit('left',  v:count1, visualmode())<CR>
+vnoremap <silent> <S-Right> <Cmd>call <SID>moveit('right', v:count1, visualmode())<CR>
+inoremap <silent> <S-Up>    <Cmd>call <SID>moveit('up',    1,        'i')<cr>
+inoremap <silent> <S-Down>  <Cmd>call <SID>moveit('down',  1,        'i')<cr>
+inoremap <silent> <S-Left>  <Cmd>call <SID>moveit('left',  1,        'i')<CR>
+inoremap <silent> <S-Right> <Cmd>call <SID>moveit('right', 1,        'i')<CR>
 
 function! s:moveit(where, count, mode) range
 
@@ -1766,10 +1766,10 @@ nnoremap <Leader><Space> i<Space><ESC>l
 "New lines
 nnoremap <Leader><CR> i<CR><ESC>
 
-nnoremap <silent> <Leader>O :<C-U>call <SID>InsertBlankLine('n-up', v:count1)<CR>
-nnoremap <silent> <Leader>o :<C-U>call <SID>InsertBlankLine('n-down', v:count1)<CR>
+nnoremap <silent> <Leader>O <Cmd>call <SID>InsertBlankLine('n-up', v:count1)<CR>
+nnoremap <silent> <Leader>o <Cmd>call <SID>InsertBlankLine('n-down', v:count1)<CR>
 
-vnoremap <silent> <Leader>o :call <SID>InsertBlankLine(visualmode(), v:count1)<CR>
+vnoremap <silent> <Leader>o <Cmd>call <SID>InsertBlankLine(visualmode(), v:count1)<CR>
 
 inoremap <silent> <C-o><C-o> <C-\><C-o>:call <SID>InsertBlankLine('n-both', 1)<CR>
 inoremap <silent> <C-o><C-i> <C-o>"_cc
@@ -1799,32 +1799,32 @@ vnoremap = =gv
 "Text-object for matching whole-line pairs
 " TODO delete only up until a closing bracket on top line or opening bracket
 " on last line in order to handle `} else {`
-vnoremap <silent> A{ :normal! [{V%<CR>
-vnoremap <silent> A} :normal! [{V%<CR>
-vnoremap <silent> AB :normal! [{V%<CR>
-vnoremap <silent> A( :normal! [(V%<CR>
-vnoremap <silent> A) :normal! [(V%<CR>
-vnoremap <silent> Ab :normal! [(V%<CR>
-vnoremap <silent> A[ :call searchpair('\[', '', '\]', 'bW') \| normal! V%<CR>
-vnoremap <silent> A] :call searchpair('\[', '', '\]', 'bW') \| normal! V%<CR>
-onoremap <silent> A{ :normal! [{V%<CR>
-onoremap <silent> A} :normal! [{V%<CR>
-onoremap <silent> AB :normal! [{V%<CR>
-onoremap <silent> A( :normal! [(V%<CR>
-onoremap <silent> A) :normal! [(V%<CR>
-onoremap <silent> Ab :normal! [(V%<CR>
-onoremap <silent> A[ :call searchpair('\[', '', '\]', 'bW') \| normal! V%<CR>
-onoremap <silent> A] :call searchpair('\[', '', '\]', 'bW') \| normal! V%<CR>
+vnoremap <silent> A{ <Cmd>normal! [{V%<CR>
+vnoremap <silent> A} <Cmd>normal! [{V%<CR>
+vnoremap <silent> AB <Cmd>normal! [{V%<CR>
+vnoremap <silent> A( <Cmd>normal! [(V%<CR>
+vnoremap <silent> A) <Cmd>normal! [(V%<CR>
+vnoremap <silent> Ab <Cmd>normal! [(V%<CR>
+vnoremap <silent> A[ <Cmd>call searchpair('\[', '', '\]', 'bW') \| normal! V%<CR>
+vnoremap <silent> A] <Cmd>call searchpair('\[', '', '\]', 'bW') \| normal! V%<CR>
+onoremap <silent> A{ <Cmd>normal! [{V%<CR>
+onoremap <silent> A} <Cmd>normal! [{V%<CR>
+onoremap <silent> AB <Cmd>normal! [{V%<CR>
+onoremap <silent> A( <Cmd>normal! [(V%<CR>
+onoremap <silent> A) <Cmd>normal! [(V%<CR>
+onoremap <silent> Ab <Cmd>normal! [(V%<CR>
+onoremap <silent> A[ <Cmd>call searchpair('\[', '', '\]', 'bW') \| normal! V%<CR>
+onoremap <silent> A] <Cmd>call searchpair('\[', '', '\]', 'bW') \| normal! V%<CR>
 
 "TODO sandwich recipes?
-nnoremap <silent> sD{ :call <SID>delete_surrounding_lines("{}")<CR>
-nnoremap <silent> sD} :call <SID>delete_surrounding_lines("{}")<CR>
-nnoremap <silent> sD[ :call <SID>delete_surrounding_lines("[]")<CR>
-nnoremap <silent> sD] :call <SID>delete_surrounding_lines("[]")<CR>
-nnoremap <silent> sD( :call <SID>delete_surrounding_lines("()")<CR>
-nnoremap <silent> sD) :call <SID>delete_surrounding_lines("()")<CR>
+nnoremap <silent> sD{ <Cmd>call <SID>delete_surrounding_lines("{}")<CR>
+nnoremap <silent> sD} <Cmd>call <SID>delete_surrounding_lines("{}")<CR>
+nnoremap <silent> sD[ <Cmd>call <SID>delete_surrounding_lines("[]")<CR>
+nnoremap <silent> sD] <Cmd>call <SID>delete_surrounding_lines("[]")<CR>
+nnoremap <silent> sD( <Cmd>call <SID>delete_surrounding_lines("()")<CR>
+nnoremap <silent> sD) <Cmd>call <SID>delete_surrounding_lines("()")<CR>
 
-nnoremap <silent> sDr :call <SID>delete_surrounding_object("ar")<CR>
+nnoremap <silent> sDr <Cmd>call <SID>delete_surrounding_object("ar")<CR>
 
 function! s:delete_surrounding_lines(pair)
   let syng_strcom = 'string\|regex\|comment\c'
@@ -1907,8 +1907,8 @@ nnoremap : ;
 vnoremap ; :
 vnoremap : ;
 
-nnoremap <silent> j :<C-u>call <SID>tiptap('j')<CR>
-nnoremap <silent> k :<C-u>call <SID>tiptap('k')<CR>
+nnoremap <silent> j <Cmd>call <SID>tiptap('j')<CR>
+nnoremap <silent> k <Cmd>call <SID>tiptap('k')<CR>
 
 let s:tiptap_count = 0
 let s:tiptap_reltime = reltime()
@@ -1977,13 +1977,13 @@ endfunction
 
 "Quick Quit
 nnoremap Q <nop>
-nnoremap QQ :quit<CR>
-nnoremap Q!! :quit!<CR>
+nnoremap QQ  <Cmd>quit<CR>
+nnoremap Q!! <Cmd>quit!<CR>
 
 "You Paste
-nnoremap <silent> _ :let b:silly=v:register<CR>:set opfunc=<SID>PasteOver<CR>g@
-vnoremap <silent> _ :<C-U>let b:silly=v:register<CR>:<C-U>call <SID>PasteOver(visualmode(), 1)<CR>
-nnoremap <silent> __ :<C-U>let b:silly=v:register<CR>V:<C-U>call <SID>PasteOver(visualmode(), 1)<CR>
+nnoremap <silent> _  <Cmd>let b:silly=v:register<CR>:set opfunc=<SID>PasteOver<CR>g@
+vnoremap <silent> _  <Cmd>let b:silly=v:register<CR>:<C-U>call <SID>PasteOver(visualmode(), 1)<CR>
+nnoremap <silent> __ <Cmd>let b:silly=v:register<CR>V:<C-U>call <SID>PasteOver(visualmode(), 1)<CR>
 function! s:PasteOver(type, ...)
   if a:0
     let [mark1, mark2] = ['`<', '`>']
@@ -2028,9 +2028,9 @@ endfunction
 
 "Duplicate
 " :copy only does lines, this is arbitrary selection
-nnoremap <silent> + :set opfunc=<SID>DuplicateDown<CR>g@
-nnoremap <silent> ++ V:<C-U>call <SID>DuplicateDown(visualmode())<CR>
-vnoremap <silent> + :<C-U>call <SID>DuplicateDown(visualmode())<CR>
+nnoremap <silent> + <Cmd>set opfunc=<SID>DuplicateDown<CR>g@
+nnoremap <silent> ++ V<Cmd>call <SID>DuplicateDown(visualmode())<CR>
+vnoremap <silent> + <Cmd>call <SID>DuplicateDown(visualmode())<CR>
 function! s:DuplicateUp(type)
   call <SID>Duplicate(a:type, 'up')
 endfunction
@@ -2059,9 +2059,9 @@ function! s:Duplicate(type, direction)
 endfunction
 
 "Duplicate and comment
-nnoremap <silent> \+ :set opfunc=<SID>DuplicateAndComment<CR>g@
-nnoremap <silent> \++ V:<C-U>call <SID>DuplicateAndComment(visualmode())<CR>
-vnoremap <silent> \+ :<C-U>call <SID>DuplicateAndComment(visualmode())<CR>
+nnoremap <silent> \+ <Cmd>set opfunc=<SID>DuplicateAndComment<CR>g@
+nnoremap <silent> \++ V<Cmd>call <SID>DuplicateAndComment(visualmode())<CR>
+vnoremap <silent> \+ <Cmd>call <SID>DuplicateAndComment(visualmode())<CR>
 function! s:DuplicateAndComment(type)
   if a:type ==? 'v'
     let [mark1, mark2] = ['`<', '`>']
@@ -2086,7 +2086,7 @@ endfunction
 nnoremap \q gwip
 vnoremap \q gw
 
-nnoremap <silent> \Q :<C-U>call <SID>QuickWrap(v:count)<CR>
+nnoremap <silent> \Q <Cmd>call <SID>QuickWrap(v:count)<CR>
 function! s:QuickWrap(count)
   " if a:type ==? 'v'
   "   let [mark1, mark2] = ['`<', '`>']
@@ -2113,13 +2113,13 @@ function! s:QuickWrap(count)
   let &textwidth = save_textwidth
 endfunction
 
-vnoremap <silent> \Q :<C-U>echo "v:count " . v:count<CR>
+vnoremap <silent> \Q <Cmd>echo "v:count " . v:count<CR>
 
 "Clear a line
 nnoremap dc cc<esc>
 
 "Swap quotes
-nnoremap <silent> <leader>' :call <SID>SwapQuotes()<CR>
+nnoremap <silent> <leader>' <Cmd>call <SID>SwapQuotes()<CR>
 function! s:SwapQuotes()
   let origline = line('.')
   let origcol = col('.')
@@ -2146,9 +2146,9 @@ endfunction
 
 "Factor out
 " vnoremap <silent> <leader>f :call inputsave()<CR>gvc<C-R>=input("variable name: ")<CR><ESC>:call inputrestore()<CR>Ovar <C-R>. = ;<ESC>PA<CR><ESC>kWVjj:MultipleCursorFind __factored__<CR>c
-vnoremap <silent> <C-X>vv :call <SID>ExtractVariable(visualmode())<CR>
-vnoremap <silent> <C-X>vl :call <SID>ExtractVariable(visualmode(), "let")<CR>
-vnoremap <silent> <C-X>vc :call <SID>ExtractVariable(visualmode(), "const")<CR>
+vnoremap <silent> <C-X>vv <Cmd>call <SID>ExtractVariable(visualmode())<CR>
+vnoremap <silent> <C-X>vl <Cmd>call <SID>ExtractVariable(visualmode(), "let")<CR>
+vnoremap <silent> <C-X>vc <Cmd>call <SID>ExtractVariable(visualmode(), "const")<CR>
 function! s:ExtractVariable(mode, ...) range
   let decl = a:0 ? " ".a:1 : ""
 
@@ -2167,7 +2167,7 @@ function! s:ExtractVariable(mode, ...) range
   exec "normal! i".name."\<ESC>O".decl.name." = \<C-R>h;\<CR>\<ESC>k^W"
 endfunction
 
-vnoremap <silent> <C-X>f :call <SID>ExtractFunction(visualmode())<CR>
+vnoremap <silent> <C-X>f <Cmd>call <SID>ExtractFunction(visualmode())<CR>
 function! s:ExtractFunction(mode) range
   call inputsave()
   let name = input("Name: ")
@@ -2187,8 +2187,8 @@ endfunction
 "Switch case of first letter and insert
 nnoremap gi g~li
 
-nnoremap <silent> [[ :call searchpair('\[', '', '\]', 'bW')<CR>
-nnoremap <silent> ]] :call searchpair('\[', '', '\]', 'W')<CR>
+nnoremap <silent> [[ <Cmd>call searchpair('\[', '', '\]', 'bW')<CR>
+nnoremap <silent> ]] <Cmd>call searchpair('\[', '', '\]', 'W')<CR>
 
 "Quick jump to window
 for i in [1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -2196,14 +2196,14 @@ for i in [1, 2, 3, 4, 5, 6, 7, 8, 9]
 endfor
 
 "Open file under cusror in split window
-nnoremap gF :vertical wincmd f<CR>
+nnoremap gF <Cmd>vertical wincmd f<CR>
 
 "Previous command line but with prefix matching
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
-nnoremap <silent> <C-W>z :call <SID>GoToThing()<ESC>
-nnoremap <silent> <C-W>Z :call <SID>CloseThing()<ESC>
+nnoremap <silent> <C-W>z <Cmd>call <SID>GoToThing()<ESC>
+nnoremap <silent> <C-W>Z <Cmd>call <SID>CloseThing()<ESC>
 
 function! s:CloseThing()
   let thing = <SID>FindThing()
@@ -2283,7 +2283,7 @@ command! ReloadVimrc source $MYVIMRC
 
 "ONLY
 command! ONLY silent only | silent tabonly
-nnoremap <C-w>O :ONLY<CR>
+nnoremap <C-w>O <Cmd>ONLY<CR>
 
 command! SyntaxGroup call <SID>SyntaxGroup()
 function! s:SyntaxGroup()
@@ -2294,7 +2294,7 @@ function! s:SyntaxGroup()
   exec "verb hi" transName
 endfunction
 
-nnoremap <leader>s :Scratch<CR>
+nnoremap <leader>s <Cmd>Scratch<CR>
 command! -nargs=? -complete=syntax Scratch call <SID>NewScratch(<q-mods>, <f-args>)
 function! s:NewScratch(mods, ...)
   let type = a:0 ? a:1 : 'markdown'
@@ -2356,7 +2356,7 @@ command! CopyFileNameToClipboard let @+ = expand("%:t")
 " TODO steal completion from https://github.com/Shopify/vim-devilish/blob/master/plugin/devilish.vim#L57
 command! -nargs=1 -complete=custom,<SID>ProjComp P call <SID>Proj(<f-args>)
 command! -nargs=1 -complete=custom,<SID>ProjComp TP call <SID>Proj(<f-args>, 1)
-nnoremap <leader>p :P<Space>
+nnoremap <leader>p  :P<Space>
 nnoremap <leader>tp :TP<Space>
 nnoremap <silent> <Leader>tr :TP rc<CR>
 
