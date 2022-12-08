@@ -173,6 +173,9 @@ update_git_submodules() {
 
 install_vim_plugins() {
   if command_exists "nvim"; then
+    command_exists pip && pip install neovim
+    command_exists gem && gem install neovim
+    command_exists npm && npm install -g neovim
     nvim --headless +PlugInstall +qall
   fi
 }
