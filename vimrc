@@ -2510,6 +2510,11 @@ lua <<EOF
   --   })
   -- })
 
+  -- needed before require('lspconfig')
+  require("nvim-lsp-installer").setup({
+    automatic_installation = true,
+  })
+
   local lspconfig = require('lspconfig')
 
   local on_attach = function(client, bufnr)
@@ -2560,9 +2565,6 @@ lua <<EOF
       }
     }
   end
-
-  local lsp_installer = require("nvim-lsp-installer")
-  lsp_installer.on_server_ready(function(server) server:setup {} end)
 EOF
 
 " vim: set fdm=marker fdl=999:
