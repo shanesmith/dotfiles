@@ -70,4 +70,4 @@ function! s:getQuotePos(q)
   return pos
 endfunction
 
-let g:loaded_textobj_entire = 1
+let g:loaded_textobj_quote = 1
