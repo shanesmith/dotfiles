@@ -39,6 +39,14 @@ LINUX_DOTFILES="Xmodmap"
 
 RCPATH="$(cd "$(dirname "$0")" && pwd)"
 
+HOMEBREW_PREFIX=
+
+if [[ -e /opt/homebrew ]]; then
+  HOMEBREW_PREFIX=/opt/homebrew
+else
+  HOMEBREW_PREFIX=/usr/local
+fi
+
 FORCE=
 
 is_linux() {
@@ -186,6 +194,9 @@ install_vim_plugins() {
 chsh_bash() {
   if is_spin; then
     sudo chsh -s /usr/bin/bash spin
+  elif is_mac; then
+    echo "$HOMEBREW_PREFIX/bin/bash" | sudo tee -a /etc/shells >/dev/null
+    sudo chsh -s "$HOMEBREW_PREFIX/bin/bash"
   fi
 }
 
