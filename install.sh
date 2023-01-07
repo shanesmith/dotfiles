@@ -37,26 +37,25 @@ DOTFILES="
 
 LINUX_DOTFILES="Xmodmap"
 
-is_linux=
-is_mac=
-is_windows=
-
-case $(uname) in
-  Linux)
-    is_linux="yes"
-    DOTFILES="$DOTFILES $LINUX_DOTFILES"
-    ;;
-  Darwin)
-    is_mac="yes"
-    ;;
-  MINGW*)
-    is_windows="yes"
-    ;;
-esac
-
-RCPATH="$(cd `dirname $0` && pwd)"
+RCPATH="$(cd "$(dirname "$0")" && pwd)"
 
 FORCE=
+
+is_linux() {
+  [[ $(uname) == "Linux" ]]
+}
+
+is_mac() {
+  [[ $(uname) == "Darwin" ]]
+}
+
+is_windows() {
+  [[ $(uname) == MINGW.* ]]
+}
+
+is_spin() {
+  [[ -n $SPIN ]]
+}
 
 set_force() {
   FORCE='-f'
@@ -70,7 +69,7 @@ get_src() {
   case "$file" in
 
     bashrc)
-      if [[ "$is_windows" ]]; then
+      if is_windows; then
         echo "$RCPATH/bashrc_msys"
         exit
       fi
@@ -87,7 +86,7 @@ get_dest() {
   case "$file" in 
 
     vim)
-      if [[ "$is_windows" ]]; then
+      if is_windows; then
         echo "$HOME/vimfiles"
         exit
       fi
@@ -112,7 +111,7 @@ is_link_to() {
   local from="$1"
   local to="$2"
   
-  if [[ -n $is_mac ]]; then
+  if is_mac; then
     if command_exists "greadlink"; then
       [[ $(greadlink -f "$from") == $src ]]
     else
@@ -127,14 +126,18 @@ is_link_to() {
 }
 
 install_fonts() {
-  if [[ -n $is_mac ]]; then
+  if is_mac; then
     cp "${RCPATH}"/fonts/* /Library/Fonts
   fi
 }
 
 link_dotfiles() {
   local ret=0
-  for file in $DOTFILES; do
+  local all_files="$DOTFILES"
+  if is_linux; then
+    all_files="$all_files $LINUX_DOTFILES"
+  fi
+  for file in $all_files; do
     local src=$(get_src "$file")
     local dest=$(get_dest "$file")
     if [[ -L $dest && -z $FORCE ]]; then
@@ -158,11 +161,11 @@ link_dotfiles() {
 install_file() {
   local src="$1"
   local dest="$2"
-  if [[ "$is_windows" ]]; then
+  if is_windows; then
     rm -rf "$dest"
     cp -r "$src" "$dest"
   else
-    mkdir -p $(dirname $dest)
+    mkdir -p "$(dirname "$dest")"
     ln -ns $FORCE "$src" "$dest"
   fi
 }
@@ -181,19 +184,19 @@ install_vim_plugins() {
 }
 
 chsh_bash() {
-  if [[ -n $SPIN ]]; then
+  if is_spin; then
     sudo chsh -s /usr/bin/bash spin
   fi
 }
 
-while [[ $# > 0 ]]; do
+while [[ $# -gt 0 ]]; do
   case $1 in
     -f) set_force;;
   esac
   shift
 done
 
-if [[ -n $is_mac ]] && ! command_exists "greadlink"; then
+if is_mac && ! command_exists "greadlink"; then
   echo "Mac detected without \`greadlink\`, if this install does something wrong you might need to \`brew install coreutils\`."
 fi
 
