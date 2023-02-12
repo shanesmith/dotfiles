@@ -6,7 +6,7 @@ __readline_insert() {
     text=" $text"
   fi
   READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}${text}${READLINE_LINE:$READLINE_POINT}"
-  READLINE_POINT=$(( $READLINE_POINT + ${#text} - 1 ))
+  READLINE_POINT=$(( READLINE_POINT + ${#text} - 1 ))
 }
 
 __readline_replace() {
@@ -21,9 +21,11 @@ __escape() {
 }
 
 _fzf_git_lol_preview() {
-  local hash=$(_fzf_git_lol_get_hash <<<$1)
+  local hash
 
-  git show --color $hash
+  hash=$(_fzf_git_lol_get_hash <<<"$1")
+
+  git show --color "$hash"
 }
 
 _fzf_git_lol_get_hash() {
@@ -37,7 +39,9 @@ _fzf_git_lol() {
   # TODO always describe?
   local log_command=${1:-lol}
   local preview="_fzf_git_lol_preview {}"
-  local sha=$(git ${log_command} | fzf --ansi --reverse --no-sort --tiebreak=index --multi --bind ctrl-p:toggle-preview --preview-window=down --preview="$preview" \
+  local sha
+
+  sha=$(git "$log_command" | fzf --ansi --reverse --no-sort --tiebreak=index --multi --bind ctrl-p:toggle-preview --preview-window=down --preview="$preview" \
     | _fzf_git_lol_get_hash \
     | xargs git describe --all --contains \
     | tr '\n' ' '
@@ -52,7 +56,9 @@ _fzf_git_lall() {
 
 _fzf_git_status_preview() {
   local flags=${1:0:2}
-  local path=$(awk '{print $2}' <<<$1)
+  local path
+
+  path=$(awk '{print $2}' <<<"$1")
 
   if [[ -d $path ]]; then
     tree -C "$path"
@@ -73,7 +79,8 @@ _fzf_git_status() {
 
   # TODO preview probably won't work with a space in the path
   local preview="_fzf_git_status_preview {}"
-  local file="$(git -c color.status=always status --short | fzf --ansi -m --preview-window=down --preview="$preview" | awk '{print $2}' | __escape)"
+  local file
+  file="$(git -c color.status=always status --short | fzf --ansi -m --preview-window=down --preview="$preview" | awk '{print $2}' | __escape)"
   __readline_insert "$file"
 }
 
@@ -82,7 +89,8 @@ _fzf_git_status_unstaged() {
 
   # TODO preview probably won't work with a space in the path
   local preview="_fzf_git_status_preview {}"
-  local file="$(git -c color.status=always status --short | grep '^.[^ ]*\s[^ ]' | fzf --ansi -m --preview-window=down --preview="$preview" | awk '{print $2}' | __escape)"
+  local file
+  file="$(git -c color.status=always status --short | grep '^.[^ ]*\s[^ ]' | fzf --ansi -m --preview-window=down --preview="$preview" | awk '{print $2}' | __escape)"
   __readline_insert "$file"
 }
 
@@ -91,7 +99,8 @@ _fzf_git_status_staged() {
 
   # TODO preview probably won't work with a space in the path
   local preview="_fzf_git_status_preview {}"
-  local file="$(git -c color.status=always status --short | grep '^[^ ]' | fzf --ansi -m --preview-window=down --preview="$preview" | awk '{print $2}' | __escape)"
+  local file
+  file="$(git -c color.status=always status --short | grep '^[^ ]' | fzf --ansi -m --preview-window=down --preview="$preview" | awk '{print $2}' | __escape)"
   __readline_insert "$file"
 }
 
@@ -100,35 +109,40 @@ _fzf_git_status_untracked() {
 
   # TODO preview probably won't work with a space in the path
   local preview="_fzf_git_status_preview {}"
-  local file="$(git -c color.status=always status --short | grep -O '^[^ ]*??[^ ]*\s' | fzf --ansi -m --preview-window=down --preview="$preview" | awk '{print $2}' | __escape)"
+  local file
+  file="$(git -c color.status=always status --short | grep -O '^[^ ]*??[^ ]*\s' | fzf --ansi -m --preview-window=down --preview="$preview" | awk '{print $2}' | __escape)"
   __readline_insert "$file"
 }
 
 _fzf_git_history() {
-  local branch=$(git hs | fzf -m --preview-window=down --preview='git lonly -n 100 {}' | __escape)
+  local branch
+  branch=$(git hs | fzf -m --preview-window=down --preview='git lonly -n 100 {}' | __escape)
   __readline_insert "$branch"
 }
 
 _fzf_git_branch() {
-  local branch=$(git for-each-ref --format="%(refname:short)" refs/heads/ | fzf -m --preview-window=down --preview='git lonly -n 100 {}' | __escape)
+  local branch
+  branch=$(git for-each-ref --format="%(refname:short)" refs/heads/ | fzf -m --preview-window=down --preview='git lonly -n 100 {}' | __escape)
   __readline_insert "$branch"
 }
 
 _fzf_git_reflog() {
-  local sha="$(git reflog --color | fzf --ansi --no-sort | awk '{print $1}' | __escape)"
+  local sha
+  sha="$(git reflog --color | fzf --ansi --no-sort | awk '{print $1}' | __escape)"
   __readline_insert "$sha"
 }
 
 _fzf_history() { 
   local line
   shopt -u nocaseglob nocasematch
-  line=$(HISTTIMEFORMAT= history | fzf --no-sort --tac +m -n2..,.. --tiebreak=index --toggle-sort=ctrl-r | awk '{ $1=""; print $0 }' | sed 's/^ *//')
+  line=$(HISTTIMEFORMAT='' history | fzf --no-sort --tac +m -n2..,.. --tiebreak=index --toggle-sort=ctrl-r | awk '{ $1=""; print $0 }' | sed 's/^ *//')
   __readline_replace "$line"
 }
 
 _fzf_files() {
   local dir="${1:-.}"
-  local file="$(fd --type f . "$dir" | fzf -m --preview='bat --color=always -pp {}' | __escape)"
+  local file
+  file="$(fd --type f . "$dir" | fzf -m --preview='bat --color=always -pp {}' | __escape)"
   if [[ -n $file ]]; then
     __readline_insert "$file"
   fi
@@ -140,29 +154,34 @@ __fzf_get_dir() {
 }
 
 _fzf_directories() {
-  local dir="$(__fzf_get_dir "$1")"
+  local dir
+  dir="$(__fzf_get_dir "$1")"
   if [[ -n $dir ]]; then
     __readline_insert "$dir"
   fi
 }
 
 _fzf_cd() {
-  local dir="$(__fzf_get_dir "$1")"
+  local dir
+  dir="$(__fzf_get_dir "$1")"
   __readline_replace "cd ${dir}"
 }
 
 _fzf_ps() {
-  local proc=$(command ps -e -o 'user,pid,stat,%cpu,%mem,command' | fzf -m --preview 'echo {}' --header-lines=1 --preview-window down:3:wrap --min-height 15 | awk '{print $2}')
+  local proc
+  proc=$(command ps -e -o 'user,pid,stat,%cpu,%mem,command' | fzf -m --preview 'echo {}' --header-lines=1 --preview-window down:3:wrap --min-height 15 | awk '{print $2}' | __escape)
   __readline_insert "$proc"
 }
 
 _fzf_gerrit_patch() {
-  local id=$(gerrit patches | fzf --header-lines=1 --reverse | awk '{print $1}')
+  local id
+  id=$(gerrit patches | fzf --header-lines=1 --reverse | awk '{print $1}')
   __readline_insert "$id"
 }
 
 _fzf_brew_install() {
-  local package=$(HOMEBREW_COLOR=1 brew search ${1} | fzf --ansi --tac --no-sort --preview "HOMEBREW_COLOR=1 brew info {}")
+  local package
+  package=$(HOMEBREW_COLOR=1 brew search "$1" | fzf --ansi --tac --no-sort --preview "HOMEBREW_COLOR=1 brew info {}")
   if [[ ! $package =~ ^[a-z] ]]; then
     return
   fi
@@ -175,7 +194,8 @@ _fzf_hub_chain_get_branch() {
 }
 
 _fzf_hub_chain_preview() {
-  local branch=$(_fzf_hub_chain_get_branch <<<$1)
+  local branch
+  branch=$(_fzf_hub_chain_get_branch <<<"$1")
   git lonly -n 100 "$branch"
 }
 
@@ -183,7 +203,8 @@ _fzf_hub_chain() {
   export -f _fzf_hub_chain_get_branch
   export -f _fzf_hub_chain_preview
 
-  local branch=$(hub-chain \
+  local branch
+  branch=$(hub-chain \
     | fzf --no-sort --tac --multi --preview-window=down --preview='_fzf_hub_chain_preview {}' \
     | _fzf_hub_chain_get_branch \
     | __escape \
@@ -193,7 +214,8 @@ _fzf_hub_chain() {
 }
 
 _fzf_p_dirs() {
-  local dirs=$(p_dirs | fzf -m --preview='tree -C {} | head -200' | __escape)
+  local dirs
+  dirs=$(p_dirs | fzf -m --preview='tree -C {} | head -200' | __escape)
   if [[ -n $dirs ]]; then
     __readline_insert "$dirs"
   fi
@@ -207,7 +229,8 @@ _fzf_word() {
   local readline_up_to_point=${READLINE_LINE:0:$READLINE_POINT}
   readline_up_to_point=${readline_up_to_point%%*( )}
   READLINE_POINT=${#readline_up_to_point}
-  local orig_word=$(awk '{print $NF}' <<<"$readline_up_to_point")
+  local orig_word
+  orig_word=$(awk '{print $NF}' <<<"$readline_up_to_point")
 
   local word="$orig_word"
 
@@ -255,7 +278,7 @@ _fzf_word() {
   fi
 
   READLINE_LINE="${readline_up_to_point:0:(($READLINE_POINT - ${#orig_word}))}${READLINE_LINE:$READLINE_POINT}"
-  READLINE_POINT="$(($READLINE_POINT - ${#orig_word}))"
+  READLINE_POINT="$((READLINE_POINT - ${#orig_word}))"
 
   eval "$cmd $args"
 }
@@ -272,7 +295,8 @@ bind -x '"\C-x\C-h": _bash_help'
 _git_show() {
   local readline_up_to_point=${READLINE_LINE:0:$READLINE_POINT}
   readline_up_to_point=${readline_up_to_point%%*( )}
-  local word=$(awk '{print $NF}' <<<"$readline_up_to_point")
+  local word
+  word=$(awk '{print $NF}' <<<"$readline_up_to_point")
 
   tmux popup "git -C '$PWD' show $word"
 }
