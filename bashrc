@@ -24,17 +24,19 @@ export NODE_PATH=$NODE_PATH:$HOME/.node/lib/node_modules
 
 export PATH=$PATH:$HOME/.node/bin:$HOME/bin.local:$HOME/bin:$GOPATH/bin
 
-export RC_INSTALL_DIR=$(cd "$(dirname "$(readlink ~/.bashrc)")" && pwd)
+export RC_INSTALL_DIR
+RC_INSTALL_DIR=$(cd "$(dirname "$(readlink ~/.bashrc)")" && pwd)
 
 export DEV_SPIN_ALLOW_UP=1
 
 command_exists() {
-  command -v $1 >/dev/null
+  command -v "$1" >/dev/null
 }
 
 if [[ -x /usr/libexec/java_home ]]; then
   # macOS only?
-  export JAVA_HOME=$(/usr/libexec/java_home 2>/dev/null)
+  export JAVA_HOME
+  JAVA_HOME=$(/usr/libexec/java_home 2>/dev/null)
 fi
 
 if [[ $(uname -m) == 'arm64' && -e /opt/homebrew/bin/brew ]]; then
@@ -51,7 +53,7 @@ fi
 
 if [[ -n $brew_prefix && -d $brew_prefix/opt/nvm ]]; then
   export NVM_DIR=~/.nvm
-  . $brew_prefix/opt/nvm/nvm.sh
+  . "${brew_prefix}/opt/nvm/nvm.sh"
 fi
 
 # If not running interactively, stop here
@@ -109,7 +111,7 @@ if ! shopt -oq posix; then
   elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
   elif [[ -n $brew_prefix && -f $brew_prefix/etc/bash_completion ]]; then
-    . $brew_prefix/etc/bash_completion
+    . "${brew_prefix}/etc/bash_completion"
   fi
 
   for file in "${RC_INSTALL_DIR}"/completion/*; do
@@ -159,7 +161,7 @@ if [[ -n $SUITUP ]]; then
   suitup
 fi
 
-echo "startup: " $(( $(now_ms) - $_start ))
+echo "startup: " $(( $(now_ms) - _start ))
 
 unset -f stamp now_ms
 unset _start
