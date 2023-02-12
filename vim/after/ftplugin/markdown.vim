@@ -1,6 +1,10 @@
 " https://github.com/plasticboy/vim-markdown/issues/462#issuecomment-694818508
 
 function! s:link_surround(mode)
+  let l:link = getreg("*")
+  if l:link !~ '^https\?://'
+    let l:link = ""
+  endif
   if a:mode == 'n'
     let l:str = expand('<cword>')
     let [l:bufnum, l:lnum, l:col, l:off, _] = getcurpos()
@@ -18,7 +22,7 @@ function! s:link_surround(mode)
     let l:line = getline(l:lnum)
   endif
   let l:new = strcharpart(l:line, 0, l:idx)
-        \ . '[' . strcharpart(l:line, l:idx, l:len) . ']()'
+        \ . '[' . strcharpart(l:line, l:idx, l:len) . '](' . l:link . ')'
         \ . strcharpart(l:line, l:idx + l:len)
   call setline(l:lnum, l:new)
   call setpos('.', [l:bufnum, l:lnum, l:idx + l:len + 4, l:off])
