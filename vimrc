@@ -697,6 +697,7 @@ endfunction
 
 
 Plug 'tpope/vim-eunuch'
+let g:eunuch_no_maps = 1
 
 Plug 'rhysd/committia.vim'
 let g:committia_open_only_vim_starting = 0
@@ -1109,7 +1110,7 @@ Plug 'Chiel92/vim-autoformat', { 'do': 'npm install -g js-beautify' }
 command! Format Autoformat
 
 Plug 'cohama/lexima.vim'
-let s:lexima_rules = [
+let g:lexima_rules = [
       \   {'char': '<CR>', 'at': '```\%#```', 'input_after': '<CR>'},
       \   {'char': '<CR>', 'at': '"""\%#"""', 'input_after': '<CR>'},
       \   {'char': '<BS>', 'at': '(\n\%#\n)', 'input': '<BS>', 'delete': 1},
@@ -1365,12 +1366,6 @@ call plug#end()
 
 "Markdown
 let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json', 'ruby', 'sass', 'xml', 'html']
-
-if exists("*lexima#add_rule")
-  for rule in s:lexima_rules
-    call lexima#add_rule(rule)
-  endfor
-endif
 
 " Colorscheme
 if has("nvim")
