@@ -145,7 +145,10 @@ sources=(
 )
 
 if [[ -n $brew_prefix ]]; then
-  sources+=("${brew_prefix}/etc/profile.d/z.sh")
+  sources+=(
+    "${brew_prefix}/etc/profile.d/z.sh"
+    "${brew_prefix}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc"
+  )
 fi
 
 for file in "${sources[@]}"; do
