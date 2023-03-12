@@ -93,8 +93,7 @@ export HISTTIMEFORMAT="%F %T> "
 export LESS="-SRi"
 
 # make less more friendly for non-text input files, see lesspipe(1)
-$(which lesspipe >/dev/null) && eval "$(lesspipe)"
-$(which lesspipe.sh >/dev/null) && eval "$(lesspipe.sh)"
+command_exists lesspipe.sh && export LESSOPEN="|lesspipe.sh %s"
 
 ## thefuck
 ## 0.11s
