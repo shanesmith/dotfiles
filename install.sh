@@ -2,12 +2,8 @@
 
 DOTFILES="
   bashrc
-  bash_help
-  bash_ps1
+  bashrc.d
   bash_aliases
-  bash_sshauth
-  bash_readline
-  bash_profile
   gitconfig
   gitconfig.shopify
   gitconfig.podman

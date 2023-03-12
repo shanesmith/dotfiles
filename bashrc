@@ -146,10 +146,7 @@ fi
 sources=(
   "/opt/dev/dev.sh"
   "${HOME}/.bash_aliases"
-  "${HOME}/.bash_ps1"
-  "${HOME}/.bash_sshauth"
-  "${HOME}/.bash_help"
-  "${HOME}/.bash_readline"
+  "${HOME}/.bashrc.d"/*
   "${HOME}/.bashrc.local"
   "${HOME}/.rvm/scripts/rvm"
   "${HOME}/.cargo/env"
