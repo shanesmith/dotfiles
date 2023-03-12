@@ -275,7 +275,7 @@ docker-desktop-logs() {
 }
 
 lsps() {
-  ps -e -o 'user,pid,stat,%cpu,%mem,command' | awk "NR==1 || /$1/ && \$6 != \"awk\""
+  ps -e -o 'user,pid,stat,%cpu,%mem,command' | awk -v pattern="$1" 'NR==1 || $0 ~ pattern && $6 != "awk"'
 }
 
 lshs() {
