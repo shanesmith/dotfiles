@@ -79,8 +79,14 @@ else
   export EDITOR=vim
 fi
 
-# Some additional evironment variables
-export CLICOLOR=1
+# LS colors
+if command_exists dircolors; then
+  eval "$(dircolors -b)"
+else
+  export CLICOLOR=1
+fi
+
+# MySQL prompt
 export MYSQL_PS1="mysql://\u@\h \d> "
 
 # don't put duplicate lines in the history. See bash(1) for more options
