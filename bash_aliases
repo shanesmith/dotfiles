@@ -16,6 +16,7 @@ alias QQ='exit'
 alias cl='clear'
 
 qrm() {
+  local emptydir
   emptydir=$(mktemp -d)
   rsync -rd --delete "${emptydir}/" "${1}/"
   # rmdir "${1}"
@@ -450,12 +451,13 @@ alias vimrc='cd ~/Code/rc && vim vimrc'
 alias bashrc='cd ~/Code/rc && vim bashrc'
 
 git_remove-merged-branches() {
-  local branches=$(git branch --merged | sed -e '/^*/d' -e '/master/d')
+  local branches
+  branches=$(git branch --merged | sed -e '/^*/d' -e '/master/d')
   echo "Finding candidate branches..."
   echo "$branches"
-  read -p "Remove these branches? "
+  read -rp "Remove these branches? "
   if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
-    git branch -d $branches
+    git branch -d "$branches"
   fi
 }
 
@@ -513,24 +515,28 @@ alias isdevdev='[[ $__dev_source_dir != "/opt/dev" && -n $__dev_source_dir ]]'
 
 P_PATH=~/Code:~/src/github.com/Shopify:~/src/github.com/ShopifyUS:~/src/github.com/Shopify/spin/containers
 p() {
-  CDPATH="$P_PATH" cd $@
+  # shellcheck disable=SC2164
+  CDPATH="$P_PATH" cd "$@"
 }
 p_dirs() {
-  readarray -td ':' paths < <(echo -n "$P_PATH")
+  local paths
+  readarray -td ':' paths <<<"$P_PATH"
 
   for p in "${paths[@]}"; do
     fd --type d -d1 . "$p"
   done
 }
 _p_comp() {
+  local paths
   local cur="${COMP_WORDS[COMP_CWORD]}"
 
   COMPREPLY=()
 
-  readarray -td ':' paths < <(echo -n "$P_PATH")
+  readarray -td ':' paths <<<"$P_PATH"
 
   for dir in "${paths[@]}"; do
-    COMPREPLY=( "${COMPREPLY[@]}" $(cd "$dir" && compgen -d -- "$cur") )
+    [[ ! -d "$dir" ]] && continue
+    readarray -t -O"${#COMPREPLY[@]}" COMPREPLY < <(cd "$dir" && compgen -d -- "$cur")
   done
 }
 complete -F _p_comp p
@@ -690,21 +696,21 @@ alias jc=journalctl
 
 git-branch-name() {
   local ref=${1:-HEAD}
-  git symbolic-ref --quiet --short $ref
+  git symbolic-ref --quiet --short "$ref"
 }
 
 hub-pr-info() {
   local branch=${1:-$(git-branch-name)}
 
   # pr-number state base newline
-  hub pr list --state all -f "%I %pS %B %n" --head $branch
+  hub pr list --state all -f "%I %pS %B %n" --head "$branch"
 }
 
 hub-pr-info-up() {
   local branch=${1:-$(git-branch-name)}
 
   # up-pr-number up-state up-branch newline
-  hub pr list --state all -f "%I %pS %H %n" --base $branch
+  hub pr list --state all -f "%I %pS %H %n" --base "$branch"
 }
 
 hub-chain() {
@@ -812,7 +818,8 @@ hub-set-base() {
     return 1
   fi
 
-  local pr_number=$(awk '{print $1}' <<< $(hub-pr-info))
+  local pr_number
+  pr_number=$(awk '{print $1}' <<<"$(hub-pr-info)")
 
   hub api "repos/{owner}/{repo}/pulls/${pr_number}" --flat --field base=$base >/dev/null
 
