@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+
+# https://github.com/postmodern/chruby/blob/master/bin/chruby-exec
+# but uses dev's chruby if present
+
+chruby_sh="${0%/*}/../share/chruby/chruby.sh"
+
+if [[ -f /opt/dev/sh/chruby/chruby.sh ]]; then
+	chruby_sh="/opt/dev/sh/chruby/chruby.sh"
+fi
+
+source "$chruby_sh"
+
+case "$1" in
+	-h|--help)
+		echo "usage: chruby-exec RUBY [RUBYOPTS] -- COMMAND [ARGS...]"
+		exit
+		;;
+	-V|--version)
+		echo "chruby version $CHRUBY_VERSION"
+		exit
+		;;
+esac
+
+if (( $# == 0 )); then
+	echo "chruby-exec: RUBY and COMMAND required" >&2
+	exit 1
+fi
+
+argv=()
+
+for arg in "$@"; do
+	shift
+
+	if [[ "$arg" == "--" ]]; then break
+	else                          argv+=($arg)
+	fi
+done
+
+if (( $# == 0 )); then
+	echo "chruby-exec: COMMAND required" >&2
+	exit 1
+fi
+
+shell_opts=("-l")
+[[ -t 0 ]] && shell_opts+=("-i")
+
+source_command="command -v chruby >/dev/null || source $chruby_sh"
+chruby_command="chruby $(printf "%q " "${argv[@]}")"
+sub_command="$(printf "%q " "$@")"
+command="$source_command; $chruby_command && exec $sub_command"
+
+exec "$SHELL" "${shell_opts[@]}" -c "$command"
