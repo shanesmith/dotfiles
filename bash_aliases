@@ -262,22 +262,6 @@ alias hs="history"
 alias jg="jobs -l"
 alias kg="kill %1"
 
-alias dk="docker"
-complete -F _docker dk
-
-alias dkc="docker-compose"
-complete -F _docker_compose dkc
-
-docker_bash() {
-  docker run --rm -it "$1" bash
-}
-
-docker-desktop-logs() {
-  # https://docs.docker.com/desktop/mac/troubleshoot/#check-the-logs
-  pred='process matches ".*(ocker|vpnkit).*" || (process in {"taskgated-helper", "launchservicesd", "kernel"} && eventMessage contains[c] "docker")'
-  /usr/bin/log stream --style syslog --level=debug --color=always --predicate "$pred"
-}
-
 lsps() {
   ps -e -o 'user,pid,stat,%cpu,%mem,command' | awk -v pattern="$1" 'NR==1 || $0 ~ pattern && $6 != "awk"'
 }
@@ -663,29 +647,6 @@ a2ibrew() {
 }
 
 alias lctl='launchctl'
-
-alias pd=podman
-complete -o default -F __start_podman pd
-
-alias pdc=podman-compose
-alias pdm="podman machine "
-
-podman-fw-list() {
-  podman machine ssh curl --silent --fail-with-body http://gateway.containers.internal/services/forwarder/all | jq
-}
-
-podman-fw-expose() {
-  podman machine ssh curl --silent --fail-with-body http://gateway.containers.internal/services/forwarder/expose -X POST -d "'{\"local\":\"$1\", \"remote\":\"$2\"}'"
-}
-
-
-podman-fw-unexpose() {
-  podman machine ssh curl --silent --fail-with-body http://gateway.containers.internal/services/forwarder/unexpose -X POST -d "'{\"local\":\"$1\"}'"
-}
-
-pd-history() {
-  podman history --no-trunc --format "{{.ID}}\t{{.Size}}\t{{.CreatedBy}}" "$@" | less
-}
 
 alias journalctl="/usr/bin/journalctl --no-hostname"
 alias sc=systemctl

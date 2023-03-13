@@ -1,8 +1,45 @@
 #!/bin/bash
 
+alias dk="docker"
+
+complete -F _docker dk
+
+alias dkc="docker-compose"
+complete -F _docker_compose dkc
+
+docker-desktop-logs() {
+  # https://docs.docker.com/desktop/mac/troubleshoot/#check-the-logs
+  pred='process matches ".*(ocker|vpnkit).*" || (process in {"taskgated-helper", "launchservicesd", "kernel"} && eventMessage contains[c] "docker")'
+  /usr/bin/log stream --style syslog --level=debug --color=always --predicate "$pred"
+}
+
 docker-desktop-shell() {
   docker run -it --rm --privileged --pid=host justincormack/nsenter1
 }
+
+alias pd=podman
+complete -o default -F __start_podman pd
+
+alias pdc=podman-compose
+alias pdm="podman machine "
+
+podman-fw-list() {
+  podman machine ssh curl --silent --fail-with-body http://gateway.containers.internal/services/forwarder/all | jq
+}
+
+podman-fw-expose() {
+  podman machine ssh curl --silent --fail-with-body http://gateway.containers.internal/services/forwarder/expose -X POST -d "'{\"local\":\"$1\", \"remote\":\"$2\"}'"
+}
+
+
+podman-fw-unexpose() {
+  podman machine ssh curl --silent --fail-with-body http://gateway.containers.internal/services/forwarder/unexpose -X POST -d "'{\"local\":\"$1\"}'"
+}
+
+pd-history() {
+  podman history --no-trunc --format "{{.ID}}\t{{.Size}}\t{{.CreatedBy}}" "$@" | less
+}
+
 
 podman-build-podman() {
   if ! podman image exists pd-builder; then
