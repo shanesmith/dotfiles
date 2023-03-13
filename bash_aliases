@@ -512,6 +512,8 @@ man() {
 alias devdev='dev use dev --backend && . ~/.bash_ps1'
 alias undevdev='dev use system --backend && . ~/.bash_ps1'
 alias isdevdev='[[ $__dev_source_dir != "/opt/dev" && -n $__dev_source_dir ]]'
+alias dev-tst='dev tc && dev style && dev test'
+alias updev='eval "$(curl -sS https://up.dev)"'
 
 P_PATH=~/Code:~/src/github.com/Shopify:~/src/github.com/ShopifyUS:~/src/github.com/Shopify/spin/containers
 p() {
