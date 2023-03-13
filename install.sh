@@ -1,6 +1,9 @@
 #!/bin/bash
 
-DOTFILES="
+# TODO
+# - Install bash-sneak
+
+DOTFILES=(
   bashrc
   bashrc.d
   bash_aliases
@@ -29,21 +32,17 @@ DOTFILES="
   config/coc/extensions/package.json
   config/coc/extensions/yarn.lock
   config/gh/config.yml
-"
+)
 
-LINUX_DOTFILES="Xmodmap"
+LINUX_DOTFILES=(
+  Xmodmap
+)
 
-RCPATH="$(cd "$(dirname "$0")" && pwd)"
-
-HOMEBREW_PREFIX=
-
-if [[ -e /opt/homebrew ]]; then
-  HOMEBREW_PREFIX=/opt/homebrew
+if [[ $0 =~ (^|/)install\.sh$ ]]; then
+  RCPATH="$(cd "$(dirname "$0")" && pwd)"
 else
-  HOMEBREW_PREFIX=/usr/local
+  RCPATH="${1:~$HOME/Code/rc}"
 fi
-
-FORCE=
 
 is_linux() {
   [[ $(uname) == "Linux" ]]
@@ -61,24 +60,14 @@ is_spin() {
   [[ -n $SPIN ]]
 }
 
-set_force() {
-  FORCE='-f'
-}
-
-unset_force() {
-  FORCE=
-}
-
 get_src() {
   case "$file" in
-
     bashrc)
       if is_windows; then
         echo "$RCPATH/bashrc_msys"
         exit
       fi
       ;;
-
   esac
 
   echo "$RCPATH/$file"
@@ -88,19 +77,16 @@ get_dest() {
   local file="$1"
 
   case "$file" in 
-
     vim)
       if is_windows; then
         echo "$HOME/vimfiles"
         exit
       fi
       ;;
-
     bin)
       echo "$HOME/bin"
       exit
       ;;
-
   esac
 
   echo "$HOME/.$file";
@@ -110,23 +96,9 @@ command_exists() {
   command -v "$1" >/dev/null 2>&1
 }
 
-is_link_to() {
-
-  local from="$1"
-  local to="$2"
-  
-  if is_mac; then
-    if command_exists "greadlink"; then
-      [[ $(greadlink -f "$from") == $src ]]
-    else
-      [[ $(readlink "$from") == $src ]]
-    fi
-    return $?
-  else
-    [[ $(readlink -f "$from") == $src ]]
-    return $?
-  fi
-
+readlink_f() {
+  # https://stackoverflow.com/a/24572274/1333402
+  perl -MCwd -le 'print Cwd::abs_path shift' "$1"
 }
 
 install_fonts() {
@@ -136,41 +108,44 @@ install_fonts() {
 }
 
 link_dotfiles() {
-  local ret=0
-  local all_files="$DOTFILES"
+  local src dest
+  local all_files=( "${DOTFILES[@]}" )
+
   if is_linux; then
-    all_files="$all_files $LINUX_DOTFILES"
+    all_files+=( "${LINUX_DOTFILES[@]}" )
   fi
-  for file in $all_files; do
-    local src=$(get_src "$file")
-    local dest=$(get_dest "$file")
-    if [[ -L $dest && -z $FORCE ]]; then
-      if is_link_to "$dest" "$src"; then
+
+  for file in "${all_files[@]}"; do
+    src=$(get_src "$file")
+    dest=$(get_dest "$file")
+
+    if [[ -L $dest ]]; then
+      if [[ $(readlink_f "$dest") == "$src" ]]; then
         echo "Already installed $file"
       else
-        echo "Link already exists for $file"
-        ret=1
+        echo "Bad link location for $file"
+        exit 1
       fi
-    elif [[ -e $dest && -z $FORCE ]]; then
+    elif [[ -e $dest ]]; then
       echo "File already exists for $file"
-      ret=1
+      exit 1
     else
       echo "Installing $file"
       install_file "$src" "$dest"
     fi
   done
-  return $ret
 }
 
 install_file() {
   local src="$1"
   local dest="$2"
+
   if is_windows; then
     rm -rf "$dest"
     cp -r "$src" "$dest"
   else
     mkdir -p "$(dirname "$dest")"
-    ln -ns $FORCE "$src" "$dest"
+    ln -ns "$src" "$dest"
   fi
 }
 
@@ -179,33 +154,69 @@ update_git_submodules() {
 }
 
 install_vim_plugins() {
-  if command_exists "nvim"; then
-    command_exists pip && pip install neovim
-    command_exists gem && gem install neovim
-    command_exists npm && npm install -g neovim
-    nvim --headless +PlugInstall +qall
-  fi
+  command_exists pip && pip install neovim
+  command_exists gem && gem install neovim
+  command_exists npm && npm install -g neovim
+  command_exists nvim && nvim --headless +PlugInstall +qall
 }
 
 chsh_bash() {
-  if is_spin; then
-    sudo chsh -s /usr/bin/bash spin
-  elif is_mac; then
-    echo "$HOMEBREW_PREFIX/bin/bash" | sudo tee -a /etc/shells >/dev/null
-    sudo chsh -s "$HOMEBREW_PREFIX/bin/bash"
+  local shell="/usr/bin/bash"
+
+  if is_mac; then
+    shell="$(brew --prefix)/bin/bash"
+    grep -q "$shell" /etc/shells && sudo tee -a /etc/shells <<<"$shell" >/dev/null
   fi
+
+  sudo chsh -s "$shell" "$USER"
 }
 
-while [[ $# -gt 0 ]]; do
-  case $1 in
-    -f) set_force;;
-  esac
-  shift
-done
+install_homebrew() {
+  local prefix
 
-if is_mac && ! command_exists "greadlink"; then
-  echo "Mac detected without \`greadlink\`, if this install does something wrong you might need to \`brew install coreutils\`."
-fi
+  if ! is_mac; then
+    return
+  fi
+
+  if ! command_exists "brew"; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
+
+  if [[ -e /opt/homebrew ]]; then
+    prefix=/opt/homebrew
+  else
+    prefix=/usr/local
+  fi
+
+  # shellcheck source=/dev/null
+  . <($prefix/bin/brew shellenv)
+}
+
+install_self() {
+  if [[ -e $RCPATH/install.sh ]]; then
+    return
+  fi
+
+  mkdir -p "$(dirname "$RCPATH")"
+  git clone https://github.com/shanesmith/dotfiles.git "$RCPATH"
+  git -C "$RCPATH" remote set-url origin git@github.com:shanesmith/dotfiles.git
+}
+
+install_brew_bundle() {
+  if ! is_mac; then
+    return
+  fi
+
+  brew bundle install
+}
+
+# install homebrew before self so that it
+# also installs xclt for git
+install_homebrew
+
+install_self
+
+install_brew_bundle
 
 update_git_submodules
 
