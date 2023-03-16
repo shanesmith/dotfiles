@@ -1030,6 +1030,7 @@ nmap ]- <Plug>(GitGutterNextHunk)
 nmap [- <Plug>(GitGutterPrevHunk)
 nnoremap <leader>- <nop>
 nmap <leader>-s <Plug>(GitGutterStageHunk)
+vmap <leader>-s <Plug>(GitGutterStageHunk)
 nmap <leader>-r <Plug>(GitGutterUndoHunk)
 nmap <leader>-p <Plug>(GitGutterPreviewHunk)
 omap i- <Plug>(GitGutterTextObjectInnerPending)
