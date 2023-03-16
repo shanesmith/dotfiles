@@ -1193,7 +1193,8 @@ Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'onsails/lspkind-nvim'
 Plug 'quangnguyen30192/cmp-nvim-ultisnips'
-Plug 'williamboman/nvim-lsp-installer'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'ray-x/lsp_signature.nvim'
 
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -2504,7 +2505,8 @@ lua <<EOF
   -- })
 
   -- needed before require('lspconfig')
-  require("nvim-lsp-installer").setup({
+  require("mason").setup()
+  require("mason-lspconfig").setup({
     automatic_installation = true,
   })
 
