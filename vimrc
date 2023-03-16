@@ -2499,8 +2499,8 @@ lua <<EOF
       { name = 'buffer', keyword_length = 3 },
     }),
     formatting = {
-      format = lspkind.cmp_format({with_text = false, maxwidth = 50})
-    }
+      format = require('lspkind').cmp_format({mode = 'symbol_text', maxwidth = 50})
+    },
   })
 
   cmp.setup.cmdline('/', {
