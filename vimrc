@@ -1389,6 +1389,9 @@ endif
 
 " Mappings {{{
 
+"Set context mark on click in order to use ``
+nnoremap <LeftMouse> m'<LeftMouse>
+
 "Resync syntax
 nnoremap <F12> :syntax sync fromstart<CR>
 
