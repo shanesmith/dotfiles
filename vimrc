@@ -2395,6 +2395,16 @@ endfunction
 
 command! CDME tcd %:h
 
+command! -nargs=? Clone call <SID>Clone(<f-args>)
+function! s:Clone(...)
+  let path = expand('%:h')
+  " TODO handle dotfiles and files without extensions
+  let name = a:0 ? a:1 : printf('%s.copy', expand('%:t:s/\..*//'))
+  let ext = expand('%:t:s/.\{-}\.//')
+
+  exe "saveas" printf('%s/%s.%s', path, name, ext)
+endfunction
+
 "}}}
 
 " AutoCommands {{{
