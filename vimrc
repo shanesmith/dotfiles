@@ -489,6 +489,7 @@ nnoremap <silent> <leader>ts :Fern . -reveal=% -opener=split<CR>
 nnoremap <silent> <leader>ty :Fern . -reveal=% -opener=tabedit<CR>
 command! -nargs=* VFern Fern -opener=vsplit <args>
 command! -nargs=* SFern Fern -opener=split <args>
+command! -nargs=* TFern Fern -opener=tabedit <args> | call fern#action#call("tcd:root")
 
 function! s:init_fern() abort
   nmap <buffer><nowait> h <Plug>(fern-action-collapse)
