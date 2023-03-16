@@ -277,7 +277,7 @@ suitup() {
 
   if [[ -z $TMUX ]]; then
     export SUITUP=1
-    muxit
+    exec tmux new -A
     return
   fi
 
@@ -298,18 +298,6 @@ suitup() {
   done < "$suitup_file"
 
   exit
-}
-
-muxit() {
-  if ! command -v tmux >/dev/null || [[ -n $TMUX ]]; then
-    return
-  fi
-
-  if tmux has-session 2>/dev/null; then
-    exec tmux -2 attach
-  fi
-
-  exec tmux -2
 }
 
 alias kill-tmux="tmux kill-session -a && tmux kill-session"
