@@ -2523,6 +2523,21 @@ lua <<EOF
     automatic_installation = true,
   })
 
+  local diag_format = function(d)
+    return string.format("(%s) %s", d.code, d.message)
+  end
+
+  vim.diagnostic.config({
+    severity_sort = true,
+    virtual_text = {
+      format = diag_format,
+    },
+    float = {
+      source = true,
+      format = diag_format,
+    }
+  })
+
   local lspconfig = require('lspconfig')
 
   local on_attach = function(client, bufnr)
