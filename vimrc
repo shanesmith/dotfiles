@@ -907,6 +907,7 @@ Plug 'Konfekt/vim-alias'
 
 Plug 'meain/vim-package-info', { 'do': 'npm install' }
 
+" TODO unmaintained, find new one?
 Plug 'kassio/neoterm'
 let g:neoterm_default_mod = 'vertical'
 
@@ -2305,8 +2306,6 @@ function! s:NewScratch(mods, ...)
   exec "setf" type
 endfunction
 
-command! CountPlugins echo len(keys(g:plugs))
-
 command! -range MakeRelative call <SID>MakeRelative()
 function! s:MakeRelative()
   let [line1, col1] = getpos("'<")[1:2]
@@ -2344,6 +2343,7 @@ command! VimrcEdit tabe ~/.vimrc
 
 command! FixClipboard set clipboard=unnamed,unnamedplus
 
+command! CountPlugins echo len(keys(g:plugs))
 command! -nargs=1 NewPlug call append(line('.'), "Plug '" . <args> . "'") | exe "Plug '" . <args> . "'" | PlugInstall
 
 command! CopyFilePathToClipboard let @+ = expand("%")
@@ -2467,10 +2467,8 @@ augroup END
 "}}}
 
 lua <<EOF
-  local ok, lspkind = pcall(require, 'lspkind')
+  local ok, cmp = pcall(require, 'cmp')
   if not ok then return end
-
-  local cmp = require('cmp')
 
   cmp.setup({
     snippet = {
