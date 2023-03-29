@@ -395,6 +395,8 @@ highlight MatchTag cterm=underline gui=underline
 
 highlight illuminatedWord guibg=#4F5454
 
+highlight FloatBorder  ctermfg=NONE ctermbg=NONE cterm=NONE
+
 if exists('g:loaded_airline')
   AirlineTheme dark
 endif

@@ -648,10 +648,14 @@ command! GResolve Gwrite | Git mergetool
 command! GB execute line('.') . "GBrowse %"
 
 Plug 'rhysd/git-messenger.vim'
+nnoremap <leader>gb :GitMessenger<CR>
 let g:git_messenger_always_into_popup = 1
+let g:git_messenger_floating_win_opts = { 'border': 'rounded' }
 function! s:setup_gitmessengerpopup() abort
-  nmap <buffer><C-o> o
-  nmap <buffer><C-i> O
+  nmap <buffer> <C-o> o
+  nmap <buffer> <C-i> O
+  nmap <buffer> < o
+  nmap <buffer> > O
 endfunction
 autocmd FileType gitmessengerpopup call <SID>setup_gitmessengerpopup()
 
