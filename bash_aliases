@@ -340,14 +340,6 @@ sing() {
   hexdump -v -e '/1 "%u\n"' < /dev/urandom | awk '{ split("0,2,4,5,7,9,11,12",a,","); for (i = 0; i < 1; i+= 0.0001) printf("%08X\n", 100*sin(1382*exp((a[$1 % 8]/12)*log(2))*i)) }' | xxd -r -p | sox -v 0.05 -traw -r44100 -b16 -e unsigned-integer - -tcoreaudio
 }
 
-
-alias apt-search="apt-cache search"
-alias apt-show="apt-cache show"
-alias apt-showpkg="apt-cache showpkg"
-alias apt-install="sudo apt-get install"
-alias apt-update="sudo apt-get update"
-alias apt-upgrade="sudo apt-get update && sudo apt-get upgrade"
-alias apt-dist-upgrade="sudo apt-get update && sudo apt-get dist-upgrade"
 apt-list-ppa() {
   local APT USER PPA
   find /etc/apt/ -name '*.list' -print0 | while IFS= read -r -d '' APT; do
@@ -599,40 +591,7 @@ __colorize_ps1() {
   echo -n "\[$(__ansi_color "$1")\]$2\[$(__ansi_color "[X]X")\]"
 }
 
-__webcam_files=(
-  "/System/Library/Frameworks/CoreMediaIO.framework/Versions/A/Resources/VDC.plugin/Contents/MacOS/VDC"
-  "/System/Library/PrivateFrameworks/CoreMediaIOServicesPrivate.framework/Versions/A/Resources/AVC.plugin/Contents/MacOS/AVC"
-  "/System/Library/QuickTime/QuickTimeUSBVDCDigitizer.component/Contents/MacOS/QuickTimeUSBVDCDigitizer"
-  "/Library/CoreMediaIO/Plug-Ins/DAL/AppleCamera.plugin/Contents/MacOS/AppleCamera"
-  "/Library/CoreMediaIO/Plug-Ins/FCP-DAL/AppleCamera.plugin/Contents/MacOS/AppleCamera"
-)
-
-macos_disable_webcam() {
-  sudo chmod a-r "${__webcam_files[@]}"
-}
-
-macos_enable_webcam() {
-  sudo chmod a+r "${__webcam_files[@]}"
-}
-
 alias path="tr ':' '\n' <<<\$PATH"
-
-alias be="bundle exec "
-
-alias ibrew="arch -x86_64 /usr/local/bin/brew"
-alias abrew="arch -arm64 /opt/homebrew/bin/brew"
-
-alias ibash="arch -x86_64 /opt/homebrew/bin/bash"
-alias abash="arch -arm64 /opt/homebrew/bin/bash"
-
-i2abrew() {
-  ibrew uninstall "$@" && abrew install "$@"
-}
-
-
-a2ibrew() {
-  abrew uninstall "$@" && ibrew install "$@"
-}
 
 alias lctl='launchctl'
 
