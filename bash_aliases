@@ -85,11 +85,18 @@ swapbak() {
   mv "$tmp"  "$dest" || return 1
 }
 
-alias cd="pushd >/dev/null"
 alias h="cd ~"
 alias ..="cd .."
 alias ...="cd ../.."
-alias recd="cd .. && cd -"
+cd() { 
+  if [ -d "$1" ] || [ -z "$1" ]; then
+      # shellcheck disable=2164
+      pushd "$@" >/dev/null
+  else
+      # shellcheck disable=2164
+      pushd "${1%/*}" >/dev/null
+  fi
+}
 --() {
   # shellcheck disable=2164
   cd -
