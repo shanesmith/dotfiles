@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # http://www.cita.utoronto.ca/~shirokov/soft/ssh-agent
 #
@@ -16,23 +16,26 @@ sshauth_reload() {
 
   if [ -f "$SSH_ENV" ]; then
     # Find SSH_AUTH_SOCK and SSH_AGENT_PID of the available daemon
-    . ${SSH_ENV} > /dev/null
+    # shellcheck source=/dev/null
+    . "${SSH_ENV}" > /dev/null
 
     # Check if the agent is still running
-    if ps -o "comm=" ${SSH_AGENT_PID} | grep -q ssh-agent; then
+    # shellcheck disable=2009
+    if ps -o "comm=" "${SSH_AGENT_PID}" | grep -q ssh-agent; then
       return
     fi
   fi
 
-  mkdir -p $(dirname "$SSH_ENV")
+  mkdir -p "$(dirname "$SSH_ENV")"
 
   # Start authenticating daemon
   # No authentications set up yet, just starting daemon!
-  ssh-agent -t 1d | head -2 > ${SSH_ENV}
-  chmod 600 ${SSH_ENV}
+  ssh-agent -t 1d | head -2 > "${SSH_ENV}"
+  chmod 600 "${SSH_ENV}"
 
   # Find SSH_AUTH_SOCK and SSH_AGENT_PID of the available daemon
-  . ${SSH_ENV} > /dev/null
+  # shellcheck source=/dev/null
+  . "${SSH_ENV}" > /dev/null
 }
 
 sshauth_reload
