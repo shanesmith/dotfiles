@@ -16,6 +16,10 @@ if ! type -t __orig_git_ps1_show_upstream >/dev/null; then
   save_function __git_ps1_show_upstream __orig_git_ps1_show_upstream
 fi
 
+__colorize_ps1() {
+  echo -n "\[$(__ansi_color "$1")\]$2\[$(__ansi_color "[X]X")\]"
+}
+
 __git_ps1_show_upstream() { 
   __orig_git_ps1_show_upstream
 

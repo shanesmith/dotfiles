@@ -77,7 +77,3 @@ __colorize() {
     echo -ne "$(__ansi_color "[X]X")"
   fi
 }
-
-__colorize_ps1() {
-  echo -n "\[$(__ansi_color "$1")\]$2\[$(__ansi_color "[X]X")\]"
-}
