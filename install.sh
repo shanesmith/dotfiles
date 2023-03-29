@@ -22,7 +22,6 @@ DOTFILES=(
   tmux
   bin
   tmuxinator
-  tern-config
   lftprc
   pryrc
   irbrc
