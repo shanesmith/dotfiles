@@ -481,8 +481,8 @@ man() {
   fi
 }
 
-alias devdev='dev use dev --backend && . ~/.bash_ps1'
-alias undevdev='dev use system --backend && . ~/.bash_ps1'
+alias devdev='dev use dev --backend'
+alias undevdev='dev use system --backend'
 alias isdevdev='[[ $__dev_source_dir != "/opt/dev" && -n $__dev_source_dir ]]'
 alias dev-tst='dev tc && dev style && dev test'
 alias updev='eval "$(curl -sS https://up.dev)"'
