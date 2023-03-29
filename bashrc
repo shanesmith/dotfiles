@@ -59,7 +59,7 @@ fi
 
 # Enforced by dev
 # shellcheck disable=2015
-[[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
+[[ -f /opt/dev/sh/chruby/chruby.sh ]] && { type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; } }
 # [[ -x $brew_prefix/bin/brew ]] && eval $($brew_prefix/bin/brew shellenv)
 
 type chruby &>/dev/null && chruby latest
