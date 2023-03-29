@@ -360,12 +360,17 @@ icanhazip() {
 }
 
 man() {
-  if [[ $# -eq 1 && $(type -t "$1") == "builtin" ]]; then
-    help "$1"
+  if [[ $# -eq 1 ]]; then
+    case "$(type -t "$1")" in
+      builtin) help "$1" ;;
+      function|alias) type "$1" ;;
+      *) /usr/bin/man "$1"
+    esac
   else
     /usr/bin/man "$@"
   fi
 }
+alias man!="/usr/bin/man"
 
 alias devdev='dev use dev --backend'
 alias undevdev='dev use system --backend'
