@@ -89,7 +89,6 @@
 # Submodules
   remove-submodule = "!f() { if [ -d $1 ]; then echo "Removing from .gitmodule..."; git config -f .gitmodules --remove-section submodule.$1; echo "Removing from .git/config..."; git config -f .git/config --remove-section submodule.$1; echo "Removing from cache..."; git rm --cached $1; fi }; f"
   delete-submodule = "!f() { if [ -d $1 ]; then echo "Removing from .gitmodule..."; git config -f .gitmodules --remove-section submodule.$1; echo "Removing from .git/config..."; git config -f .git/config --remove-section submodule.$1; echo "Removing from cache..."; git rm --cached $1; echo "Removing directory..."; rm -rf $1; fi }; f"
-  remove-merged-branches = "!git_remove-merged-branches"
 
 # Branch
   bracoa = "!f() { git checkout -b \"$1\" && git commit -a -m \"${2:-wip}\" && git checkout -; }; f"

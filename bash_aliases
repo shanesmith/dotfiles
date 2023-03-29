@@ -31,31 +31,6 @@ os_is_linux() {
   [[ $(uname -s) == "Linux" ]]
 }
 
-alias npr="npm run" # run script
-alias npl="npm-run" # run with local patch
-npm_upgrade() {
-  for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f2)
-  do
-    npm -g install "$package"
-  done
-}
-
-npm_list_license() {
-  npm list --depth=0 \
-    | tail -n +2 \
-    | awk '! /^\s*$/ {print $2}' \
-    | while read -r package; do 
-      # sed 's/@.*$//' <<<"$package" | xargs -I'{}' npm --no-progress info '{}' license
-      local license
-      license=$(sed 's/@.*$//' <<<"$package" | xargs -I'{}' npm --no-progress info '{}' license)
-      echo "$package ($license)"
-    done
-}
-
-alias reyarn="unpm && yarn"
-alias renpm="unpm && npm install"
-alias unpm="find . -type d -name node_modules -prune -print0 | xargs -0 rm -rf --"
-
 bak() {
   local src=${1%/}
   local dest=$src.bak$2
@@ -118,9 +93,6 @@ alias recd="cd .. && cd -"
 --() {
   # shellcheck disable=2164
   cd -
-}
-cs() {
-  cd "$1" && ls
 }
 cddir() {
   # shellcheck disable=2164
@@ -254,7 +226,6 @@ alias now="date +%s"
 
 alias whoareyou="uname -a"
 
-alias svim="sudo vim"
 alias vim="nvim"
 
 alias hs="history"
@@ -300,44 +271,12 @@ suitup() {
   exit
 }
 
-alias kill-tmux="tmux kill-session -a && tmux kill-session"
-
 function ] {
   if [[ $(which xdg-open) ]]; then
     xdg-open "$1"
   elif [[ $(uname) == "Darwin" && $(which open) ]]; then
     open "$1"
   fi
-}
-
-apt-list-ppa() {
-  local APT USER PPA
-  find /etc/apt/ -name '*.list' -print0 | while IFS= read -r -d '' APT; do
-    grep -o "^deb http://ppa.launchpad.net/[a-z0-9-]\+/[a-z0-9.-]\+" "$APT" | while read -r ENTRY ; do
-      USER=$(cut -d/ -f4 <<<"$ENTRY")
-      PPA=$(cut -d/ -f5 <<<"$ENTRY")
-      echo "ppa:${USER}/${PPA}"
-    done
-  done
-}
-remove-old-kernels() {
-  local OLDCONF
-  local CURKERNEL
-  local LINUXPKG
-  local METALINUXPKG
-  local OLDKERNELS
-
-  OLDCONF=$(dpkg -l | grep "^rc" | awk '{print $2}')
-  CURKERNEL=$(uname -r|sed 's/-*[a-z]//g'|sed 's/-386//g')
-  LINUXPKG="linux-(image|headers|ubuntu-modules|restricted-modules)"
-  METALINUXPKG="linux-(image|headers|restricted-modules)-(generic|i386|server|common|rt|xen)"
-  OLDKERNELS=$(dpkg -l | awk '{print $2}' | grep -E "$LINUXPKG" | grep -vE "$METALINUXPKG" | grep -v "$CURKERNEL")
-
-  echo "Removing old config files..."
-  sudo apt-get purge "$OLDCONF"
-
-  echo "Removing old kernels..."
-  sudo apt-get purge "$OLDKERNELS"
 }
 
 
@@ -366,11 +305,6 @@ complete -F _vagrant vv
 
 alias rr="ranger"
 
-gittop() {
-  # shellcheck disable=2164
-  cd "$(git top)"
-}
-
 httpython() {
   python3 -m http.server "${1:-8080}" >> httpython.log 2>&1 &
 }
@@ -383,23 +317,6 @@ alias please='sudo '
 
 alias vimrc='cd ~/Code/rc && vim vimrc'
 alias bashrc='cd ~/Code/rc && vim bashrc'
-
-git_remove-merged-branches() {
-  local branches
-  branches=$(git branch --merged | sed -e '/^*/d' -e '/master/d')
-  echo "Finding candidate branches..."
-  echo "$branches"
-  read -rp "Remove these branches? "
-  if [[ $REPLY == "y" || $REPLY == "Y" ]]; then
-    git branch -d "$branches"
-  fi
-}
-
-git_whitespace_fix() {
-  for FILE in $(exec git diff-index --check HEAD -- | sed '/^[+-]/d' | cut -d: -f1 | uniq); do
-    sed -i 's/[[:space:]]*$//' "$FILE"
-  done
-}
 
 relative_path() {
   # also available on non-OSX systems as
