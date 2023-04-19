@@ -1,2 +1,3 @@
 aliases:
     web: pr view --web
+    co: pr checkout
