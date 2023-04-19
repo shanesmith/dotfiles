@@ -117,21 +117,23 @@ link_dotfiles() {
   for file in "${all_files[@]}"; do
     src=$(get_src "$file")
     dest=$(get_dest "$file")
+    orig_bk="${dest}.orig"
 
     if [[ -L $dest ]]; then
       if [[ $(readlink_f "$dest") == "$src" ]]; then
         echo "Already installed $file"
+        continue
       else
-        echo "Bad link location for $file"
-        exit 1
+        echo "Bad link location for $file, backing up to $orig_bk"
+        mv "$dest" "$orig_bk"
       fi
     elif [[ -e $dest ]]; then
-      echo "File already exists for $file"
-      exit 1
-    else
-      echo "Installing $file"
-      install_file "$src" "$dest"
+      echo "File already exists for $file, backing up to $orig_bk"
+      mv "$dest" "$orig_bk"
     fi
+
+    echo "Installing $file"
+    install_file "$src" "$dest"
   done
 }
 
