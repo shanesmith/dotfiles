@@ -7,6 +7,7 @@ DOTFILES=(
   bashrc
   bashrc.d
   bash_aliases
+  bash_profile
   gitconfig
   gitconfig.shopify
   gitconfig.podman
