@@ -117,6 +117,7 @@
   bdiff = "!f() { git diff $(git merge-base HEAD ${1:-master}); }; f"
   branch-name = symbolic-ref --quiet --short
   cup = "!f() { git checkout -B $1 \"${1}@{u}\"; }; f"
+  branch-exists = !git show-ref --quiet refs/heads/"$1" && :
 
 # Commit
   cc = "!f() { if [ -n \"$1\" ]; then git commit -m \"$1\"; else git commit; fi; }; f"
@@ -151,6 +152,7 @@
   pr = "!f() { git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
   ppr = !git por && git newpr
   newpr = !/opt/dev/bin/dev open pr --base "$(git name-rev --name-only --refs='refs/heads/*' HEAD^)"
+  update-pr-body = !git show -s --format='%b' | gh pr edit -F -
 
 [color]
   ui = auto
