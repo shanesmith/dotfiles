@@ -124,6 +124,22 @@ __rosetta() {
   fi
 }
 
+__git_ps1_worktree() {
+  local count
+  count=$(git worktree list 2>/dev/null | wc -l | bc)
+
+  if [[ $count -gt 1 ]]; then
+    local main
+    main=$(git-wt main)
+
+    if [[ "$PWD" == "$main" ]]; then
+      echo -n "t(${count}) "
+    else
+      echo -n "t[${main##*/}] "
+    fi
+  fi
+}
+
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
   debian_chroot=$(cat /etc/debian_chroot)
@@ -151,7 +167,7 @@ ${USER_HOST}\
 ${CWD}\
 \$(__ssh_keys_status)\
 \$(__jobs_status)\
-\$(__git_ps1 ' (%s)')\
+\$(__git_ps1 \" (\$(__git_ps1_worktree)%s)\")\
 \$(__rosetta)\
 \$(__dev_dev)\
 \n\
