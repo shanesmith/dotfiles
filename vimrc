@@ -2598,7 +2598,9 @@ lua <<EOF
     flags = flags,
   }
 
-  require("lsp_signature").setup({})
+  require("lsp_signature").setup({
+    toggle_key = '<M-e>'
+  })
 EOF
 
 " vim: set fdm=marker fdl=999:
