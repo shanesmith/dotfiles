@@ -385,7 +385,7 @@ icanhazip() {
     /^[^[:space:]]/ { name = substr($1, 0, length($1) - 1) }
     /^[[:space:]]+inet / && name != "lo0" { print name " " $2 }
   '
-  echo "external $(curl -s http://icanhazip.com/s)"
+  echo "external $(curl -s http://ipv4.icanhazip.com/s)"
 }
 
 man() {
