@@ -62,7 +62,7 @@ __color_code() {
     B) code="34" ;; # Blue
     M) code="35" ;; # Magenta
     C) code="36" ;; # Cyan
-    W) code="37" ;; # White (Light gray)
+    W) code="37" ;; # White
     X) code="0"  ;; # Reset
   esac
 

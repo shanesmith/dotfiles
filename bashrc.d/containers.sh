@@ -21,7 +21,7 @@ alias pd=podman
 complete -o default -F __start_podman pd
 
 alias pdc=podman-compose
-alias pdm="podman machine "
+alias pdm="podman machine"
 
 podman-fw-list() {
   podman machine ssh curl --silent --fail-with-body http://gateway.containers.internal/services/forwarder/all | jq
