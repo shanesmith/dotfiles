@@ -2571,18 +2571,32 @@ lua <<EOF
 
   local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
+  local flags = { debounce_text_changes = 500 }
+
   -- Use a loop to conveniently call 'setup' on multiple servers and
   -- map buffer local keybindings when the language server attaches
-  local servers = { 'solargraph', 'bashls', 'dockerls', 'sorbet', 'vimls' }
+  local servers = { 'bashls', 'dockerls', 'vimls' }
   for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
       on_attach = on_attach,
       capabilities = capabilities,
-      flags = {
-        debounce_text_changes = 150,
-      }
+      flags = flags,
     }
   end
+
+  lspconfig.solargraph.setup {
+    cmd = { "chruby-exec", "latest", "--", "solargraph", "stdio" },
+    on_attach = on_attach,
+    capabilities = capabilities,
+    flags = flags,
+  }
+
+  lspconfig.sorbet.setup {
+    cmd = { "chruby-exec", "latest", "--", "srb", "tc", "--lsp" },
+    on_attach = on_attach,
+    capabilities = capabilities,
+    flags = flags,
+  }
 
   require("lsp_signature").setup({})
 EOF
