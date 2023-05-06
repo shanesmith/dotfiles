@@ -1275,12 +1275,12 @@ function! s:IsFoldable()
   " wrong......
   return foldlevel(curline-1) < foldlevel(curline) || foldlevel(curline+1) < foldlevel(curline)
 endfunction
-inoremap <silent> <tab> <C-R>=<SID>PumOrUltisnips(1)<CR>
-inoremap <silent> <s-tab> <C-R>=<SID>PumOrUltisnips(0)<CR>
-snoremap <silent> <tab> <Esc>:call UltiSnips#JumpForwards()<CR>
-snoremap <silent> <s-tab> <Esc>:call UltiSnips#JumpBackwards()<CR>
-nnoremap <expr> <silent> <tab> <SID>PumOrUltisnips(1)
-nnoremap <expr> <silent> <s-tab> <SID>PumOrUltisnips(0)
+" inoremap <silent> <tab> <C-R>=<SID>PumOrUltisnips(1)<CR>
+" inoremap <silent> <s-tab> <C-R>=<SID>PumOrUltisnips(0)<CR>
+" snoremap <silent> <tab> <Esc>:call UltiSnips#JumpForwards()<CR>
+" snoremap <silent> <s-tab> <Esc>:call UltiSnips#JumpBackwards()<CR>
+" nnoremap <expr> <silent> <tab> <SID>PumOrUltisnips(1)
+" nnoremap <expr> <silent> <s-tab> <SID>PumOrUltisnips(0)
 
 
 "}}}
