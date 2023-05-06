@@ -79,7 +79,7 @@ __ssh_keys_status() {
   echo -e " {\xC2\xA7}"
 }
 
-if ! type __git_ps1 >/dev/null; then
+if ! type __git_ps1 >/dev/null 2>&1; then
   __git_ps1() {
     return
   }
