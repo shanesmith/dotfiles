@@ -122,7 +122,7 @@ _fzf_git_history() {
 
 _fzf_git_branch() {
   local branch
-  branch=$(git for-each-ref --format="%(refname:short)" refs/heads/ | fzf -m --preview-window=down --preview='git lonly -n 100 {}' | __escape)
+  branch=$(git for-each-ref --format="%(refname:short)" --sort=-committerdate refs/heads/ | fzf --no-sort -m --preview-window=down --preview='git lonly -n 100 {}' | __escape)
   __readline_insert "$branch"
 }
 
