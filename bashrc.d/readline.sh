@@ -132,6 +132,21 @@ _fzf_git_reflog() {
   __readline_insert "$sha"
 }
 
+_fzf_git_worktree_preview() {
+  local worktree="${1%% *}"
+  echo "$worktree"
+  git -C "$worktree" -c color.status=always status
+}
+
+_fzf_git_worktree() {
+  export -f _fzf_git_worktree_preview
+
+  local preview="_fzf_git_worktree_preview {}"
+  local worktree
+  worktree=$(git worktree list | fzf --multi --preview-window=down --preview="$preview" | awk '{print $1}' | __escape)
+  __readline_insert "$worktree"
+}
+
 _fzf_history() { 
   local line
   shopt -u nocaseglob nocasematch
@@ -253,6 +268,7 @@ _fzf_word() {
     grp) cmd="_fzf_gerrit_patch" ;;
     gb)  cmd="_fzf_git_branch" ;;
     gr)  cmd="_fzf_git_reflog" ;;
+    gw)  cmd="_fzf_git_worktree" ;;
     hc)  cmd="_fzf_hub_chain" ;;
     *)   cmd="_fzf_${word}" ;;
   esac
@@ -271,6 +287,8 @@ _fzf_word() {
       case "$readline_up_to_point" in
         git\ @(ad?(d)|rm|remove)) cmd="_fzf_git_status_unstaged" ;;
         git\ @(co|checkout)) cmd="_fzf_git_history" ;;
+        git\ @(wt|worktree)\ @(remove|rm|move|mv|repair)) cmd="_fzf_git_worktree" ;;
+        git\ unstage) cmd="_fzf_git_status_staged" ;;
         kill) cmd="_fzf_ps" ;;
         *) return ;;
       esac
