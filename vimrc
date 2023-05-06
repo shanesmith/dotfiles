@@ -2503,6 +2503,9 @@ lua <<EOF
     formatting = {
       format = require('lspkind').cmp_format({mode = 'symbol_text', maxwidth = 50})
     },
+    experimental = {
+      ghost_text = false,
+    },
   })
 
   cmp.setup.cmdline('/', {
