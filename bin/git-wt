@@ -1,0 +1,44 @@
+#!/bin/bash
+
+if [[ $# -eq 0 ]]; then
+  git worktree list
+  exit $?
+fi
+
+subcmd=$1
+shift
+
+case $subcmd in
+  ad) subcmd=add ;;
+  ls) subcmd=list ;;
+  rm) subcmd=remove ;;
+  mv) subcmd=move ;;
+esac
+
+case $subcmd in
+  main)
+    git worktree list | awk 'NR == 1 {print $1}'
+    ;;
+
+  remove)
+    flags=()
+    worktrees=()
+    while [[ $# -ne 0 ]]; do
+      if [[ $1 =~ ^- ]]; then
+        flags+=( "$1" )
+      else
+        worktrees+=( "$1" )
+      fi
+      shift
+    done
+    for wt in "${worktrees[@]}"; do
+      echo "Removing ${wt}"
+      git worktree remove "${flags[@]}" "$wt"
+    done
+    ;;
+
+  *)
+    git worktree "$subcmd" "$@"
+    ;;
+esac
+
