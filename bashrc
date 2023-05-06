@@ -41,7 +41,6 @@ fi
 
 if [[ $(uname -m) == 'arm64' && -e /opt/homebrew/bin/brew ]]; then
   brew_prefix=/opt/homebrew
-  export PATH=/opt/homebrew/bin:$PATH
 elif [[ -e /usr/local/bin/brew ]]; then
   brew_prefix=/usr/local
 
@@ -60,7 +59,11 @@ fi
 # Enforced by dev
 # shellcheck disable=2015
 [[ -f /opt/dev/sh/chruby/chruby.sh ]] && { type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; } }
-# [[ -x $brew_prefix/bin/brew ]] && eval $($brew_prefix/bin/brew shellenv)
+
+if [[ -x "${brew_prefix}/bin/brew" ]]; then
+  # shellcheck source=/dev/null  
+   . <("${brew_prefix}/bin/brew" shellenv)
+fi
 
 type chruby &>/dev/null && chruby latest
 
