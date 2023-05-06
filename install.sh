@@ -9,8 +9,6 @@ DOTFILES=(
   bash_aliases
   bash_profile
   gitconfig
-  gitconfig.shopify
-  gitconfig.podman
   gitignore
   gitmessage
   vimrc
@@ -54,10 +52,6 @@ is_mac() {
 
 is_windows() {
   [[ $(uname) == MINGW.* ]]
-}
-
-is_spin() {
-  [[ -n $SPIN ]]
 }
 
 get_src() {

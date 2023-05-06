@@ -345,16 +345,6 @@ alias please='sudo '
 alias vimrc='cd ~/Code/rc && vim vimrc'
 alias bashrc='cd ~/Code/rc && vim bashrc'
 
-dud() { dev use "${1:-dev}" --backend; }
-alias undud='dev use system --backend'
-alias nodud='undud'
-# shellcheck disable=SC2154
-alias isdevdev='[[ -n $__dev_source_dir && $__dev_source_dir != "/opt/dev" ]]'
-alias isdud='isdevdev'
-alias dev-tst='dev tc && dev style && dev test'
-alias updev='eval "$(curl -sS https://up.dev)"'
-alias spix='spin up --vm -m vm_disk_image=nixos-image-22-11 -m os=nixos empty --name nix --shell'
-
 relative_path() {
   # also available on non-OSX systems as
   #   realpath --relative-to="$file1" "$file2"
@@ -370,10 +360,6 @@ port_holder() {
 }
 
 rebash() {
-  if isdevdev; then
-    exec bash -li <<<"dud '$__dev_source_dir'; exec</dev/tty"
-  fi
-
   exec bash -l
 }
 alias rbb=rebash
@@ -401,7 +387,7 @@ man() {
 }
 alias man!="/usr/bin/man"
 
-P_PATH=~/Code:~/src/github.com/Shopify:~/src/github.com/ShopifyUS:~/src/github.com/Shopify/spin/containers
+P_PATH=~/Code
 p() {
   # shellcheck disable=SC2164
   CDPATH="$P_PATH" cd "$@"

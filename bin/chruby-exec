@@ -1,14 +1,6 @@
 #!/usr/bin/env bash
 
-# https://github.com/postmodern/chruby/blob/master/bin/chruby-exec
-# but uses dev's chruby if present
-
 chruby_sh="${0%/*}/../share/chruby/chruby.sh"
-
-if [[ -f /opt/dev/sh/chruby/chruby.sh ]]; then
-	chruby_sh="/opt/dev/sh/chruby/chruby.sh"
-fi
-
 source "$chruby_sh"
 
 case "$1" in

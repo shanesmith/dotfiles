@@ -27,8 +27,6 @@ export PATH=$PATH:$HOME/.node/bin:$HOME/bin.local:$HOME/bin:$GOPATH/bin
 export RC_INSTALL_DIR
 RC_INSTALL_DIR=$(cd "$(dirname "$(readlink ~/.bashrc)")" && pwd)
 
-export DEV_SPIN_ALLOW_UP=1
-
 command_exists() {
   command -v "$1" >/dev/null
 }
@@ -55,10 +53,6 @@ if [[ -n $brew_prefix && -d $brew_prefix/opt/nvm ]]; then
   # shellcheck source=/dev/null 
   . "${brew_prefix}/opt/nvm/nvm.sh"
 fi
-
-# Enforced by dev
-# shellcheck disable=2015
-[[ -f /opt/dev/sh/chruby/chruby.sh ]] && { type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; } }
 
 if [[ -x "${brew_prefix}/bin/brew" ]]; then
   # shellcheck source=/dev/null  
@@ -147,7 +141,6 @@ if ! shopt -oq posix; then
 fi
 
 sources=(
-  "/opt/dev/dev.sh"
   "${HOME}/.bash_aliases"
   "${HOME}/.bashrc.d"/*
   "${HOME}/.bashrc.local"
@@ -169,10 +162,6 @@ for file in "${sources[@]}"; do
     . "$file"
   fi
 done
-
-## Satisfy dev checks
-# [[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
-# [[ -x /usr/local/bin/brew ]] && eval $(/usr/local/bin/brew shellenv)
 
 if [[ -n $SUITUP ]]; then
   unset SUITUP

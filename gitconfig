@@ -151,7 +151,7 @@
 # Github
   pr = "!f() { git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
   ppr = !git por && git newpr
-  newpr = !/opt/dev/bin/dev open pr --base "$(git name-rev --name-only --refs='refs/heads/*' HEAD^)"
+  newpr = !echo 'TODO'
   update-pr-body = !git show -s --format='%b' | gh pr edit -F -
 
 [color]
@@ -185,16 +185,6 @@
 
 [include]
   path = ~/.gitconfig.local
-  path = ~/.config/dev/gitconfig
-
-[includeIf "gitdir:~/src/github.com/Shopify/"]
-  path = ~/.gitconfig.shopify
-
-[includeIf "gitdir:~/src/github.com/ShopifyUS/"]
-  path = ~/.gitconfig.shopify
-
-[includeIf "gitdir:~/Code/podman/"]
-  path = ~/.gitconfig.podman
 
 [fetch]
   prune = true

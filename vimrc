@@ -916,8 +916,6 @@ Plug 'meain/vim-package-info', { 'do': 'npm install' }
 Plug 'kassio/neoterm'
 let g:neoterm_default_mod = 'vertical'
 
-Plug 'Shopify/shadowenv.vim'
-
 "}}}
 
 "" LOLz {{{
@@ -2355,14 +2353,13 @@ command! CopyFilePathToClipboard let @+ = expand("%")
 command! CopyFileAbsoluePathToClipboard let @+ = expand("%:p")
 command! CopyFileNameToClipboard let @+ = expand("%:t")
 
-" TODO steal completion from https://github.com/Shopify/vim-devilish/blob/master/plugin/devilish.vim#L57
 command! -nargs=1 -complete=custom,<SID>ProjComp P call <SID>Proj(<f-args>)
 command! -nargs=1 -complete=custom,<SID>ProjComp TP call <SID>Proj(<f-args>, 1)
 nnoremap <leader>p :P<Space>
 nnoremap <leader>tp :TP<Space>
 nnoremap <silent> <Leader>tr :TP rc<CR>
 
-let g:proj_dirs="~/Code/,~/src/github.com/Shopify/,~/src/github.com/ShopifyUS/,~/src/github.com/Shopify/spin/containers"
+let g:proj_dirs="~/Code"
 
 function! s:Proj(dir, tab = 0)
   let save_cdpath = &cdpath

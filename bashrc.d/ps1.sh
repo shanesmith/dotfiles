@@ -104,20 +104,6 @@ __smiley() {
   fi
 }
 
-__dev_dev() {
-  if ! isdevdev; then
-    return
-  fi
-
-  echo -n " "
-  __colorize U_ "🔧"
-
-  # shellcheck disable=SC2154
-  if [[ $__dev_source_dir != "/Users/shane/src/github.com/Shopify/dev" ]]; then
-    __colorize DW "$(tinypath "$__dev_source_dir")"
-  fi
-}
-
 __rosetta() {
   if os_is_mac && [[ $(sysctl -in sysctl.proc_translated) == "1" ]]; then
     echo " 🌹"
@@ -152,9 +138,8 @@ HISTORY_NUMBER="$(__colorize_ps1 DW '\!')"
 
 TIME="$(__colorize_ps1 LK '\A')"
 
-HOST=$([[ -n $SPIN ]] && sed "s/\\..*//" < /etc/spin/machine/fqdn || echo '\h')
 USER_HOST_COLOR=$([ -n "$SSH_CLIENT" ] && echo "Y" || echo "G" )
-USER_HOST="$(__colorize_ps1 "$USER_HOST_COLOR" "\\u@$HOST")"
+USER_HOST="$(__colorize_ps1 "$USER_HOST_COLOR" "\\u@\\h")"
 
 CWD="$(__colorize_ps1 C '\w')"
 
@@ -169,7 +154,6 @@ ${CWD}\
 \$(__jobs_status)\
 \$(__git_ps1 \" (\$(__git_ps1_worktree)%s)\")\
 \$(__rosetta)\
-\$(__dev_dev)\
 \n\
 ${TIME}\
  \
