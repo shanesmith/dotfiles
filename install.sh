@@ -156,7 +156,7 @@ update_git_submodules() {
 }
 
 install_vim_plugins() {
-  command_exists pip && pip install neovim
+  command_exists pip3 && pip3 install neovim
   command_exists gem && gem install neovim
   command_exists npm && npm install -g neovim
   command_exists nvim && nvim --headless +PlugInstall +qall
@@ -167,7 +167,7 @@ chsh_bash() {
 
   if is_mac; then
     shell="$(brew --prefix)/bin/bash"
-    grep -q "$shell" /etc/shells && sudo tee -a /etc/shells <<<"$shell" >/dev/null
+    grep -q "$shell" /etc/shells || sudo tee -a /etc/shells <<<"$shell" >/dev/null
   fi
 
   sudo chsh -s "$shell" "$USER"
