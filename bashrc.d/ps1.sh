@@ -1,49 +1,74 @@
 #!/bin/bash
 
-export GIT_PS1_SHOWDIRTYSTATE=true
-export GIT_PS1_SHOWSTASHSTATE=true
-export GIT_PS1_SHOWUNTRACKEDFILES=true
-export GIT_PS1_SHOWUPSTREAM="name"
+export GIT_PS1_SHOWDIRTYSTATE=
+export GIT_PS1_SHOWSTASHSTATE=
+export GIT_PS1_SHOWUNTRACKEDFILES=
+export GIT_PS1_SHOWUPSTREAM=true
 export GIT_PS1_DESCRIBE_STYLE=branch
-
-if ! type -t __orig_git_ps1_show_upstream >/dev/null; then
-  __save_function() {
-    local ORIG_FUNC NEWNAME_FUNC
-
-    ORIG_FUNC=$(declare -f "$1")
-    NEWNAME_FUNC="$2${ORIG_FUNC#"$1"}"
-
-    eval "$NEWNAME_FUNC"
-  }
-
-  __save_function __git_ps1_show_upstream __orig_git_ps1_show_upstream
-
-  unset -f __save_function
-fi
 
 __colorize_ps1() {
   echo -n "\[$(__ansi_color "$1")\]$2\[$(__ansi_color "[X]X")\]"
 }
 
+__git_ps1_others() {
+  local status
+
+  status=$(git status --porcelain --no-renames)
+
+  # untrackted
+  # shellcheck disable=SC2034
+  [[ $status =~ (^|$'\n')\?\? ]] && u='%'
+
+  # unstanged change
+  # shellcheck disable=SC2034
+  [[ $status =~ (^|$'\n').[^?\ ] ]] && w='*'
+
+  # staged changes
+  # shellcheck disable=SC2034
+  [[ $status =~ (^|$'\n')[^?\ ] ]] && i='+'
+
+  # shellcheck disable=SC2154,SC2034
+  [[ -e "${g}/refs/stash" ]] && s='$'
+
+  # from __git_ps1
+  if [ -z "$short_sha" ] && [ -z "$i" ]; then
+    i="#"
+  fi
+}
+
 __git_ps1_show_upstream() { 
-  __orig_git_ps1_show_upstream
+  local marker result branch upstream remote remote_branch
 
-  local branch upstream remote remote_branch
+  case "$(git rev-list --count --left-right '@{upstream}'...HEAD 2>/dev/null)" in
+    "") # no upstream
+      marker="" ;;
+    "0	0") # equal to upstream
+      marker="=" ;;
+    "0	"*) # ahead of upstream
+      marker=">" ;;
+    *"	0") # behind upstream
+      marker="<" ;;
+    *)	    # diverged from upstream
+      marker="<>" ;;
+  esac
 
-  branch="$(git rev-parse --symbolic-full-name --abbrev-ref @)"
-  upstream="$(git rev-parse --symbolic-full-name --abbrev-ref '@{upstream}' 2>/dev/null)"
+  readarray -t result < <(git rev-parse --symbolic-full-name --abbrev-ref '@' '@{upstream}' 2>/dev/null)
+  branch="${result[0]}"
+  upstream="${result[1]}"
+
   remote="${upstream%%/*}"
   remote_branch="${upstream#*/}"
 
   if [[ -n $upstream ]]; then
     if [[ $branch == "$remote_branch" ]]; then
-      p="$p${remote}"
-    else
-      p="$p${upstream}"
+      upstream="$remote"
     fi
-    b="$b $p"
-    p=""
+
+    # place it next to branch
+    b="$b $marker$upstream"
   fi
+
+  __git_ps1_others
 }
 
 __ssh_keys_status() {
