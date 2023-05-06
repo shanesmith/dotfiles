@@ -1,5 +1,22 @@
 #!/bin/bash
 
+JAG_ISOGUN_TEST_SERVICES=(
+  bigtable
+  elasticsearch-v7
+  elasticsearch-v8
+  elasticsearch-v8.6
+  kafka
+  magellan
+  memcached
+  mysql
+  nginx
+  redis
+  schema-registry
+  seed-kafka-service
+  toxiproxy
+  zookeeper
+)
+
 jag() {
   local tasks dir devyml
 
@@ -20,10 +37,15 @@ jag() {
   ( cd "$dir" && dev up )
 }
 
-jag-isogun-all() {
+cdjag() {
+  # shellcheck disable=2164
+  cd "$JAGDIR"
+}
+
+jag-isogun-test-all() {
   local ret
   local start=${1}
-  for s in bigtable elasticsearch-v7 elasticsearch-v8 imagery kafka magellan memcached mysql nginx redis schema-registry seed-kafka-service toxiproxy zookeeper; do
+  for s in "${JAG_ISOGUN_TEST_SERVICES[@]}"; do
     if [[ -n $start ]]; then
       if [[ "$start" == "$s" ]]; then
         start=
@@ -31,7 +53,7 @@ jag-isogun-all() {
         continue
       fi
     fi
-    jag-isogun $s
+    jag-isogun-test "$s"
     ret=$?
     if [[ $ret -ne 0 ]]; then
       return 1
@@ -39,7 +61,7 @@ jag-isogun-all() {
   done
 }
 
-jag-isogun() {
+jag-isogun-test() {
   local service=$1
   local dir
   dir=$(mktemp -d -t "jag-${service}")
@@ -69,6 +91,8 @@ EOF
     hostnames:
       - jag.railgun
 EOF
+
+  sudo -v
 
   ( cd "${dir}" && dev isogun reset )
 
@@ -114,7 +138,6 @@ isogun-test() {
       memcached) [[ $(nc "$MEMCACHED_HOST" "$MEMCACHED_PORT" <<<$'stats\nquit') =~ ^STAT ]] ;;
       redis) [[ $(nc "$REDIS_HOST" "$REDIS_PORT" <<<$'PING\nQUIT') =~ ^\+PONG ]] ;;
       mysql) mysql -u root -h "$MYSQL_HOST" -P "$MYSQL_PORT" -e '\q' ;; 
-      imagery) curl "$IMAGERY_HOST:$IMAGERY_PORT" ;;
       schema-registry) curl "$SCHEMA_REGISTRY_HOST:$SCHEMA_REGISTRY_PORT" ;;
       seed-kafka-service) curl "$SEED_KAFKA_SERVICE_HOST:$SEED_KAFKA_SERVICE_PORT/health/live" ;;
       *) echo "isogun-test does not know the service ${service}" && return 1 ;;
@@ -126,6 +149,7 @@ isogun-test() {
       return $ret
     fi
 
+    sleep 2
     echo "Retry test #${retry}..."
   done
 }
