@@ -86,6 +86,11 @@ __dev_dev() {
 
   echo -n " "
   __colorize U_ "🔧"
+
+  # shellcheck disable=SC2154
+  if [[ $__dev_source_dir != "/Users/shane/src/github.com/Shopify/dev" ]]; then
+    __colorize DW "$(tinypath "$__dev_source_dir")"
+  fi
 }
 
 __rosetta() {
