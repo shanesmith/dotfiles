@@ -6,6 +6,26 @@ alias ll='ls -ahlF'
 alias la='ls -A'
 alias l='ls -CF'
 alias lld='ll -d'
+llw() {
+  ll "$(which "$1")"
+}
+chase() {
+  local link cur="$1"
+
+  echo "$cur"
+
+  while [[ -L $cur ]]; do
+    link=$(readlink "$cur")
+
+    echo "$link"
+
+    if [[ $link =~ ^/ ]]; then
+      cur="$link"
+    else
+      cur="$(dirname "$cur")/${link}"
+    fi
+  done
+}
 
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -409,6 +429,15 @@ complete -F _p_comp p
 alias path="tr ':' '\n' <<<\$PATH"
 
 alias lctl='launchctl'
+
+# from /Users/shane/Code/project to /U/s/C/project
+tinypath() {
+  sed -E -e "s|^$HOME|~|" -e 's|([^/])[^/]+/|\1/|g' <<<"$1"
+}
+
+tinypwd() {
+  tinypath "$PWD"
+}
 
 alias journalctl="/usr/bin/journalctl --no-hostname"
 alias sc=systemctl
