@@ -109,7 +109,7 @@ alias h="cd ~"
 alias ..="cd .."
 alias ...="cd ../.."
 cd() { 
-  if [ -d "$1" ] || [ -z "$1" ]; then
+  if [[ -d "$1" || -z "$1" || "$1" == "--" ]]; then
       # shellcheck disable=2164
       pushd "$@" >/dev/null
   else
