@@ -504,6 +504,7 @@ function! s:init_fern() abort
   nmap <buffer><nowait> t <Plug>(fern-action-open:tabedit)<Plug>(fern-action-tcd)
 
   nmap <buffer><nowait> A <Plug>(fern-action-new-path)
+  nmap <buffer><nowait> R <Plug>(fern-action-reveal)
 
   nmap <buffer><nowait> dd <Plug>(fern-action-remove)
   nmap <buffer><nowait> yy <Plug>(fern-action-clipboard-copy)
