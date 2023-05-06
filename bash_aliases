@@ -445,3 +445,44 @@ tinypwd() {
 alias journalctl="/usr/bin/journalctl --no-hostname"
 alias sc=systemctl
 alias jc=journalctl
+
+git() {
+  local cmd=$1
+
+  shift
+
+  case "$cmd" in
+    pro?(p?(agate)))
+      local toplevel name branch=$1
+      toplevel=$(command git rev-parse --show-toplevel)
+      name=$(basename "$toplevel")
+      local targetdir="${toplevel}/../${name}-${branch}"
+      local args=()
+      if [[ -z $branch ]]; then
+        targetdir="${toplevel}/../${name}-detached"
+        args+=( "-d" "$targetdir" )
+      elif command git branch-exists "$branch"; then
+        args+=( "$targetdir" "$branch" )
+      else
+        args+=( "-b" "$branch" "$targetdir" )
+      fi
+      # shellcheck disable=2164
+      command git worktree add "${args[@]}" && cd "$targetdir"
+      ;;
+
+    fell)
+      local main
+      main=$(command git-wt main)
+      # shellcheck disable=2164
+      command git worktree remove "$PWD" && cd "$main"
+      ;;
+
+    worktree)
+      command git-wt "$@"
+      ;;
+
+    *)
+      command git "$cmd" "$@"
+      ;;
+  esac
+}
