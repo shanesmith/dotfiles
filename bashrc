@@ -54,12 +54,17 @@ if [[ -n $brew_prefix && -d $brew_prefix/opt/nvm ]]; then
   . "${brew_prefix}/opt/nvm/nvm.sh"
 fi
 
+if [[ -n $brew_prefix && -d $brew_prefix/opt/chruby ]]; then
+  # shellcheck source=/dev/null
+  . "${brew_prefix}/opt/chruby/share/chruby/chruby.sh"
+fi
+
 if [[ -x "${brew_prefix}/bin/brew" ]]; then
   # shellcheck source=/dev/null  
    . <("${brew_prefix}/bin/brew" shellenv)
 fi
 
-type chruby &>/dev/null && chruby latest
+type chruby &>/dev/null && chruby 3.2.2
 
 
 # If not running interactively, stop here
