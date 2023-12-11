@@ -87,7 +87,7 @@ fi
 
 __jobs_status() {
   local cnt
-  cnt=$(jobs | awk '/^\[[0-9]+\]/ && $2 !~ /^Done/' | wc -l | awk '{print $1}')
+  cnt=$(jobs | awk '/^\[[0-9]+\]/ && $2 !~ /^Done/ && $0 !~ /_WARP_/' | wc -l | awk '{print $1}')
 
   if [[ $cnt -eq 0 ]]; then
     return
@@ -143,7 +143,18 @@ USER_HOST="$(__colorize_ps1 "$USER_HOST_COLOR" "\\u@\\h")"
 
 CWD="$(__colorize_ps1 C '\w')"
 
+PRE_PROMPT="\
+\n\
+${TIME}\
+ \
+${HISTORY_NUMBER}\
+"
+
 PROMPT="\$"
+
+if [[ $__CFBundleIdentifier =~ dev.warp. ]]; then
+  PRE_PROMPT=
+fi
 
 PS1="\
 ${debian_chroot}\
@@ -154,10 +165,7 @@ ${CWD}\
 \$(__jobs_status)\
 \$(__git_ps1 \" (\$(__git_ps1_worktree)%s)\")\
 \$(__rosetta)\
-\n\
-${TIME}\
- \
-${HISTORY_NUMBER}\
+${PRE_PROMPT}\
  \
 ${PROMPT}\
  \
