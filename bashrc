@@ -143,6 +143,10 @@ if ! shopt -oq posix; then
     . <(gerrit completion)
   fi
 
+  if command_exists ng; then
+    . <(ng completion script)
+  fi
+
 fi
 
 sources=(
