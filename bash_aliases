@@ -472,3 +472,7 @@ git() {
       ;;
   esac
 }
+
+btt_backup() {
+  osascript -e 'tell application "BetterTouchTool" to export_preset "Default" outputPath "~/Code/rc/default.bttpreset" with includeSettings'
+}
