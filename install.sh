@@ -185,7 +185,7 @@ install_homebrew() {
   fi
 
   # shellcheck source=/dev/null
-  . <($prefix/bin/brew shellenv)
+  eval "$($prefix/bin/brew shellenv)"
 }
 
 install_self() {
