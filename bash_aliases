@@ -387,14 +387,14 @@ man() {
 }
 alias man!="/usr/bin/man"
 
-P_PATH=~/Code,~/clio
+P_PATH=~/Code:~/clio
 p() {
   # shellcheck disable=SC2164
   CDPATH="$P_PATH" cd "$@"
 }
 p_dirs() {
   local paths
-  readarray -td ':' paths <<<"$P_PATH"
+  readarray -td ':' paths < <(echo -n "$P_PATH")
 
   for p in "${paths[@]}"; do
     fd --type d -d1 . "$p"
@@ -406,7 +406,7 @@ _p_comp() {
 
   COMPREPLY=()
 
-  readarray -td ':' paths <<<"$P_PATH"
+  readarray -td ':' paths < <(echo -n "$P_PATH")
 
   for dir in "${paths[@]}"; do
     [[ ! -d "$dir" ]] && continue
