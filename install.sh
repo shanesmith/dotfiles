@@ -3,6 +3,8 @@
 # TODO
 # - Install bash-sneak
 
+set -eo pipefail
+
 DOTFILES=(
   bashrc
   bashrc.d
