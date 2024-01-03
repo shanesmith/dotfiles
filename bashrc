@@ -10,11 +10,7 @@
 # set -x
 
 now_ms() {
-  if command -v gdate >/dev/null; then
-    gdate +%s%3N
-  else
-    date +%s%3N
-  fi
+  ruby -e 'print Time.now.to_f.round(3).*(1000).to_i'
 }
 
 _start=$(now_ms)
