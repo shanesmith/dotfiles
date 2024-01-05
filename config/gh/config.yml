@@ -1,3 +1,4 @@
 aliases:
     web: pr view --web
     co: pr checkout
+version: "1"
