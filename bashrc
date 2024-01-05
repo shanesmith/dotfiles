@@ -143,6 +143,10 @@ if ! shopt -oq posix; then
     . <(ng completion script)
   fi
 
+  if command_exists dev; then
+    eval "$(dev _hook)"
+  fi
+
 fi
 
 sources=(
