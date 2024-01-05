@@ -151,7 +151,7 @@
 # Github
   pr = "!f() { git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
   ppr = !git por && git newpr
-  newpr = !echo 'TODO'
+  newpr = !gh pr create --web
   update-pr-body = !git show -s --format='%b' | gh pr edit -F -
 
 [color]
