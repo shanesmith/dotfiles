@@ -110,6 +110,16 @@ __rosetta() {
   fi
 }
 
+__dev_dev() {
+  if ! command -v dev >/dev/null; then
+    return
+  fi
+
+  if [[ $(dev --version) == *"v0.0.0"* ]]; then
+    echo " 🛠️"
+  fi
+}
+
 __git_ps1_worktree() {
   local count
   count=$(git worktree list 2>/dev/null | wc -l | bc)
@@ -165,6 +175,7 @@ ${CWD}\
 \$(__jobs_status)\
 \$(__git_ps1 \" (\$(__git_ps1_worktree)%s)\")\
 \$(__rosetta)\
+\$(__dev_dev)\
 ${PRE_PROMPT}\
  \
 ${PROMPT}\
