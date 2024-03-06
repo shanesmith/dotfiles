@@ -6,7 +6,7 @@ function! s:link_surround(mode)
     let l:link = ""
   endif
   if a:mode == 'n'
-    let l:str = expand('<cword>')
+    let l:str = expand('<cWORD>')
     let [l:bufnum, l:lnum, l:col, l:off, _] = getcurpos()
     let l:len = strchars(l:str)
     let l:line = getline(l:lnum)
