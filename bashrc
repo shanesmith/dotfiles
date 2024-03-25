@@ -149,7 +149,16 @@ if ! shopt -oq posix; then
 
 fi
 
-sources=(
+sources=()
+
+if [[ -n $brew_prefix ]]; then
+  sources+=(
+    "${brew_prefix}/etc/profile.d"/*
+    "${brew_prefix}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc"
+  )
+fi
+
+sources+=(
   "${HOME}/.bash_aliases"
   "${HOME}/.bashrc.d"/*
   "${HOME}/.bashrc.local"
@@ -157,13 +166,6 @@ sources=(
   "${HOME}/.cargo/env"
   "${HOME}/Code/bash-sneak/sneak.bash"
 )
-
-if [[ -n $brew_prefix ]]; then
-  sources+=(
-    "${brew_prefix}/etc/profile.d/z.sh"
-    "${brew_prefix}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc"
-  )
-fi
 
 for file in "${sources[@]}"; do
   if [ -f "$file" ]; then
