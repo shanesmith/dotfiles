@@ -1,8 +1,6 @@
 tap "github/gh"
 tap "homebrew/bundle"
-tap "homebrew/cask"
 tap "homebrew/cask-fonts"
-tap "homebrew/core"
 
 brew "bash"
 brew "bash-completion@2"
