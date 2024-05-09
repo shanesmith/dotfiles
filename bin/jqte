@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+
+# https://github.com/qmacro/dotfiles/blob/main/scripts/jqte
+
+# tmux-based jq explorer (inspired by https://github.com/bfrg/vim-jqplay)
+
+# Uses tmux, jq, vim and entr.
+
+# Invocation:
+# jqte jsonfile
+
+# The main invocation, just with a JSON file, is all that is needed,
+# i.e. jqte somedata.json
+
+setup() {
+
+  local jsonfile filterfile
+
+  if [[ $# -gt 0 ]]; then
+    jsonfile=$1
+  else
+    jsonfile="$(mktemp)"
+    cat > "$jsonfile"
+  fi
+
+  filterfile="$(mktemp)"
+
+  # Start with basic filter
+  echo "." > "$filterfile"
+
+  # Create a new tmux window to explore the data in the JSON file,
+  # like this:
+
+  # +---------------------+----------------------+
+  # | output              | original JSON data   |
+  # |                     |                      |
+  # |                     |                      |
+  # |                     |                      |
+  # |          1          |                      |
+  # |                     |                      |
+  # |                     |          2           |
+  # |                     |                      |
+  # +                     +----------------------|
+  # |                     | filter               |
+  # |                     |          3           |
+  # |                     |                      |
+  # +---------------------+----------------------+
+
+  # This assumes, btw, that you have pane numbering starting at 1
+  # with set -w -g pane-base-index 1
+
+  # The 'output' and 'original JSON data' panes (1 and 2) are
+  # read-only, and the 'filter' pane (3) is a vim session to edit the
+  # jq filter. Whenever that filter is modified the output is
+  # re-rendered accordingly.
+
+  tmux new-window \; \
+    split-window -h \; \
+    send-keys "vim -c 'set filetype=json' $jsonfile" C-m \; \
+    select-pane -t 2 \; \
+    split-window -v -l 20% \; \
+    send-keys "vim -c 'set filetype=jq' -c 'autocmd TextChanged,InsertLeave <buffer> silent write' $filterfile" C-m \; \
+    select-pane -t 1 \; \
+    send-keys "ls $jsonfile $filterfile | entr -cc jq -f $filterfile $jsonfile" C-m \; \
+    select-pane -t 3
+}
+
+setup "$@"
