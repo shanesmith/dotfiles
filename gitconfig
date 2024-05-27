@@ -147,6 +147,7 @@
   is-index-clean = diff-index --no-ext-diff --quiet --exit-code HEAD
   is-staging-clean = diff-index --no-ext-diff --quiet --exit-code --cached HEAD
   n-rebase = "!f() { git rebase --onto=\"${2}\" \"@~${1}\"; }; f"
+  pag = "!f() { git tag ${1} && git push ${2:-origin} ${1}; }; f"
 
 # Github
   pr = "!f() { git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
