@@ -348,7 +348,9 @@ complete -F _vagrant vv
 alias rr="ranger"
 
 httpython() {
-  python3 -m http.server "${1:-8080}" >> httpython.log 2>&1 &
+  local port=${1:-8080}
+  python3 -m http.server "$port" >> httpython.log 2>&1 &
+  echo "http://localhost:${port}/"
 }
 
 # the space allows for aliases...
