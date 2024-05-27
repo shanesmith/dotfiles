@@ -2296,12 +2296,14 @@ function! s:SyntaxGroup()
   exec "verb hi" transName
 endfunction
 
-nnoremap <leader>s :Scratch<CR>
+nnoremap <leader>ss :Scratch<CR>
+nnoremap <leader>st :tab Scratch<CR>
+nnoremap <leader>sv :vert Scratch<CR>
 command! -nargs=? -complete=syntax Scratch call <SID>NewScratch(<q-mods>, <f-args>)
 function! s:NewScratch(mods, ...)
   let type = a:0 ? a:1 : 'markdown'
 
-  if &ft == 'fern'
+  if &ft == 'fern' && a:mods == ''
     enew
   else
     exe a:mods 'new'
