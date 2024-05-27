@@ -1899,12 +1899,8 @@ endfunction
 " endfunction
 
 "Easier line start/end movement
-nnoremap H ^
-vnoremap H ^
-onoremap H ^
-nnoremap L g_
-vnoremap L g_
-onoremap L g_
+noremap H ^
+noremap L g_
 inoremap <C-a> <C-o>^
 inoremap <C-e> <C-o>$
 
