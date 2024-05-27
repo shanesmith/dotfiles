@@ -276,7 +276,7 @@ alias jg="jobs -l"
 alias kg="kill %1"
 
 lsps() {
-  ps -e -o 'user,pid,stat,%cpu,%mem,command' | awk -v pattern="$1" 'NR==1 || $0 ~ pattern && $6 != "awk"'
+  ps -e -o 'user,pid,pgid,stat,%cpu,%mem,command' | awk -v pattern="$1" 'NR==1 || $0 ~ pattern && $7 != "awk"'
 }
 
 lshs() {
