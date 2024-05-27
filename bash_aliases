@@ -226,6 +226,8 @@ g() {
 
   dir=$(eval echo "${dir//>}")
 
+  echo "$dir"
+
   # shellcheck disable=2164
   cd "$dir"
 }
