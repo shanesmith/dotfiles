@@ -2410,6 +2410,8 @@ function! s:Clone(...)
   exe "saveas" printf('%s/%s.%s', path, name, ext)
 endfunction
 
+command! PU PlugUpdate
+
 "}}}
 
 " AutoCommands {{{
