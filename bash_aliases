@@ -404,7 +404,7 @@ man() {
 }
 alias man!="/usr/bin/man"
 
-P_PATH=~/Code:~/clio
+P_PATH=~/Code:~/clio:~/mystacksco
 p() {
   # shellcheck disable=SC2164
   CDPATH="$P_PATH" cd "$@"
