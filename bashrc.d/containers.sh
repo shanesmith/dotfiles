@@ -9,6 +9,12 @@ alias dk-kill-all="docker ps -q | xargs -r docker kill"
 alias dkc="docker-compose"
 complete -F _docker_compose dkc
 
+alias kc="kubectl"
+complete -o default -F __start_kubectl kc
+
+alias kctx="kubectl config use-context"
+alias kcn="kubectl config set-context --current --namespace"
+
 docker-desktop-logs() {
   # https://docs.docker.com/desktop/mac/troubleshoot/#check-the-logs
   pred='process matches ".*(ocker|vpnkit).*" || (process in {"taskgated-helper", "launchservicesd", "kernel"} && eventMessage contains[c] "docker")'
@@ -136,3 +142,11 @@ podman-enable-swap() {
   podman machine ssh free -m
 }
 
+kc_run() {
+  local image command name
+  image="$1"
+  command="${2:-bash}"
+  name=$(sed 's/[^-a-zA-Z0-9]/-/g' <<<"${image}")
+
+  kubectl run "${name}" --rm --tty -i --restart='Never' --image "${image}" --command -- "${command}"
+}
