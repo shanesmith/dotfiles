@@ -166,7 +166,11 @@ if [[ $__CFBundleIdentifier =~ dev.warp. ]]; then
   PRE_PROMPT=
 fi
 
+# Escape sequences for semantic shell promp
+# to enable tmux prev/next-prompt
+# https://github.com/tmux/tmux/issues/3064
 PS1="\
+\[\e]133;A\a\]\
 ${debian_chroot}\
 ${USER_HOST}\
 \$(__smiley)\
@@ -180,6 +184,8 @@ ${PRE_PROMPT}\
  \
 ${PROMPT}\
  \
+\[\e]133;B\a\]\
+\[\e]133;C\a\]\
 "
 
 unset HISTORY_NUMBER TIME HOST USER_HOST_COLOR USER_HOST CWD PROMPT
