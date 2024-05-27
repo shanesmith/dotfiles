@@ -28,9 +28,17 @@ uppercase() {
 }
 
 trim() {
-  local var="$*"
+  local var
+
+  if [[ $# -eq 0 ]]; then
+    read -r var
+  else
+    var="$*"
+  fi
+
   var="${var#"${var%%[![:space:]]*}"}"   # remove leading whitespace characters
   var="${var%"${var##*[![:space:]]}"}"   # remove trailing whitespace characters
+
   echo -n "$var"
 }
 
