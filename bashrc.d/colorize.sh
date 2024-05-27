@@ -77,3 +77,7 @@ __colorize() {
     echo -ne "$(__ansi_color "[X]X")"
   fi
 }
+
+__strip_ansi() {
+  sed -E "s/[[:cntrl:]]\[(([0-9]{1,3};)*[0-9]{1,3})?m//g"
+}

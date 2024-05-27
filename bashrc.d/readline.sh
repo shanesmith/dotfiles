@@ -29,12 +29,13 @@ _fzf_git_lol_preview() {
 }
 
 _fzf_git_lol_get_hash() {
-  sed -E -e "s/[[:cntrl:]]\[(([0-9]{1,3};)*[0-9]{1,3})?m//g" -e 's/^[^[:alnum:]]*//' | awk '{print $1}'
+  __strip_ansi | sed -E 's/^[^[:alnum:]]*//' | awk '{print $1}'
 }
 
 _fzf_git_lol() {
   export -f _fzf_git_lol_preview
   export -f _fzf_git_lol_get_hash
+  export -f __strip_ansi
 
   # TODO always describe?
   local log_command=${1:-lol}
