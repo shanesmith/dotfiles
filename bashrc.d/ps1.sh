@@ -115,7 +115,7 @@ __dev_dev() {
     return
   fi
 
-  if [[ $(dev --version) == *"v0.0.0"* ]]; then
+  if ! codesign -dv /opt/clio/bin/dev 2>&1 | grep -q 3289N5S57Z; then
     echo " 🛠️"
   fi
 }
