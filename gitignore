@@ -13,3 +13,6 @@ npm-debug.log
 .lvimrc
 .rgignore
 .projections.json
+
+# dev
+.dev-metrics.log
