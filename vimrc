@@ -504,7 +504,6 @@ function! s:init_fern() abort
   nmap <buffer><nowait> t <Plug>(fern-action-open:tabedit)<Plug>(fern-action-tcd)
 
   nmap <buffer><nowait> A <Plug>(fern-action-new-path)
-  nmap <buffer><nowait> R <Plug>(fern-action-reveal)
 
   nmap <buffer><nowait> dd <Plug>(fern-action-remove)
   nmap <buffer><nowait> yy <Plug>(fern-action-clipboard-copy)
@@ -524,9 +523,7 @@ function! s:init_fern() abort
   vmap <buffer><nowait> yy <Plug>(fern-action-mark)<Plug>(fern-action-clipboard-copy)
   vmap <buffer><nowait> xx <Plug>(fern-action-mark)<Plug>(fern-action-clipboard-move)
 
-  nmap <buffer><nowait> <C-d> gg<Plug>(fern-action-fzf-dirs)
-  nmap <buffer><nowait> <C-f> gg<Plug>(fern-action-fzf-files)
-  nmap <buffer><nowait> <C-g> gg<Plug>(fern-action-fzf-both)
+  nmap <buffer><nowait> R <Plug>(fern-action-fzf-root-dirs)
 
   nmap <buffer><nowait> P <Plug>(fern-action-focus:parent)
 
