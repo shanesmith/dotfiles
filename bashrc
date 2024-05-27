@@ -110,9 +110,6 @@ if ! shopt -oq posix; then
   elif [ -f /etc/bash_completion ]; then
     # shellcheck source=/dev/null 
     . /etc/bash_completion
-  elif [[ -n $brew_prefix && -f $brew_prefix/etc/bash_completion ]]; then
-    # shellcheck source=/dev/null 
-    . "${brew_prefix}/etc/bash_completion"
   fi
 
   for file in "${RC_INSTALL_DIR}"/completion/*; do
