@@ -1,4 +1,5 @@
+version: "1"
 aliases:
     web: pr view --web
     co: pr checkout
-version: "1"
+    run web: "!gh run view --web $(gh run list -c $(git rev-parse HEAD) --json databaseId -q '.[].databaseId')"
