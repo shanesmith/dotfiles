@@ -41,6 +41,11 @@ function! s:link_surround(mode, type)
     else
       let l:prev_lnum = l:eof_lnum
       let l:prev_num = 0
+
+      if getline(l:prev_lnum) !~ '^\s*$'
+        call append(l:prev_lnum, '')
+        let l:prev_lnum += 1
+      endif
     endif
     let l:next_num = l:prev_num + 1
 
