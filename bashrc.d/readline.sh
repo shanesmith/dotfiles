@@ -2,6 +2,10 @@
 
 __readline_insert() {
   local text=$1
+  if [[ -z $text ]]; then
+    return
+  fi
+
   if [[ ${READLINE_POINT} -ne 0 && ${READLINE_LINE:((${READLINE_POINT} - 1)):1} != " " ]]; then
     text=" $text"
   fi
