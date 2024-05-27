@@ -63,6 +63,18 @@ bak() {
   cp -ai "$src" "$dest"
 }
 
+unbak() {
+  local src=${1%/}
+  local dest=${src%.bak}
+
+  if [[ -e $dest ]]; then
+    echo "Already exists: $dest"
+    return
+  fi
+
+  cp -ai "$src" "$dest"
+}
+
 mvbak() {
   local src=${1%/}
   local dest=$src.bak$2
@@ -143,6 +155,7 @@ up() {
   # shellcheck disable=2164
   cd "$x"
 }
+alias upg='cd $(git top)'
 mkcd() {
   # shellcheck disable=2164
   mkdir -p "$1" && cd "$1"
@@ -476,3 +489,12 @@ git() {
 btt_backup() {
   osascript -e 'tell application "BetterTouchTool" to export_preset "Default" outputPath "~/Code/rc/default.bttpreset" with includeSettings'
 }
+
+alias tf=terraform
+complete -C terraform tf
+
+alias tg=terragrunt
+
+alias lenv="env | less"
+alias genv="env | grep"
+alias grenv="env | grep"
