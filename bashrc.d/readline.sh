@@ -347,3 +347,8 @@ _git_show() {
   tmux popup "git -C '$PWD' show $word"
 }
 bind -x '"\C-x\C-g": _git_show'
+
+__readline_yank() {
+  echo -n "$READLINE_LINE" | pbcopy
+}
+bind -x '"\C-x\C-y": __readline_yank'
