@@ -128,6 +128,15 @@ if ! shopt -oq posix; then
 
   if command_exists dev; then
     eval "$(dev _hook)"
+    . <(dev completion bash)
+  fi
+
+  if command_exists terraform; then
+    complete -C terraform terraform
+  fi
+
+  if command_exists git-lfs; then
+    . <(git-lfs completion bash)
   fi
 
 fi
