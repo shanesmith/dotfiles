@@ -317,7 +317,7 @@ _fzf_word() {
         git\ unstage) cmd="_fzf_git_status_staged" ;;
         kctx|@(kc|kubectl)\ config\ use-context) cmd="_fzf_kubectl_context" ;;
         kcn) cmd="_fzf_kubectl_namespace" ;;
-        kill) cmd="_fzf_ps" ;;
+        kill*) cmd="_fzf_ps" ;;
         *) return ;;
       esac
     fi
