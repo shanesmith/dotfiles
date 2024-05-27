@@ -22,7 +22,7 @@ docker-desktop-logs() {
 }
 
 docker-desktop-shell() {
-  docker run -it --rm --privileged --pid=host justincormack/nsenter1
+  docker run -it --rm --privileged --pid=host alpine nsenter -t 1 -m -u -n -i -- "$@"
 }
 
 alias pd=podman
