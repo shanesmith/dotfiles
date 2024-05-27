@@ -1071,6 +1071,8 @@ vmap [; <Plug>VSneakPrevious
 nmap z <Plug>Sneak_s
 nmap Z <Plug>Sneak_S
 nnoremap ZZ ZZ
+noremap z= z=
+nnoremap zg zg
 
 Plug 'inkarkat/vim-ConflictMotions'
 " avoid conflict with vim-textobj-xmlattr
