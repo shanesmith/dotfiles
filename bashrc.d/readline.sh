@@ -19,7 +19,7 @@ __readline_replace() {
 }
 
 __escape() {
-  while read -r item; do 
+  while read -r item; do
     printf '%q ' "$item"
   done
 }
@@ -241,7 +241,7 @@ _fzf_p_dirs() {
   fi
 }
 
-fzf_kubectl_context() {
+_fzf_kubectl_context() {
   local context
   context=$(kubectl config get-contexts -o name | fzf --preview-window=down,5 --preview "kubectl config get-contexts {} | rs -Tz" | __escape)
   __readline_insert "$context"
@@ -257,6 +257,13 @@ _fzf_kubectl_pods() {
   local namespace
   namespace=$(kubectl get pods --no-headers | awk '{print $1}' | fzf --preview-window=wrap --preview "kubectl describe pod {}" | __escape)
   __readline_insert "$namespace"
+}
+
+_fzf_kubectl_thing() {
+  local what result
+  what="$1"
+  result=$(kubectl get ${what} | fzf --header-lines=1 --preview "kubectl describe ${what} {1}" | awk '{print $1}' | __escape)
+  __readline_insert "$result"
 }
 
 _fzf_word() {
@@ -293,9 +300,10 @@ _fzf_word() {
     gr)  cmd="_fzf_git_reflog" ;;
     gw)  cmd="_fzf_git_worktree" ;;
     hc)  cmd="_fzf_hub_chain" ;;
-    kc)  cmd="_fzf_kubectl_context" ;;
-    kn)  cmd="_fzf_kubectl_namespace" ;;
-    kp)  cmd="_fzf_kubectl_pods" ;;
+    kc)  cmd="_fzf_kubectl_thing"; args=$mod ;;
+    kcx) cmd="_fzf_kubectl_context" ;;
+    kcn) cmd="_fzf_kubectl_namespace" ;;
+    kcp) cmd="_fzf_kubectl_pods" ;;
     *)   cmd="_fzf_${word}" ;;
   esac
 
@@ -315,9 +323,10 @@ _fzf_word() {
         git\ @(co|checkout)) cmd="_fzf_git_history" ;;
         git\ @(wt|worktree)\ @(remove|rm|move|mv|repair)) cmd="_fzf_git_worktree" ;;
         git\ unstage) cmd="_fzf_git_status_staged" ;;
-        kctx|@(kc|kubectl)\ config\ use-context) cmd="_fzf_kubectl_context" ;;
-        kcn) cmd="_fzf_kubectl_namespace" ;;
-        kill*) cmd="_fzf_ps" ;;
+        kccx) cmd="_fzf_kubectl_context" ;;
+        kccn) cmd="_fzf_kubectl_namespace" ;;
+        @(kc|kcd|kcg|kubectl)\ *) cmd="_fzf_kubectl_thing"; args=$word ;;
+        kill?( *)) cmd="_fzf_ps" ;;
         *) return ;;
       esac
     fi
