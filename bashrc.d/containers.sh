@@ -12,8 +12,48 @@ complete -F _docker_compose dkc
 alias kc="kubectl"
 complete -o default -F __start_kubectl kc
 
-alias kctx="kubectl config use-context"
-alias kcn="kubectl config set-context --current --namespace"
+alias kcg="kubectl get"
+alias kcd="kubectl describe"
+
+kccx() {
+  local ctx
+  ctx="$1"
+
+  if [[ -z $ctx ]]; then
+    ctx=$(kubectl config get-contexts -o name | fzf --preview-window=down,5 --preview "kubectl config get-contexts {} | rs -Tz")
+
+    if [[ -z $ctx ]]; then
+      return
+    fi
+  fi
+
+  local code
+  kubectl config use-context "$ctx"
+  code=$?
+
+  if [[ $code -ne 0 ]]; then
+    return $code
+  fi
+
+  local ns
+  ns=$(kubectl config get-contexts --no-headers "${ctx}" | awk '{print $5}')
+  echo "Namespace \"${ns:-default}\""
+}
+
+kccn() {
+  local ns
+  ns="$1"
+
+  if [[ -z $ns ]]; then
+    ns=$(kubectl get namespaces --no-headers | awk '{print $1}' | fzf --preview-window=wrap --preview "kubectl describe namespace {}")
+
+    if [[ -z $ns ]]; then
+      return
+    fi
+  fi
+
+  kubectl config set-context --current --namespace "$ns"
+}
 
 docker-desktop-logs() {
   # https://docs.docker.com/desktop/mac/troubleshoot/#check-the-logs
