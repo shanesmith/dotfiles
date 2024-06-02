@@ -199,6 +199,17 @@
 [pull]
   ff = only
 
+[credential "https://github.com"]
+  helper =
+  helper = !gh auth git-credential
+
+[credential "https://gist.github.com"]
+  helper =
+  helper = !gh auth git-credential
+
+[url "https://github.com/"]
+  insteadOf = git@github.com:
+
 [add "interactive"]
   # fix for diff-so-fancy
   # https://github.com/so-fancy/diff-so-fancy/issues/437
