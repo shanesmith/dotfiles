@@ -133,6 +133,28 @@ aws_logged_in() {
   fi
 }
 
+tick_tock() {
+  local cnt
+  local tickfile="/tmp/tmux_status_tick"
+
+  if [[ ! -f $tickfile ]]; then
+    cnt=0
+  else
+    cnt=$(cat $tickfile)
+  fi
+
+  if [[ $(( cnt % 2 )) -eq 0 ]]; then
+    fg=$LIGHT_GRAY
+  else
+    fg=$BLACK
+  fi
+
+  echo $(( cnt + 1 )) > $tickfile
+
+  echo -n "$(_color "$fg"):"
+}
+
 aws_logged_in
 docker_count
 kubectl_context
+tick_tock
