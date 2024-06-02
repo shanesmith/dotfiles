@@ -11,6 +11,7 @@ DOTFILES=(
   bash_aliases
   bash_profile
   gitconfig
+  gitconfig.clio
   gitignore
   gitmessage
   vimrc
