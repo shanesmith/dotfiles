@@ -395,7 +395,7 @@ man() {
   if [[ $# -ne 1 ]]; then
     /usr/bin/man "$@"
     return
-  end
+  fi
 
   case "$(type -t "$1")" in
     builtin)
