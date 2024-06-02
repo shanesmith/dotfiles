@@ -1112,7 +1112,6 @@ omap [C <Plug>(columnmove-gE)
 Plug 'editorconfig/editorconfig-vim'
 
 Plug 'ntpeters/vim-better-whitespace'
-let g:current_line_whitespace_disabled_soft = 1
 let g:better_whitespace_filetypes_blacklist = ["ctrlsf", "help", "diff"]
 command! WhitespaceStrip StripWhitespace
 
