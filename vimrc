@@ -358,7 +358,7 @@ let g:fzf_action = {
       \ 'ctrl-v': 'vsplit'
       \ }
 
-let g:fzf_layout = { 
+let g:fzf_layout = {
       \ 'window': 'call FloatingFZF()'
       \ }
 
@@ -2388,12 +2388,12 @@ function! s:Proj(dir, tab = 0)
 endfunction
 
 function! s:ProjComp(ArgLead, CmdLine, CursorPos)
-  let dirs = split(globpath(g:proj_dirs, '*'), '\n') 
+  let dirs = split(globpath(g:proj_dirs, '*'), '\n')
 
   let dirs = filter(dirs, {_, val -> isdirectory(val) })
 
   let dirs = map(dirs, {_, val -> fnamemodify(val, ':t') })
-  
+
   return join(dirs, "\n")
 endfunction
 
@@ -2428,7 +2428,7 @@ au TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeou
 augroup FocusedWindow
   au!
   au VimEnter,WinEnter,BufWinEnter * call FocusedWindow()
-  au WinLeave * call UnFocusedWindow() 
+  au WinLeave * call UnFocusedWindow()
 augroup END
 
 function! FocusedWindow()
