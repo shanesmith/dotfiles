@@ -120,7 +120,7 @@ swapbak() {
 alias h="cd ~"
 alias ..="cd .."
 alias ...="cd ../.."
-cd() { 
+cd() {
   if [[ -d "$1" || -z "$1" || "$1" == "--" ]]; then
       # shellcheck disable=2164
       pushd "$@" >/dev/null
@@ -392,15 +392,27 @@ icanhazip() {
 }
 
 man() {
-  if [[ $# -eq 1 ]]; then
-    case "$(type -t "$1")" in
-      builtin) help "$1" ;;
-      function|alias) type "$1" ;;
-      *) /usr/bin/man "$1"
-    esac
-  else
+  if [[ $# -ne 1 ]]; then
     /usr/bin/man "$@"
-  fi
+    return
+  end
+
+  case "$(type -t "$1")" in
+    builtin)
+      help "$1"
+      ;;
+
+    function|alias)
+      local key
+      type "$1"
+      echo; read -rsn1 -p "Press enter to view man page for $1 " key; echo
+      [[ -z $key ]] && /usr/bin/man "$1"
+      ;;
+
+    *)
+      /usr/bin/man "$1"
+      ;;
+  esac
 }
 alias man!="/usr/bin/man"
 
