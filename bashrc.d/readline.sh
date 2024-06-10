@@ -152,7 +152,7 @@ _fzf_git_worktree() {
   __readline_insert "$worktree"
 }
 
-_fzf_history() { 
+_fzf_history() {
   local line
   shopt -u nocaseglob nocasematch
   line=$(HISTTIMEFORMAT='' history | fzf --no-sort --tac +m -n2..,.. --tiebreak=index --toggle-sort=ctrl-r | awk '{ $1=""; print $0 }' | sed 's/^ *//')

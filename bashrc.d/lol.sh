@@ -6,23 +6,23 @@ matrix() {
   local i r v
   echo -e "\e[32m"
 
-  while :; do 
+  while :; do
     # shellcheck disable=2034
-    for i in {1..16}; do 
+    for i in {1..16}; do
       r="$((RANDOM % 2))"
-      if [[ $((RANDOM % 2)) == 1 ]]; then 
-        if [[ $((RANDOM % 4)) == 1 ]]; then 
+      if [[ $((RANDOM % 2)) == 1 ]]; then
+        if [[ $((RANDOM % 4)) == 1 ]]; then
           v+="\e[1m $r   "
-        else 
+        else
           v+="\e[2m $r   "
         fi
-      else 
+      else
         v+="     "
       fi
-    done 
+    done
 
-    echo -e "$v" 
-    v="" 
+    echo -e "$v"
+    v=""
 
     sleep 0.001
   done

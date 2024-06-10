@@ -4,7 +4,7 @@ var str = process.argv[2];
 
 var root = structure(str);
 
-var eqRoot = equalize(root); 
+var eqRoot = equalize(root);
 
 var layout = reconstruct(eqRoot);
 
@@ -174,7 +174,7 @@ function checksum(str) {
   return padLeft(hex, 4, '0');
 }
 
-function noParent(key, val) { 
+function noParent(key, val) {
   if (key === "parent") {
     return val.width + "x" + val.height;
   }

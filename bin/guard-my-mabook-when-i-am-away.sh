@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #
-# When you are working on your macbook sitting in cafe and you have to go pee, 
-# you need some way to guard you machine. 
+# When you are working on your macbook sitting in cafe and you have to go pee,
+# you need some way to guard you machine.
 #
 # Start this script, remove any earphones, and go do the job.
 # The assumption is the thief will close the lid of the laptop before taking it away.

@@ -45,7 +45,7 @@ elif [[ -e /usr/local/bin/brew ]]; then
 fi
 
 if [[ -x "${brew_prefix}/bin/brew" ]]; then
-  # shellcheck source=/dev/null  
+  # shellcheck source=/dev/null
    . <("${brew_prefix}/bin/brew" shellenv)
 fi
 
@@ -105,20 +105,20 @@ export FZF_DEFAULT_OPTS="--bind 'ctrl-j:down,ctrl-k:up,alt-a:toggle-all,ctrl-h:r
 if ! shopt -oq posix; then
 
   if [ -f /usr/share/bash-completion/bash_completion ]; then
-    # shellcheck source=/dev/null 
+    # shellcheck source=/dev/null
     . /usr/share/bash-completion/bash_completion
   elif [ -f /etc/bash_completion ]; then
-    # shellcheck source=/dev/null 
+    # shellcheck source=/dev/null
     . /etc/bash_completion
   fi
 
   for file in "${RC_INSTALL_DIR}"/completion/*; do
-    # shellcheck source=/dev/null 
+    # shellcheck source=/dev/null
     . "$file"
   done
 
   if command_exists gerrit; then
-    # shellcheck source=/dev/null 
+    # shellcheck source=/dev/null
     . <(gerrit completion)
   fi
 
@@ -161,7 +161,7 @@ sources+=(
 
 for file in "${sources[@]}"; do
   if [ -f "$file" ]; then
-    # shellcheck source=/dev/null 
+    # shellcheck source=/dev/null
     . "$file"
   fi
 done
