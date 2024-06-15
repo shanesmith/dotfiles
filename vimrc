@@ -680,7 +680,6 @@ command! RESTTab call <SID>rest_tab()
 function! s:rest_tab()
   tabnew
   setf rest
-  setlocal buftype=nofile
   call append(0, [
         \ "# http://example.com",
         \ "# Content-Type: application/json",
