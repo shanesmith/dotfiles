@@ -708,6 +708,10 @@ let g:eunuch_no_maps = 1
 
 Plug 'rhysd/committia.vim'
 let g:committia_open_only_vim_starting = 0
+let g:committia_hooks = {}
+function! g:committia_hooks.diff_open(info)
+  setlocal number
+endfunction
 
 Plug 'AndrewRadev/switch.vim'
 let g:switch_mapping = "-"
