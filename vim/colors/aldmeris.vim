@@ -102,6 +102,9 @@ if exists("syntax_on")
    syntax reset
 endif
 
+" Need original vim colorscheme base
+runtime colors/vim.lua
+
 let g:colors_name = "aldmeris"
 " }}}
 " Custom highlight function {{{
