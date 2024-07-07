@@ -2315,6 +2315,10 @@ function! s:NewScratch(mods, ...)
     exe a:mods 'new'
   endif
 
+  setlocal noswapfile
+  setlocal nobuflisted
+  setlocal bufhidden=wipe
+
   exec "setf" type
 endfunction
 
