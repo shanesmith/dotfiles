@@ -2292,9 +2292,13 @@ nnoremap <C-w>O :ONLY<CR>
 command! SyntaxGroup call <SID>SyntaxGroup()
 function! s:SyntaxGroup()
   let id = synID(line('.'), col('.'), 1)
+  if id == 0
+    echo "No syntax group here"
+    return
+  endif
   let name = synIDattr(id, 'name')
   let transName = synIDattr(synIDtrans(id), 'name')
-  echo  name . ' -> ' . transName
+  exec "verb hi" name
   exec "verb hi" transName
 endfunction
 
