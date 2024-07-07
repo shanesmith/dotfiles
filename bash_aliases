@@ -405,6 +405,10 @@ man() {
     function|alias)
       local key
       type "$1"
+      # allow stderr to display to user
+      if ! /usr/bin/man "$1" >/dev/null; then
+        return
+      fi
       echo; read -rsn1 -p "Press enter to view man page for $1 " key; echo
       [[ -z $key ]] && /usr/bin/man "$1"
       ;;
