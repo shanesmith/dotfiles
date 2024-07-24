@@ -6,7 +6,7 @@ complete -F _docker dk
 alias dk-stop-all="docker ps -q | xargs -r docker stop"
 alias dk-kill-all="docker ps -q | xargs -r docker kill"
 
-alias dkc="docker-compose"
+alias dkc="docker compose"
 complete -F _docker_compose dkc
 
 alias kc="kubectl"
