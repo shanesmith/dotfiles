@@ -373,7 +373,11 @@ fun! FloatingFZF()
         \     'height': height,
         \     'style': 'minimal'
         \ }
-  call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
+  " Just hacking, don't think this works...
+  let g:ss_last_win = get(g:, 'ss_win')
+  let g:ss_win = nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
+  tnoremap <buffer> <c-g> <cmd>call fzf#vim#gitfiles("?", fzf#vim#with_preview({'dir': getcwd(-1), 'placeholder': ''}), 0)<CR><cmd>call win_execute(g:ss_last_win, 'close')<CR>
+  tnoremap <buffer> <c-b> <cmd>call win_execute(g:ss_last_win, 'close')<CR>
 endf
 
 " TODO port these over to FZF?
