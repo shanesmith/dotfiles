@@ -959,6 +959,15 @@ Plug 'dunstontc/vim-vscode-theme'
 
 Plug 'romainl/Apprentice'
 
+Plug 'navarasu/onedark.nvim'
+let g:onedark_config = {'style': 'warm'}
+
+Plug 'rebelot/kanagawa.nvim'
+
+Plug 'sainnhe/everforest'
+let g:everforest_background = 'soft'
+
+
 Plug 'RRethy/vim-illuminate'
 
 Plug 'gcmt/taboo.vim'
