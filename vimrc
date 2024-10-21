@@ -664,7 +664,7 @@ Plug 'vim-utils/vim-husk'
 cnoremap <expr> <M-Left> husk#left()
 cnoremap <expr> <M-Right> husk#right()
 
-Plug 'diepm/vim-rest-console'
+Plug 'shanesmith/vim-rest-console'
 let g:vrc_trigger = '<C-R>'
 let g:vrc_show_command = 1
 let g:vrc_curl_opts = {
