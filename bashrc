@@ -15,13 +15,15 @@ now_ms() {
 
 _start=$(now_ms)
 
+export RC_INSTALL_DIR
+RC_INSTALL_DIR=$(cd "$(dirname "$(readlink ~/.bashrc)")" && pwd)
+
+[[ $- == *i* ]] && source "${RC_INSTALL_DIR}"/blesh/ble.sh --noattach
+
 export GOPATH=$HOME/go
 export NODE_PATH=$NODE_PATH:$HOME/.node/lib/node_modules
 
 export PATH=$PATH:$HOME/.node/bin:$HOME/bin.local:$HOME/bin:$GOPATH/bin
-
-export RC_INSTALL_DIR
-RC_INSTALL_DIR=$(cd "$(dirname "$(readlink ~/.bashrc)")" && pwd)
 
 command_exists() {
   command -v "$1" >/dev/null
@@ -179,3 +181,5 @@ unset _start
 
 # start with a happy :)
 true
+
+[[ ${BLE_VERSION-} ]] && ble-attach

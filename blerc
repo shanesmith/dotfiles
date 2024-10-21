@@ -1,0 +1,19 @@
+# vim: ft=bash
+
+ble-face -s command_function fg=magenta
+ble-face -s syntax_function_name fg=magenta
+ble-face -s varname_expr fg=magenta
+
+ble-face -s filename_directory fg=blue,underline
+ble-face -s command_directory fg=blue,underline
+ble-face -s syntax_expr fg=blue
+
+ble-face -s region_insert fg=92,bg=252
+
+ble-face -s auto_complete fg=242
+
+ble-bind -m auto_complete -f C-f -
+
+# Hit ENTER to run multiline
+ble-bind -m emacs -f 'C-m' 'accept-line'
+ble-bind -m emacs -f 'RET' 'accept-line'
