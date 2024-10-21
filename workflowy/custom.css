@@ -1,0 +1,12 @@
+.bc-gray.bc-gray {
+  font-family: Menlo, Monaco, monospace;
+  font-size: 85%;
+  padding: 2px 4px;
+  border-radius: 6px;
+  background-color: #eef0f3;
+}
+
+.bc-gray.bc-gray > a {
+  text-decoration: none;
+  pointer-events: none;
+}
