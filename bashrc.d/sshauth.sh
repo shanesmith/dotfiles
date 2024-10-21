@@ -10,6 +10,11 @@ SSH_ENV=$HOME/.ssh/env-$HOSTNAME
 
 # Initialize new agent and add authentication
 sshauth_reload() {
+  if [[ $(uname -s) == "Darwin" ]]; then
+    # use builtin on macos
+    return
+  fi
+
   if [ -n "$SSH_AUTH_SOCK" ] && [ -S "$SSH_AUTH_SOCK" ] && [ -n "$SSH_AGENT_PID" ]; then
     return
   fi
