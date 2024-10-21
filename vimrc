@@ -643,9 +643,6 @@ endfunction
 " Plug 'lambdalisue/gin.vim'
 
 Plug 'tpope/vim-fugitive'
-nnoremap <leader>g :leftabove vert G
-nnoremap <leader>gg :leftabove vert G<CR>
-nnoremap <leader>G :leftabove vert G<CR>
 command! GResolve Gwrite | Git mergetool
 command! GB execute line('.') . "GBrowse %"
 
