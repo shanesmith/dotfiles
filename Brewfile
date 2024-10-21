@@ -66,3 +66,4 @@ cask "workflowy"
 cask "yt-music"
 
 mas "Monosnap", id: 540348655
+mas "Hour - World Clock", id: 569089415
