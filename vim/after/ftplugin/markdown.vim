@@ -80,10 +80,21 @@ function! s:get_url(snr)
 endfunction
 
 function! s:open_or_create_link(type)
-  let snr = s:markdown_script_number()
+  let l:snr = s:markdown_script_number()
   let l:url = s:get_url(snr)
-  if l:url != ''
-    call call('<SNR>'.snr.'_VersionAwareNetrwBrowseX', [l:url])
+  if a:type ==# 'X' && l:url =~ '^https\?://github\.com/\(.*\)/\(issues\|pull\)/\(.*\)$'
+    let [l:bufnum, l:lnum, l:col, l:off, _] = getcurpos()
+    let l:len = strchars(l:url)
+    let l:line = getline(l:lnum)
+    let l:idx = strridx(l:line, l:url, l:col)
+    let l:sub = substitute(l:url, '^https\?://github\.com/\(.*\)/\(issues\|pull\)/\(.*\)$', '\1#\3', '')
+    let l:new = strcharpart(l:line, 0, l:idx)
+          \ . l:sub
+          \ . strcharpart(l:line, l:idx + l:len)
+    call setline(l:lnum, l:new)
+    call setpos('.', [l:bufnum, l:lnum, l:idx + strchars(l:sub), l:off])
+  elseif l:url != ''
+    call call('<SNR>'.l:snr.'_VersionAwareNetrwBrowseX', [l:url])
   else
     call s:link_surround('n', a:type)
   endif
