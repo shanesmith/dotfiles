@@ -920,6 +920,8 @@ Plug 'Konfekt/vim-alias'
 Plug 'meain/vim-package-info', { 'do': 'npm install' }
 
 " TODO unmaintained, find new one?
+" https://github.com/akinsho/toggleterm.nvim
+" https://github.com/voldikss/vim-floaterm
 Plug 'kassio/neoterm'
 let g:neoterm_default_mod = 'vertical'
 
