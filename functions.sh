@@ -79,7 +79,7 @@ ask() {
 		question="$question [$default]"
 	fi
 
-	read -p "$question "
+	read -rp "$question "
 
 	if [[ -z $REPLY ]]; then
 		REPLY="$default"
