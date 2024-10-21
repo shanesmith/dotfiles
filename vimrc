@@ -350,7 +350,7 @@ endfunction
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 nnoremap <C-p> :Files<CR>
-nnoremap <leader>g<C-p> :GFiles?<CR>
+nnoremap <leader>gg :call fzf#vim#gitfiles("?", fzf#vim#with_preview({'dir': getcwd(-1), 'placeholder': ''}), 0)<CR>
 
 let g:fzf_action = {
       \ 'ctrl-t': 'tab split',
