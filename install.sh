@@ -33,6 +33,7 @@ DOTFILES=(
   config/coc/extensions/package.json
   config/coc/extensions/yarn.lock
   config/gh/config.yml
+  rbenv/version
 )
 
 LINUX_DOTFILES=(
@@ -73,7 +74,7 @@ get_src() {
 get_dest() {
   local file="$1"
 
-  case "$file" in 
+  case "$file" in
     vim)
       if is_windows; then
         echo "$HOME/vimfiles"
@@ -209,6 +210,10 @@ install_brew_bundle() {
   brew bundle install
 }
 
+install_ruby() {
+  rbenv install
+}
+
 # install homebrew before self so that it
 # also installs xclt for git
 install_homebrew
@@ -216,6 +221,8 @@ install_homebrew
 install_self
 
 install_brew_bundle
+
+install_ruby
 
 update_git_submodules
 
