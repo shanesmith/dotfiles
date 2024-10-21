@@ -246,6 +246,8 @@ scp-tar() {
 
 alias sad=ssh-add
 
+alias ssh_tunnels="lsof -P -i | grep -E '^ssh\>'"
+
 alias cpsync="rsync -vahP"
 
 date2timestamp() {
@@ -448,6 +450,15 @@ _p_comp() {
 }
 complete -F _p_comp p
 
+PT_PATH=~/clio/terraform/services
+pt() {
+  P_PATH=$PT_PATH p "$@"
+}
+_pt_comp() {
+  P_PATH=$PT_PATH _p_comp "$@"
+}
+complete -F _pt_comp pt
+
 alias path="tr ':' '\n' <<<\$PATH"
 
 alias lctl='launchctl'
@@ -518,3 +529,12 @@ alias tg=terragrunt
 alias lenv="env | less"
 alias genv="env | grep"
 alias grenv="env | grep"
+
+dev_login_profile() {
+  okta-aws-cli --aws-iam-role "arn:aws:iam::280138978118:role/Auth_Clio_$1" --profile "Auth_Clio_$1"
+}
+
+tgcopy() {
+  tmux capture-pane -S- -p | tac | sed -n -e '/^No changes. Your infrastructure matches/{p;q;}' -e '/^Plan:/,${p;/^Terraform will perform the following actions:/q;}' | tac | pbcopy
+  pbpaste
+}
