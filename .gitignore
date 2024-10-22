@@ -10,3 +10,5 @@ bin/errcheck
 bin/goimports
 bin/golangci-lint
 bin/golint
+
+blesh/cache.d/
