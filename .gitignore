@@ -12,3 +12,5 @@ bin/golangci-lint
 bin/golint
 
 blesh/cache.d/
+
+Brewfile.lock.json
