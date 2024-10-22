@@ -128,7 +128,7 @@ if ! shopt -oq posix; then
     . <(ng completion script)
   fi
 
-  if command_exists dev; then
+  if command_exists dev && [[ -e ~/.devrc ]]; then
     eval "$(dev _hook)"
     . <(dev completion bash)
   fi
