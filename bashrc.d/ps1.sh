@@ -36,7 +36,7 @@ __git_ps1_others() {
   fi
 }
 
-__git_ps1_show_upstream() { 
+__git_ps1_show_upstream() {
   local marker result branch upstream remote remote_branch
 
   case "$(git rev-list --count --left-right '@{upstream}'...HEAD 2>/dev/null)" in
@@ -72,6 +72,10 @@ __git_ps1_show_upstream() {
 }
 
 __ssh_keys_status() {
+  if [[ $SSH_AUTH_SOCK =~ launchd ]]; then
+    return
+  fi
+
   if ! ssh-add -l >/dev/null 2>&1; then
     return
   fi
