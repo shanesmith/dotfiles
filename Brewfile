@@ -59,7 +59,7 @@ cask "vimr"
 cask "visual-studio-code"
 cask "vivaldi"
 cask "workflowy"
-cask "yt-music"
+cask "ytmdesktop-youtube-music"
 
 mas "Monosnap", id: 540348655
 mas "Hour - World Clock", id: 569089415
