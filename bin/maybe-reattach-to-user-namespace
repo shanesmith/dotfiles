@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if command -v reattach-to-user-namespace >/dev/null; then
+  command reattach-to-user-namespace "$@"
+else
+  [[ $1 == "-l" ]] && shift
+  "$@"
+fi
