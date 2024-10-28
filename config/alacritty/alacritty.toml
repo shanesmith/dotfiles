@@ -1,3 +1,4 @@
+[general]
 live_config_reload = true
 working_directory = "None"
 
@@ -605,7 +606,7 @@ semantic_escape_chars = ",│`|:\"' ()[]{}<>"
 decorations = "none"
 dynamic_padding = false
 dynamic_title = true
-opacity = 0.95
-startup_mode = "Windowed"
+opacity = 0.9
+startup_mode = "Maximized"
 dimensions = { columns = 0, lines = 0 }
-padding = { x = 0, y = 0 }
+padding = { x = 10, y = 10 }
