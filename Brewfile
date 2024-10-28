@@ -28,7 +28,6 @@ brew "pstree"
 brew "python"
 brew "rbenv"
 brew "ranger"
-brew "reattach-to-user-namespace"
 brew "ripgrep"
 brew "ruby-install"
 brew "ssh-copy-id", link: true
