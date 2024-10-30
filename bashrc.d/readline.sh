@@ -347,7 +347,7 @@ export BASHELP_TERMINAL=tmux
 bind -x '"\C-xh": _bash_help'
 bind -x '"\C-x\C-h": _bash_help'
 
-_git_show() {
+__git_show_popup() {
   local readline_up_to_point=${READLINE_LINE:0:$READLINE_POINT}
   readline_up_to_point=${readline_up_to_point%%*( )}
   local word
@@ -355,7 +355,7 @@ _git_show() {
 
   tmux popup "git -C '$PWD' show $word"
 }
-bind -x '"\C-x\C-g": _git_show'
+bind -x '"\C-x\C-g": __git_show_popup'
 
 __readline_yank() {
   echo -n "$READLINE_LINE" | pbcopy
