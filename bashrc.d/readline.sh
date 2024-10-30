@@ -360,4 +360,5 @@ bind -x '"\C-x\C-g": __git_show_popup'
 __readline_yank() {
   echo -n "$READLINE_LINE" | pbcopy
 }
-bind -x '"\C-x\C-y": __readline_yank'
+bind -x '"\C-x\C-y": __readline_yank' # broken in ble.sh
+bind -x '"\C-x\"": __readline_yank'
