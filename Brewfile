@@ -54,11 +54,19 @@ cask "keepingyouawake"
 cask "keyboardcleantool"
 cask "numi"
 cask "omnidisksweeper"
+cask "stats"
 cask "vimr"
 cask "visual-studio-code"
 cask "vivaldi"
 cask "workflowy"
-cask "ytmdesktop-youtube-music"
+
+# Latest isn't available for ARM, instead:
+#   git clone https://github.com/ytmdesktop/ytmdesktop ~/Code/ytmdesktop
+#   cd ~/Code/ytmdesktop/
+#   yarn install
+#   yarn make --arch arm64
+#   sudo unzip 'out/make/zip/darwin/arm64/YouTube Music Desktop App-darwin-arm64-2.0.5.zip' -d /Applications
+# cask "ytmdesktop-youtube-music"
 
 mas "Monosnap", id: 540348655
 mas "Hour - World Clock", id: 569089415
