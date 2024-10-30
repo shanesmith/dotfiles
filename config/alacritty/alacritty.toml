@@ -609,4 +609,4 @@ dynamic_title = true
 opacity = 0.9
 startup_mode = "Maximized"
 dimensions = { columns = 0, lines = 0 }
-padding = { x = 10, y = 10 }
+padding = { x = 0, y = 0 }
