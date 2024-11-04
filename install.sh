@@ -41,11 +41,7 @@ LINUX_DOTFILES=(
   Xmodmap
 )
 
-if [[ $0 =~ (^|/)install\.sh$ ]]; then
-  RCPATH="$(cd "$(dirname "$0")" && pwd)"
-else
-  RCPATH="${1:~$HOME/Code/rc}"
-fi
+RCPATH="$HOME/Code/rc"
 
 is_linux() {
   [[ $(uname) == "Linux" ]]
