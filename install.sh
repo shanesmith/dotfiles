@@ -171,14 +171,14 @@ install_homebrew() {
     return
   fi
 
-  if ! command_exists "brew"; then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  fi
-
   if [[ -e /opt/homebrew ]]; then
     prefix=/opt/homebrew
   else
     prefix=/usr/local
+  fi
+
+  if ! [[ -e ${prefix}/bin/brew ]]; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
 
   # shellcheck source=/dev/null
@@ -212,14 +212,15 @@ install_homebrew
 
 install_self
 
+cd "$RCPATH"
+
 install_brew_bundle
-
-install_ruby
-
 
 install_fonts
 
 link_dotfiles
+
+install_ruby
 
 install_vim_plugins
 
