@@ -1,7 +1,5 @@
 version: "1"
-
 git_protocol: https
-
 aliases:
     web: "!gh pr view --web || gh repo view --web"
     co: pr checkout
