@@ -547,5 +547,5 @@ pref-diff() {
 
   after=$(defaults read)
 
-  diff -u <(echo "$before") <(echo "$after")
+  diff -I "DKThrottledActivityLast" -I "bytes =" -u <(echo "$before") <(echo "$after")
 }
