@@ -46,7 +46,7 @@ _fzf_git_lol() {
   local preview="_fzf_git_lol_preview {}"
   local sha
 
-  sha=$(git "$log_command" | fzf --ansi --reverse --no-sort --tiebreak=index --multi --bind ctrl-p:toggle-preview --preview-window=down --preview="$preview" \
+  sha=$(git "$log_command" | fzf --ansi --reverse --no-sort --track --scheme=history --multi --bind ctrl-p:toggle-preview --preview-window=down --preview="$preview" \
     | _fzf_git_lol_get_hash \
     | xargs git describe --all --contains \
     | tr '\n' ' '
@@ -85,7 +85,7 @@ _fzf_git_status() {
   # TODO preview probably won't work with a space in the path
   local preview="_fzf_git_status_preview {}"
   local file
-  file="$(git -c color.status=always status --short | fzf --ansi -m --preview-window=down --preview="$preview" | awk '{print $2}' | __escape)"
+  file="$(git -c color.status=always status --short | fzf --ansi -m --scheme=path --preview-window=down --preview="$preview" | awk '{print $2}' | __escape)"
   __readline_insert "$file"
 }
 
@@ -95,7 +95,7 @@ _fzf_git_status_unstaged() {
   # TODO preview probably won't work with a space in the path
   local preview="_fzf_git_status_preview {}"
   local file
-  file="$(git -c color.status=always status --short | grep '^.[^ ]*\s[^ ]' | fzf --ansi -m --preview-window=down --preview="$preview" | awk '{print $2}' | __escape)"
+  file="$(git -c color.status=always status --short | grep '^.[^ ]*\s[^ ]' | fzf --ansi -m --scheme=path --preview-window=down --preview="$preview" | awk '{print $2}' | __escape)"
   __readline_insert "$file"
 }
 
@@ -105,7 +105,7 @@ _fzf_git_status_staged() {
   # TODO preview probably won't work with a space in the path
   local preview="_fzf_git_status_preview {}"
   local file
-  file="$(git -c color.status=always status --short | grep '^[^ ]' | fzf --ansi -m --preview-window=down --preview="$preview" | awk '{print $2}' | __escape)"
+  file="$(git -c color.status=always status --short | grep '^[^ ]' | fzf --ansi -m --scheme=path --preview-window=down --preview="$preview" | awk '{print $2}' | __escape)"
   __readline_insert "$file"
 }
 
@@ -115,13 +115,13 @@ _fzf_git_status_untracked() {
   # TODO preview probably won't work with a space in the path
   local preview="_fzf_git_status_preview {}"
   local file
-  file="$(git -c color.status=always status --short | grep -O '^[^ ]*??[^ ]*\s' | fzf --ansi -m --preview-window=down --preview="$preview" | awk '{print $2}' | __escape)"
+  file="$(git -c color.status=always status --short | grep -O '^[^ ]*??[^ ]*\s' | fzf --ansi -m --scheme=path --preview-window=down --preview="$preview" | awk '{print $2}' | __escape)"
   __readline_insert "$file"
 }
 
 _fzf_git_history() {
   local branch
-  branch=$(git hs | fzf -m --preview-window=down --preview='git lonly -n 100 {}' | __escape)
+  branch=$(git hs | fzf -m --scheme=history --preview-window=down --preview='git lonly -n 100 {}' | __escape)
   __readline_insert "$branch"
 }
 
@@ -133,7 +133,7 @@ _fzf_git_branch() {
 
 _fzf_git_reflog() {
   local sha
-  sha="$(git reflog --color | fzf --ansi --no-sort | awk '{print $1}' | __escape)"
+  sha="$(git reflog --color | fzf --ansi --no-sort --track | awk '{print $1}' | __escape)"
   __readline_insert "$sha"
 }
 
@@ -155,14 +155,14 @@ _fzf_git_worktree() {
 _fzf_history() {
   local line
   shopt -u nocaseglob nocasematch
-  line=$(HISTTIMEFORMAT='' history | fzf --no-sort --tac +m -n2..,.. --tiebreak=index --toggle-sort=ctrl-r | awk '{ $1=""; print $0 }' | sed 's/^ *//')
+  line=$(HISTTIMEFORMAT='' history | tac | fzf --no-sort --scheme=history --track +m -n2..,.. --tiebreak=index --toggle-sort=ctrl-r | awk '{ $1=""; print $0 }' | sed 's/^ *//')
   __readline_replace "$line"
 }
 
 _fzf_files() {
   local dir="${1:-.}"
   local file
-  file="$(fd --type f . "$dir" | fzf -m --preview='bat --color=always -pp {}' | __escape)"
+  file="$(fd --type f . "$dir" | fzf -m --scheme=path --preview='bat --color=always -pp {}' | __escape)"
   if [[ -n $file ]]; then
     __readline_insert "$file"
   fi
@@ -170,7 +170,7 @@ _fzf_files() {
 
 __fzf_get_dir() {
   local dir="${1:-.}"
-  fd --type d . "$dir" | fzf -m --preview='tree -C {} | head -200' | __escape
+  fd --type d . "$dir" | fzf -m --scheme=path --preview='tree -C {} | head -200' | __escape
 }
 
 _fzf_directories() {
