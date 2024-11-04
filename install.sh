@@ -216,6 +216,12 @@ create_ssh_dir() {
   chmod 700 ~/.ssh
 }
 
+set_preferences() {
+  if ! is_mac; then
+    return
+  fi
+
+  "$RCPATH"/mac-prefs.sh
 }
 
 # install homebrew before self so that it
@@ -241,3 +247,5 @@ install_vim_plugins
 create_ssh_dir
 
 chsh_bash
+
+set_preferences
