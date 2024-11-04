@@ -214,6 +214,14 @@ let maplocalleader = "\\"
 "Default filetype=sh to bash syntax
 let is_bash=1
 
+if filereadable(expand('~/.venv/bin/python'))
+  let g:python3_host_prog = '~/.venv/bin/python'
+endif
+
+if filereadable(expand('~/.rbenv/shims/ruby'))
+  let g:ruby_host_prog = '~/.rbenv/shims/ruby'
+endif
+
 "}}} Settings
 
 " Plugins {{{
