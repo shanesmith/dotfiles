@@ -146,10 +146,6 @@ install_file() {
   fi
 }
 
-update_git_submodules() {
-  git submodule update --init --recursive
-}
-
 install_vim_plugins() {
   command_exists pip3 && pip3 install neovim
   command_exists gem && gem install neovim
@@ -220,7 +216,6 @@ install_brew_bundle
 
 install_ruby
 
-update_git_submodules
 
 install_fonts
 
