@@ -538,3 +538,14 @@ tgcopy() {
   tmux capture-pane -S- -p | tac | sed -n -e '/^No changes. Your infrastructure matches/{p;q;}' -e '/^Plan:/,${p;/^Terraform will perform the following actions:/q;}' | tac | pbcopy
   pbpaste
 }
+
+pref-diff() {
+  local before after
+  before=$(defaults read)
+
+  read -srn1 -p "Make a change and hit a key..."
+
+  after=$(defaults read)
+
+  diff -u <(echo "$before") <(echo "$after")
+}
