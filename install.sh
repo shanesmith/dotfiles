@@ -196,7 +196,6 @@ install_self() {
 
   mkdir -p "$(dirname "$RCPATH")"
   git clone https://github.com/shanesmith/dotfiles.git "$RCPATH"
-  git -C "$RCPATH" remote set-url origin git@github.com:shanesmith/dotfiles.git
 }
 
 install_brew_bundle() {
