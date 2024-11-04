@@ -3,6 +3,8 @@ version: "1"
 git_protocol: https
 
 aliases:
-    web: pr view --web
+    web: "!gh pr view --web || gh repo view --web"
     co: pr checkout
     run web: "!gh run view --web $(gh run list -c $(git rev-parse HEAD) --json databaseId -q '.[].databaseId')"
+    login-clio: auth login -p https -h github.com -w -s read:packages
+    clone: "!cd $HOME/Code && gh repo clone $1"
