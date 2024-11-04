@@ -1,0 +1,72 @@
+#!/bin/bash
+
+preview() {
+  local flags=${1:0:2}
+  local path=${1:3}
+
+  if [[ -d $path ]]; then
+    tree -C "$path"
+  else
+    if [[ $flags = "??" ]]; then
+      bat --color=always -pp "$path"
+    # TODO and if it's both? (eg: "MM")
+    elif [[ $flags = "M " || $flags = "A " ]]; then
+      git diff --color --staged -- "$path"
+    else
+      git diff --color -- "$path"
+    fi
+  fi
+}
+export -f preview
+
+git_add() {
+  local selections_file="$1"
+
+  awk '{print substr($0, 3)}' "${selections_file}" | xargs -I% git add -- %
+}
+export -f git_add
+
+git_unstage() {
+  local selections_file="$1"
+
+  awk '{print substr($0, 3)}' "${selections_file}" | xargs -I% git reset -- %
+}
+export -f git_unstage
+
+git_patch_add() {
+  local selections_file="$1"
+
+  awk '{print substr($0, 3)}' "${selections_file}" | xargs -o -I% git add --patch -- %
+}
+export -f git_patch_add
+
+git_commit() {
+  git commit </dev/tty
+}
+export -f git_commit
+
+
+
+# TODO preview probably won't work with a space in the path
+preview=""
+
+FZF_DEFAULT_COMMAND="git -c color.status=always status --short -z" fzf \
+  --ansi \
+  --multi \
+  --read0 \
+  --nth 2.. \
+  --scheme=path \
+  --preview="preview {}" \
+  --preview-window=down \
+  --header='<: add | >: unstage | Ctrl-P: add patch | Ctrl-V: vim' \
+  --bind='<:execute-silent(git_add {+f})+reload($FZF_DEFAULT_COMMAND)' \
+  --bind='>:execute-silent(git_unstage {+f})+reload($FZF_DEFAULT_COMMAND)' \
+  --bind='ctrl-p:execute(git_patch_add {+f})+reload($FZF_DEFAULT_COMMAND)' \
+  --bind='ctrl-v:execute(nvim {2})+reload($FZF_DEFAULT_COMMAND)' \
+  --bind='ctrl-r:reload($FZF_DEFAULT_COMMAND)' \
+  --bind='ctrl-a:select-all' \
+  --bind='ctrl-y:execute(git_commit)+reload($FZF_DEFAULT_COMMAND)' \
+  --bind='enter:abort' \
+  --bind='esc:ignore' \
+  || true
+
