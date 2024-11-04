@@ -2644,19 +2644,19 @@ lua <<EOF
     }
   end
 
-  lspconfig.solargraph.setup {
-    cmd = { "chruby-exec", "latest", "--", "solargraph", "stdio" },
-    on_attach = on_attach,
-    capabilities = capabilities,
-    flags = flags,
-  }
-
-  lspconfig.sorbet.setup {
-    cmd = { "chruby-exec", "latest", "--", "srb", "tc", "--lsp" },
-    on_attach = on_attach,
-    capabilities = capabilities,
-    flags = flags,
-  }
+  -- lspconfig.solargraph.setup {
+  --   cmd = { "chruby-exec", "latest", "--", "solargraph", "stdio" },
+  --   on_attach = on_attach,
+  --   capabilities = capabilities,
+  --   flags = flags,
+  -- }
+  --
+  -- lspconfig.sorbet.setup {
+  --   cmd = { "chruby-exec", "latest", "--", "srb", "tc", "--lsp" },
+  --   on_attach = on_attach,
+  --   capabilities = capabilities,
+  --   flags = flags,
+  -- }
 
   require("lsp_signature").setup({
     toggle_key = '<M-e>'
