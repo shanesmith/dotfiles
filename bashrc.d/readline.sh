@@ -61,9 +61,7 @@ _fzf_git_lall() {
 
 _fzf_git_status_preview() {
   local flags=${1:0:2}
-  local path
-
-  path=$(awk '{print $2}' <<<"$1")
+  local path=${1:3}
 
   if [[ -d $path ]]; then
     tree -C "$path"
