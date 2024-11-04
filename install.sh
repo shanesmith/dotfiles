@@ -210,6 +210,12 @@ install_ruby() {
 install_python_venv() {
   python3 -m venv ~/.venv
 }
+
+create_ssh_dir() {
+  mkdir -p ~/.ssh
+  chmod 700 ~/.ssh
+}
+
 }
 
 # install homebrew before self so that it
@@ -231,5 +237,7 @@ install_ruby
 install_python_venv
 
 install_vim_plugins
+
+create_ssh_dir
 
 chsh_bash
