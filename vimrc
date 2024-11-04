@@ -49,6 +49,9 @@ set sessionoptions=blank,buffers,curdir,folds,globals,help,tabpages,winsize
 "Enable mouse
 set mouse=a
 
+"Disable right-click popup menu
+set mousemodel=extend
+
 "Wrap at start/end of line
 set whichwrap+=<,>,[,],h,l
 
