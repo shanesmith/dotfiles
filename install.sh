@@ -10,6 +10,7 @@ DOTFILES=(
   bashrc.d
   bash_aliases
   bash_profile
+  blerc
   gitconfig
   gitconfig.clio
   gitignore
