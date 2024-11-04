@@ -147,7 +147,7 @@ install_file() {
 }
 
 install_vim_plugins() {
-  command_exists pip3 && pip3 install neovim
+  [[ -e ~/.venv/bin/pip ]] && ~/.venv/bin/pip install pynvim
   command_exists gem && gem install neovim
   command_exists npm && npm install -g neovim
   command_exists nvim && nvim --headless +PlugInstall +qall
@@ -203,7 +203,13 @@ install_brew_bundle() {
 }
 
 install_ruby() {
-  rbenv install
+  rbenv install --skip-existing $(cat $RCPATH/rbenv/version)
+  eval "$(rbenv init -)"
+}
+
+install_python_venv() {
+  python3 -m venv ~/.venv
+}
 }
 
 # install homebrew before self so that it
@@ -221,6 +227,8 @@ install_fonts
 link_dotfiles
 
 install_ruby
+
+install_python_venv
 
 install_vim_plugins
 
