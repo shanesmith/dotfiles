@@ -97,14 +97,19 @@ readlink_f() {
 }
 
 install_fonts() {
-  if is_mac; then
-    cp "${RCPATH}"/fonts/* /Library/Fonts
+  if ! is_mac; then
+    return
   fi
+
+  echo "👾 Installing fonts..."
+  cp "${RCPATH}"/fonts/* /Library/Fonts
 }
 
 link_dotfiles() {
   local src dest
   local all_files=( "${DOTFILES[@]}" )
+
+  echo "👾 Linking dotfiles..."
 
   if is_linux; then
     all_files+=( "${LINUX_DOTFILES[@]}" )
@@ -147,6 +152,8 @@ install_file() {
 }
 
 install_vim_plugins() {
+  echo "👾 Installing VIM Plugins..."
+
   [[ -e ~/.venv/bin/pip ]] && ~/.venv/bin/pip install pynvim
   command_exists gem && gem install neovim
   command_exists npm && npm install -g neovim
@@ -155,6 +162,8 @@ install_vim_plugins() {
 
 chsh_bash() {
   local shell="/usr/bin/bash"
+
+  echo "👾 Changing shell to BASH..."
 
   if is_mac; then
     shell="$(brew --prefix)/bin/bash"
@@ -171,6 +180,8 @@ install_homebrew() {
     return
   fi
 
+  echo "👾 Installing Homebrew..."
+
   if [[ -e /opt/homebrew ]]; then
     prefix=/opt/homebrew
   else
@@ -179,6 +190,8 @@ install_homebrew() {
 
   if ! [[ -e ${prefix}/bin/brew ]]; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  else
+    echo "👾 ...Homebrew already exists!"
   fi
 
   # shellcheck source=/dev/null
@@ -190,6 +203,8 @@ install_self() {
     return
   fi
 
+  echo "👾 Installing self..."
+
   mkdir -p "$(dirname "$RCPATH")"
   git clone https://github.com/shanesmith/dotfiles.git "$RCPATH"
 }
@@ -199,19 +214,24 @@ install_brew_bundle() {
     return
   fi
 
+  echo "👾 Installing Brew Bundles..."
+
   brew bundle install
 }
 
 install_ruby() {
+  echo "👾 Installing Ruby..."
   rbenv install --skip-existing $(cat $RCPATH/rbenv/version)
   eval "$(rbenv init -)"
 }
 
 install_python_venv() {
+  echo "👾 Installing Python VENV..."
   python3 -m venv ~/.venv
 }
 
 create_ssh_dir() {
+  echo "👾 Creating ssh dir..."
   mkdir -p ~/.ssh
   chmod 700 ~/.ssh
 }
@@ -220,6 +240,8 @@ set_preferences() {
   if ! is_mac; then
     return
   fi
+
+  echo "👾 Setting macOS Preferences..."
 
   "$RCPATH"/mac-prefs.sh
 }
@@ -249,3 +271,5 @@ create_ssh_dir
 chsh_bash
 
 set_preferences
+
+echo "👾 DONE! 👾"
