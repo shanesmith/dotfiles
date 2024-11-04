@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Battery_position</key>
+	<integer>6</integer>
+	<key>Battery_state</key>
+	<false/>
+	<key>Bluetooth_position</key>
+	<integer>7</integer>
+	<key>Bluetooth_state</key>
+	<false/>
+	<key>CPU_barChart_position</key>
+	<integer>3</integer>
+	<key>CPU_idleColor</key>
+	<string>lightGray</string>
+	<key>CPU_label_position</key>
+	<integer>4</integer>
+	<key>CPU_lineChart_position</key>
+	<integer>5</integer>
+	<key>CPU_mini_alignment</key>
+	<string>left</string>
+	<key>CPU_mini_color</key>
+	<string>secondGray</string>
+	<key>CPU_mini_label</key>
+	<true/>
+	<key>CPU_mini_position</key>
+	<integer>0</integer>
+	<key>CPU_pieChart_position</key>
+	<integer>2</integer>
+	<key>CPU_position</key>
+	<integer>0</integer>
+	<key>CPU_tachometer_position</key>
+	<integer>1</integer>
+	<key>CPU_widget</key>
+	<string>mini</string>
+	<key>Clock_position</key>
+	<integer>8</integer>
+	<key>CombinedModules</key>
+	<true/>
+	<key>CombinedModules_popup</key>
+	<true/>
+	<key>CombinedModules_spacing</key>
+	<string>none</string>
+	<key>Disk_position</key>
+	<integer>3</integer>
+	<key>Disk_state</key>
+	<false/>
+	<key>GPU_position</key>
+	<integer>1</integer>
+	<key>LaunchAtLoginNext</key>
+	<true/>
+	<key>NSNavLastRootDirectory</key>
+	<string>~/Documents</string>
+	<key>NSNavPanelExpandedSizeForSaveMode</key>
+	<string>{800, 448}</string>
+	<key>NSNavPanelExpandedStateForSaveMode</key>
+	<true/>
+	<key>NSStatusItem Preferred Position CombinedModules</key>
+	<real>631</real>
+	<key>NSToolbar Configuration eu.exelban.Stats.Settings.Toolbar</key>
+	<dict>
+		<key>TB Display Mode</key>
+		<integer>1</integer>
+		<key>TB Icon Size Mode</key>
+		<integer>1</integer>
+		<key>TB Is Shown</key>
+		<true/>
+		<key>TB Size Mode</key>
+		<integer>1</integer>
+	</dict>
+	<key>NSWindow Frame NSNavPanelAutosaveName</key>
+	<string>479 1823 800 448 -401 1169 2560 1415 </string>
+	<key>Network_label_position</key>
+	<integer>3</integer>
+	<key>Network_networkChart_position</key>
+	<integer>2</integer>
+	<key>Network_position</key>
+	<integer>5</integer>
+	<key>Network_speed_downloadColor</key>
+	<string>secondGray</string>
+	<key>Network_speed_icon</key>
+	<string>arrows</string>
+	<key>Network_speed_iconAlignment</key>
+	<string>right</string>
+	<key>Network_speed_iconColor</key>
+	<string>constant</string>
+	<key>Network_speed_mode</key>
+	<string>twoRows</string>
+	<key>Network_speed_monochrome</key>
+	<false/>
+	<key>Network_speed_position</key>
+	<integer>0</integer>
+	<key>Network_speed_reverseOrder</key>
+	<false/>
+	<key>Network_speed_units</key>
+	<true/>
+	<key>Network_speed_uploadColor</key>
+	<string>secondGray</string>
+	<key>Network_speed_value</key>
+	<true/>
+	<key>Network_speed_valueColor</key>
+	<string>constant</string>
+	<key>Network_state_position</key>
+	<integer>1</integer>
+	<key>Network_text_position</key>
+	<integer>4</integer>
+	<key>Network_widget</key>
+	<string>speed</string>
+	<key>RAM_mini_color</key>
+	<string>secondGray</string>
+	<key>RAM_position</key>
+	<integer>2</integer>
+	<key>Sensors_barChart_position</key>
+	<integer>3</integer>
+	<key>Sensors_label_position</key>
+	<integer>2</integer>
+	<key>Sensors_mini_position</key>
+	<integer>0</integer>
+	<key>Sensors_position</key>
+	<integer>4</integer>
+	<key>Sensors_stack_position</key>
+	<integer>1</integer>
+	<key>Sensors_state</key>
+	<false/>
+	<key>Sensors_widget</key>
+	<string>mini</string>
+	<key>dockIcon</key>
+	<false/>
+	<key>runAtLoginInitialized</key>
+	<true/>
+	<key>setupProcess</key>
+	<true/>
+	<key>telemetry</key>
+	<false/>
+	<key>telemetry_id</key>
+	<string>459D5659-EFFD-4025-B628-F2D863DE0413</string>
+	<key>updater_check_ts</key>
+	<integer>1730127110</integer>
+	<key>version</key>
+	<string>2.11.16</string>
+</dict>
+</plist>
