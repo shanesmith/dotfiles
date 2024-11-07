@@ -2411,7 +2411,7 @@ nnoremap <leader>p :P<Space>
 nnoremap <leader>tp :TP<Space>
 nnoremap <silent> <Leader>tr :TP rc<CR>
 
-let g:proj_dirs="~/Code,~/clio,~/mystacksco"
+let g:proj_dirs="~/Code,~/clio"
 
 function! s:Proj(dir, tab = 0)
   let save_cdpath = &cdpath
