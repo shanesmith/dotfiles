@@ -544,7 +544,17 @@ btt_backup() {
 alias tf=terraform
 complete -C terraform tf
 
-alias tg=terragrunt
+tg() {
+  if [[ -f ~/.aws/credentials ]]; then
+    local expiry=$(awk '$1 == "x_security_token_expires" { print $3; exit }' < ~/.aws/credentials | sed -E 's/:([[:digit:]]{2})$/\1/' | xargs date -jf '%Y-%m-%dT%H:%M:%S%z' +%s)
+
+    if [[ $expiry -lt $(date +%s) ]]; then
+      dev login
+    fi
+  fi
+
+  terragrunt "$@"
+}
 
 alias lenv="env | less"
 alias genv="env | grep"
