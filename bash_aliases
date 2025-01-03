@@ -427,6 +427,25 @@ P_PATH=~/Code:~/clio
 p() {
   # shellcheck disable=SC2164
   CDPATH="$P_PATH" cd "$@"
+
+  if [[ $? -ne 0 ]]; then
+    local proj
+    for a in "$@"; do
+      if [[ ! $a =~ ^-  ]]; then
+        proj="$a"
+        break
+      fi
+    done
+
+    if [[ -z $proj ]]; then
+      return
+    fi
+
+    if gh repo view "clio/${proj}" >/dev/null; then
+      dev clone "${proj}"
+      cd ~/clio/"${proj}"
+    fi
+  fi
 }
 p_dirs() {
   local paths
