@@ -1198,6 +1198,8 @@ let g:vim_markdown_conceal_code_blocks = 0
 let g:javascript_plugin_jsdoc = 1
 let g:polyglot_disabled = ['pascal']
 
+Plug 'delphinus/vim-firestore'
+
 Plug 'gisphm/vim-gitignore'
 
 Plug 'heavenshell/vim-jsdoc'
