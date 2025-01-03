@@ -686,8 +686,8 @@ let g:vrc_curl_opts = {
 let g:vrc_auto_format_response_patterns = {
       \ 'json': 'jq .'
       \ }
-let g:vrc_body_preprocessor = 'dotenv --ignore yq --indent 0 -o json ''(.. | select(tag == "!!str")) |= envsubst(nu)'''
-let g:vrc_header_preprocessor = 'sed "s/.*/\"&\"/" | dotenv --ignore yq ". | envsubst"'
+let g:vrc_body_preprocessor = 'maybe-dotenv --ignore yq --indent 0 -o json ''(.. | select(tag == "!!str")) |= envsubst(nu)'''
+let g:vrc_header_preprocessor = 'sed "s/.*/\"&\"/" | maybe-dotenv --ignore yq ". | envsubst"'
 command! RESTTab call <SID>rest_tab()
 function! s:rest_tab()
   tabnew
