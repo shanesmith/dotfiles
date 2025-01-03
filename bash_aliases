@@ -579,3 +579,11 @@ pref-diff() {
 
   diff -I "DKThrottledActivityLast" -I "bytes =" -u <(echo "$before") <(echo "$after")
 }
+
+csv-to-json() {
+  # https://stackoverflow.com/a/65100738/1333402
+  python3 -c 'import csv, json, sys; print(json.dumps([dict(r) for r in csv.DictReader(sys.stdin)]))'
+}
+
+alias fbase=firebase
+alias fbae=firebase
