@@ -58,7 +58,7 @@ FZF_DEFAULT_COMMAND="git -c color.status=always status --short -z" fzf \
   --scheme=path \
   --preview="preview {}" \
   --preview-window=down \
-  --header='<: add | >: unstage | Ctrl-P: add patch | Ctrl-V: vim' \
+  --header='<: add | >: unstage | C-p: add patch | C-v: vim | C-y: commit' \
   --bind='<:execute-silent(git_add {+f})+reload($FZF_DEFAULT_COMMAND)' \
   --bind='>:execute-silent(git_unstage {+f})+reload($FZF_DEFAULT_COMMAND)' \
   --bind='ctrl-p:execute(git_patch_add {+f})+reload($FZF_DEFAULT_COMMAND)' \
