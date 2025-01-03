@@ -183,7 +183,7 @@ install_homebrew() {
 
   echo "👾 Installing Homebrew..."
 
-  if [[ -e /opt/homebrew ]]; then
+  if [[ $(uname -m) == "arm64" ]]; then
     prefix=/opt/homebrew
   else
     prefix=/usr/local
