@@ -264,6 +264,14 @@ _fzf_kubectl_thing() {
   __readline_insert "$result"
 }
 
+_fzf_ssh_keys() {
+  local file
+  file="$(fd --type f . "$HOME/.ssh" | fzf -m --scheme=path | __escape)"
+  if [[ -n $file ]]; then
+    __readline_insert "$file"
+  fi
+}
+
 _fzf_word() {
   local cmd
   local args
@@ -325,6 +333,7 @@ _fzf_word() {
         kccn) cmd="_fzf_kubectl_namespace" ;;
         @(kc|kcd|kcg|kubectl)\ *) cmd="_fzf_kubectl_thing"; args=$word ;;
         kill?( *)) cmd="_fzf_ps" ;;
+        sad|ssh-add) cmd="_fzf_ssh_keys" ;;
         *) return ;;
       esac
     fi
