@@ -82,6 +82,13 @@ defaults write -g NSNavPanelExpandedStateForSaveMode -bool true
 
 defaults write -g NSAutomaticPeriodSubstitutionEnabled -bool false
 
+# https://apple.stackexchange.com/a/431021/214341
+defaults -currentHost write com.apple.Spotlight MenuItemHidden -int 1
+
+# https://superuser.com/a/1723655/261110
+defaults -currentHost write com.apple.controlcenter WiFi -int 24
+
+
 killall Dock
 killall Finder
 
