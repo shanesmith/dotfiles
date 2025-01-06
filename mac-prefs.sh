@@ -6,6 +6,10 @@ set -ex
 # - https://github.com/benbalter/plister
 # - https://github.com/robperc/FinderSidebarEditor
 
+# Close any open System Preferences panes, to prevent them from overriding
+# settings we’re about to change
+osascript -e 'tell application "System Preferences" to quit'
+
 defaults write AppleScrollerPagingBehavior -bool true
 
 defaults write com.apple.dock mineffect -string scale
@@ -49,7 +53,7 @@ defaults write com.apple.dock showMissionControlGestureEnabled -bool true
 
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 defaults write com.apple.finder ShowStatusBar -bool true
-defaults write com.apple.finder ShowPathBar -bool true
+defaults write com.apple.finder ShowPathbar -bool true
 defaults write com.apple.finder PathBarRootAtHome -bool true
 
 # Search current folder and not whole system
@@ -80,3 +84,7 @@ defaults write -g NSAutomaticPeriodSubstitutionEnabled -bool false
 
 killall Dock
 killall Finder
+
+# Needed for "com.apple.AppleMultitouchTrackpad Clicking" at the very least
+# https://apple.stackexchange.com/a/414836/214341
+/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
