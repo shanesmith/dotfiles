@@ -3,6 +3,7 @@
 # TODO
 # - Install bash-sneak
 # - Accept target (link files, brew bundle...)
+# - Open newly installed apps (BTT, Karabiner, Ferdium...)
 
 set -eo pipefail
 
