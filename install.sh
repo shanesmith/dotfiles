@@ -232,9 +232,9 @@ install_python_venv() {
   python3 -m venv ~/.venv
 }
 
-create_ssh_dir() {
-  echo "👾 Creating ssh dir..."
-  mkdir -p ~/.ssh
+create_common_dirs() {
+  echo "👾 Creating common dirs..."
+  mkdir -p ~/.ssh ~/tmp ~/Code/tmp
   chmod 700 ~/.ssh
 }
 
@@ -268,7 +268,7 @@ install_python_venv
 
 install_vim_plugins
 
-create_ssh_dir
+create_common_dirs
 
 chsh_bash
 
