@@ -1,0 +1,23 @@
+{
+    "createdBy": "Redirector v3.5.3",
+    "createdAt": "2025-01-15T21:59:32.932Z",
+    "redirects": [
+        {
+            "description": "Slack",
+            "exampleUrl": "https://clio.slack.com/archives/ABC/123",
+            "exampleResult": "https://clio.slack.com/messages/ABC/123",
+            "error": null,
+            "includePattern": "https://*.slack.com/archives/*/*",
+            "excludePattern": "",
+            "patternDesc": "",
+            "redirectUrl": "https://$1.slack.com/messages/$2/$3",
+            "patternType": "W",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "grouped": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        }
+    ]
+}
