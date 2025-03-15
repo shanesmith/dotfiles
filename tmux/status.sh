@@ -6,7 +6,7 @@ DARK_GRAY="#444444"
 BLACK="#202020"
 RED="#EF8E7D"
 YELLOW="#E8E800"
-GREEN="#28A324"
+GREEN="#59CE57"
 
 _trim() {
   local var
