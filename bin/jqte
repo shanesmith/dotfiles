@@ -20,7 +20,7 @@ setup() {
     jsonfile=$1
   else
     jsonfile="$(mktemp)"
-    cat > "$jsonfile"
+    jq > "$jsonfile" # read stdin, format and spit it out
   fi
 
   filterfile="$(mktemp)"
