@@ -49,6 +49,7 @@
   BMV = branch -M
   default-branch = !git symbolic-ref refs/remotes/origin/HEAD | cut -f4 -d/
   com = !git checkout $(git default-branch)
+  patch = !git --no-pager diff
 
 # Log
   lol = "!f() {   local extra=\"\"; if git rev-parse -q --verify '@{u}' >/dev/null 2>&1; then extra=\"$extra @{u}\"; fi; git log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cd>%Creset %s' --color --graph --date=relative HEAD $extra $@; }; f"
@@ -65,6 +66,7 @@
   who = shortlog -s
   whatdidido = log --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %C(yellow)<%an, %cd>%Creset %s' --graph --all --date=short --author=Shane
   rescue = !git fsck --full --no-reflogs --unreachable --lost-found | grep commit | cut -d' ' -f3 | xargs git log --pretty=oneline
+  lolm = !git lol $(git default-branch)@{u}
 
 # Git-SVN
   slog = svn log --show-commit
