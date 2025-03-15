@@ -1,13 +1,14 @@
 #!/bin/bash
 
 if command -v rbenv >/dev/null && rbenv which dotenv >/dev/null 2>&1; then
-  dotenv "$@"
+  exec $(rbenv which dotenv) "$@"
 else
-  while [[ $1 =~ -* ]]; do
+  while [[ $# -gt 0 && $1 =~ -.* ]]; do
     if [[ $1 == "-f" ]]; then
       shift
     fi
     shift
   done
-  "$@"
+
+  exec "$@"
 fi
