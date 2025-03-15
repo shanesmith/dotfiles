@@ -356,6 +356,11 @@ httpython() {
   echo "http://localhost:${port}/"
 }
 
+httnpm() {
+  npx http-server "$@" >> httnpm.log 2>&1 &
+  echo "http://localhost:8080"
+}
+
 # the space allows for aliases...
 # https://wiki.archlinux.org/index.php/Sudo#Passing_aliases
 alias sudo='sudo '
@@ -587,3 +592,28 @@ csv-to-json() {
 
 alias fbase=firebase
 alias fbae=firebase
+
+bkapi() {
+  local path="${1}"
+  shift
+  curl -fsSL -H "Authorization: Bearer ${BUILDKITE_API_TOKEN}" "https://api.buildkite.com/${path#/}" "$@"
+}
+
+shx() {
+  local ret
+  type "$1"
+  case "$(type -t "$1")" in
+    file)
+      bash -x "$@"
+      ret=$?
+      ;;
+
+    *)
+      set -x
+      "$@"
+      ret=$?
+      set +x
+      ;;
+  esac
+  return $ret
+}
