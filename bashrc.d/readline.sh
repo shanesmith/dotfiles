@@ -272,6 +272,24 @@ _fzf_ssh_keys() {
   fi
 }
 
+ _fzf_docker_container() {
+   local container
+   container=$(docker ps | fzf --header-lines=1 | awk '{print $1}' | __escape)
+   __readline_insert "$container"
+ }
+
+ _fzf_docker_container_all() {
+   local container
+   container=$(docker ps -a | fzf --header-lines=1 | awk '{print $1}' | __escape)
+   __readline_insert "$container"
+ }
+
+ _fzf_docker_image() {
+   local image
+   image=$(docker images | fzf --header-lines=1 | awk '{print $3}' | __escape)
+   __readline_insert "$image"
+ }
+
 _fzf_word() {
   local cmd
   local args
@@ -310,6 +328,9 @@ _fzf_word() {
     kcx) cmd="_fzf_kubectl_context" ;;
     kcn) cmd="_fzf_kubectl_namespace" ;;
     kcp) cmd="_fzf_kubectl_pods" ;;
+    dkc) cmd="_fzf_docker_container" ;;
+    dkca)cmd="_fzf_docker_container_all" ;;
+    dki) cmd="_fzf_docker_image" ;;
     *)   cmd="_fzf_${word}" ;;
   esac
 
