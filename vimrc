@@ -88,8 +88,7 @@ endf
 
 "Remove toolbar from GUI vim
 set winaltkeys=no
-set guioptions-=T
-set guioptions+=c
+set guioptions-=Te
 if has("gui_macvim")
   set macmeta
   set guifont=Droid_Sans_Mono_for_Powerline:h10
