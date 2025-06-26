@@ -1423,6 +1423,13 @@ else
   colorscheme desert
 endif
 
+" Remove 'reverse' from neovim v0.11 colorscheme messing things up for airline
+" https://github.com/vim-airline/vim-airline/issues/2693#issuecomment-2424756650
+hi statusline cterm=NONE gui=NONE
+hi tabline cterm=NONE gui=NONE
+hi tablinefill cterm=NONE gui=NONE
+hi winbar cterm=NONE gui=NONE
+
 "}}}
 
 " Mappings {{{
