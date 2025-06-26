@@ -539,9 +539,11 @@ function! s:init_fern() abort
   vmap <buffer><nowait> xx <Plug>(fern-action-mark)<Plug>(fern-action-clipboard-move)
 
   nmap <buffer><nowait> R <Plug>(fern-action-fzf-root-dirs)
+  nmap <buffer><nowait> <C-g> <Plug>(fern-action-fzf-root-dirs)
 
   nmap <buffer><nowait> P <Plug>(fern-action-focus:parent)
 
+  nmap <buffer><nowait> Y  <Plug>(fern-action-yank:label)
   nmap <buffer><nowait> yp <Plug>(fern-action-yank:path)
 
   " nmap <buffer><silent> <Plug>(fern-action-search) <Plug>(fern-action-ex=)CtrlSF<Space>
