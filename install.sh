@@ -37,6 +37,7 @@ DOTFILES=(
   config/coc/extensions/yarn.lock
   config/gh/config.yml
   rbenv/version
+  Library/Application\ Support/Cursor/User/settings.json
 )
 
 LINUX_DOTFILES=(
@@ -62,7 +63,7 @@ get_src() {
     bashrc)
       if is_windows; then
         echo "$RCPATH/bashrc_msys"
-        exit
+        return
       fi
       ;;
   esac
@@ -77,12 +78,16 @@ get_dest() {
     vim)
       if is_windows; then
         echo "$HOME/vimfiles"
-        exit
+        return
       fi
       ;;
     bin)
       echo "$HOME/bin"
-      exit
+      return
+      ;;
+    Library/*)
+      echo "$HOME/$file"
+      return
       ;;
   esac
 

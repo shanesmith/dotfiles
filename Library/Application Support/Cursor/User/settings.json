@@ -1,0 +1,13 @@
+{
+    "window.commandCenter": true,
+    "editor.codeLens": false,
+    "editor.wordWrap": "on",
+    "editor.lineNumbers": "relative",
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "workbench.colorTheme": "Aldmeris Dark",
+    "git.openRepositoryInParentFolders": "never",
+    "gitlens.currentLine.enabled": false,
+    "workbench.editor.showTabs": "single",
+}
