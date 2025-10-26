@@ -201,13 +201,15 @@
 [pull]
   ff = only
 
+# Homebrew sanitizes PATH which makes `gh` not available when
+# cloning private taps so we use the absolute path /opt/homebrew/bin/gh
 [credential "https://github.com"]
   helper =
-  helper = !gh auth git-credential
+  helper = !/opt/homebrew/bin/gh auth git-credential
 
 [credential "https://gist.github.com"]
   helper =
-  helper = !gh auth git-credential
+  helper = !/opt/homebrew/bin/gh auth git-credential
 
 [url "https://github.com/"]
   insteadOf = git@github.com:
