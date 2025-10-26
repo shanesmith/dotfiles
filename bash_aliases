@@ -475,6 +475,23 @@ _p_comp() {
 }
 complete -F _p_comp p
 
+cur() {
+  local git_root
+
+  if [[ $# -eq 0 ]]; then
+    git_root=$(git rev-parse --show-toplevel 2>/dev/null)
+    if [[ $? -eq 0 ]]; then
+      cursor "$git_root"
+    else
+      cursor .
+    fi
+    return
+  fi
+
+  ( CDPATH="$P_PATH" cd "$@" && cursor . )
+}
+complete -F _p_comp cur
+
 PT_PATH=~/clio/terraform/services
 pt() {
   P_PATH=$PT_PATH p "$@"
