@@ -11,7 +11,7 @@
   stuart = status
   shoe = show
   br = branch
-  co = "!f() { git checkout ${@:--}; }; f" # default to `checkout -`
+  co = "!f() { cd ${GIT_PREFIX:-.} && git checkout \"${@:--}\"; }; f" # default to `checkout -`
   pop = stash pop
   unstage = reset HEAD --
   df = diff
