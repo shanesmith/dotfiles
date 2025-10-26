@@ -107,6 +107,7 @@ export FZF_DEFAULT_OPTS="--bind 'ctrl-j:down,ctrl-k:up,alt-a:toggle-all'"
 # needs to come before setting PS1 for __git_ps1 check
 if ! shopt -oq posix; then
 
+  # source brew bash completion early to support other completions
   if [[ -f "${brew_prefix}/etc/profile.d/bash_completion.sh" ]]; then
     # shellcheck source=/dev/null
     . "${brew_prefix}/etc/profile.d/bash_completion.sh"
@@ -153,7 +154,7 @@ sources=()
 
 if [[ -n $brew_prefix ]]; then
   sources+=(
-    "${brew_prefix}/etc/profile.d"/*
+    "${brew_prefix}/etc/profile.d"/[!bash_completion.sh]*
     "${brew_prefix}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc"
   )
 fi
