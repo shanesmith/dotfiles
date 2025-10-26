@@ -107,10 +107,13 @@ export FZF_DEFAULT_OPTS="--bind 'ctrl-j:down,ctrl-k:up,alt-a:toggle-all'"
 # needs to come before setting PS1 for __git_ps1 check
 if ! shopt -oq posix; then
 
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
+  if [[ -f "${brew_prefix}/etc/profile.d/bash_completion.sh" ]]; then
+    # shellcheck source=/dev/null
+    . "${brew_prefix}/etc/profile.d/bash_completion.sh"
+  elif [[ -f /usr/share/bash-completion/bash_completion ]]; then
     # shellcheck source=/dev/null
     . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
+  elif [[ -f /etc/bash_completion ]]; then
     # shellcheck source=/dev/null
     . /etc/bash_completion
   fi
