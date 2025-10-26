@@ -129,6 +129,7 @@ if ! shopt -oq posix; then
   fi
 
   if command_exists ng; then
+    # shellcheck source=/dev/null
     . <(ng completion script)
   fi
 
@@ -142,6 +143,7 @@ if ! shopt -oq posix; then
   fi
 
   if command_exists git-lfs; then
+    # shellcheck source=/dev/null
     . <(git-lfs completion bash)
   fi
 
