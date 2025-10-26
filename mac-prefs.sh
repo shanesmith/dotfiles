@@ -88,6 +88,7 @@ defaults -currentHost write com.apple.Spotlight MenuItemHidden -int 1
 # https://superuser.com/a/1723655/261110
 defaults -currentHost write com.apple.controlcenter WiFi -int 24
 
+defaults write com.apple.controllcenter "NSStatusItem Visible NowPlaying" -bool false
 
 killall Dock
 killall Finder
