@@ -864,25 +864,6 @@ let g:sandwich#recipes = [
       \     'input':        ['q']
       \   },
       \ ]
-    " \   {
-    " \     'buns':         ['{\', '\}'],
-    " \     'nesting':      1,
-    " \     'match_syntax': 1,
-    " \     'skip_break':   1,
-    " \     'input':        ['}'],
-    " \   },
-    " \   {
-    " \     'buns':         ['[\', '\]'],
-    " \     'nesting':      1,
-    " \     'match_syntax': 1,
-    " \     'input':        [']'],
-    " \   },
-    " \   {
-    " \     'buns':         ['(\', '\)'],
-    " \     'nesting':      1,
-    " \     'match_syntax': 1,
-    " \     'input':        [')'],
-    " \   },
 
 " Include preceding objects in function (ie: foo.bar())
 let g:sandwich#magicchar#f#patterns = [
