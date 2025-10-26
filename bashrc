@@ -136,7 +136,7 @@ if ! shopt -oq posix; then
 
   if command_exists dev && [[ -e ~/.devrc ]]; then
     eval "$(dev _hook)"
-    . <(dev completion bash)
+    [[ -d "/opt/clio/bin/devxp" ]] && export PATH="/opt/clio/bin/devxp:$PATH"
   fi
 
   if command_exists terraform; then
