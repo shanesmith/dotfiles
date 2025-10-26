@@ -640,3 +640,6 @@ shx() {
   esac
   return $ret
 }
+
+alias cert_info='openssl x509 -text -noout -in'
+alias cert_enddate='openssl x509 -enddate -noout -in'
