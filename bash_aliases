@@ -619,7 +619,7 @@ alias fbae=firebase
 bkapi() {
   local path="${1}"
   shift
-  curl -fsSL -H "Authorization: Bearer ${BUILDKITE_API_TOKEN}" "https://api.buildkite.com/${path#/}" "$@"
+  curl -fsSL -H "Authorization: Bearer ${BUILDKITE_API_TOKEN}" "https://api.buildkite.com/v2/${path#/}" "$@"
 }
 
 shx() {
