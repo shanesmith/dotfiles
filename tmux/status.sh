@@ -86,7 +86,7 @@ docker_count() {
 
   local count=$(BKT_TTL=5s bkt -- timeout 2 docker ps -q | wc -l | _trim)
   local disk_usage=$(stat -f '%b %z' "${rawfile}" | awk '{ printf("%d%%", ($1*512/$2)*100) }')
-  local cpu_usage=$(BKT_TTL=10s docker-desktop-shell top -b -n 1 -d 5 | awk '/^CPU/ { print 100-$8 "%" }')
+  local cpu_usage=$(BKT_TTL=10s docker-desktop-shell top -b -n1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1"%"}')
   local mem_usage=$(BKT_TTL=30s docker-desktop-shell free | awk 'NR == 2 { printf("%d%%", ($3/$2)*100) }')
 
   disk_usage=$(_attention "$disk_usage" 70 90)
