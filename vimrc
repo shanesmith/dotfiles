@@ -1094,8 +1094,11 @@ nnoremap <leader>x <nop>
 
 Plug 'inkarkat/vim-CountJump'
 
-Plug 'andymass/vim-matchup'
-let g:matchup_matchparen_status_offscreen = 0
+" https://github.com/andymass/vim-matchup/issues/376
+if ! exists("g:vscode")
+  Plug 'andymass/vim-matchup'
+  let g:matchup_matchparen_status_offscreen = 0
+endif
 
 Plug 'machakann/vim-columnmove'
 let g:columnmove_no_default_key_mappings = 1
