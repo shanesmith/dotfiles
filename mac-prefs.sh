@@ -90,6 +90,9 @@ defaults -currentHost write com.apple.controlcenter WiFi -int 24
 
 defaults write com.apple.controllcenter "NSStatusItem Visible NowPlaying" -bool false
 
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+defaults write $(osascript -e 'id of app "Cursor"') ApplePressAndHoldEnabled -bool false
+
 killall Dock
 killall Finder
 
