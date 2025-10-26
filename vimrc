@@ -2592,7 +2592,6 @@ lua <<EOF
     }
   })
 
-  local lspconfig = require('lspconfig')
   local keymap_opts = { noremap=true, silent=true }
   vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, keymap_opts)
   vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, keymap_opts)
@@ -2631,11 +2630,11 @@ lua <<EOF
   -- https://github.com/williamboman/mason-lspconfig.nvim?tab=readme-ov-file#available-lsp-servers
   local servers = { 'bashls', 'dockerls', 'vimls', 'gopls' }
   for _, lsp in ipairs(servers) do
-    lspconfig[lsp].setup {
+    vim.lsp.config(lsp, {
       on_attach = on_attach,
       capabilities = capabilities,
       flags = flags,
-    }
+    })
   end
 
   -- lspconfig.solargraph.setup {
